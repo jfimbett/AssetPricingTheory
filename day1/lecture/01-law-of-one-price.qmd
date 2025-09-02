@@ -1,0 +1,229 @@
+---
+title: "Law of One Price and No-Arbitrage"
+subtitle: "Day 1 - Asset Pricing Theory"
+author: "Juan F. Imbet"
+format:
+  revealjs:
+    theme: white
+    css: ../../src/styles.css
+    slide-number: true
+    chalkboard: true
+---
+
+## Law of One Price {.center}
+
+::: {.key-concept}
+**Fundamental Principle**: Assets with identical payoffs in all states of the world must have identical prices
+:::
+
+## Mathematical Statement
+
+Let $X^a$ and $X^b$ be the payoff vectors for assets $a$ and $b$.
+
+**Law of One Price**: If $X^a(s) = X^b(s)$ for all states $s$, then $p^a = p^b$
+
+### Notation
+- $s = 1, 2, \ldots, S$: States of the world
+- $X^j(s)$: Payoff of asset $j$ in state $s$
+- $p^j$: Current price of asset $j$
+
+## Economic Intuition
+
+::: {.two-columns}
+::: {.column}
+**Why Must This Hold?**
+- Rational investors prefer more wealth to less
+- If $X^a = X^b$ but $p^a \neq p^b$, arbitrage exists
+- Market forces eliminate arbitrage opportunities
+:::
+
+::: {.column}
+**Key Insight**
+- No assumptions about risk preferences
+- No assumptions about beliefs
+- Pure logic of market efficiency
+:::
+:::
+
+## Arbitrage Defined
+
+::: {.financial-concept}
+**Arbitrage Opportunity**: A trading strategy that:
+1. Requires no initial investment: $\sum_j \theta_j p_j = 0$
+2. Has non-negative payoffs: $\sum_j \theta_j X_j(s) \geq 0$ for all $s$
+3. Has positive payoff in at least one state: $\sum_j \theta_j X_j(s) > 0$ for some $s$
+
+where $\theta_j$ is the position (long/short) in asset $j$.
+:::
+
+## Arbitrage Example
+
+### Market Setup
+- Two assets with identical payoffs
+- **Asset A**: Price = $10, Payoff = $(15, 12, 8)$ in states $(1, 2, 3)$
+- **Asset B**: Price = $9, Payoff = $(15, 12, 8)$ in states $(1, 2, 3)$
+
+### Arbitrage Strategy
+1. **Buy 1 unit of Asset B** (cost: $9)
+2. **Sell 1 unit of Asset A** (receive: $10)
+3. **Net position**: $+1$ today, $0$ in all future states
+
+**Result**: Riskless profit of $1 with no downside risk!
+
+## No-Arbitrage Condition
+
+::: {.key-concept}
+**No-Arbitrage Condition**: There exists no portfolio $\theta$ such that:
+- $\sum_j \theta_j p_j = 0$ (zero cost)
+- $\sum_j \theta_j X_j(s) \geq 0$ for all $s$ (non-negative payoffs)
+- $\sum_j \theta_j X_j(s) > 0$ for some $s$ (strictly positive somewhere)
+:::
+
+### Matrix Representation
+Let $X$ be the $S \times N$ payoff matrix and $p$ be the $N \times 1$ price vector.
+
+**No arbitrage** ⟺ $X\theta \geq 0$ and $X\theta \neq 0$ implies $p'\theta > 0$
+
+## Implications of No-Arbitrage
+
+### Portfolio Valuation
+If portfolio $\theta$ has the same payoffs as asset $j$, then:
+$$\sum_i \theta_i p_i = p_j$$
+
+### Linearity of Pricing
+For any portfolio $\theta$:
+$$\text{Price of portfolio} = \sum_i \theta_i p_i$$
+
+### Dominance
+If $X^a(s) \geq X^b(s)$ for all $s$ and $X^a(s) > X^b(s)$ for some $s$, then $p^a > p^b$.
+
+## Connection to Positive Pricing Kernels
+
+::: {.financial-concept}
+**Fundamental Theorem of Asset Pricing**
+
+No arbitrage ⟺ There exists a positive vector $m = (m_1, m_2, \ldots, m_S)$ with $m_s > 0$ such that:
+$$p_j = \sum_{s=1}^S m_s X_j(s)$$
+
+The vector $m$ is called a **pricing kernel** or **state price density**.
+:::
+
+## Proof Sketch (⇐ Direction)
+
+**Given**: Positive pricing kernel $m$ exists  
+**To Show**: No arbitrage
+
+**Proof**: Suppose arbitrage portfolio $\theta$ exists:
+- $\sum_j \theta_j p_j = 0$
+- $\sum_j \theta_j X_j(s) \geq 0$ for all $s$, with strict inequality for some $s$
+
+Then:
+$$0 = \sum_j \theta_j p_j = \sum_j \theta_j \sum_s m_s X_j(s) = \sum_s m_s \sum_j \theta_j X_j(s)$$
+
+Since $m_s > 0$ and $\sum_j \theta_j X_j(s) \geq 0$ with strict inequality somewhere, the sum must be positive. **Contradiction!**
+
+## Proof Sketch (⇒ Direction)
+
+**Given**: No arbitrage  
+**To Show**: Positive pricing kernel exists
+
+**Proof Strategy**: Use separating hyperplane theorem
+- Consider the set $K = \{X\theta : p'\theta \leq 0\}$
+- No arbitrage means $K \cap \mathbb{R}^S_{++} = \emptyset$
+- By separating hyperplane theorem, exists $m \geq 0$, $m \neq 0$ such that $m'y \leq 0$ for all $y \in K$
+- Technical details show $m > 0$ and $p_j = \sum_s m_s X_j(s)$
+
+## State Prices Interpretation
+
+### Economic Meaning of $m_s$
+- $m_s$ = "price" of $1 delivered in state $s$
+- Also called **Arrow-Debreu prices**
+- Fundamental building blocks for all asset prices
+
+### Asset Pricing Formula
+$$p_j = \sum_{s=1}^S m_s X_j(s)$$
+
+**Interpretation**: Asset price equals the sum of payoffs weighted by state prices
+
+## Examples and Applications
+
+### Risk-Free Bond
+- Payoff: $X^f(s) = 1$ for all states $s$
+- Price: $p^f = \sum_{s=1}^S m_s = \sum_{s=1}^S m_s \cdot 1$
+- Risk-free rate: $R_f = \frac{1}{p^f}$
+
+### State-Contingent Claims
+- **Arrow-Debreu security for state $k$**: $X^k(s) = \begin{cases} 1 & \text{if } s = k \\ 0 & \text{otherwise} \end{cases}$
+- Price: $p^k = m_k$
+
+## Market Completeness Preview
+
+::: {.key-concept}
+**Complete Markets**: Every possible payoff pattern can be replicated
+
+**Implication**: State prices are **uniquely determined** by no-arbitrage
+
+**Incomplete Markets**: Multiple pricing kernels consistent with no-arbitrage
+:::
+
+## Limitations and Extensions
+
+### What Law of One Price Doesn't Tell Us
+- How are state prices $m_s$ determined?
+- What determines the level of asset prices?
+- How do preferences and beliefs matter?
+
+### Need for Equilibrium Theory
+- **General equilibrium**: Endowments, preferences, beliefs
+- **Portfolio choice**: Risk-return trade-offs
+- **Dynamic models**: Intertemporal considerations
+
+## Practical Implications
+
+### For Derivatives Pricing
+- Replication principle
+- Risk-neutral valuation
+- Hedging strategies
+
+### For Portfolio Management
+- Identifying mispriced securities
+- Constructing arbitrage strategies
+- Risk management
+
+### For Corporate Finance
+- Project valuation
+- Capital structure decisions
+- Real options
+
+## Summary
+
+### Key Takeaways
+1. **Law of one price** prevents arbitrage opportunities
+2. **No-arbitrage condition** is mathematically precise
+3. **Pricing kernels** exist if and only if no arbitrage
+4. **State prices** are fundamental building blocks
+5. **Linearity** of pricing follows from no-arbitrage
+
+### Mathematical Tools
+- Portfolio algebra
+- Linear algebra (matrix operations)
+- Convex analysis (separating hyperplane theorem)
+
+## Next Topic Preview
+
+::: {.financial-concept}
+**Coming Next**: Stochastic Discount Factor
+
+We'll generalize the pricing kernel concept to dynamic settings and connect it to investor optimization and equilibrium.
+:::
+
+---
+
+### Questions and Discussion {.center}
+
+**Key concepts to master:**
+- Why is the law of one price so fundamental?
+- How does the proof of the fundamental theorem work?
+- What's the economic intuition behind state prices?
+
+*Next: [Stochastic Discount Factor →](02-stochastic-discount-factor.qmd)*

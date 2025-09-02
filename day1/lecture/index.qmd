@@ -1,0 +1,250 @@
+---
+title: "Day 1: Fundamentals of Asset Pricing"
+subtitle: "Asset Pricing Theory"
+author: "Juan F. Imbet"
+institute: "Paris Dauphine University-PSL"
+date: "`r Sys.Date()`"
+format:
+  revealjs:
+    theme: white
+    css: ../../src/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "Asset Pricing Theory - Day 1"
+---
+
+## Fundamentals of Asset Pricing {.center}
+
+::: {.financial-concept}
+**Day 1: Building the Foundation**
+
+Law of one price • Stochastic discount factor • Arrow-Debreu framework • Arbitrage and market completeness
+:::
+
+## Learning Objectives
+
+By the end of this session, you will understand:
+
+- The law of one price and its implications
+- The stochastic discount factor (SDF) framework
+- Arrow-Debreu state-space model
+- Arbitrage and the fundamental theorem of asset pricing
+- Market completeness and state prices
+- Risk-neutral probabilities and their relationship to state prices
+
+## Session Outline
+
+1. **[Law of One Price and No-Arbitrage](01-law-of-one-price.qmd)**
+2. **[Stochastic Discount Factor](02-stochastic-discount-factor.qmd)**
+3. **[Arrow-Debreu Framework](03-arrow-debreu.qmd)**
+4. **[Market Completeness](04-market-completeness.qmd)**
+5. **[Risk-Neutral Probabilities](05-risk-neutral-pricing.qmd)**
+
+## The Central Question
+
+::: {.key-concept}
+**How are asset prices determined in financial markets?**
+
+Today we establish the theoretical foundation that will guide our entire course.
+:::
+
+### Preview of Key Results
+
+The fundamental pricing equation:
+$$p_t = E_t[M_{t+1} X_{t+1}]$$
+
+where $M_{t+1}$ is the **stochastic discount factor** and $X_{t+1}$ is the asset payoff.
+
+## Course Context
+
+### Where We're Going
+- **Today**: Fundamental principles and framework
+- **Day 2**: Portfolio choice and static equilibrium
+- **Day 3**: Dynamic models and intertemporal choice
+- **Days 4-9**: Extensions and applications
+
+### Mathematical Sophistication
+We start with discrete states and finite horizons, then generalize to continuous time and infinite horizons.
+
+## Topic 1: Law of One Price
+
+::: {.financial-concept}
+**Core Principle**: Assets with identical payoffs must have identical prices
+
+**Mathematical Statement**: If $X^a = X^b$ then $p^a = p^b$
+:::
+
+### Economic Intuition
+- Prevents riskless arbitrage opportunities
+- Foundation for all asset pricing theory
+- Does not require agents to be risk-neutral or rational
+
+**Next**: [Detailed exposition →](01-law-of-one-price.qmd)
+
+## Topic 2: Stochastic Discount Factor
+
+::: {.key-concept}
+**The SDF Framework**: 
+$$p = E[MX]$$
+
+where $M$ is the stochastic discount factor that "discounts" future payoffs to present values.
+:::
+
+### Why This Matters
+- Unifies all asset pricing models
+- Links asset prices to economic fundamentals
+- Foundation for risk-return relationships
+
+**Next**: [SDF derivation and properties →](02-stochastic-discount-factor.qmd)
+
+## Topic 3: Arrow-Debreu Framework
+
+::: {.financial-concept}
+**State-Space Model**: 
+- Finite states of the world: $s = 1, 2, \ldots, S$
+- State prices: $\pi_s$ = price of $1 in state $s$
+- Asset prices: $p_j = \sum_{s=1}^S \pi_s X_j(s)$
+:::
+
+### Applications
+- Derivative pricing
+- Risk management
+- Portfolio construction
+
+**Next**: [Complete framework development →](03-arrow-debreu.qmd)
+
+## Topic 4: Market Completeness
+
+::: {.key-concept}
+**Complete Markets**: Every possible payoff pattern can be replicated using existing securities
+
+**Mathematical Condition**: Asset payoff matrix has full rank
+:::
+
+### Implications
+- Unique state prices
+- Perfect risk sharing
+- Welfare theorems apply
+
+**Next**: [Completeness analysis →](04-market-completeness.qmd)
+
+## Topic 5: Risk-Neutral Pricing
+
+::: {.financial-concept}
+**Risk-Neutral Measure**: Probability measure $Q$ such that:
+$$p = \frac{1}{1+r_f} E^Q[X]$$
+
+where $E^Q$ denotes expectation under the risk-neutral measure.
+:::
+
+### Connection to State Prices
+$$q_s = \frac{\pi_s}{1+r_f}, \quad \sum_{s=1}^S q_s = 1$$
+
+**Next**: [Risk-neutral framework →](05-risk-neutral-pricing.qmd)
+
+## Mathematical Prerequisites Check
+
+### Linear Algebra
+- Matrix operations and rank
+- Eigenvalues and eigenvectors
+- Linear independence
+
+### Probability Theory
+- Conditional expectations
+- Change of measure
+- Law of total expectation
+
+### Optimization
+- Lagrange multipliers
+- First-order conditions
+- Constrained optimization
+
+## Key Theoretical Results
+
+### Fundamental Theorem of Asset Pricing
+
+::: {.financial-concept}
+**Theorem**: No arbitrage ⟺ Existence of positive stochastic discount factor
+
+**Economic Meaning**: Markets are arbitrage-free if and only if there exists a way to discount future payoffs that respects current prices.
+:::
+
+### First Welfare Theorem
+In complete markets with no arbitrage, competitive equilibrium is Pareto optimal.
+
+### Second Welfare Theorem
+Every Pareto optimal allocation can be supported as a competitive equilibrium.
+
+## Summary of Day 1
+
+### What We've Established
+1. **Law of one price** as the foundation
+2. **SDF** as the unifying framework  
+3. **Arrow-Debreu** state-space model
+4. **Market completeness** and its implications
+5. **Risk-neutral pricing** as a computational tool
+
+### Mathematical Tools Introduced
+- State prices and their properties
+- Stochastic discount factor
+- Risk-neutral probabilities
+- Arbitrage arguments
+
+## Looking Ahead
+
+### Day 2 Preview: Portfolio Choice
+- Expected utility theory
+- Mean-variance analysis
+- CAPM and factor models
+- Equilibrium asset pricing
+
+### Connection to Today
+Day 1 provides the **arbitrage-free pricing framework**  
+Day 2 adds **investor optimization** to determine equilibrium prices
+
+## Problem Set 1 (Preview)
+
+### Theoretical Problems
+1. Prove the fundamental theorem of asset pricing
+2. Derive state prices in a three-state model
+3. Show equivalence of SDF and risk-neutral pricing
+
+### Computational Problems
+1. Calculate state prices from observed bond prices
+2. Price a derivative using replication
+3. Test market completeness in a given economy
+
+## Questions and Discussion {.center}
+
+::: {.key-concept}
+**Discussion Points**
+
+- Which concepts need clarification?
+- How do these foundations connect to empirical asset pricing?
+- What are the limitations of the no-arbitrage approach?
+:::
+
+## Preparation for Next Session
+
+### Required Reading
+- **Cochrane (2005)**: Chapters 3-4
+- **Duffie (2001)**: Sections 1.1-1.3
+
+### Mathematical Review
+- Expected utility theory
+- Quadratic optimization
+- Matrix calculus
+
+### Conceptual Questions
+- How do we move from no-arbitrage to equilibrium?
+- What determines the stochastic discount factor?
+
+---
+
+## Session Complete {.center}
+
+**Today**: Fundamental arbitrage-free pricing theory  
+**Next**: Portfolio choice and equilibrium asset pricing
+
+*The mathematical beauty of asset pricing theory begins with these simple but powerful foundations!* 🎯

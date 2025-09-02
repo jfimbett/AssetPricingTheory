@@ -1,0 +1,294 @@
+---
+title: "Day 2: Portfolio Choice and Static Asset-Pricing Models"
+subtitle: "Asset Pricing Theory"
+author: "Juan F. Imbet"
+institute: "Paris Dauphine University-PSL"
+date: "`r Sys.Date()`"
+format:
+  revealjs:
+    theme: white
+    css: ../../src/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "Asset Pricing Theory - Day 2"
+---
+
+## Portfolio Choice and Static Models {.center}
+
+::: {.financial-concept}
+**Day 2: From Arbitrage to Equilibrium**
+
+Expected utility • Mean-variance analysis • CAPM • APT • Factor structures in equilibrium
+:::
+
+## Learning Objectives
+
+By the end of this session, you will understand:
+
+- Expected utility theory and optimal portfolio choice
+- Mean-variance analysis and the efficient frontier
+- HARA utility and two-fund separation theorems
+- Capital Asset Pricing Model (CAPM) derivation
+- Arbitrage Pricing Theory (APT) and factor models
+- Consumption-based CAPM foundations
+
+## Session Outline
+
+1. **[Expected Utility and Portfolio Choice](01-expected-utility.qmd)**
+2. **[Mean-Variance Analysis](02-mean-variance.qmd)**
+3. **[HARA Utility and Two-Fund Separation](03-hara-separation.qmd)**
+4. **[Capital Asset Pricing Model](04-capm.qmd)**
+5. **[Arbitrage Pricing Theory](05-apt.qmd)**
+
+## Connecting to Day 1
+
+### Yesterday: Arbitrage-Free Pricing
+- Law of one price
+- Stochastic discount factor exists
+- State prices and risk-neutral probabilities
+
+### Today: Equilibrium Pricing
+- **How** is the SDF determined?
+- **What** drives cross-sectional differences in returns?
+- **Why** do we observe specific risk-return relationships?
+
+## The Central Economic Question
+
+::: {.key-concept}
+**How do rational investors choose portfolios, and what does this imply for asset prices in equilibrium?**
+
+Answer: Optimization + Market clearing = Asset pricing models
+:::
+
+## Mathematical Framework
+
+### Individual Optimization
+$$\max_{w} E[u(W_0(1 + r_p))]$$
+where $r_p = \sum_i w_i r_i$ is the portfolio return.
+
+### Market Clearing
+$$\sum_h w_h = w^{market}$$
+where $w^{market}$ is the market capitalization weights.
+
+### Result: Risk-Return Relationships
+The equilibrium determines how expected returns relate to risk characteristics.
+
+## Topic 1: Expected Utility Theory
+
+::: {.financial-concept}
+**Von Neumann-Morgenstern Utility**
+$$E[u(W)] = \sum_s \pi_s u(W_s)$$
+
+where $u(\cdot)$ satisfies:
+- Monotonicity: $u'(W) > 0$
+- Concavity: $u''(W) < 0$ (risk aversion)
+:::
+
+### Key Properties
+- **Risk aversion** and portfolio diversification
+- **Certainty equivalents** and risk premia
+- **Arrow-Pratt measures** of risk aversion
+
+**Detailed development**: [Expected Utility Theory →](01-expected-utility.qmd)
+
+## Topic 2: Mean-Variance Analysis
+
+::: {.key-concept}
+**Portfolio Problem**
+$$\min_w \frac{1}{2} w' \Sigma w \text{ subject to } w' \mu = \mu_p, \; w' \mathbf{1} = 1$$
+
+**Solution**: Efficient frontier in $(\sigma, \mu)$ space
+$$w^*(\mu_p) = g + h \mu_p$$
+:::
+
+### Applications
+- Mutual fund separation
+- Tangency portfolio
+- Capital allocation line
+
+**Mathematical details**: [Mean-Variance Analysis →](02-mean-variance.qmd)
+
+## Topic 3: HARA and Two-Fund Separation
+
+::: {.financial-concept}
+**HARA Utility Class**
+$$u(W) = \frac{1-\gamma}{\gamma} \left( \frac{W - W_0}{1-\gamma} \right)^{\gamma}$$
+
+**Cass-Stiglitz Theorem**: With HARA utility, all investors hold combinations of the same two mutual funds.
+:::
+
+### Economic Implications
+- **Separation of portfolio choice** from individual characteristics
+- **Mutual fund industry** theoretical justification
+- **CAPM foundations** from individual optimization
+
+**Proof and applications**: [HARA and Separation →](03-hara-separation.qmd)
+
+## Topic 4: Capital Asset Pricing Model
+
+::: {.financial-concept}
+**CAPM Equation**
+$$E[r_i] - r_f = \beta_i (E[r_m] - r_f)$$
+
+where $\beta_i = \frac{\text{Cov}(r_i, r_m)}{\text{Var}(r_m)}$
+:::
+
+### Derivation Steps
+1. **Individual optimization** with mean-variance preferences
+2. **Market clearing** condition
+3. **Tangency portfolio** = market portfolio
+4. **Beta pricing** emerges from equilibrium
+
+**Complete derivation**: [CAPM Theory →](04-capm.qmd)
+
+## Topic 5: Arbitrage Pricing Theory
+
+::: {.financial-concept}
+**APT Equation**
+$$E[r_i] - r_f = \sum_{k=1}^K \beta_{i,k} \lambda_k$$
+
+where $\beta_{i,k}$ are factor loadings and $\lambda_k$ are risk premia.
+:::
+
+### Key Differences from CAPM
+- **Multiple factors** vs. single market factor
+- **Arbitrage arguments** vs. equilibrium optimization
+- **Fewer assumptions** about preferences and distributions
+
+**Theory and applications**: [Arbitrage Pricing Theory →](05-apt.qmd)
+
+## From Static to Dynamic
+
+### What We've Achieved Today
+- **Static portfolio choice** theory
+- **Single-period** equilibrium models
+- **Risk-return relationships** in cross-section
+
+### Tomorrow's Extension
+- **Multi-period** models
+- **Dynamic programming** approach
+- **Intertemporal** risk-return trade-offs
+
+## Key Mathematical Results
+
+### Mean-Variance Efficient Frontier
+$$\sigma_p^2(\mu_p) = \frac{1}{A} \left[ 1 + \frac{(B - A\mu_p)^2}{AC - B^2} \right]$$
+
+where $A = \mathbf{1}' \Sigma^{-1} \mathbf{1}$, $B = \mathbf{1}' \Sigma^{-1} \mu$, $C = \mu' \Sigma^{-1} \mu$.
+
+### CAPM Beta Decomposition
+$$\beta_i = \frac{\text{Cov}(r_i, r_m)}{\text{Var}(r_m)} = \rho_{i,m} \frac{\sigma_i}{\sigma_m}$$
+
+**Interpretation**: Beta depends on correlation with market and relative volatility.
+
+## Economic Intuition
+
+### Risk-Return Trade-off
+- **Higher expected returns** require bearing **systematic risk**
+- **Diversifiable risk** is not rewarded in equilibrium
+- **Market price of risk** determined by aggregate risk aversion
+
+### Cross-Sectional Predictions
+- Assets with higher $\beta$ (CAPM) or factor loadings (APT) have higher expected returns
+- Risk-free asset has zero beta/factor loadings
+- Market portfolio has beta of one
+
+## Empirical Implications
+
+### Testable Predictions
+1. **Security market line**: Linear relationship between $E[r_i]$ and $\beta_i$
+2. **Risk-free rate**: Determined by time preference and growth
+3. **Market risk premium**: Related to aggregate risk aversion
+
+### Limitations and Puzzles
+- **CAPM violations**: Size effect, value effect, momentum
+- **Factor models**: Fama-French, momentum factors
+- **Behavioral explanations**: Limits to arbitrage
+
+## Connection to Consumption-Based Models
+
+### The Missing Link
+- **Portfolio choice** models explain how investors allocate wealth
+- **Consumption choice** determines the stochastic discount factor
+- **Integration** leads to consumption-based asset pricing
+
+### Preview of Day 3
+$$M_{t+1} = \beta \frac{u'(C_{t+1})}{u'(C_t)}$$
+
+The SDF is determined by **marginal utility of consumption**.
+
+## Problem Set Applications
+
+### Theoretical Exercises
+1. Derive the efficient frontier with $N$ risky assets
+2. Prove the two-fund separation theorem
+3. Show CAPM emerges from mean-variance optimization
+
+### Computational Problems
+1. Calculate optimal portfolio weights for given $\mu$ and $\Sigma$
+2. Estimate CAPM betas and test the security market line
+3. Implement APT with multiple factors
+
+## Summary of Day 2
+
+### Theoretical Achievements
+1. **Expected utility** foundation for portfolio choice
+2. **Mean-variance** optimization and efficient frontier
+3. **HARA utility** and mutual fund separation
+4. **CAPM** as equilibrium model
+5. **APT** as factor-based alternative
+
+### Mathematical Tools
+- Lagrange multiplier optimization
+- Matrix algebra for portfolio theory
+- Statistical factor models
+
+## Looking Forward
+
+### Day 3 Preview: Dynamic Asset Pricing
+- **Multi-period** portfolio and consumption choice
+- **Dynamic programming** techniques
+- **Intertemporal CAPM** and state variables
+- **Consumption-based** asset pricing
+
+### Building Complexity
+**Day 1**: No-arbitrage framework  
+**Day 2**: Static equilibrium models  
+**Day 3**: Dynamic equilibrium models
+
+## Questions and Discussion {.center}
+
+::: {.key-concept}
+**Discussion Topics**
+
+- How realistic are mean-variance preferences?
+- What explains CAPM's empirical failures?
+- How do we choose factors for APT models?
+- What's the role of behavioral biases?
+:::
+
+## Preparation for Next Session
+
+### Required Reading
+- **Cochrane (2005)**: Chapters 5-8
+- **Campbell, Lo & MacKinlay (1997)**: Chapter 5
+
+### Mathematical Review
+- Dynamic programming basics
+- Stochastic calculus (optional preview)
+- Continuous-time methods
+
+### Key Concepts to Master
+- Portfolio choice in multi-period settings
+- Consumption vs. portfolio decisions
+- State variables and hedging demands
+
+---
+
+## Session Complete {.center}
+
+**Today**: Static portfolio choice and equilibrium asset pricing  
+**Next**: Dynamic optimization and intertemporal models
+
+*From arbitrage to optimization to equilibrium - the theoretical foundations are coming together!* 🎯

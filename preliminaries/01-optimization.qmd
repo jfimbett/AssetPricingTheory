@@ -1,0 +1,194 @@
+---
+title: "Mathematical Optimization for Asset Pricing"
+subtitle: "Prerequisites Review"
+author: "Juan F. Imbet"
+format:
+  html:
+    css: ../src/styles.css
+    toc: true
+    number-sections: true
+    code-fold: show
+---
+
+## Introduction
+
+This review covers essential optimization techniques used throughout the Asset Pricing Theory course. These methods form the foundation for portfolio choice, equilibrium analysis, and dynamic programming.
+
+## Unconstrained Optimization
+
+### Single Variable Optimization
+
+For a function $f(x)$, the first-order condition for an optimum is:
+
+$$\frac{df}{dx} = 0$$
+
+The second-order condition ensures we have a maximum (if $f''(x) < 0$) or minimum (if $f''(x) > 0$).
+
+::: {.key-concept}
+**Example**: Portfolio with one risky asset
+
+An investor chooses portfolio weight $w$ to maximize utility:
+$$U(w) = E[r_p] - \frac{\gamma}{2} \text{Var}(r_p)$$
+
+where $r_p = w r + (1-w) r_f$ is the portfolio return.
+:::
+
+### Multivariable Optimization
+
+For a function $f(x_1, x_2, \ldots, x_n)$, the first-order conditions are:
+
+$$\frac{\partial f}{\partial x_i} = 0 \quad \text{for all } i$$
+
+The Hessian matrix $H$ with elements $H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ determines the nature of the optimum:
+- **Positive definite**: Local minimum
+- **Negative definite**: Local maximum
+- **Indefinite**: Saddle point
+
+## Constrained Optimization
+
+### Equality Constraints: Lagrange Method
+
+To optimize $f(x_1, \ldots, x_n)$ subject to $g(x_1, \ldots, x_n) = 0$:
+
+1. Form the Lagrangian:
+   $$L(x_1, \ldots, x_n, \lambda) = f(x_1, \ldots, x_n) - \lambda g(x_1, \ldots, x_n)$$
+
+2. Set partial derivatives to zero:
+   $$\frac{\partial L}{\partial x_i} = 0, \quad \frac{\partial L}{\partial \lambda} = 0$$
+
+::: {.financial-concept}
+**Portfolio Optimization Example**
+
+Maximize utility $U(w) = w'\mu - \frac{\gamma}{2} w' \Sigma w$ subject to $w' \mathbf{1} = 1$
+
+**Lagrangian**: $L = w'\mu - \frac{\gamma}{2} w' \Sigma w - \lambda(w' \mathbf{1} - 1)$
+
+**First-order conditions**:
+- $\frac{\partial L}{\partial w} = \mu - \gamma \Sigma w - \lambda \mathbf{1} = 0$
+- $\frac{\partial L}{\partial \lambda} = w' \mathbf{1} - 1 = 0$
+
+**Solution**: $w^* = \frac{1}{\gamma} \Sigma^{-1} (\mu - \lambda^* \mathbf{1})$
+:::
+
+### Inequality Constraints: Kuhn-Tucker Conditions
+
+For the problem:
+$$\max f(x) \quad \text{subject to} \quad g_i(x) \leq 0, \quad i = 1, \ldots, m$$
+
+The Kuhn-Tucker conditions are:
+
+1. **Stationarity**: $\nabla f(x^*) - \sum_i \mu_i \nabla g_i(x^*) = 0$
+2. **Primal feasibility**: $g_i(x^*) \leq 0$ for all $i$
+3. **Dual feasibility**: $\mu_i \geq 0$ for all $i$
+4. **Complementary slackness**: $\mu_i g_i(x^*) = 0$ for all $i$
+
+## Dynamic Optimization
+
+### Discrete Time: Dynamic Programming
+
+The Bellman equation for a dynamic optimization problem:
+
+$$V(s_t) = \max_{a_t} \left[ u(s_t, a_t) + \beta E_t[V(s_{t+1})] \right]$$
+
+where:
+- $V(s_t)$: Value function at state $s_t$
+- $a_t$: Action/control variable
+- $\beta$: Discount factor
+
+::: {.key-concept}
+**Consumption-Investment Problem**
+
+An agent maximizes lifetime utility:
+$$V(W_t) = \max_{C_t, w_t} E_t \left[ \sum_{s=t}^{\infty} \beta^{s-t} u(C_s) \right]$$
+
+subject to wealth evolution:
+$$W_{t+1} = (W_t - C_t)(w_t R_{t+1} + (1-w_t) R_f)$$
+:::
+
+### Continuous Time: Calculus of Variations
+
+For optimizing a functional $J = \int_0^T F(t, x(t), \dot{x}(t)) dt$:
+
+The Euler-Lagrange equation is:
+$$\frac{\partial F}{\partial x} - \frac{d}{dt}\left(\frac{\partial F}{\partial \dot{x}}\right) = 0$$
+
+## Applications in Asset Pricing
+
+### Mean-Variance Portfolio Optimization
+
+**Problem**: Choose portfolio weights $w$ to minimize variance for given expected return $\mu_p$:
+
+$$\min_{w} \frac{1}{2} w' \Sigma w \quad \text{subject to} \quad w' \mu = \mu_p, \quad w' \mathbf{1} = 1$$
+
+**Solution**: 
+$$w^*(\mu_p) = g + h \mu_p$$
+
+where:
+- $g = \frac{\Sigma^{-1} \mathbf{1}}{C} - \frac{\Sigma^{-1} \mu}{B}$
+- $h = \frac{\Sigma^{-1} \mu}{A} - \frac{\Sigma^{-1} \mathbf{1}}{B}$
+- $A = \mathbf{1}' \Sigma^{-1} \mathbf{1}$, $B = \mathbf{1}' \Sigma^{-1} \mu$, $C = \mu' \Sigma^{-1} \mu$
+
+### Consumption-Based Asset Pricing
+
+**Investor's Problem**:
+$$\max E_0 \left[ \sum_{t=0}^{\infty} \beta^t u(C_t) \right]$$
+
+subject to budget constraint:
+$$\sum_{t=0}^{\infty} p_t C_t = \sum_{t=0}^{\infty} p_t e_t$$
+
+**First-order condition** yields the fundamental pricing equation:
+$$p_t = \beta^t \frac{u'(C_t)}{u'(C_0)} = E_0[M_t]$$
+
+where $M_t = \beta^t \frac{u'(C_t)}{u'(C_0)}$ is the stochastic discount factor.
+
+## Practical Examples
+
+### Example 1: Two-Asset Portfolio
+
+Consider an investor choosing between a risk-free asset ($r_f = 0.03$) and a risky asset with $\mu = 0.08$ and $\sigma = 0.20$.
+
+**Utility function**: $U = E[r_p] - \frac{\gamma}{2} \text{Var}(r_p)$ with $\gamma = 3$
+
+**Portfolio return**: $r_p = w r + (1-w) r_f$
+
+**Optimization**:
+- $E[r_p] = w \mu + (1-w) r_f$
+- $\text{Var}(r_p) = w^2 \sigma^2$
+- $U = w \mu + (1-w) r_f - \frac{\gamma}{2} w^2 \sigma^2$
+
+**First-order condition**: $\frac{dU}{dw} = \mu - r_f - \gamma w \sigma^2 = 0$
+
+**Optimal weight**: $w^* = \frac{\mu - r_f}{\gamma \sigma^2} = \frac{0.08 - 0.03}{3 \times 0.04} = 0.417$
+
+### Example 2: Log Utility and Portfolio Choice
+
+With log utility $u(C) = \ln(C)$, the consumption-investment problem becomes:
+
+$$\max E_0 \left[ \sum_{t=0}^{\infty} \beta^t \ln(C_t) \right]$$
+
+**Result**: The optimal consumption rule is:
+$$C_t = (1-\beta) W_t$$
+
+and the portfolio weight in the risky asset is:
+$$w^* = \frac{\mu - r_f}{\sigma^2}$$
+
+This is the **myopic portfolio** - independent of investment horizon and wealth level.
+
+## Mathematical Techniques Summary
+
+| Method | Application | Key Equation |
+|--------|-------------|--------------|
+| Lagrange Multipliers | Equality constraints | $\nabla f = \lambda \nabla g$ |
+| Kuhn-Tucker | Inequality constraints | $\mu_i g_i(x^*) = 0$ |
+| Dynamic Programming | Intertemporal choice | $V(s) = \max[u + \beta E[V(s')]]$ |
+| Calculus of Variations | Continuous time | Euler-Lagrange equation |
+
+## Further Reading
+
+1. **Simon, C. P. & Blume, L. (1994)**. *Mathematics for Economists*. Norton.
+2. **Stokey, N. L. & Lucas, R. E. (1989)**. *Recursive Methods in Economic Dynamics*. Harvard University Press.
+3. **Kamien, M. I. & Schwartz, N. L. (2012)**. *Dynamic Optimization*. Dover Publications.
+
+---
+
+*This review provides the mathematical foundation for advanced asset pricing theory.*

@@ -1,0 +1,78 @@
+project:
+  type: website
+  title: "Asset Pricing Theory"
+  
+website:
+  title: "Asset Pricing Theory"
+  description: "Advanced Ph.D. Level Course - Paris Dauphine-PSL"
+  site-url: "https://jfimbet.github.io/AssetPricingTheory"
+  repo-url: "https://github.com/jfimbet/AssetPricingTheory"
+  
+  navbar:
+    title: "Asset Pricing Theory"
+    left:
+      - text: "Home"
+        href: index.html
+      - text: "Prerequisites"
+        href: preliminaries/index.qmd
+      - text: "Course Days"
+        menu:
+          - text: "Day 0: Introduction"
+            href: day0/lecture/index.qmd
+          - text: "Day 1: Fundamentals"
+            href: day1/lecture/index.qmd
+          - text: "Day 2: Portfolio Choice"
+            href: day2/lecture/index.qmd
+          - text: "Day 3: Dynamic Models"
+            href: day3/lecture/index.qmd
+          - text: "Day 4: Fixed Income"
+            href: day4/lecture/index.qmd
+          - text: "Day 5: Market Frictions"
+            href: day5/lecture/index.qmd
+          - text: "Day 6: Information"
+            href: day6/lecture/index.qmd
+          - text: "Day 7: Long-Horizon"
+            href: day7/lecture/index.qmd
+          - text: "Day 8: Macro-Finance"
+            href: day8/lecture/index.qmd
+          - text: "Day 9: Behavioral Finance"
+            href: day9/lecture/index.qmd
+    right:
+      - icon: github
+        href: "https://github.com/jfimbet/AssetPricingTheory"
+
+format:
+  html:
+    theme: 
+      - cosmo
+      - src/styles.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    number-depth: 3
+    code-fold: false
+    code-tools: true
+    citations-hover: true
+    footnotes-hover: true
+    
+  revealjs:
+    theme: white
+    css: src/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    transition: slide
+    background-transition: fade
+    hash-type: number
+    controls: true
+    progress: true
+    center: false
+    
+bibliography: references.bib
+csl: chicago-author-date.csl
+
+execute:
+  freeze: auto
+  cache: true
+
+editor: visual
