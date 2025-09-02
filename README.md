@@ -79,21 +79,25 @@ This repository contains all course materials organized by day:
 ├── README.md                  # This file
 ├── LICENSE                    # MIT License
 ├── TODO.md                    # Development checklist
-├── src/                       # Source files and templates
-│   ├── styles.css            # CSS styling for all course materials
-│   └── DAY_TEMPLATE.md       # Template for creating new days
-├── images/                    # Course assets and branding
-├── preliminaries/             # Prerequisites and setup materials
-├── day0/                      # Course introduction
-├── day1/                      # Fundamentals of Asset Pricing
-├── day2/                      # Portfolio Choice and Static Models
-├── day3/                      # Dynamic Asset Pricing
-├── day4/                      # Fixed-Income and Derivatives
-├── day5/                      # Market Frictions
-├── day6/                      # Information and Microstructure
-├── day7/                      # Intertemporal Risk
-├── day8/                      # Macro-Finance
-└── day9/                      # Behavioral and Household Finance
+├── _quarto.yml                # Quarto configuration
+└── src/                       # All course source materials
+    ├── assets/                # Styling and images
+    │   ├── styles.css         # CSS styling for all materials
+    │   └── images/            # Course assets and branding
+    ├── templates/             # Templates for creating content
+    │   └── DAY_TEMPLATE.md    # Template for creating new days
+    ├── preliminaries/         # Prerequisites and setup materials
+    └── lectures/              # All course lectures
+        ├── day0/              # Course introduction
+        ├── day1/              # Fundamentals of Asset Pricing
+        ├── day2/              # Portfolio Choice and Static Models
+        ├── day3/              # Dynamic Asset Pricing
+        ├── day4/              # Fixed-Income and Derivatives
+        ├── day5/              # Market Frictions
+        ├── day6/              # Information and Microstructure
+        ├── day7/              # Intertemporal Risk
+        ├── day8/              # Macro-Finance
+        └── day9/              # Behavioral and Household Finance
 ```
 
 Each day contains:

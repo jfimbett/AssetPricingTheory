@@ -14,29 +14,29 @@ website:
       - text: "Home"
         href: index.html
       - text: "Prerequisites"
-        href: preliminaries/index.qmd
+        href: src/preliminaries/index.qmd
       - text: "Course Days"
         menu:
           - text: "Day 0: Introduction"
-            href: day0/lecture/index.qmd
+            href: src/lectures/day0/lecture/index.qmd
           - text: "Day 1: Fundamentals"
-            href: day1/lecture/index.qmd
+            href: src/lectures/day1/lecture/index.qmd
           - text: "Day 2: Portfolio Choice"
-            href: day2/lecture/index.qmd
+            href: src/lectures/day2/lecture/index.qmd
           - text: "Day 3: Dynamic Models"
-            href: day3/lecture/index.qmd
+            href: src/lectures/day3/lecture/index.qmd
           - text: "Day 4: Fixed Income"
-            href: day4/lecture/index.qmd
+            href: src/lectures/day4/lecture/index.qmd
           - text: "Day 5: Market Frictions"
-            href: day5/lecture/index.qmd
+            href: src/lectures/day5/lecture/index.qmd
           - text: "Day 6: Information"
-            href: day6/lecture/index.qmd
+            href: src/lectures/day6/lecture/index.qmd
           - text: "Day 7: Long-Horizon"
-            href: day7/lecture/index.qmd
+            href: src/lectures/day7/lecture/index.qmd
           - text: "Day 8: Macro-Finance"
-            href: day8/lecture/index.qmd
+            href: src/lectures/day8/lecture/index.qmd
           - text: "Day 9: Behavioral Finance"
-            href: day9/lecture/index.qmd
+            href: src/lectures/day9/lecture/index.qmd
     right:
       - icon: github
         href: "https://github.com/jfimbet/AssetPricingTheory"
@@ -45,7 +45,7 @@ format:
   html:
     theme: 
       - cosmo
-      - src/styles.css
+      - src/assets/styles.css
     toc: true
     toc-depth: 3
     number-sections: true
@@ -57,7 +57,7 @@ format:
     
   revealjs:
     theme: white
-    css: src/styles.css
+    css: src/assets/styles.css
     slide-number: true
     chalkboard: true
     preview-links: auto

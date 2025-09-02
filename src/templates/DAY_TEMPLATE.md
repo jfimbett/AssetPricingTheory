@@ -7,18 +7,20 @@ This template can be copied to create new day structures for the Asset Pricing T
 Each day should follow this standardized structure:
 
 ```
-dayX/
-└── lecture/
-    ├── index.qmd                 # Main lecture file
-    ├── index.html                # Rendered HTML version
-    ├── index_files/              # Quarto-generated assets
-    ├── 01-topic1.qmd             # Individual topic files
-    ├── 01-topic1.html            # Rendered versions
-    ├── 02-topic2.qmd
-    ├── 02-topic2.html
-    ├── 03-topic3.qmd
-    ├── 03-topic3.html
-    └── [additional topics...]
+src/
+└── lectures/
+    └── dayX/
+        └── lecture/
+            ├── index.qmd                 # Main lecture file
+            ├── index.html                # Rendered HTML version
+            ├── index_files/              # Quarto-generated assets
+            ├── 01-topic1.qmd             # Individual topic files
+            ├── 01-topic1.html            # Rendered versions
+            ├── 02-topic2.qmd
+            ├── 02-topic2.html
+            ├── 03-topic3.qmd
+            ├── 03-topic3.html
+            └── [additional topics...]
 ```
 
 ## File Templates
@@ -35,11 +37,11 @@ date: "`r Sys.Date()`"
 format:
   revealjs:
     theme: white
-    css: ../../src/styles.css
+    css: ../../../assets/styles.css
     slide-number: true
     chalkboard: true
     preview-links: auto
-    logo: ../../images/logo.png
+    logo: ../../../assets/images/logo.png
     footer: "Asset Pricing Theory - Day X"
 ---
 
@@ -80,7 +82,7 @@ author: "Juan F. Imbet"
 format:
   revealjs:
     theme: white
-    css: ../../src/styles.css
+    css: ../../../assets/styles.css
     slide-number: true
 ---
 

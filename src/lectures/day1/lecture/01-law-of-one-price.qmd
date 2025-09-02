@@ -5,7 +5,7 @@ author: "Juan F. Imbet"
 format:
   revealjs:
     theme: white
-    css: ../../src/styles.css
+    css: ../../../assets/styles.css
     slide-number: true
     chalkboard: true
 ---

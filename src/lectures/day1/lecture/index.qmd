@@ -7,7 +7,7 @@ date: "`r Sys.Date()`"
 format:
   revealjs:
     theme: white
-    css: ../../src/styles.css
+    css: ../../../assets/styles.css
     slide-number: true
     chalkboard: true
     preview-links: auto
