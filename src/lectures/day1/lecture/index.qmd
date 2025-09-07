@@ -379,7 +379,7 @@ What do we need to extend these concepts to infinite dimensional spaces?
     \mathcal{S} = \{ A\theta : \theta \in \mathbb{R}^N \}.
     $$
 
--   Any SDF $M$ decomposes uniquely as\
+-   For a fixed $X$, any SDF $M$ decomposes uniquely as\
     $$
     M = M_{\parallel} + M_{\perp}, 
     \quad M_{\parallel} \in \mathcal{S},\; M_{\perp} \in \mathcal{S}^\perp.
