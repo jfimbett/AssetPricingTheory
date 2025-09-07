@@ -1,6 +1,7 @@
 project:
   type: website
   title: "Asset Pricing Theory"
+  output-dir: "_site"
   
 website:
   title: "Asset Pricing Theory"
@@ -13,8 +14,6 @@ website:
     left:
       - text: "Home"
         href: index.html
-      - text: "Prerequisites"
-        href: src/preliminaries/index.qmd
       - text: "Course Days"
         menu:
           - text: "Day 0: Introduction"
@@ -68,9 +67,6 @@ format:
     progress: true
     center: false
     
-bibliography: references.bib
-csl: chicago-author-date.csl
-
 execute:
   freeze: auto
   cache: true

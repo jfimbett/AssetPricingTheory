@@ -3,7 +3,6 @@ title: "Day 1: Fundamentals of Asset Pricing"
 subtitle: "Asset Pricing Theory"
 author: "Juan F. Imbet"
 institute: "Paris Dauphine University-PSL"
-date: "`r Sys.Date()`"
 format:
   revealjs:
     theme: white
@@ -12,239 +11,408 @@ format:
     chalkboard: true
     preview-links: auto
     footer: "Asset Pricing Theory - Day 1"
+    include-in-header: tikzjax.html
+execute:
+  enabled: false
 ---
-
-## Fundamentals of Asset Pricing {.center}
-
-::: {.financial-concept}
-**Day 1: Building the Foundation**
-
-Law of one price • Stochastic discount factor • Arrow-Debreu framework • Arbitrage and market completeness
-:::
-
-## Learning Objectives
-
-By the end of this session, you will understand:
-
-- The law of one price and its implications
-- The stochastic discount factor (SDF) framework
-- Arrow-Debreu state-space model
-- Arbitrage and the fundamental theorem of asset pricing
-- Market completeness and state prices
-- Risk-neutral probabilities and their relationship to state prices
-
-## Session Outline
-
-1. **[Law of One Price and No-Arbitrage](01-law-of-one-price.qmd)**
-2. **[Stochastic Discount Factor](02-stochastic-discount-factor.qmd)**
-3. **[Arrow-Debreu Framework](03-arrow-debreu.qmd)**
-4. **[Market Completeness](04-market-completeness.qmd)**
-5. **[Risk-Neutral Probabilities](05-risk-neutral-pricing.qmd)**
-
-## The Central Question
-
-::: {.key-concept}
-**How are asset prices determined in financial markets?**
-
-Today we establish the theoretical foundation that will guide our entire course.
-:::
-
-### Preview of Key Results
-
-The fundamental pricing equation:
-$$p_t = E_t[M_{t+1} X_{t+1}]$$
-
-where $M_{t+1}$ is the **stochastic discount factor** and $X_{t+1}$ is the asset payoff.
-
-## Course Context
-
-### Where We're Going
-- **Today**: Fundamental principles and framework
-- **Day 2**: Portfolio choice and static equilibrium
-- **Day 3**: Dynamic models and intertemporal choice
-- **Days 4-9**: Extensions and applications
-
-### Mathematical Sophistication
-We start with discrete states and finite horizons, then generalize to continuous time and infinite horizons.
-
-## Topic 1: Law of One Price
-
-::: {.financial-concept}
-**Core Principle**: Assets with identical payoffs must have identical prices
-
-**Mathematical Statement**: If $X^a = X^b$ then $p^a = p^b$
-:::
-
-### Economic Intuition
-- Prevents riskless arbitrage opportunities
-- Foundation for all asset pricing theory
-- Does not require agents to be risk-neutral or rational
-
-**Next**: [Detailed exposition →](01-law-of-one-price.qmd)
-
-## Topic 2: Stochastic Discount Factor
-
-::: {.key-concept}
-**The SDF Framework**: 
-$$p = E[MX]$$
-
-where $M$ is the stochastic discount factor that "discounts" future payoffs to present values.
-:::
-
-### Why This Matters
-- Unifies all asset pricing models
-- Links asset prices to economic fundamentals
-- Foundation for risk-return relationships
-
-**Next**: [SDF derivation and properties →](02-stochastic-discount-factor.qmd)
-
-## Topic 3: Arrow-Debreu Framework
-
-::: {.financial-concept}
-**State-Space Model**: 
-- Finite states of the world: $s = 1, 2, \ldots, S$
-- State prices: $\pi_s$ = price of $1 in state $s$
-- Asset prices: $p_j = \sum_{s=1}^S \pi_s X_j(s)$
-:::
-
-### Applications
-- Derivative pricing
-- Risk management
-- Portfolio construction
-
-**Next**: [Complete framework development →](03-arrow-debreu.qmd)
-
-## Topic 4: Market Completeness
-
-::: {.key-concept}
-**Complete Markets**: Every possible payoff pattern can be replicated using existing securities
-
-**Mathematical Condition**: Asset payoff matrix has full rank
-:::
-
-### Implications
-- Unique state prices
-- Perfect risk sharing
-- Welfare theorems apply
-
-**Next**: [Completeness analysis →](04-market-completeness.qmd)
-
-## Topic 5: Risk-Neutral Pricing
-
-::: {.financial-concept}
-**Risk-Neutral Measure**: Probability measure $Q$ such that:
-$$p = \frac{1}{1+r_f} E^Q[X]$$
-
-where $E^Q$ denotes expectation under the risk-neutral measure.
-:::
-
-### Connection to State Prices
-$$q_s = \frac{\pi_s}{1+r_f}, \quad \sum_{s=1}^S q_s = 1$$
-
-**Next**: [Risk-neutral framework →](05-risk-neutral-pricing.qmd)
-
-## Mathematical Prerequisites Check
-
-### Linear Algebra
-- Matrix operations and rank
-- Eigenvalues and eigenvectors
-- Linear independence
-
-### Probability Theory
-- Conditional expectations
-- Change of measure
-- Law of total expectation
-
-### Optimization
-- Lagrange multipliers
-- First-order conditions
-- Constrained optimization
-
-## Key Theoretical Results
-
-### Fundamental Theorem of Asset Pricing
-
-::: {.financial-concept}
-**Theorem**: No arbitrage ⟺ Existence of positive stochastic discount factor
-
-**Economic Meaning**: Markets are arbitrage-free if and only if there exists a way to discount future payoffs that respects current prices.
-:::
-
-### First Welfare Theorem
-In complete markets with no arbitrage, competitive equilibrium is Pareto optimal.
-
-### Second Welfare Theorem
-Every Pareto optimal allocation can be supported as a competitive equilibrium.
-
-## Summary of Day 1
-
-### What We've Established
-1. **Law of one price** as the foundation
-2. **SDF** as the unifying framework  
-3. **Arrow-Debreu** state-space model
-4. **Market completeness** and its implications
-5. **Risk-neutral pricing** as a computational tool
-
-### Mathematical Tools Introduced
-- State prices and their properties
-- Stochastic discount factor
-- Risk-neutral probabilities
-- Arbitrage arguments
-
-## Looking Ahead
-
-### Day 2 Preview: Portfolio Choice
-- Expected utility theory
-- Mean-variance analysis
-- CAPM and factor models
-- Equilibrium asset pricing
-
-### Connection to Today
-Day 1 provides the **arbitrage-free pricing framework**  
-Day 2 adds **investor optimization** to determine equilibrium prices
-
-## Problem Set 1 (Preview)
-
-### Theoretical Problems
-1. Prove the fundamental theorem of asset pricing
-2. Derive state prices in a three-state model
-3. Show equivalence of SDF and risk-neutral pricing
-
-### Computational Problems
-1. Calculate state prices from observed bond prices
-2. Price a derivative using replication
-3. Test market completeness in a given economy
-
-## Questions and Discussion {.center}
-
-::: {.key-concept}
-**Discussion Points**
-
-- Which concepts need clarification?
-- How do these foundations connect to empirical asset pricing?
-- What are the limitations of the no-arbitrage approach?
-:::
-
-## Preparation for Next Session
-
-### Required Reading
-- **Cochrane (2005)**: Chapters 3-4
-- **Duffie (2001)**: Sections 1.1-1.3
-
-### Mathematical Review
-- Expected utility theory
-- Quadratic optimization
-- Matrix calculus
-
-### Conceptual Questions
-- How do we move from no-arbitrage to equilibrium?
-- What determines the stochastic discount factor?
 
 ---
 
-## Session Complete {.center}
+## What is an Asset?
 
-**Today**: Fundamental arbitrage-free pricing theory  
-**Next**: Portfolio choice and equilibrium asset pricing
+-   An asset is a **resource** that is **owned** by an individual or entity and is expected to provide future economic benefits or costs.
+-   Assets can take various forms, including physical assets (e.g., real estate, machinery) and intangible assets (e.g., patents, trademarks).
+-   Financial assets, such as stocks and bonds, represent claims on future cash flows linked to the underlying assets or the issuing entity.
+-   **Asset Pricing** is the process of determining the **fair** value of an asset, taking into account its expected future cash flows, risks, and the time value of money.
+-   The concept of **fairness** is delicate, and hopefully by the end of this course we should understand the difference between what prices **should** be and what they actually are.
 
-*The mathematical beauty of asset pricing theory begins with these simple but powerful foundations!* 🎯
+---
+
+## States of nature
+
+-   The future is uncertain, and since most asset holders (investors) or asset suppliers (e.g. firms) are risk-averse, uncertainty places an important role in determining prices.
+-   A **state of nature** is a possible outcome of the world at a given point in time.
+-   States of nature are clearly **continuous** and therefore **infinitely uncountable**.
+-   Discretizing states of nature is normally a simplification of reality that can provide a more manageable framework.
+-   We will start with a discrete version of our analysis and later provide continous counterparts.
+-   Imagine a world with discrete time $t \in \{0, 1, 2, \ldots\}$ and a finite set of states of nature $S = \{s_1, s_2, \ldots, s_n\}$.
+-   A payoff of an asset is a $|S|$-dimensional vector $X = (X_1, X_2, \ldots, X_n)$, where $X_i$ is the payoff in state $s_i$.
+-   For now consider the case in which known probabilities are assigned to each state of nature denoted by $\pi(s_i)$.
+
+---
+
+## Arbitrage
+
+-   There is a widely used expression in finance: **"There is no such thing as a free lunch."**
+-   In other words, if something appears to be too good to be true, it probably is.
+-   **Arbitrage** refers to the practice of taking advantage of price differences in different markets or forms.
+-   In an efficient market, arbitrage opportunities are quickly exploited and eliminated.
+-   Early work by Fama during the 1960s laid the foundation for modern asset pricing theory and the efficient market hypothesis.
+
+---
+
+## The Efficient Market Hypothesis
+
+The view about efficiency in financial markets accepted in the 60s and 70s states that assets quickly react to new information.
+
+-   Good news (higher future cashflows) tend to **increase asset prices**, while bad news tend to **decrease asset prices**.
+-   Modern versions of this hypothesis incorporate limits to arbitrage, private information, and behavioral biases.
+-   In a nutshell, there are three forms of market efficiency:
+    -   **Weak form**: Prices reflect all past market data (e.g., prices, volumes).
+    -   **Semi-strong form**: Prices reflect all publicly available information (e.g., financial statements, news).
+    -   **Strong form**: Prices reflect all information, both public and private (e.g., insider information).
+
+---
+
+## Arbitrage and the EMH
+
+A portfolio is a **linear** combination of assets, using our notation, given $N$ assets with payoffs $X^{(1)}, X^{(2)}, \ldots, X^{(N)}$ where each $X^{(i)}$ is a vector, a portfolio is defined by weights $\theta = (\theta_1, \theta_2, \ldots, \theta_N)$.
+
+-   The expected payoff of the portfolio in each state of nature is given by the weighted sum of the payoffs of the individual assets: $$
+    X^P(s) = \sum_{i=1}^N \theta_i X^{(i)}(s)
+    $$
+
+-   These weights do not need to sum to one when we think about **payoffs** but they will sum to one when we talk about returns.
+
+An arbitrage opportunity is a portfolio with zero or negative price, but non-negative expected payoffs in all states of nature (and positive in at least one state). In other words, it is a risk-free profit opportunity that arises when the market misprices an asset or a portfolio of assets.
+
+-   Denote by $P$ the price of the portfolio, which is given by the weighted sum of the prices of the individual assets (e.g. buy 2 shares of TSLA and 2 of AAPL) $$
+    P = \sum_{i=1}^N \theta_i P^{(i)}
+    $$
+
+---
+
+## Arbitrage and the EMH (continued.)
+
+A formal definition of an arbitrage states that there exist weights $\theta = (\theta_1, \theta_2, \ldots, \theta_N)$ such that:
+
+1.  The price of the portfolio is zero or negative: $$
+    P = \sum_{i=1}^N \theta_i P^{(i)} \leq 0
+    $$
+
+2.  The expected payoff of the portfolio is non-negative in all states of nature (and positive in at least one state): $$
+    X^P(s) = \sum_{i=1}^N \theta_i X^{(i)}(s) \geq 0 \quad \forall s \in S
+    $$
+
+3.  Strictly positive payoff with positive probability for at least one state: $$
+    \mathbb{P}(X^P(s) > 0) > 0
+    $$
+
+---
+
+## Existence of an arbitrage opportunity
+
+An arbitrage strategy is the solution to the following system of equations
+
+$$
+\begin{align}
+A\vec{\theta} &\geq 0 \\
+\vec{p}^T \vec{\theta} &\leq 0 \\
+1^T A \vec{\theta} &\geq \epsilon
+\end{align}
+$$
+
+where $A$ is the matrix of payoffs, $\vec{p}$ is the vector of prices, and $\epsilon$ is a small positive number. This deals with the strict inequality imposed by condition 3.
+
+---
+
+## Example
+
+-   Two assets two states of nature, a bond and a stock.
+-   Bond has a price of $1$ and pays $1$ in both states.
+-   Stock has a price of $1.5$, pays $1$ in state 1 and $0$ in state 2.
+
+Arbitrage portfolio: $\theta=(1, -1)$.
+
+-   Cost now: $P = 1 - 1.5 = -0.5$.
+-   State payoffs: $X^P = (1 - 1, 1 - 0) = (0, 1)$.
+
+**Market Dynamics and Equilibrium:**
+
+-   Buying one bond and short selling one stock gives a risk-free profit of $0.5$.
+-   What stops the investor from buying 2 bonds and short selling 2 stocks?
+-   Or better, to sell all his assets, ask for an excessive amount of loans, buy millions of bonds and short millions of stocks?
+-   An arbitrage is a deviation from an equilibrium, and excessive demand and supply will quickly adjust prices.
+
+## Arbitrage and the Law of One Price
+
+-   Consider two portfolios $A$ and $B$ with payoffs $X^A$ and $X^B$.
+-   Under no arbitrage, if $X^A(s) = X^B(s)$ for all states $s$, then $P^A = P^B$.
+-   If not, a quick arbitrage strategy of buying cheap and selling expensive can be formed.
+
+## The Stochastic Discount Factor
+
+-   If you know payoffs $X(s)$ and probabilities $\pi(s)$ how can we **map** payoffs to prices?
+-   The SDF is a positive random variable $M$ such that the price of any asset is given by the discounted expected payoff: $$
+    P = \mathbb{E}[M(s) X(s)] = \sum_{s \in S} \pi(s) M(s) X(s)
+    $$
+-   Under no arbitrage opportunities, there exists a strictly positive SDF.
+
+---
+
+
+## Existence of the SDF
+
+Consider a one–period economy. Let $\mathcal{X}$ be a linear space of payoffs at date $T$, e.g. bounded random variables $L^\infty(\Omega,\mathcal{F},\mathbb{P})$.\
+Traded assets $i=1,\dots,n$ have prices $p_i$ and payoffs $X_i \in \mathcal{X}$.\
+The pricing map on portfolios is linear: $$
+f\!\left(\sum_i \theta_i X_i\right) = \sum_i \theta_i f(X_i) = \sum_i \theta_i p_i.
+$$
+
+-   There are no arbitrage opportunities, anything with non-negative payoffs has a non-negative price. If at least one state has a strictly positive payoff, then the price must be strictly positive as well.
+
+Define the cone of zero-cost payoffs. A cone in a vector space is a subset that is closed under positive scalar multiplication and addition.
+
+$$
+\mathcal{C} = \left\{\, Y=\sum_i \theta_i X_i : \sum_i \theta_i p_i = 0 \,\right\} \subset \mathcal{X}.
+$$
+
+## Hyperplane Separation Theorem
+
+-   **Idea:** No-arbitrage means the set of zero-cost payoffs\
+    $$\mathcal{C} = \{ Y : f(Y)=0 \}$$\
+    cannot intersect the nonnegative cone of payoffs $$\mathcal{X}_+ = \{ X : X \ge 0 \}.$$ except at zero.
+
+-   Both $\mathcal{C}$ and $\mathcal{X}_+$ are convex sets.\
+    Since $\mathcal{C}\cap \mathcal{X}_+ = \{0\}$, we can apply the **Separating Hyperplane Theorem**.
+
+- We will use the separating hyperplane theorem in the dual space. 
+
+---
+
+## The dual space
+
+-  The dual space $\mathcal{X}^*$ of a vector space $\mathcal{X}$ is the set of all linear functionals from $\mathcal{X}$ to its field of scalars (e.g., $\mathbb{R}$).
+-  A linear functional is a function that satisfies linearity: for all $x, y \in \mathcal{X}$ and scalars $a, b$, we have $\varphi(ax + by) = a\varphi(x) + b\varphi(y)$.
+-  The dual space is itself a vector space, with addition and scalar multiplication defined pointwise.
+-  In finite-dimensional spaces, the dual space is isomorphic to the original space, meaning they have the same dimension and structure.
+
+## Separating Hyperplane Theorem
+
+- If two convex sets do not intersect, there exists a hyperplane that separates them.
+- If they intersect only at a single point, there exists a hyperplane that touches them at that point.
+- This hyperplane can be represented by a linear functional $\varphi$ such that:
+    - $\varphi(x) \leq \alpha$ for all $x$ in the first set.
+    - $\varphi(y) \geq \alpha$ for all $y$ in the second set.
+    - For some scalar $\alpha$.
+    - In two dimensions this is very simple to visualize, but it is true in any dimension.
+- The theorem states that there exists a non-zero linear functional $\varphi \in \mathcal{X}^*$ such that 
+$$
+\varphi(Y) = 0 \quad \forall Y \in \mathcal{C}, 
+\qquad
+X \ge 0 \;\Rightarrow\; \varphi(X) \ge 0.
+$$
+- In other words, positive payoffs have positive prices.
+
+---
+
+## Representation Theorem
+
+-   **Step 2 of the argument:** Every positive linear functional on a suitable space of payoffs can be represented as an **expectation**.
+
+-   **Theorem (Riesz / Yosida–Hewitt):**\
+    If $\varphi:\mathcal{X}\to\mathbb{R}$ is a positive continuous linear functional on $L^p$ (e.g. $L^2$), then there exists a nonnegative random variable $M$ such that $$
+    \varphi(X) \;=\; \mathbb{E}[M X] \quad \forall X\in\mathcal{X}.
+    $$
+
+---
+
+## Sketch of Proof: From No-Arbitrage to SDF
+
+**Step 1: Separating Hyperplane**
+
+NA implies $\mathcal{C}\cap \mathcal{X}_+ = \{0\}$.\
+By the separating hyperplane theorem, there exists a positive linear functional\
+$\varphi:\mathcal{X}\to\mathbb{R}$ such that $$
+\varphi(Y)=0 \quad \forall Y\in \mathcal{C}, 
+\qquad 
+X\ge 0 \;\Rightarrow\; \varphi(X)\ge 0.
+$$
+
+**Step 2: Representation**
+
+-   By the **representation theorem**, any positive linear functional\
+    $\varphi:\mathcal{X}\to\mathbb{R}$ can be written as an expectation.
+
+-   Therefore, there exists a nonnegative random variable $M$ such that: $$
+    \varphi(X) = \mathbb{E}[M X] = \sum_{s \in S} \pi(s) M(s) X(s),
+    \quad \forall X \in \mathcal{X}.
+    $$
+
+-   $M$ is called the **Stochastic Discount Factor (SDF)** or **pricing kernel**.
+
+-   The positivity of the function $\phi$ comes from the no-arbitrage assumption.
+
+---
+
+## Prices as Expectations
+
+-   Recall that by construction, for any portfolio with weights $\theta$: $$
+    f\!\left(\sum_i \theta_i X^{(i)}\right) = \sum_i \theta_i p^{(i)}.
+    $$
+
+-   But since $f$ coincides with $\varphi$, we have: $$
+    \sum_i \theta_i p^{(i)} = \varphi\!\left(\sum_i \theta_i X^{(i)}\right) 
+    = \mathbb{E}\!\left[M \sum_i \theta_i X^{(i)}\right].
+    $$
+
+-   Because this holds for any choice of weights $\theta$, it must hold asset by asset: $$
+    p^{(i)} = \mathbb{E}[M X^{(i)}], \quad i=1,\ldots,N.
+    $$
+
+---
+
+## Complete Markets
+
+-   A market is **complete** if any payoff vector $X \in \mathbb{R}^{|S|}$ can be replicated by a portfolio of traded assets.
+
+-   Formally:\
+    The span of traded payoffs $\{X^{(1)}, \ldots, X^{(N)}\}$ is the whole space $\mathbb{R}^{|S|}$.
+
+-   **Implication:**\
+    For any payoff $Y=(Y(s_1), \ldots, Y(s_{|S|}))$, there exist weights $\theta=(\theta_1,\ldots,\theta_N)$ such that $$
+    Y(s) = \sum_{i=1}^N \theta_i X^{(i)}(s), \quad \forall s \in S.
+    $$
+
+---
+
+## Arrow–Debreu Securities and Historical Context
+
+**Arrow–Debreu Securities:**
+
+-   An **Arrow–Debreu security** $\delta^{(s)}$ pays $1$ in state $s$ and $0$ in all other states: $$
+    \delta^{(s)}(s') =
+    \begin{cases}
+    1 & \text{if } s'=s, \\
+    0 & \text{otherwise.}
+    \end{cases}
+    $$
+
+-   If markets are complete, each $\delta^{(s)}$ can be replicated with some portfolio $\theta^{(s)}$.
+
+-   The price of $\delta^{(s)}$ is the **state price** $q(s)$.
+
+**Historical Note:**
+
+-   **Kenneth Arrow (1921–2017)** and **Gérard Debreu (1921–2004)** were pioneers in general equilibrium theory.\
+-   Their 1954 paper *"Existence of an Equilibrium for a Competitive Economy"* gave the first rigorous proof of general equilibrium existence.\
+-   Arrow won the Nobel Prize in 1972 (with John Hicks), Debreu in 1983.
+
+---
+
+## Existence of Arrow–Debreu Securities
+
+-   Stack payoffs in the matrix $A \in \mathbb{R}^{|S|\times N}$ with entries $$
+    A_{s i} = X^{(i)}(s).
+    $$
+
+-   **Completeness** $\iff \operatorname{rank}(A) = |S|$ (full row rank).
+
+-   Then, for each state $s$, there exists a portfolio $\theta^{(s)}$ such that $$
+    A\,\theta^{(s)} = \delta^{(s)}.
+    $$
+
+-   Its price is the **state price**: $$
+    q(s) = \sum_{i=1}^N \theta^{(s)}_i \, p^{(i)}.
+    $$
+
+---
+
+## Pricing Any Payoff with State Prices
+
+-   Any payoff $X \in \mathbb{R}^{|S|}$ can be decomposed as $$
+    X = \sum_{s\in S} X(s)\, \delta^{(s)}.
+    $$
+
+-   By linearity of pricing: $$
+    P(X) = \sum_{s\in S} X(s)\, q(s).
+    $$
+
+-   Equivalently, in probability form: $$
+    P(X) = \sum_{s\in S} \pi(s)\, M(s)\, X(s),
+    \quad \text{where } M(s) = \tfrac{q(s)}{\pi(s)}.
+    $$
+
+---
+
+## Uniqueness of the SDF and Extensions
+
+**Uniqueness in Complete Markets:**
+
+-   Suppose $M$ and $M'$ both price all traded assets: $$
+    p^{(i)} = \mathbb{E}[M X^{(i)}] = \mathbb{E}[M' X^{(i)}], \quad i=1,\ldots,N.
+    $$
+
+-   In state–price form: $A^\top q = p$ and $A^\top q' = p$,\
+    where for each state $s$, $$
+    q(s) = \pi(s)\,M(s), 
+    \qquad 
+    q'(s) = \pi(s)\,M'(s).
+    $$
+
+-   Subtracting: $A^\top (q-q') = 0$.
+
+-   If markets are complete, $\ker(A^\top)=\{0\}$ $\;\Rightarrow\;$ $q=q'$.
+
+-   With $\pi(s)>0$ for all $s$, it follows that $M(s) = M'(s)$.
+
+**Extension to Continuous States:**
+
+What do we need to extend these concepts to infinite dimensional spaces?
+
+-   Generalized separating hyperplane theorems (exist)
+-   Generalized representation theorems (exist)\
+-   **Challenge:** Uniqueness, since infinite dimensional payoff spaces can only be spanned approximately.
+
+---
+
+## Projection View of the SDF (Discrete Case)
+
+-   Define inner product:\
+    $$
+    \langle X, Y \rangle = \sum_{s\in S} \pi(s)\,X(s)Y(s).
+    $$
+-   An inner product is a way of multiplying (with some weights) two vectors to get a scalar. 
+-   It is zero if the vectors are orthogonal (perpendicular).
+-   Span of traded payoffs:\
+    $$
+    \mathcal{S} = \{ A\theta : \theta \in \mathbb{R}^N \}.
+    $$
+
+-   Any SDF $M$ decomposes uniquely as\
+    $$
+    M = M_{\parallel} + M_{\perp}, 
+    \quad M_{\parallel} \in \mathcal{S},\; M_{\perp} \in \mathcal{S}^\perp.
+    $$
+
+-   For any traded payoff $Y \in \mathcal{S}$,\
+    $$
+    \mathbb{E}[M Y] = \mathbb{E}[M_{\parallel} Y].
+    $$
+
+---
+
+## Projection Geometry of the SDF
+
+**Key Insight:** Only the projection of $M$ onto $\mathcal{S}$ matters for pricing traded assets.
+
+**Mathematical Decomposition:** $$
+M = M_{\parallel} + M_{\perp}
+$$ where:
+
+$M_{\parallel} = \text{proj}_{\mathcal{S}}(M)$ is the orthogonal projection of $M$ onto $\mathcal{S}$
+
+$M_{\perp} \in \mathcal{S}^{\perp}$ is the orthogonal component such that $\langle M_{\perp}, Y \rangle = 0$ for any $Y \in \mathcal{S}$
+
+**Pricing Implications:**
+
+For any traded payoff $Y \in \mathcal{S}$: $$
+\langle M, Y \rangle = \langle M_{\parallel} + M_{\perp}, Y \rangle = \langle M_{\parallel}, Y \rangle + \underbrace{\langle M_{\perp}, Y \rangle}_{=0} = \langle M_{\parallel}, Y \rangle
+$$
+
+**Consequence:** All SDFs with the same projection $M_{\parallel}$ yield identical prices: $$
+M_1 = M_{\parallel} + M_{\perp}^{(1)}, \quad M_2 = M_{\parallel} + M_{\perp}^{(2)} \quad \Rightarrow \quad \langle M_1, Y \rangle = \langle M_2, Y \rangle \text{ for all } Y \in \mathcal{S}
+$$
+
+- In complete markets, no two different SDFs can have the same orthogonal projection to the space of traded payoffs, hence the SDF is unique.
+- For the same $M$, $M_{\parallel}$ will be different for every asset that it prices, but there is only one $M$ that prices all at the same time.

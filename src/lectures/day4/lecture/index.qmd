@@ -1,0 +1,424 @@
+---
+title: "Day 4: Fixed Income Securities"
+subtitle: "Asset Pricing Theory"
+author: "Juan F. Imbet"
+institute: "Paris Dauphine University-PSL"
+format:
+  revealjs:
+    theme: white
+    css: ../../../assets/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "Asset Pricing Theory - Day 4"
+---
+
+## Fixed Income Securities {.center}
+
+**Mathematical Foundations of Bond Pricing, Credit Risk, and Derivatives**
+
+## Bond Pricing Theory
+
+### Present Value Framework
+
+**Assumptions:**
+1. **Risk-neutral pricing:** Asset prices are expectations under risk-neutral measure Q
+2. **No arbitrage:** Law of one price holds
+3. **Complete markets:** All contingent claims can be priced
+4. **Time-additive discounting:** Exponential discounting
+
+**Bond price as discounted cash flows:**
+$$P(t,T) = E_t^Q\left[\sum_{i=1}^n c_i e^{-\int_t^{T_i} r_s ds} + F e^{-\int_t^T r_s ds}\right]$$
+
+**Under risk-neutral measure Q:**
+- Discount factor: $P(t,T) = E_t^Q[e^{-\int_t^T r_s ds}]$
+- Forward rates: $f(t,T,T+\delta) = -\frac{\partial}{\partial \delta} \ln P(t,T+\delta)$
+
+**Derivation of forward rates:**
+$$\frac{\partial}{\partial \delta} \ln P(t,T+\delta) = \frac{1}{P(t,T+\delta)} \frac{\partial P(t,T+\delta)}{\partial \delta}$$
+$$f(t,T,T+\delta) = -\frac{1}{P(t,T+\delta)} \frac{\partial P(t,T+\delta)}{\partial \delta}$$
+
+### Duration and Convexity
+
+**Macaulay duration derivation:**
+- Weighted average time to receive cash flows
+- Weights are present values of cash flows
+$$D_{mac} = \frac{\sum_{i=1}^n t_i \cdot \frac{c_i}{(1+y)^i} + T \cdot \frac{F}{(1+y)^T}}{P}$$
+
+**Modified duration:**
+- Measures percentage price change for small yield changes
+$$D_{mod} = -\frac{1}{P} \frac{\partial P}{\partial y}$$
+
+**Relationship to Macaulay duration:**
+$$D_{mod} = \frac{D_{mac}}{1+y}$$
+
+**Convexity derivation:**
+- Second derivative measures curvature of price-yield relationship
+$$C = \frac{1}{P} \frac{\partial^2 P}{\partial y^2}$$
+
+**For coupon bond:**
+$$C = \frac{1}{P(1+y)^2} \sum_{i=1}^n t_i(t_i+1) \frac{c_i}{(1+y)^i} + \frac{T(T+1)F}{P(1+y)^T}$$
+
+**Taylor expansion approximation:**
+$$\frac{\Delta P}{P} \approx -D_{mod} \Delta y + \frac{1}{2} C (\Delta y)^2$$
+
+**Error bound:** Higher-order terms become important for large yield changes
+
+## Term Structure Models
+
+### Vasicek Model
+
+**Short rate dynamics:**
+$$dr_t = \kappa(\theta - r_t)dt + \sigma dW_t$$
+
+**Assumptions:**
+1. **Ornstein-Uhlenbeck process:** Mean-reverting Gaussian process
+2. **Constant volatility:** Diffusion term independent of r_t
+3. **Complete markets:** Risk-neutral dynamics same as physical
+
+**Economic interpretation:**
+- $\kappa$: Speed of mean reversion (higher = faster reversion)
+- $\theta$: Long-run mean of short rate
+- $\sigma$: Volatility of short rate innovations
+
+**Bond price solution:**
+$$P(t,T) = e^{A(t,T) - B(t,T) r_t}$$
+
+**Derivation of B(t,T):**
+- Satisfies Riccati equation: $B'(t,T) = -1 + \kappa B(t,T)$
+- Boundary condition: $B(T,T) = 0$
+- Solution: $B(t,T) = \frac{1 - e^{-\kappa(T-t)}}{\kappa}$
+
+**Derivation of A(t,T):**
+- Satisfies: $A'(t,T) = -\frac{1}{2} \sigma^2 B(t,T)^2 - \kappa \theta B(t,T)$
+- Solution: $A(t,T) = \left(\theta - \frac{\sigma^2}{2\kappa^2}\right)(B(t,T) - (T-t)) - \frac{\sigma^2}{4\kappa} B(t,T)^2$
+
+### Cox-Ingersoll-Ross (CIR) Model
+
+**Square-root diffusion:**
+$$dr_t = \kappa(\theta - r_t)dt + \sigma \sqrt{r_t} dW_t$$
+
+**Key assumptions:**
+1. **State-dependent volatility:** Prevents negative interest rates
+2. **Affine structure:** Bond prices remain exponential-affine
+3. **Feller condition:** $2\kappa\theta > \sigma^2$ ensures strictly positive rates
+
+**Economic motivation:**
+- Volatility increases with rate level (realistic)
+- Square-root ensures non-negativity
+- Captures volatility clustering in rates
+
+**Bond price:**
+$$P(t,T) = e^{A(t,T) - B(t,T) r_t}$$
+
+**Derivation of B(t,T):**
+- Satisfies: $B'(t,T) = -1 + \kappa B(t,T) + \frac{1}{2} \sigma^2 B(t,T)^2$
+- With $\gamma = \sqrt{\kappa^2 + 2\sigma^2}$
+- Solution: $B(t,T) = \frac{2\gamma e^{-\gamma(T-t)}}{(\gamma + \kappa)(1 - e^{-\gamma(T-t)}) + 2\gamma}$
+
+**Feller condition derivation:**
+- Stationary distribution: $\sqrt{r} \sim \chi^2$ with 4κθ/σ² degrees of freedom
+- Mean: E[r] = θ
+- Variance: Var(r) = σ²θ/(2κ)
+- Condition 2κθ > σ² ensures finite variance
+
+## Credit Risk Models
+
+### Structural Models
+
+**Merton (1974) model assumptions:**
+1. **Firm value follows geometric Brownian motion:** $dV_t = (r + \pi)V_t dt + \sigma_V V_t dW_t$
+2. **Debt is zero-coupon bond with face value D**
+3. **Default occurs if V_T < D at maturity T**
+4. **Absolute priority:** Debt holders get min(V_T, D), equity gets max(V_T - D, 0)
+
+**Equity as call option derivation:**
+$$E = V N(d_1) - D e^{-rT} N(d_2)$$
+
+where:
+$$d_1 = \frac{\ln(V/D) + (r + \frac{1}{2}\sigma_V^2)T}{\sigma_V \sqrt{T}}$$
+$$d_2 = d_1 - \sigma_V \sqrt{T}$$
+
+**Credit spread derivation:**
+- Risk-neutral bond price: $P = E^Q[\min(V_T, D) e^{-rT}]$
+- Default probability: $PD = N(-d_2)$
+- Recovery: $R = V_T/D$ conditional on default
+- Credit spread: $s = -\frac{1}{T} \ln\left(\frac{V N(d_1) - D N(d_2)}{D}\right)$
+
+**Black-Cox model:**
+- Endogenous default boundary $V_B(t)$
+- Optimal exercise condition: $V_B(t) = \frac{\alpha D}{1-\alpha}$
+- Where $\alpha = \frac{1-e^{-r(T-t)}}{r(T-t)}$ (present value factor)
+
+### Reduced-Form Models
+
+**Hazard rate framework:**
+- Default intensity $\lambda_t$: instantaneous default probability
+- Survival probability: $S(t,T) = E[e^{-\int_t^T \lambda_s ds}]$
+- Risk-neutral bond price: $P(t,T) = E_t^Q\left[e^{-\int_t^T (r_s + \lambda_s) ds}\right]$
+
+**Credit spread decomposition:**
+$$s(t,T) = \frac{E_t[\int_t^T \lambda_s S(t,s) ds]}{E_t[S(t,T)]}$$
+
+**Derivation:**
+- Total yield: $y = r + s$
+- Bond price: $P = E^Q[e^{-\int_t^T (r_s + \lambda_s) ds}]$
+- Spread: $s(t,T) = -\frac{1}{T-t} \ln E^Q[e^{-\int_t^T \lambda_s ds}]$
+- Approximation: $s \approx E[\int_t^T \lambda_s ds]$ for small spreads
+
+### Copula Models for Portfolio Credit Risk
+
+**Gaussian copula:**
+$$C(u_1,\dots,u_n) = \Phi_\rho(\Phi^{-1}(u_1),\dots,\Phi^{-1}(u_n))$$
+
+**Assumptions:**
+1. **Marginal distributions:** Each default time has CDF F_i(t)
+2. **Copula dependence:** Captures correlation in default times
+3. **Time-homogeneous dependence:** Constant correlation parameter
+
+**Default time correlation:**
+$$\rho_{ij} = \frac{\partial^2 C}{\partial u_i \partial u_j} \bigg|_{\mathbf{u}=\mathbf{1}}$$
+
+**Large portfolio approximation:**
+$$PD_{portfolio} \approx \Phi\left(\frac{\sqrt{\rho} \Phi^{-1}(PD) + \sqrt{1-\rho} \Phi^{-1}(q)}{\sqrt{1 - \rho(1-q)/(1-PD)}}\right)$$
+
+**Derivation:**
+- Conditional PD given systematic factor Z ~ N(0,1)
+- Individual PD: $PD_i = \Phi\left(\frac{\sqrt{\rho} Z + \sqrt{1-\rho} \epsilon_i}{\sqrt{1-\rho}}\right)$
+- Portfolio loss distribution via law of large numbers
+
+## Interest Rate Derivatives
+
+### Forward Rate Agreements
+
+**FRA mechanics:**
+- Contract to borrow/lend at predetermined rate K
+- Reference period [T, T+δ]
+- Settlement at time T
+
+**Payoff derivation:**
+$$\text{Payoff} = N \cdot \frac{\delta (L - K)}{1 + \delta L}$$
+
+**No-arbitrage pricing:**
+$$F(t,T,T+\delta) = \frac{1}{\delta}\left(\frac{P(t,T)}{P(t,T+\delta)} - 1\right)$$
+
+**Derivation:**
+- Forward contract: Long FRA = Long bond + Short zero
+- Value at maturity: $\frac{N}{1 + \delta L} - \frac{N}{1 + \delta K}$
+- Present value: $N \cdot \frac{F - K}{1 + \delta F} \cdot P(t,T+\delta)$
+
+### Interest Rate Swaps
+
+**Swap mechanics:**
+- Exchange fixed payments for floating payments
+- Notional amount N, payment dates T_1 to T_n
+- Fixed rate S, floating rate resets
+
+**Swap rate derivation:**
+$$S(t,T_0,T_n) = \frac{P(t,T_0) - P(t,T_n)}{\sum_{i=1}^n \delta_i P(t,T_i)}$$
+
+**Value of fixed leg:**
+$$V_{fixed} = N \cdot S \cdot \sum_{i=1}^n \delta_i P(t,T_i)$$
+
+**Value of floating leg:**
+$$V_{float} = N \cdot (P(t,T_0) - P(t,T_n))$$
+
+**No-arbitrage condition:** At inception, V_fixed = V_float
+
+### Black's Model for Caps
+
+**Forward rate dynamics under T-forward measure:**
+$$dF(t,T,T+\delta) = \sigma F(t,T,T+\delta) dW_T(t)$$
+
+**Assumptions:**
+1. **Log-normal forward rates:** Geometric Brownian motion
+2. **Constant volatility:** σ independent of F and time
+3. **T-forward measure:** Measure where P(t,T) is numeraire
+
+**Caplet price derivation:**
+$$C = N \cdot \delta \cdot P(t,T+\delta) \cdot [F N(d_1) - K N(d_2)]$$
+
+where:
+$$d_1 = \frac{\ln(F/K) + \frac{1}{2}\sigma^2 (T-t)}{\sigma \sqrt{T-t}}$$
+$$d_2 = d_1 - \sigma \sqrt{T-t}$$
+
+**Derivation:**
+- Payoff: N·δ·max(F - K, 0)
+- Risk-neutral pricing: E^T[max(F - K, 0)] · P(t,T+δ)
+- Black-Scholes analogy for forward rates
+
+### Swaptions
+
+**Swaption mechanics:**
+- Option to enter into swap at fixed rate K
+- Payer swaption: Right to pay fixed, receive floating
+- Receiver swaption: Right to receive fixed, pay floating
+
+**Black's formula:**
+$$\text{Swaption} = A(t) \cdot [S N(d_1) - K N(d_2)]$$
+
+where $A(t) = N \sum_{i=1}^n \delta_i P(t,T_i)$
+
+**Volatility calibration:**
+- Implied volatility from market prices
+- Term structure of volatility
+- Smile effects in swaption markets
+
+## Mortgage-Backed Securities
+
+### Mortgage Mathematics
+
+**Fixed-rate mortgage payment:**
+$$PMT = \frac{P_0 r}{1 - (1+r)^{-n}}$$
+
+**Derivation:**
+- Present value of payments equals loan amount
+- Annuity formula for level payments
+
+**Outstanding balance:**
+$$B_t = PMT \cdot \frac{1 - (1+r)^{-(n-t)}}{r}$$
+
+**Principal and interest split:**
+$$\text{Interest}_t = r B_{t-1}$$
+$$\text{Principal}_t = PMT - \text{Interest}_t$$
+
+### Prepayment Modeling
+
+**PSA prepayment function:**
+$$CPR_t = \begin{cases} 0.002 \cdot \min(t, 30) & t \leq 30 \\ 0.06 & t > 30 \end{cases}$$
+
+**Single Monthly Mortality:**
+$$SMM_t = 1 - (1 - CPR_t)^{1/12}$$
+
+**Conditional prepayment rate:**
+$$CPR_t = 1 - (1 - SMM_t)^{12}$$
+
+**Derivation:**
+- CPR: Annual prepayment rate
+- SMM: Monthly prepayment rate
+- Relationship: $SMM = 1 - (1 - CPR)^{1/12}$
+
+### Option-Adjusted Spread (OAS)
+
+**OAS calculation:**
+$$P_{market} = E^Q\left[\sum_{t=1}^T \frac{CF_t}{(1 + r_t + OAS)^t}\right]$$
+
+**Simulation approach:**
+1. Generate interest rate paths $\{r_t^{(i)}\}_{i=1}^N$
+2. Compute prepayments and cash flows for each path
+3. Discount at Treasury + OAS
+4. Average across paths to match market price
+
+**Mathematical foundation:**
+- OAS captures compensation for prepayment risk
+- Monte Carlo simulation for path-dependent cash flows
+- Numerical root-finding to solve for OAS
+
+### Negative Convexity
+
+**Price-yield relationship:**
+$$\frac{\partial^2 P}{\partial y^2} < 0$$
+
+**Causes:**
+- Prepayment option limits upside potential
+- Extension risk increases downside risk
+- Effective duration can be negative for IO strips
+
+**Mathematical derivation:**
+- MBS value = Straight bond - Prepayment option
+- Option value increases with volatility
+- Convexity adjustment accounts for optionality
+
+## Inflation-Linked Bonds
+
+### Real vs. Nominal Pricing
+
+**Fisher equation:**
+$$1 + i_t = (1 + r_t)(1 + \pi_t^e)$$
+
+**Real bond price:**
+$$P^{real}(t,T) = E_t^Q\left[e^{-\int_t^T r_s ds}\right]$$
+
+**TIPS price:**
+$$P^{TIPS}(t,T) = P^{real}(t,T) \cdot \frac{I_t}{I_{t_0}}$$
+
+**Breakeven inflation:**
+$$BE_t^T = y_t^{nominal} - y_t^{real}$$
+
+**Decomposition:**
+$$BE_t^T = E_t[\pi_{t,T}] + IP_t^T + LP_t^T + CB_t^T$$
+
+### Inflation Risk Premium
+
+**Theoretical foundation:**
+$$IRP_t^T = -\frac{\partial u}{\partial \pi} \cdot \frac{\partial \pi}{\partial c} \cdot \frac{\partial c}{\partial IRP}$$
+
+**Empirical estimation:**
+$$IRP_t^T = BE_t^T - E_t[\pi_{t,T}] - CB_t^T$$
+
+### Jarrow-Yildirim Model
+
+**Real rate process:**
+$$dr_t = (\alpha_r + \beta_r r_t) dt + \sigma_r dW_r$$
+
+**Inflation process:**
+$$d\pi_t = (\alpha_\pi + \beta_\pi \pi_t) dt + \sigma_\pi dW_\pi$$
+
+**Nominal short rate:**
+$$i_t = r_t + \pi_t + \phi \sigma_r \sigma_\pi \rho_{r\pi}$$
+
+**Bond pricing:**
+$$P(t,T) = E_t^Q\left[e^{-\int_t^T (r_s + \pi_s + \phi \sigma_r \sigma_\pi \rho_{r\pi}) ds}\right]$$
+
+## Key Mathematical Results
+
+### Duration-Convexity Approximation
+$$\frac{\Delta P}{P} = -D \Delta y + \frac{1}{2} C (\Delta y)^2 + \epsilon$$
+
+**Error bound:** $\epsilon \leq \frac{1}{6} \max|\frac{\partial^3 P}{\partial y^3}| (\Delta y)^3$
+
+### Credit Spread Asymptotics
+For small spreads: $s(t,T) \approx \frac{E[\int_t^T \lambda_s ds]}{T-t}$
+
+**Exact relationship:** $s(t,T) = -\frac{1}{T-t} \ln E[e^{-\int_t^T \lambda_s ds}]$
+
+### Mortgage OAS Convergence
+$$OAS = \lim_{N \to \infty} \frac{1}{N} \sum_{i=1}^N \left( y_t^{Treasury} + \frac{1}{T} \ln \frac{P_{model}^{(i)}}{P_{market}} \right)$$
+
+## Applications and Extensions
+
+### Portfolio Immunization
+**Duration matching:**
+$$\sum_{i=1}^n w_i D_i = D_{liability}$$
+
+**Convexity matching:**
+$$\sum_{i=1}^n w_i C_i = C_{liability}$$
+
+### Credit Portfolio Management
+**Value-at-Risk calculation:**
+$$VaR_\alpha = \inf \{ l \in \mathbb{R} : P(L > l) \leq 1-\alpha \}$$
+
+**Expected shortfall:**
+$$ES_\alpha = E[L | L > VaR_\alpha]$$
+
+### Inflation Hedging
+**Optimal inflation hedge ratio:**
+$$h^* = \frac{\text{Cov}(r_p, \pi)}{\text{Var}(\pi)}$$
+
+**Real return maximization:**
+$$\max_h E[r_p - h \pi] - \frac{\gamma}{2} \text{Var}(r_p - h \pi)$$
+
+## Conclusion
+
+**Key Takeaways:**
+- Bond pricing requires understanding of term structure models
+- Credit risk encompasses both default probability and recovery
+- Derivatives pricing builds on underlying asset valuation
+- Mortgage securities introduce prepayment and extension risk
+- Inflation-linked securities provide real return guarantees
+
+**Mathematical Rigor:**
+- Complete derivations of key pricing formulas
+- Understanding of stochastic processes in finance
+- Risk management through Greeks and hedging
+- Portfolio optimization under various constraints

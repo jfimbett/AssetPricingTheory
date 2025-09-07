@@ -11,9 +11,6 @@ src/
 │   └── images/               # Course images, logos, and visual assets
 ├── templates/                 # Templates for creating new content
 │   └── DAY_TEMPLATE.md       # Template for creating new lecture days
-├── preliminaries/             # Prerequisites and course setup
-│   ├── index.qmd             # Main prerequisites overview
-│   └── 01-optimization.qmd   # Mathematical optimization review
 └── lectures/                  # All course lectures organized by day
     ├── day0/                 # Course introduction
     ├── day1/                 # Fundamentals of Asset Pricing
@@ -39,11 +36,6 @@ src/
 - Ensures consistency in structure and formatting
 - Contains sample content and best practices
 
-### Preliminaries (`preliminaries/`)
-- Course prerequisites and mathematical background
-- Setup instructions for software and tools
-- Review materials for essential concepts
-
 ### Lectures (`lectures/`)
 - Main course content organized by day
 - Each day follows the template structure
@@ -53,7 +45,6 @@ src/
 
 All internal links are relative to the repository root:
 - From lecture files: Use `../../../` to reach root level
-- From preliminaries: Use `../` to reach other src/ folders
 - Consistent path structure for easy maintenance
 
 ## Content Development Workflow

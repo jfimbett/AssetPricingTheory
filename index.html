@@ -4,227 +4,174 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asset Pricing Theory - Ph.D. Course</title>
-    <link rel="stylesheet" href="src/assets/styles.css">
     <style>
-        body {
-            font-family: "Merriweather", serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            color: #000000;
-            line-height: 1.6;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
+
         header {
-            background: linear-gradient(135deg, #2596be 0%, #1f7a9a 100%);
+            text-align: center;
             color: white;
-            padding: 40px 0;
-            text-align: center;
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
         }
-        .navigation {
-            background: #f8f9fa;
-            padding: 20px 0;
-            border-bottom: 2px solid #2596be;
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
         }
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            max-width: 1200px;
+
+        .subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 1.1em;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 20px;
+            opacity: 0.9;
         }
-        .nav-item {
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
             background: white;
-            border: 2px solid #2596be;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: block;
         }
-        .nav-item:hover {
-            background: #e3f2fd;
-            transform: translateY(-2px);
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
-        .nav-item a {
-            color: #2596be;
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .card .link {
+            color: #667eea;
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.9em;
         }
-        .course-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 40px 0;
+
+        .card .link:hover {
+            text-decoration: underline;
         }
-        .info-section {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            border-left: 5px solid #2596be;
-        }
-        .schedule {
-            margin: 40px 0;
-        }
-        .schedule-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .schedule-item {
-            background: white;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .day-title {
-            color: #2596be;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        footer {
-            background: #2596be;
+
+        .section-title {
             color: white;
             text-align: center;
-            padding: 30px 0;
-            margin-top: 60px;
+            font-size: 2.2em;
+            margin: 50px 0 30px 0;
+            font-weight: 300;
         }
+
+        .instructor {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .instructor h3 {
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .instructor p {
+            opacity: 0.9;
+        }
+
         @media (max-width: 768px) {
-            .course-info {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .content-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
+    <div class="container">
+        <header>
             <h1>Asset Pricing Theory</h1>
-            <h2>Advanced Ph.D. Level Course</h2>
-            <p>M104 Master of Research in Finance | Paris Dauphine-PSL</p>
+            <p class="subtitle">Ph.D. Level Course - Paris Dauphine University-PSL (10 Sessions)</p>
+            <p class="description">
+                This advanced course provides a comprehensive understanding of the theoretical foundations
+                for how financial assets are priced in equilibrium markets.
+            </p>
+        </header>
+
+        <h2 class="section-title">Course Lectures</h2>
+        <div class="content-grid">
+            <a href="_site/src/lectures/day0/lecture/index.html" class="card">
+                <h3>🚀 Day 0: Introduction</h3>
+                <p>Course overview, objectives, and fundamental concepts in asset pricing theory.</p>
+                <span class="link">Start Here →</span>
+            </a>
+
+            <a href="_site/src/lectures/day1/lecture/index.html" class="card">
+                <h3>📊 Day 1: Fundamentals</h3>
+                <p>Core principles and foundational theories of asset pricing.</p>
+                <span class="link">View Lecture →</span>
+            </a>
         </div>
-    </header>
 
-    <nav class="navigation">
-        <div class="nav-grid">
-            <div class="nav-item"><a href="src/lectures/day0/lecture/index.html">Day 0: Course Introduction</a></div>
-            <div class="nav-item"><a href="src/lectures/day1/lecture/index.html">Day 1: Fundamentals</a></div>
-            <div class="nav-item"><a href="src/lectures/day2/lecture/index.html">Day 2: Portfolio Choice</a></div>
-            <div class="nav-item"><a href="src/lectures/day3/lecture/index.html">Day 3: Dynamic Models</a></div>
-            <div class="nav-item"><a href="src/lectures/day4/lecture/index.html">Day 4: Fixed Income</a></div>
-            <div class="nav-item"><a href="src/lectures/day5/lecture/index.html">Day 5: Market Frictions</a></div>
-            <div class="nav-item"><a href="src/lectures/day6/lecture/index.html">Day 6: Information</a></div>
-            <div class="nav-item"><a href="src/lectures/day7/lecture/index.html">Day 7: Long-Horizon Models</a></div>
-            <div class="nav-item"><a href="src/lectures/day8/lecture/index.html">Day 8: Macro-Finance</a></div>
-            <div class="nav-item"><a href="src/lectures/day9/lecture/index.html">Day 9: Behavioral Finance</a></div>
+        <div class="instructor">
+            <h3>👨‍🏫 Course Instructor</h3>
+            <p><strong>Juan F. Imbet</strong></p>
+            <p>Paris Dauphine University-PSL</p>
+            <p>Email: juan.imbet@dauphine.psl.eu</p>
         </div>
-    </nav>
-
-    <main class="container">
-        <section class="course-info">
-            <div class="info-section">
-                <h3>Course Information</h3>
-                <p><strong>Instructor:</strong> Juan F. Imbet</p>
-                <p><strong>Email:</strong> juan.imbet@dauphine.psl.eu</p>
-                <p><strong>Position:</strong> Assistant Professor of Finance</p>
-                <p><strong>Institution:</strong> Paris Dauphine University-PSL</p>
-                <p><strong>Duration:</strong> 10 sessions of 3 hours each</p>
-                <p><strong>Prerequisites:</strong> Foundation courses on Microeconomics</p>
-            </div>
-            
-            <div class="info-section">
-                <h3>Learning Objectives</h3>
-                <ul>
-                    <li>Understand and apply key theoretical models in asset pricing</li>
-                    <li>Develop ability to create original models</li>
-                    <li>Prepare for advanced Empirical Asset Pricing</li>
-                    <li>Master the theoretical foundations of modern finance</li>
-                </ul>
-                
-                <h3>Grading Structure</h3>
-                <ul>
-                    <li>70% Final Exam</li>
-                    <li>30% Two Homework Assignments</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="schedule">
-            <h2>Course Schedule</h2>
-            <div class="schedule-grid">
-                <div class="schedule-item">
-                    <div class="day-title">Day 0: Course Introduction</div>
-                    <p>Presentation of the course and overview of asset pricing theory.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 1: Fundamentals of Asset Pricing</div>
-                    <p>Law of one price, stochastic discount factor, Arrow-Debreu framework, and fundamental theorem of asset pricing.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 2: Portfolio Choice and Static Models</div>
-                    <p>Mean-variance analysis, HARA utility, CAPM, and Arbitrage Pricing Theory.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 3: Dynamic Asset Pricing</div>
-                    <p>Dynamic programming, Merton's model, intertemporal CAPM, and recursive preferences.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 4: Fixed-Income and Derivatives</div>
-                    <p>Term structure models, option pricing, and continuous-time asset pricing.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 5: Market Frictions</div>
-                    <p>Transaction costs, borrowing constraints, and incomplete markets.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 6: Information and Microstructure</div>
-                    <p>Asymmetric information, rational expectations, and market microstructure models.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 7: Intertemporal Risk</div>
-                    <p>Long-run risk, rare disasters, and Epstein-Zin preferences.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 8: Macro-Finance</div>
-                    <p>Intermediary asset pricing, production-based models, and macro-finance links.</p>
-                </div>
-                
-                <div class="schedule-item">
-                    <div class="day-title">Day 9: Behavioral and Household Finance</div>
-                    <p>Prospect theory, behavioral deviations, and theoretical household finance.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="quick-links" style="margin: 40px 0;">
-            <h2>Quick Links</h2>
-            <div class="nav-grid">
-                <div class="nav-item"><a href="src/preliminaries/index.html">Prerequisites & Setup</a></div>
-                <div class="nav-item"><a href="README.md">Course README</a></div>
-                <div class="nav-item"><a href="TODO.md">Development Status</a></div>
-                <div class="nav-item"><a href="src/assets/images/">Course Assets</a></div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Juan F. Imbet | Paris Dauphine University-PSL</p>
-            <p>Asset Pricing Theory - Advanced Ph.D. Course</p>
-        </div>
-    </footer>
+    </div>
 </body>
 </html>

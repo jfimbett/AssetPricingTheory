@@ -1,0 +1,392 @@
+---
+title: "Day 5: Market Frictions"
+subtitle: "Asset Pricing Theory"
+author: "Juan F. Imbet"
+institute: "Paris Dauphine University-PSL"
+format:
+  revealjs:
+    theme: white
+    css: ../../../assets/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "Asset Pricing Theory - Day 5"
+---
+
+## Market Frictions {.center}
+
+**Mathematical Models of Trading Costs, Constraints, and Arbitrage Limits**
+
+## Transaction Costs and Liquidity
+
+### Bid-Ask Spread Components
+
+**Glosten-Milgrom (1985) model assumptions:**
+1. **Sequential trading:** One trader at a time
+2. **Two types of traders:** Informed (probability α) and uninformed
+3. **Dealer posts bid and ask quotes**
+4. **Bayesian updating:** Dealer learns from order flow
+
+**Model setup:**
+- Informed trader observes signal: $s = V + \epsilon$, where $\epsilon \sim N(0, \sigma_\epsilon^2)$
+- Uninformed trader arrives with probability 1-α
+- Dealer sets bid $P_B$ and ask $P_A$ to break even
+
+**Dealer optimization:**
+- Bid quote: $P_B = E[V | \text{bid order}]$
+- Ask quote: $P_A = E[V | \text{ask order}]$
+- Break-even condition: $\alpha P_A + (1-\alpha) P_B = V^*$
+
+**Adverse selection component derivation:**
+$$AS = P_A - P_B = \frac{\alpha}{2} \cdot \frac{\sigma_\epsilon^2}{\sigma_\epsilon^2 + \sigma_u^2} \cdot \sigma_V$$
+
+**Intuition:** Spread compensates dealer for trading against informed traders
+
+**Inventory component (Ho-Stoll 1981):**
+$$P_{ask} = P^* + \frac{\sigma^2}{2\rho} I + \frac{\sigma^2}{4\rho}$$
+$$P_{bid} = P^* + \frac{\sigma^2}{2\rho} I - \frac{\sigma^2}{4\rho}$$
+
+**Assumptions:**
+- Dealer has CARA utility with risk aversion ρ
+- Inventory I follows random walk
+- Price follows random walk with variance σ²
+
+**Derivation:**
+- Dealer maximizes: $E[U(W + \pi (P - P^*))] - \rho \cdot \frac{1}{2} \sigma^2 I^2$
+- First-order condition: $\pi = \frac{\rho}{\sigma^2} (P - P^*)$
+- Inventory effect: $\frac{\partial P}{\partial I} = \frac{\sigma^2}{2\rho} + \frac{\sigma^2}{\rho} I$
+
+### Market Impact Models
+
+**Kyle (1985) linear impact assumptions:**
+1. **Single informed trader** with private signal
+2. **Noise traders** with random demand
+3. **Risk-neutral market maker** sets prices
+4. **Linear equilibrium**
+
+**Model equations:**
+- Informed trader: $x = \beta (V - \mu)$
+- Noise traders: $u \sim N(0, \sigma_u^2)$
+- Market maker: $P = \mu + \lambda (x + u)$
+
+**Equilibrium derivation:**
+- Informed trader maximizes: $(V - P) x - \frac{\lambda}{2} x^2$
+- First-order condition: $V - P - \lambda x = 0$
+- Solution: $x = \frac{V - \mu}{\lambda}$, $\beta = \frac{1}{\lambda}$
+
+**Market maker's inference:**
+- Posterior: $E[V|x+u] = \mu + \frac{\sigma_V^2}{\sigma_V^2 + \sigma_u^2/\beta^2} \cdot \frac{x+u}{\beta}$
+- Optimal λ: $\lambda = \frac{\sigma_V}{\beta \sigma_u}$
+
+**Almgren-Chriss (2000) square-root impact:**
+$$\Delta P = \eta \cdot \text{sgn}(Q) \cdot \sqrt{|Q|}$$
+
+**Assumptions:**
+1. **Temporary impact:** Decays over time
+2. **Permanent impact:** Long-run price change
+3. **Risk term:** Variance of execution
+
+**Optimal execution problem:**
+$$\min \int_0^T \eta \frac{(Q_t)^2}{V_t} dt + \lambda \sigma^2 \int_0^T Q_t^2 dt$$
+
+**Solution:** Trade at constant rate with risk-reward optimization
+
+### Liquidity Measures
+
+**Amihud (2002) illiquidity ratio:**
+$$ILLIQ_{i,t} = \frac{|r_{i,t}|}{P_{i,t} VOL_{i,t}}$$
+
+**Theoretical foundation:**
+- Price impact per dollar volume
+- Higher values indicate lower liquidity
+- Cross-sectional and time-series patterns
+
+**Pastor-Stambaugh (2003) liquidity measure:**
+$$r_{i,t} = \alpha_i + \beta_i r_{m,t} + \gamma_i \text{sgn}(\Delta VOL_t) \cdot \Delta VOL_t + \epsilon_{i,t}$$
+
+**Derivation:**
+- Liquidity innovations: $\gamma_i$ captures price impact of order flow
+- Positive γ indicates price reversal (illiquidity)
+- Aggregate liquidity: $LIQ_t = -\sum_{i=1}^N \gamma_i \cdot r_{i,t-1}$
+
+**Liquidity-adjusted CAPM (Acharya-Pedersen 2007):**
+$$E[r_i] - r_f = \beta_1 (E[r_m] - r_f) + \beta_2 E[LIQ_m] + \beta_3 E[r_m \cdot ILLIQ_i] + \beta_4 E[ILLIQ_m \cdot r_i]$$
+
+**Four betas:**
+1. **Market beta:** $\beta_1 = \frac{\text{Cov}(r_i, r_m)}{\text{Var}(r_m)}$
+2. **Liquidity level beta:** $\beta_2 = \frac{\text{Cov}(r_i, LIQ_m)}{\text{Var}(LIQ_m)}$
+3. **Liquidity sensitivity beta:** $\beta_3 = \frac{\text{Cov}(r_i, r_m \cdot ILLIQ_i)}{\text{Var}(r_m)}$
+4. **Commonality beta:** $\beta_4 = \frac{\text{Cov}(r_i, ILLIQ_m \cdot r_i)}{\text{Var}(ILLIQ_m)}$
+
+## Short-Sale Constraints
+
+### Miller (1977) Model
+
+**Assumptions:**
+1. **Heterogeneous beliefs:** Optimists and pessimists
+2. **Short-sale constraint:** Pessimists cannot sell short
+3. **Rational expectations**
+4. **No transaction costs**
+
+**Model setup:**
+- True value: $V^*$
+- Optimists: $E[V|O] = \mu_O > V^*$
+- Pessimists: $E[V|P] = \mu_P < V^*$
+- Market clearing: $\pi_O P + \pi_P P = \pi_O \mu_O + \pi_P \mu_P$
+
+**Equilibrium price:**
+$$P = \frac{\pi_O \mu_O + \pi_P \mu_P}{\pi_O + \pi_P}$$
+
+**Overvaluation result:**
+$$P > V^* \text{ when pessimists are constrained}$$
+
+**Intuition:** Price reflects only optimistic beliefs, leading to overvaluation
+
+### Diamond-Verrecchia (1987) Model
+
+**Assumptions:**
+1. **Private information:** Informed trader observes signal
+2. **Short-sale constraint:** P ≥ 0
+3. **Risk-neutral agents**
+4. **Normal distributions**
+
+**Model setup:**
+- Prior: $V \sim N(\bar{V}, \sigma_V^2)$
+- Signal: $s = V + \epsilon$, $\epsilon \sim N(0, \sigma_\epsilon^2)$
+- Informed trader: $E[V|s] = \bar{V} + \frac{\sigma_V^2}{\sigma_V^2 + \sigma_\epsilon^2} (s - \bar{V})$
+
+**Equilibrium price function:**
+$$P = \max\left(0, E[V|s] - \frac{\alpha}{1-\alpha} \cdot \frac{\sigma_\epsilon^2}{\sigma_V^2 + \sigma_\epsilon^2} \cdot \sigma_V^2\right)$$
+
+**Derivation:**
+- Uninformed traders set P = E[V|order flow]
+- Informed trader shorts only if P < E[V|s]
+- Equilibrium requires consistency
+
+### Hong-Stein (1999) Model
+
+**Assumptions:**
+1. **Gradual information diffusion**
+2. **Short-sale constraints**
+3. **Heterogeneous learning speeds**
+4. **Momentum traders**
+
+**Model equations:**
+$$x_{i,t+1} = x_{i,t} + \phi_i (x_{i,t}^* - x_{i,t}) + \epsilon_{i,t}$$
+
+**Momentum effect derivation:**
+$$\text{Momentum} \propto \frac{1}{\phi} \cdot \text{Short-sale constraint tightness}$$
+
+**Intuition:** Slow learning + constraints create momentum as information diffuses gradually
+
+## Borrowing Constraints
+
+### Black's Zero-Beta CAPM
+
+**Assumptions:**
+1. **Borrowing costs > lending costs:** r_B > r_f > r_L
+2. **Some investors face borrowing constraints**
+3. **Two-fund separation fails**
+
+**Zero-beta portfolio derivation:**
+- Zero-beta portfolio: Cov(R_Z, R_M) = 0
+- Expected return: E[R_Z] = r_f + \frac{\text{Cov}(R_Z, R_M)}{\text{Var}(R_M)} (E[R_M] - r_f)
+- But this is not the risk-free rate when constraints bind
+
+**Market portfolio not efficient:**
+- Constrained investors hold different portfolios
+- Traditional CAPM breaks down
+
+### Frazzini-Pedersen Leverage Constraints
+
+**Low-beta anomaly explanation:**
+- Investors prefer high expected returns
+- Cannot leverage low-risk assets sufficiently
+- Bid up high-beta stocks instead
+
+**Betting Against Beta (BAB) factor:**
+$$BAB_t = \frac{1}{2} (R_{LB,t} - R_{HB,t})$$
+
+**Expected return derivation:**
+$$E[R_{BAB}] \approx 1\% \text{ per month}$$
+
+**Mechanism:** Leverage constraints create demand pressure on high-beta assets
+
+### Kiyotaki-Moore Collateral Constraints
+
+**Model setup:**
+$$B_t \leq \theta_t \cdot Q_t \cdot K_t$$
+
+**Feedback amplification:**
+$$\frac{dQ}{Q} = \frac{\eta}{1 - \eta \theta} \cdot \frac{d\theta}{\theta}$$
+
+**Financial accelerator effect:**
+- Asset price declines reduce collateral value
+- Reduced borrowing capacity leads to further selling
+- Amplifies business cycle fluctuations
+
+## Market Microstructure
+
+### Kyle (1985) Model
+
+**Linear equilibrium:**
+$$P = \mu + \lambda (x + u)$$
+
+**Informed trader optimization:**
+$$\max_x E[\tilde{V} - P|x] \cdot x - \frac{\lambda}{2} x^2$$
+
+**First-order condition:**
+$$\frac{\partial}{\partial x} = E[\tilde{V} - P|x] - \lambda x = 0$$
+$$x^* = \frac{E[\tilde{V} - \mu]}{\lambda}$$
+
+**Market maker's problem:**
+- Set λ to break even: E[P] = μ
+- Infer from order flow: E[V|order flow]
+
+### Glosten-Milgrom Adverse Selection
+
+**Sequential trading model:**
+- Bid: $P_B = E[V|B] = \frac{\alpha \mu_B + (1-\alpha) V^*}{\alpha + (1-\alpha)}$
+- Ask: $P_A = E[V|A] = \frac{\alpha \mu_A + (1-\alpha) V^*}{\alpha + (1-\alpha)}$
+
+**Spread components:**
+$$\text{Spread} = P_A - P_B = \frac{\alpha}{2} (\mu_A - \mu_B)$$
+
+**Adverse selection cost:**
+- Dealer loses to informed traders
+- Spread compensates for this cost
+
+### Easley-KO-O'Hara PIN Model
+
+**Trade classification:**
+- Buy orders: Informed (αμ) or Uninformed (ε)
+- Sell orders: Informed (αμ) or Uninformed (ε)
+
+**Probability of informed trading:**
+$$PIN = \frac{\alpha \mu}{\alpha \mu + 2\epsilon}$$
+
+**Model likelihood:**
+$$L = \prod_{t=1}^T \left[ \alpha \mu e^{-\mu} \frac{(\mu)^B}{B!} \cdot \epsilon e^{-\epsilon} \frac{(\epsilon)^S}{S!} \right]$$
+
+**Maximum likelihood estimation of PIN**
+
+## Limits to Arbitrage
+
+### Shleifer-Vishny (1997) Model
+
+**Arbitrageur capital dynamics:**
+$$\frac{dC}{C} = \mu dt + \sigma dW - \delta dt$$
+
+**Performance-based capital withdrawal:**
+- Good performance: Capital inflow
+- Poor performance: Capital outflow
+
+**Procyclical arbitrage:**
+$$\text{Arbitrage activity} \propto C_t$$
+
+**Key insight:** Capital flows exacerbate mispricings exactly when arbitrage is most needed
+
+### De Long et al. (1990) Noise Trader Model
+
+**Noise trader demand:**
+$$D_{NT,t} = \gamma P_{t-1} + \epsilon_t$$
+
+**Arbitrageur response:**
+$$D_{A,t} = -\phi (P_t - P^*)$$
+
+**Equilibrium price:**
+$$P_t = P^* + \frac{\gamma}{1 + \phi} P_{t-1} + \frac{1}{1 + \phi} \epsilon_t$$
+
+**Persistent mispricing when $\phi$ is limited**
+
+### Brunnermeier-Pedersen Liquidity Spirals
+
+**Market liquidity:**
+$$L_M = f(\text{Order flow, Inventory})$$
+
+**Funding liquidity:**
+$$L_F = g(\text{Margin requirements, Haircuts})$$
+
+**Spiral condition:**
+$$\frac{\partial L_M}{\partial L_F} \cdot \frac{\partial L_F}{\partial L_M} > 1$$
+
+**Mechanism:**
+- Funding constraints reduce market making
+- Reduced market liquidity increases funding constraints
+- Self-reinforcing downward spiral
+
+## Key Mathematical Results
+
+### Transaction Cost Portfolio Choice
+
+**Magill-Constantinides no-trade region:**
+$$\frac{1-\tau}{1+\tau} \leq \frac{w}{w^*} \leq \frac{1+\tau}{1-\tau}$$
+
+**Optimal rebalancing threshold:**
+$$\Delta w^* = \sqrt{\frac{2\tau}{\gamma \sigma^2}}$$
+
+### Arbitrage Profitability
+
+**Expected arbitrage return:**
+$$E[\pi] = \frac{\text{Mispricing}}{\text{Time to convergence}} - \text{Costs}$$
+
+**Break-even mispricing:**
+$$\text{Mispricing}^* = \frac{\text{Carry costs} + \text{Transaction costs}}{\text{Convergence probability}}$$
+
+### Liquidity Risk Premium
+
+**Liquidity beta:**
+$$\beta_{LIQ,i} = \frac{\text{Cov}(r_i, LIQ_m)}{\text{Var}(LIQ_m)}$$
+
+**Cross-sectional pricing:**
+$$E[r_i] = \gamma_0 + \gamma_1 \beta_{i,M} + \gamma_2 \beta_{i,LIQ}$$
+
+## Applications and Extensions
+
+### Optimal Execution Strategies
+
+**VWAP algorithm:**
+$$\text{Participation rate} = \frac{\text{Target volume}}{\text{Expected volume}}$$
+
+**Implementation shortfall minimization:**
+$$\min \text{Market impact} + \text{Timing risk} + \text{Commission costs}$$
+
+### Statistical Arbitrage
+
+**Pairs trading signal:**
+$$z_t = \frac{p_{1,t} - p_{2,t} - \mu}{\sigma}$$
+
+**Entry threshold:**
+$$|z_t| > \phi \implies \text{Trade}$$
+
+**Mean-reversion speed:**
+$$\kappa = -\ln(\rho) \text{ (half-life in periods)}$$
+
+### Risk Management with Constraints
+
+**Effective leverage:**
+$$L_{eff} = \frac{\sum |w_i|}{\sum w_i^+} \leq L_{max}$$
+
+**Portfolio optimization under constraints:**
+$$\max_w E[r_p] - \frac{\gamma}{2} \text{Var}(r_p)$$
+$$\text{s.t. } L_{eff} \leq L_{max}$$
+
+## Conclusion
+
+**Core Insights:**
+- Transaction costs create no-trade regions and affect portfolio choice
+- Short-sale constraints allow overvaluation and slow price discovery
+- Borrowing constraints break traditional CAPM relationships
+- Market microstructure affects price formation and liquidity
+- Limits to arbitrage allow mispricings to persist
+
+**Mathematical Rigor:**
+- Complete equilibrium derivations in constrained settings
+- Stochastic processes for price dynamics with frictions
+- Optimization under various constraint types
+- Risk-return trade-offs in imperfect markets
+
+**Policy Implications:**
+- Market design affects trading costs and efficiency
+- Regulatory constraints can amplify or dampen cycles
+- Understanding frictions crucial for asset pricing theory

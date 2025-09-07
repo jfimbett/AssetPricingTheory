@@ -1,0 +1,459 @@
+---
+title: "Day 9: Behavioral Finance"
+subtitle: "Asset Pricing Theory"
+author: "Juan F. Imbet"
+institute: "Paris Dauphine University-PSL"
+format:
+  revealjs:
+    theme: white
+    css: ../../../assets/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "Asset Pricing Theory - Day 9"
+---
+
+## Behavioral Finance {.center}
+
+**Psychological Foundations of Asset Pricing**
+
+## Prospect Theory and Asset Pricing
+
+### Kahneman-Tversky (1979) Prospect Theory
+
+**Value function:**
+$$v(x) = \begin{cases} x^\alpha & x \geq 0 \\ -\lambda (-x)^\beta & x < 0 \end{cases}$$
+
+**Parameters:**
+- $\alpha \approx 0.88$ (concave for gains)
+- $\beta \approx 0.88$ (convex for losses)
+- $\lambda \approx 2.25$ (loss aversion coefficient)
+
+**Probability weighting function:**
+$$w(p) = \frac{p^\gamma}{(p^\gamma + (1-p)^\gamma)^{1/\gamma}}$$
+
+**With $\gamma \approx 0.61$ (overweight small probabilities)**
+
+**Asset pricing implications:**
+- **Fourfold pattern of risk attitudes:**
+  - Risk-averse for gains
+  - Risk-seeking for losses
+  - Loss aversion creates endowment effect
+
+### Benartzi-Thaler (1995) Myopic Loss Aversion
+
+**Cumulative prospect theory for investments:**
+
+**Evaluation period:** Annual evaluation despite daily trading
+
+**Value of portfolio:**
+$$v(W) = \sum_{t=1}^T w\left(\frac{1}{T}\right) v\left(\frac{W_t - W_{t-1}}{W_{t-1}}\right)$$
+
+**Where:**
+- T = number of evaluation periods
+- w(p) = probability weighting function
+- Loss aversion creates myopic behavior
+
+**Equilibrium asset pricing:**
+- Investors avoid volatile assets
+- Equity premium increases with evaluation frequency
+- Explains low stock market participation
+
+### Barberis-Huang-Santos (2001) Model
+
+**Beliefs and preferences:**
+
+**Representative investor with:**
+- Loss aversion: λ = 2.25
+- Probability weighting: γ = 0.61
+- Narrow framing (security-by-security evaluation)
+
+**Asset returns:**
+$$R_{i,t+1} = E[R_{i,t+1}] + \epsilon_{i,t+1}$$
+
+**Portfolio choice:**
+$$\max \sum_i w_i v(R_{i,t+1} - R_f)$$
+
+**Where v incorporates prospect theory**
+
+**Equilibrium implications:**
+- Under-diversification
+- Home bias
+- Familiarity bias
+- Lottery-like preferences for stocks
+
+## Investor Sentiment
+
+### Baker-Wurgler (2006) Sentiment Index
+
+**Sentiment proxies:**
+1. **Trading volume** (NYSE turnover)
+2. **IPO activity** (number of IPOs)
+3. **IPO first-day returns**
+4. **Mutual fund flows**
+5. **Consumer confidence** (University of Michigan)
+
+**Principal component analysis:**
+$$S_t = \omega_1 \cdot \text{Turnover}_t + \omega_2 \cdot \text{IPOs}_t + \omega_3 \cdot \text{IPO Returns}_t + \omega_4 \cdot \text{Flows}_t + \omega_5 \cdot \text{Confidence}_t$$
+
+**Sentiment and stock returns:**
+- High sentiment → Overvaluation of difficult-to-value stocks
+- Low sentiment → Undervaluation of difficult-to-value stocks
+- Predicts returns for small, young, volatile stocks
+
+### Noise Trader Models
+
+**De Long et al. (1990) model:**
+
+**Noise trader demand:**
+$$D_{NT,t} = \gamma P_{t-1} + \eta_t$$
+
+**Arbitrageur demand:**
+$$D_{A,t} = -\phi (P_t - P^*)$$
+
+**Market clearing:**
+$$D_{NT,t} + D_{A,t} = S_t$$
+
+**Price dynamics:**
+$$P_t = P^* + \frac{\gamma}{1+\phi} P_{t-1} + \frac{1}{1+\phi} \eta_t$$
+
+**Equilibrium with noise traders:**
+- Prices deviate from fundamentals
+- Arbitrageurs face noise trader risk
+- Persistent mispricings possible
+
+### Sentiment and Anomalies
+
+**Stambaugh-Yuan-Wu (2015) model:**
+
+**Two types of investors:**
+1. **Rational arbitrageurs** with limited capital
+2. **Sentiment investors** with biased beliefs
+
+**Sentiment investor beliefs:**
+$$E_S[R_{t+1}] = \mu + \theta_t + \epsilon_{t+1}$$
+
+**Where $\theta_t$ is sentiment**
+
+**Equilibrium price:**
+$$P_t = \frac{E_S[R_{t+1}] - R_f}{\gamma_S} + \frac{\mu - R_f}{\gamma_S} \cdot \frac{1}{1 + \frac{\gamma_A}{\gamma_S} \cdot \frac{C_A}{C_S}}$$
+
+**Sentiment beta:**
+$$\beta_{i,\theta} = \frac{\text{Cov}(R_i, \theta)}{\text{Var}(\theta)}$$
+
+**Cross-sectional pricing:**
+$$E[R_i] = R_f + \beta_{i,M} \lambda_M + \beta_{i,\theta} \lambda_\theta$$
+
+## Behavioral Biases and Anomalies
+
+### Overconfidence and Trading Volume
+
+**Daniel-Hirshleifer-Subrahmanyam (1998) model:**
+
+**Overconfident trader beliefs:**
+$$E_t[R_{i,t+1}] = \mu_i + \beta_i \cdot \text{Signal quality}$$
+
+**Self-attribution bias:**
+- Good outcomes → Skill
+- Bad outcomes → Bad luck
+
+**Trading volume:**
+$$V_t \propto \text{Dispersion in beliefs}$$
+
+**Asset pricing implications:**
+- Higher trading volume predicts lower future returns
+- Overconfident investors trade too much
+- Creates momentum and reversals
+
+### Limited Attention
+
+**Hirshleifer-Riley (2016) model:**
+
+**Attention allocation:**
+$$A_{i,t} = f(\text{Salience}_{i,t}, \text{Capacity})$$
+
+**Where salience depends on:**
+- News volume
+- Extreme returns
+- Advertising
+
+**Underreaction to salient information:**
+$$P_t = P_{t-1} + \delta (F_t - P_{t-1}) + \epsilon_t$$
+
+**Where δ < 1 for limited attention**
+
+**Empirical implications:**
+- Post-earnings announcement drift
+- Attention-grabbing events have larger price impact
+- Neglected stocks earn higher returns
+
+### Mental Accounting
+
+**Thaler (1999) mental accounting:**
+
+**Multiple mental accounts:**
+- Current income
+- Asset gains/losses
+- Future consumption
+
+**Disposition effect:**
+- Sell winners too early
+- Hold losers too long
+
+**Mathematical formulation:**
+$$U(W) = u(W_{current}) + v(W_{gains}) + w(W_{losses})$$
+
+**With different utility functions for each account**
+
+**Portfolio implications:**
+- Tax-loss selling
+- Realization of gains for consumption
+- Asymmetric treatment of gains and losses
+
+## Limits to Arbitrage Revisited
+
+### Shleifer-Vishny (1997) Model
+
+**Arbitrageur capital dynamics:**
+$$\frac{dC}{C} = \mu dt + \sigma dW - \delta dt$$
+
+**Performance-based capital withdrawal:**
+- Good performance: Capital inflow (μ > 0)
+- Poor performance: Capital outflow (δ > 0)
+
+**Procyclical arbitrage:**
+$$\text{Arbitrage activity} \propto C_t$$
+
+**Key insight:** Capital flows exacerbate mispricings exactly when arbitrage is most needed
+
+### Xiong (2001) Synchronization Risk
+
+**Multiple arbitrage opportunities:**
+- Common factor in arbitrage returns
+- Correlated arbitrage strategies
+
+**Capital allocation:**
+$$C_t = C_0 + \int_0^t \mu_s ds + \int_0^t \sigma_s dW_s - \int_0^t \delta_s ds$$
+
+**Synchronization effect:**
+- Arbitrageurs chase same opportunities
+- Creates crowded trades
+- Amplifies price movements
+
+### Arbitrage Risk and Mispricing
+
+**Pontiff (1996) limits to arbitrage:**
+
+**Arbitrage costs:**
+1. **Transaction costs**
+2. **Short-sale constraints**
+3. **Noise trader risk**
+4. **Synchronization risk**
+
+**Mispricing dynamics:**
+$$\frac{d(P - P^*)}{P^*} = -\kappa (P - P^*) dt + \sigma dW + \text{Noise trader risk}$$
+
+**Where κ depends on arbitrage capital and costs**
+
+**Empirical evidence:**
+- Mispricings persist longer for hard-to-arbitrage stocks
+- Limits to arbitrage explain anomaly persistence
+- Risk-based explanations insufficient
+
+## Behavioral Portfolio Theory
+
+### Shefrin-Statman (2000) Behavioral Portfolio Theory
+
+**Layered portfolio structure:**
+
+**Safety layer:** Risk-free assets for basic needs
+**Aspiration layer:** Bonds and blue-chip stocks
+**Adventure layer:** High-risk assets for aspirations
+
+**Mental accounting:**
+- Separate layers for different goals
+- Different risk preferences per layer
+- Loss aversion within layers
+
+**Mathematical formulation:**
+$$\max \prod_{k=1}^K u_k(W_k)$$
+
+**Subject to:**
+$$\sum_{k=1}^K W_k = W$$
+$$W_k \geq 0$$
+
+**Where u_k are layer-specific utility functions**
+
+### SP/A Theory
+
+**Security-Potential/Aspiration framework:**
+
+**Security potential:** Downside protection
+**Aspiration potential:** Upside potential
+
+**Portfolio choice:**
+- Minimize downside risk for security
+- Maximize upside potential for aspirations
+
+**Value function:**
+$$v(W) = \begin{cases} -\lambda (A - W)^\beta & W < A \\ (W - A)^\alpha & W > A \end{cases}$$
+
+**Where A is aspiration level**
+
+## Mathematical Models of Behavioral Finance
+
+### Belief Formation Models
+
+**Representativeness heuristic:**
+
+**Bayesian updating:**
+$$p(\theta|y) = \frac{p(y|\theta) p(\theta)}{p(y)}$$
+
+**Representative heuristic:**
+$$p(\theta|y) \approx p(y|\theta) \cdot \text{Base rate neglect}$$
+
+**Overconfidence in beliefs:**
+$$E[R] = \mu + \kappa \cdot \text{Signal precision}$$
+
+**Where κ > 1 for overconfidence**
+
+### Learning and Behavior
+
+**Erev-Roth (1998) reinforcement learning:**
+
+**Choice probability:**
+$$p_{i,t+1} = \frac{e^{\phi Q_{i,t}}}{ \sum_j e^{\phi Q_{j,t}} }$$
+
+**Q-value update:**
+$$Q_{i,t+1} = Q_{i,t} + \alpha (R_t - Q_{i,t})$$
+
+**Where:**
+- ϕ = sensitivity to attractions
+- α = learning rate
+- R_t = reinforcement signal
+
+**Asset pricing implications:**
+- Slow learning creates momentum
+- Over-reaction to recent outcomes
+- Path-dependent beliefs
+
+### Evolutionary Models
+
+**De Vries-Wakker (2003) evolutionary foundation:**
+
+**Population of traders:**
+- Fundamentalists: Trade on fundamentals
+- Chartists: Trade on trends
+- Noise traders: Random trades
+
+**Fitness function:**
+$$\pi_i = E[R_i] - \frac{\gamma}{2} \text{Var}(R_i)$$
+
+**Reproduction:**
+- Successful strategies reproduce
+- Unsuccessful strategies die out
+
+**Equilibrium:**
+- Mix of strategies survives
+- Market efficiency emerges endogenously
+- Behavioral biases persist in some traders
+
+## Applications and Extensions
+
+### Behavioral Corporate Finance
+
+**Managerial behavioral biases:**
+
+**Overconfidence:**
+- Over-investment in pet projects
+- Under-estimation of project risk
+- Excessive leverage
+
+**Optimism:**
+$$E[\text{Project return}] = \mu + \kappa \cdot \text{Manager confidence}$$
+
+**Corporate investment:**
+$$I_t = f(\text{Manager optimism}_t, \text{Fundamentals}_t)$$
+
+### Household Finance
+
+**Anomalies in household portfolios:**
+
+**Under-diversification:**
+- 1-stock portfolios common
+- Local bias in stock holdings
+- Familiarity bias
+
+**Participation puzzle:**
+- Many households not invested in stocks
+- Despite high equity premium
+
+**Mental accounting:**
+- Separate accounts for different goals
+- Asymmetric treatment of gains/losses
+- Tax-related decisions
+
+### Behavioral Risk Management
+
+**Narrow framing in risk-taking:**
+
+**Security-by-security evaluation:**
+$$U(P) = \sum_i u_i(R_i)$$
+
+**Portfolio evaluation:**
+$$U(P) = u\left( \sum_i w_i R_i \right)$$
+
+**Implications:**
+- Under-diversification
+- Excessive risk-taking in individual positions
+- Inadequate hedging
+
+### Market Design and Behavior
+
+**Auction design and behavioral responses:**
+
+**Winner's curse:**
+$$E[\text{Bid}| \text{Win}] = \frac{1}{n} \sum_{j=1}^n v_j$$
+
+**Where v_j are valuations**
+
+**Behavioral bidders:**
+- Overbidding due to overconfidence
+- Underbidding due to regret aversion
+- Reference point effects
+
+## Conclusion
+
+**Core Insights:**
+- **Prospect theory** explains fourfold risk attitudes and loss aversion
+- **Investor sentiment** creates time-varying mispricings
+- **Behavioral biases** generate anomalies inconsistent with EMH
+- **Limits to arbitrage** allow mispricings to persist
+- **Mental accounting** affects portfolio choice and trading
+
+**Mathematical Rigor:**
+- **Prospect theory value function** with loss aversion and probability weighting
+- **Noise trader models** with sentiment-driven demand
+- **Overconfidence models** with biased belief formation
+- **Reinforcement learning** for belief updating
+- **Evolutionary models** for strategy survival
+
+**Empirical Evidence:**
+- **Disposition effect** documented in trading records
+- **Sentiment predicts returns** for difficult-to-value stocks
+- **Limited attention** creates underreaction to news
+- **Mental accounting** affects tax-loss selling
+- **Overconfidence** increases trading volume
+
+**Policy Implications:**
+- **Investor protection** requires understanding behavioral biases
+- **Market design** should account for behavioral responses
+- **Financial education** needs to address cognitive limitations
+- **Regulation** should consider arbitrage limits
+
+**Future Directions:**
+- **Neurofinance** linking brain activity to financial decisions
+- **Machine learning** for detecting behavioral patterns
+- **Cultural differences** in financial behavior
+- **Social influences** on investment decisions
+- **Algorithmic trading** and behavioral interactions

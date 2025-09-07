@@ -15,6 +15,43 @@ Advanced Ph.D. level course on Asset Pricing Theory taught at the M104 Master of
 
 To understand and apply key theoretical models in asset pricing to be able to develop original models and to prepare students for Empirical Asset Pricing.
 
+## Project Structure
+
+- `src/` - All source files for course content
+  - `lectures/` - Daily lecture materials (day0-day9)
+  - `assets/` - Styles and images
+- `_quarto.yml` - Quarto project configuration
+- `index.qmd` - Main course index page
+- `_backup/` - Backup of removed files
+- `site_libs/` - Auto-generated libraries (will be recreated by Quarto)
+
+## How to Use This Repository
+
+### Rendering Content
+
+To render QMD files to revealjs slides, use Quarto commands directly:
+
+```bash
+# Render any QMD file to revealjs slides
+quarto render src/lectures/day1/lecture/index.qmd --to revealjs
+
+# Render a specific slide file
+quarto render src/lectures/day1/lecture/01-law-of-one-price.qmd --to revealjs
+
+# Render to HTML instead of slides
+quarto render src/lectures/day1/lecture/index.qmd --to html
+
+# Render the entire project
+quarto render
+```
+
+### Project Notes
+
+The project has been cleaned to contain only essential files:
+- All source content is organized in `src/`
+- Removed redundant citation files, bibliography, and temporary files
+- Quarto will recreate necessary libraries and cache files when rendering
+
 ## Grading Structure
 
 - 70% Final exam
@@ -86,7 +123,6 @@ This repository contains all course materials organized by day:
     │   └── images/            # Course assets and branding
     ├── templates/             # Templates for creating content
     │   └── DAY_TEMPLATE.md    # Template for creating new days
-    ├── preliminaries/         # Prerequisites and setup materials
     └── lectures/              # All course lectures
         ├── day0/              # Course introduction
         ├── day1/              # Fundamentals of Asset Pricing
@@ -123,7 +159,6 @@ Each day contains:
 ## Usage
 
 ### For Students
-- Start with the `preliminaries/` folder to review prerequisites
 - Navigate through days sequentially using the main landing page
 - Review lecture slides and theoretical materials
 

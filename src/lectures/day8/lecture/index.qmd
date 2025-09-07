@@ -1,0 +1,443 @@
+---
+title: "Day 8: Macro-Finance"
+subtitle: "Asset Pricing Theory"
+author: "Juan F. Imbet"
+institute: "Paris Dauphine University-PSL"
+format:
+  revealjs:
+    theme: white
+    css: ../../../assets/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "Asset Pricing Theory - Day 8"
+---
+
+## Macro-Finance {.center}
+
+**Mathematical Models of Macroeconomics and Asset Prices**
+
+## Production-Based Asset Pricing
+
+### Cochrane (1991) Production Economy
+
+**Firm optimization:**
+$$\max E \sum_{t=0}^\infty \beta^t \frac{D_{t+1}^{1-\gamma}}{1-\gamma}$$
+
+**Subject to:**
+$$D_{t+1} = Y_{t+1} - I_{t+1} + (1-\delta) K_{t+1}$$
+$$Y_{t+1} = F(K_{t+1}, Z_{t+1})$$
+$$K_{t+1} = I_{t+1} + (1-\delta) K_t$$
+
+**First-order conditions:**
+$$\beta E_t \left[ \frac{D_{t+2}^{1-\gamma}}{D_{t+1}^{1-\gamma}} \cdot (F_K(K_{t+2}, Z_{t+2}) + 1 - \delta) \right] = 1$$
+$$\beta E_t \left[ \frac{D_{t+2}^{1-\gamma}}{D_{t+1}^{1-\gamma}} \cdot F_K(K_{t+2}, Z_{t+2}) \right] = 1$$
+
+**Equity return:**
+$$R_{t+1}^e = \frac{D_{t+1} + P_{t+1}}{P_t}$$
+
+**Where firm value:**
+$$P_t = E_t \sum_{j=1}^\infty \beta^j \frac{D_{t+j}^{1-\gamma}}{D_t^{1-\gamma}} \cdot D_t$$
+
+### Investment-Based Asset Pricing
+
+**Tobin Q theory:**
+$$Q_t = \frac{\text{Market value of capital}}{\text{Replacement cost of capital}}$$
+
+**Investment equation:**
+$$I_t = f(Q_t, \text{adjustment costs})$$
+
+**Q-theory of investment:**
+- High Q → Investment > Depreciation
+- Low Q → Investment < Depreciation
+- Q measures marginal profitability
+
+**Asset pricing implications:**
+$$E[R_{t+1}^e] - R_f = \gamma \text{Cov}(R_{t+1}^e, \ln C_{t+1}) + \frac{\gamma(\gamma+1)}{2} \text{Var}(\ln C_{t+1})$$
+
+**Where consumption equals dividends in production economy**
+
+### Real Business Cycle Models
+
+**Kydland-Prescott (1982) model:**
+
+**Household problem:**
+$$\max E \sum_{t=0}^\infty \beta^t u(C_t, 1 - L_t)$$
+
+**Subject to:**
+$$C_t + I_t = Y_t$$
+$$Y_t = Z_t F(K_t, L_t)$$
+$$K_{t+1} = I_t + (1-\delta) K_t$$
+
+**Technology shock:**
+$$Z_{t+1} = \rho Z_t + \epsilon_{t+1}$$
+
+**Equilibrium conditions:**
+- Labor supply: $u_L(C_t, 1-L_t) = Z_t F_L(K_t, L_t)$
+- Investment: $u_C(C_t, 1-L_t) = \beta E_t u_C(C_{t+1}, 1-L_{t+1}) (Z_{t+1} F_K(K_{t+1}, L_{t+1}) + 1-\delta)$
+
+**Asset pricing in RBC:**
+- Equity premium determined by technology risk
+- Countercyclical risk premium
+- Low frequency variation in expected returns
+
+## General Equilibrium Models
+
+### Lucas (1978) Asset Pricing
+
+**Endowment economy:**
+$$C_t + S_t = Y_t$$
+
+**Where $Y_t$ follows geometric Brownian motion:**
+$$dY = \mu Y dt + \sigma Y dW$$
+
+**Representative agent:**
+$$\max E \sum_{t=0}^\infty \beta^t u(C_t)$$
+
+**Equilibrium price:**
+$$P_t = E_t \int_t^\infty e^{-\int_t^s r_u du} C_s^\gamma ds$$
+
+**For power utility $u(C) = C^{1-\gamma}/(1-\gamma)$:**
+$$P_t = \frac{C_t^{1-\gamma}}{\rho} \left(1 - \frac{1}{(1+\rho)^k}\right) + \text{transversality}$$
+
+**Equity premium:**
+$$E[R^e] - r = -\gamma \text{Cov}(R^e, \ln C)$$
+
+**Risk-free rate:**
+$$r = \rho + \gamma E[\ln C] - \frac{\gamma(\gamma+1)}{2} \text{Var}(\ln C)$$
+
+### Mehra-Prescott Equity Premium Puzzle
+
+**Calibration:**
+- Risk aversion γ = 10 (to match equity premium)
+- Time preference ρ = 0.03
+- Consumption growth volatility σ = 0.035
+
+**Problem:**
+- Model predicts equity premium ≈ 0.35%
+- Data shows equity premium ≈ 6%
+- Risk-free rate too high (≈ 10% vs 1%)
+
+**Resolutions:**
+1. **Rare disasters** (Rietz 1988)
+2. **Long-run risk** (Bansal-Yaron 2004)
+3. **Habit formation** (Campbell-Cochrane 1999)
+4. **Idiosyncratic risk** (Huggett 1993)
+
+### Aiyagari (1994) Incomplete Markets
+
+**Heterogeneous agent economy:**
+- Entrepreneurs with uninsurable idiosyncratic risk
+- Incomplete markets (no insurance, no contingent claims)
+
+**Entrepreneur problem:**
+$$\max E \sum_{t=0}^\infty \beta^t u(C_t^e)$$
+
+**Subject to:**
+$$C_t^e + I_t = R_t K_t^e + Z_t \epsilon_t$$
+$$K_{t+1}^e = I_t + (1-\delta) K_t^e$$
+
+**Idiosyncratic shock:**
+$$\epsilon_{t+1} = \begin{cases} \epsilon_H & \text{prob } p \\ \epsilon_L & \text{prob } 1-p \end{cases}$$
+
+**Equilibrium:**
+- Stationary distribution of capital holdings
+- Higher precautionary saving
+- Higher equity premium due to uninsurable risk
+
+## Business Cycle and Asset Prices
+
+### Fama-French Three-Factor Model
+
+**Time-series regression:**
+$$R_{it} - R_{ft} = \alpha_i + \beta_{i,M} (R_{Mt} - R_{ft}) + \beta_{i,SMB} SMB_t + \beta_{i,HML} HML_t + \epsilon_{it}$$
+
+**Factor definitions:**
+- **Market (MKT):** $R_M - R_f$
+- **Size (SMB):** Small minus Big portfolio returns
+- **Value (HML):** High minus Low B/M portfolio returns
+
+**Business cycle patterns:**
+- SMB negative in expansions (small stocks suffer)
+- HML positive in recessions (value stocks outperform)
+- Countercyclical risk premia
+
+### Lettau-Ludvigson (2001) cay Model
+
+**Consumption-wealth ratio:**
+$$cay_t = c_t - 0.5 y_t - 0.3 h_t$$
+
+**Where:**
+- $c_t = \ln(C_t/C_{t-1}) - \ln(G_t/G_{t-1})$ (detrended consumption growth)
+- $y_t = \ln(Y_t/Y_{t-1}) - \ln(G_t/G_{t-1})$ (detrended income growth)
+- $h_t = \ln(H_t/H_{t-1}) - \ln(G_t/G_{t-1})$ (detrended housing wealth)
+
+**Predictive regression:**
+$$r_{t+1} = \alpha + \beta cay_t + \epsilon_{t+1}$$
+
+**Theoretical foundation:**
+- cay measures deviation from consumption-income relation
+- Predicts future consumption and return dynamics
+- Related to error-correction in consumption function
+
+### Cochrane (2008) Business Cycle Facts
+
+**Key stylized facts:**
+1. **Consumption volatility < Income volatility**
+2. **Investment volatility > Output volatility**
+3. **Labor productivity procyclical**
+4. **Real wage procyclical**
+
+**Asset pricing implications:**
+- Risk premia countercyclical
+- Expected returns higher in recessions
+- Price of risk varies with business cycle
+
+## Monetary Policy and Markets
+
+### Taylor Rule
+
+**Federal Reserve reaction function:**
+$$i_t = r_t^* + \pi_t + 0.5(\pi_t - \pi^*) + 0.5(y_t - \bar{y})$$
+
+**Where:**
+- $i_t$ = nominal interest rate
+- $r_t^*$ = equilibrium real rate
+- $\pi_t$ = inflation rate
+- $\pi^*$ = target inflation
+- $y_t - \bar{y}$ = output gap
+
+**Asset pricing implications:**
+- Predictable monetary policy affects bond yields
+- Risk premia depend on policy stance
+- Term structure reflects policy expectations
+
+### Monetary Policy Shocks
+
+**VAR identification:**
+$$\begin{bmatrix} y_t \\ \pi_t \\ i_t \\ R_t \end{bmatrix} = \Phi(L) \begin{bmatrix} y_{t-1} \\ \pi_{t-1} \\ i_{t-1} \\ R_{t-1} \end{bmatrix} + \epsilon_t$$
+
+**Cholesky identification:**
+- Monetary shock: Innovation in interest rate equation
+- Assumption: Fed responds to economic conditions but not asset prices contemporaneously
+
+**Impulse responses:**
+- Contractionary shock → Higher interest rates
+- Stock prices fall
+- Exchange rate appreciates
+- Output declines
+
+### Risk-Free Rate Puzzles
+
+**Backus-Gregory-Zin (1989) model:**
+
+**Real interest rate:**
+$$r_t = \rho + \gamma E_t[\Delta c_{t+1}] - \frac{\gamma(\gamma+1)}{2} \text{Var}_t(\Delta c_{t+1})$$
+
+**Nominal interest rate:**
+$$i_t = r_t + E_t[\pi_{t+1}]$$
+
+**Fisher effect:**
+$$i_t - r_t = E_t[\pi_{t+1}]$$
+
+**Empirical puzzle:**
+- Nominal rates predict inflation poorly
+- Real rates too volatile
+- Risk premium in nominal bonds
+
+## International Asset Pricing
+
+### Purchasing Power Parity
+
+**Absolute PPP:**
+$$P_t = S_t P_t^*$$
+
+**Where:**
+- $P_t$ = domestic price level
+- $P_t^*$ = foreign price level
+- $S_t$ = exchange rate (domestic currency per foreign)
+
+**Relative PPP:**
+$$\Delta \ln S_t = \pi_t - \pi_t^*$$
+
+**Real exchange rate:**
+$$q_t = S_t P_t^* / P_t$$
+
+**Stationary if PPP holds**
+
+### International CAPM
+
+**World market portfolio:**
+$$R_{W,t+1} = \sum_{j=1}^N w_j R_{j,t+1}$$
+
+**International CAPM:**
+$$E[R_{i,t+1}] - R_{f,t} = \beta_{i,W} (E[R_{W,t+1}] - R_{f,t})$$
+
+**Where:**
+$$\beta_{i,W} = \frac{\text{Cov}(R_{i,t+1}, R_{W,t+1})}{\text{Var}(R_{W,t+1})}$$
+
+**Exchange rate risk:**
+- Currency fluctuations affect international returns
+- Hedging currency risk reduces beta
+- Home bias puzzle: Under-investment in foreign assets
+
+### Carry Trade
+
+**Currency carry:**
+- Borrow in low-interest currency
+- Invest in high-interest currency
+- Profit from interest differential
+
+**Expected return:**
+$$E[R_{t+1}] = i_{high} - i_{low} + E[\Delta s_{t+1}]$$
+
+**Where $\Delta s_{t+1}$ is exchange rate change**
+
+**Risk factors:**
+- Exchange rate volatility
+- Crash risk (Brunnermeier et al. 2009)
+- Time-varying risk premia
+
+### Home Bias Puzzle
+
+**Theoretical portfolio share:**
+$$w_j = \frac{\sigma_j^{-2} E[R_j]}{\sum_k \sigma_k^{-2} E[R_k]}$$
+
+**Empirical facts:**
+- US investors hold 90% domestic stocks
+- Foreign investors hold 60% US stocks
+- Theoretical prediction: 40% domestic
+
+**Explanations:**
+1. **Information asymmetry**
+2. **Transaction costs**
+3. **Hedging motives**
+4. **Behavioral factors**
+
+## Mathematical Methods in Macro-Finance
+
+### DSGE Models
+
+**Dynamic Stochastic General Equilibrium:**
+
+**Household problem:**
+$$\max E_0 \sum_{t=0}^\infty \beta^t u(C_t, L_t)$$
+
+**Subject to:**
+$$C_t + I_t + B_t = W_t L_t + R_t B_{t-1} + \Pi_t + T_t$$
+
+**Firm problem:**
+$$\max E_0 \sum_{t=0}^\infty \beta^t \frac{\Lambda_t}{P_t} D_t$$
+
+**Subject to:**
+$$D_t = P_t Y_t - W_t L_t - R_t^K K_{t-1}$$
+
+**Equilibrium:**
+- Goods market: $Y_t = C_t + I_t + G_t$
+- Labor market: $L_t$ clears
+- Asset market: $B_t$ clears
+
+### Solution Methods
+
+**Linearization around steady state:**
+
+**Log-deviation from steady state:**
+$$\hat{x}_t = \ln(x_t / \bar{x})$$
+
+**First-order approximation:**
+$$f(\hat{x}_t, \hat{x}_{t-1}, \epsilon_t) \approx f(\bar{x}, \bar{x}, 0) + f_x \hat{x}_t + f_{x-1} \hat{x}_{t-1} + f_\epsilon \epsilon_t$$
+
+**State-space representation:**
+$$\begin{bmatrix} \hat{x}_{t+1} \\ E_t \hat{x}_{t+1} \end{bmatrix} = A \begin{bmatrix} \hat{x}_t \\ \hat{x}_t \end{bmatrix} + B \epsilon_{t+1}$$
+
+### Asset Pricing in DSGE
+
+**Stochastic discount factor:**
+$$M_{t+1} = \beta \frac{u'(C_{t+1})}{u'(C_t)} \frac{P_t}{P_{t+1}}$$
+
+**Asset return:**
+$$E_t[R_{i,t+1}] = \frac{1}{E_t[M_{t+1}]} \text{Cov}_t(M_{t+1}, R_{i,t+1})$$
+
+**Risk premia:**
+$$E_t[R_{i,t+1}] - R_f = -\frac{\text{Cov}_t(M_{t+1}, R_{i,t+1})}{E_t[M_{t+1}]}$$
+
+**Model evaluation:**
+- Match asset pricing moments
+- Match macroeconomic moments
+- Impulse response functions
+
+## Applications and Extensions
+
+### Fiscal Policy and Asset Prices
+
+**Government budget constraint:**
+$$\sum_{t=0}^\infty \frac{B_t}{R^t} = \sum_{t=0}^\infty \frac{G_t - T_t}{R^t}$$
+
+**Ricardian equivalence:**
+- Tax and debt changes offset
+- No effect on asset prices
+
+**Non-Ricardian effects:**
+- Distortionary taxation
+- Political economy constraints
+- Time-inconsistent policy
+
+### Climate Risk and Asset Pricing
+
+**Climate change model:**
+$$\frac{dT}{dt} = \kappa (F - \lambda T)$$
+
+**Where:**
+- T = temperature anomaly
+- F = radiative forcing
+- κ, λ = climate parameters
+
+**Asset pricing implications:**
+- Long-run climate risk
+- Stranded assets
+- Green finance premia
+
+### Macroprudential Policy
+
+**Financial stability objective:**
+- Lean against credit cycle
+- Countercyclical capital requirements
+- Macro-prudential tools
+
+**Asset pricing effects:**
+- Time-varying risk premia
+- Credit spreads
+- Bank equity returns
+
+## Conclusion
+
+**Core Insights:**
+- **Production economies** link investment to asset prices through Q-theory
+- **General equilibrium** determines risk premia through consumption dynamics
+- **Business cycles** create countercyclical variation in expected returns
+- **Monetary policy** affects asset prices through interest rate channel
+- **International factors** add currency and home bias considerations
+
+**Mathematical Rigor:**
+- **DSGE models** provide structural framework for macro-finance
+- **Linearization methods** solve complex nonlinear models
+- **Stochastic discount factors** price all assets consistently
+- **VAR methods** identify structural shocks and propagation
+
+**Empirical Evidence:**
+- **Equity premium puzzle** challenges simple models
+- **Home bias** remains unexplained by standard theory
+- **Carry trade** profits despite risk
+- **Business cycle** patterns in risk premia
+
+**Policy Implications:**
+- **Monetary policy** affects financial stability
+- **Fiscal policy** has asset pricing consequences
+- **Macroprudential tools** influence credit cycles
+- **Climate risk** requires new pricing frameworks
+
+**Future Directions:**
+- **Heterogeneous agent models** with incomplete markets
+- **Machine learning** for macro forecasting
+- **Climate finance** integration
+- **Digital currencies** and monetary policy
