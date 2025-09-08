@@ -1,0 +1,407 @@
+---
+title: "Day 7: Long-Horizon Returns"
+subtitle: "Asset Pricing Theory"
+author: "Juan F. Imbet"
+institute: "Paris Dauphine University-PSL"
+format:
+  revealjs:
+    theme: white
+    css: ../../../assets/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "Asset Pricing Theory - Day 7"
+---
+
+## Long-Horizon Returns {.center}
+
+**Mathematical Analysis of Return Predictability and Long-Run Dynamics**
+
+## Return Predictability
+
+### Dividend-Price Ratio and Return Forecasting
+
+**Campbell-Shiller (1988) present value model:**
+$$\frac{P_t}{D_t} = \frac{1}{\rho} \left(1 - \frac{1}{(1+\rho)^{k-1}}\right) + \frac{1}{\rho} E_t \sum_{j=1}^{k-1} \frac{\Delta d_{t+j}}{(1+\rho)^j} + \frac{E_t P_{t+k-1}/D_{t+k-1}}{(1+\rho)^{k-1}}$$
+
+**Log-linear approximation:**
+$$p_t - d_t = A + E_t \sum_{j=0}^\infty \rho^j (r_{t+1+j} - \Delta d_{t+1+j}) + \text{transversality}$$
+
+**Where:**
+- $p_t = \ln(P_t), d_t = \ln(D_t)$
+- $\rho = 1/(1+\exp(\bar{r} - \bar{\Delta d}))$
+- $A = -\ln(\rho) - \frac{1-\rho}{\rho} \ln(1/\rho)$
+
+**Dividend-price ratio as predictor:**
+$$dp_t = p_t - d_t = A + E_t \sum_{j=0}^\infty \rho^j r_{t+1+j} - E_t \sum_{j=0}^\infty \rho^j \Delta d_{t+1+j}$$
+
+**Return forecasting regression:**
+$$r_{t+1} = \alpha + \beta dp_t + \epsilon_{t+1}$$
+
+**Theoretical slope coefficient:**
+$$\beta = -\frac{\text{Cov}(r_{t+1}, dp_t)}{\text{Var}(dp_t)} = -\frac{\text{Cov}(r_{t+1}, E_t \sum \rho^j r_{t+1+j})}{\text{Var}(dp_t)}$$
+
+### Long-Horizon Return Predictability
+
+**Multi-period return accumulation:**
+$$R_{t,k} = \sum_{j=1}^k r_{t+j} = \ln(P_{t+k}/P_t)$$
+
+**Long-horizon regression:**
+$$R_{t,k} = \alpha_k + \beta_k dp_t + \epsilon_{t,k}$$
+
+**Asymptotic theory (Cavanagh et al. 1995):**
+- Under stationarity: $\sqrt{T} (\hat{\beta}_k - \beta_k) \to N(0, V)$
+- Variance depends on persistence of dp_t
+- Overlapping observations create dependence
+
+**Theoretical slope for long horizons:**
+$$\beta_k = -\frac{1 - \rho^k}{1 - \rho} \cdot \frac{\text{Cov}(r_{t+1}, dp_t)}{\text{Var}(dp_t)}$$
+
+**Intuition:** Long-horizon predictability stronger due to accumulation of expected returns
+
+### Other Predictor Variables
+
+**Term spread (yield curve slope):**
+$$R_{t,k} = \alpha + \beta (y_{t}^{(10)} - y_{t}^{(1)}) + \epsilon_{t,k}$$
+
+**Default spread:**
+$$R_{t,k} = \alpha + \beta (BAA_t - AAA_t) + \epsilon_{t,k}$$
+
+**Consumption-wealth ratio (cay):**
+$$cay_t = c_t - 0.5 y_t - 0.3 h_t$$
+
+**Where:**
+- $c_t =$ consumption growth
+- $y_t =$ income growth  
+- $h_t =$ housing collateral
+
+## Present Value Models
+
+### Campbell-Shiller Decomposition
+
+**Log-linear present value identity:**
+$$p_t + d_t = \frac{\kappa}{1-\rho} + E_t \sum_{j=0}^\infty \rho^j (r_{t+1+j} + d_{t+1+j})$$
+
+**Where:**
+- $\kappa = -\ln(\rho) - (1-\rho) \ln(1/\rho)$
+- $\rho = 1/(1 + \exp(\bar{r} - \bar{\Delta d}))$
+
+**Price-dividend ratio dynamics:**
+$$dp_t = A + E_t \sum_{j=0}^\infty \rho^j r_{t+1+j} - E_t \sum_{j=0}^\infty \rho^j \Delta d_{t+1+j}$$
+
+**VAR representation:**
+$$\begin{bmatrix} dp_{t+1} \\ r_{t+1} \\ \Delta d_{t+1} \end{bmatrix} = \begin{bmatrix} \phi_{11} & \phi_{12} & \phi_{13} \\ \phi_{21} & \phi_{22} & \phi_{23} \\ \phi_{31} & \phi_{32} & \phi_{33} \end{bmatrix} \begin{bmatrix} dp_t \\ r_t \\ \Delta d_t \end{bmatrix} + \epsilon_{t+1}$$
+
+**Variance decomposition:**
+$$\text{Var}(dp_t) = \frac{\sigma_r^2}{(1-\rho)^2} + \frac{\sigma_{\Delta d}^2}{(1-\rho)^2} + 2\frac{\text{Cov}(r,\Delta d)}{(1-\rho)^2}$$
+
+### Return Decomposition
+
+**Unexpected return components:**
+$$r_{t+1} - E_t r_{t+1} = (p_{t+1} + d_{t+1} - p_t) - E_t(p_{t+1} + d_{t+1} - p_t)$$
+
+**Campbell (1991) decomposition:**
+$$r_{t+1} - E_t r_{t+1} = (E_{t+1} - E_t) \sum_{j=0}^\infty \rho^j r_{t+1+j} - (E_{t+1} - E_t) \sum_{j=0}^\infty \rho^j \Delta d_{t+1+j} + \eta_{t+1}$$
+
+**Where $\eta_{t+1}$ is the revision in expectations**
+
+**News components:**
+- **Return news:** Revisions in expected future returns
+- **Dividend news:** Revisions in expected future dividends
+- **Discount rate news:** Changes in expected discount rates
+
+## Long-Run Risk and Return
+
+### Bansal-Yaron (2004) Model
+
+**Preferences:**
+$$U_t = E_t \sum_{j=0}^\infty \delta^j \frac{C_{t+j}^{1-\gamma}}{1-\gamma}$$
+
+**Consumption dynamics:**
+$$\ln C_{t+1} = \ln C_t + \mu_c + x_t + \sigma_c \eta_{t+1}^c$$
+$$\ln C_{t+1} = \ln C_t + \mu_c + x_t + \sigma_c \eta_{t+1}^c + \sigma_x \eta_{t+1}^x$$
+
+**Long-run risk component:**
+$$x_{t+1} = \rho x_t + \phi_e \sigma_{t+1} + \sigma_x \eta_{t+1}^x$$
+
+**Volatility dynamics:**
+$$\sigma_{t+1}^2 = \sigma^2 + v_1 (\sigma_t^2 - \sigma^2) + v_2 \eta_{t+1}^v$$
+
+**Equity premium derivation:**
+$$E[R_{t+1}^e] - R_f = \gamma \text{Cov}(R_{t+1}^e, \ln C_{t+1}) + \frac{\gamma(\gamma+1)}{2} \text{Var}(\ln C_{t+1})$$
+
+**Long-run component:**
+- Consumption volatility: $\sigma_c^2 + \frac{\sigma_x^2}{1-\rho^2}$
+- Risk premium: Proportional to long-run consumption uncertainty
+
+### Epstein-Zin Preferences
+
+**Recursive utility:**
+$$U_t = \left[ (1-\delta) C_t^\rho + \delta (E_t U_{t+1}^\alpha)^\rho \right]^{1/\rho}$$
+
+**Where:**
+- $\alpha = 1 - 1/\psi$ (elasticity of intertemporal substitution)
+- $\rho = (1-\gamma)/(1-1/\psi)$ (risk aversion parameter)
+
+**Equivalence to power utility when $\psi = 1/\gamma$**
+
+**Asset pricing with Epstein-Zin:**
+$$P_t = E_t \left[ \delta^\alpha \left(\frac{C_{t+1}}{C_t}\right)^{\alpha(1-\gamma)} R_{t+1}^{1-\alpha} U_{t+1}^{\alpha-1} \right]$$
+
+**Risk-return trade-off:**
+$$E[R_{t+1}] - R_f = -\frac{\text{Cov}(R_{t+1}, M_{t+1})}{E[M_{t+1}]}$$
+
+**Where stochastic discount factor:**
+$$M_{t+1} = \delta^\alpha \left(\frac{C_{t+1}}{C_t}\right)^{\alpha(1-\gamma)} R_{t+1}^{1-\alpha} \left(\frac{U_{t+1}}{U_t}\right)^{\alpha-1}$$
+
+### Habit Formation Models
+
+**Campbell-Cochrane (1999) model:**
+
+**Surplus consumption ratio:**
+$$S_t = \frac{C_t - X_t}{C_t}$$
+
+**Where habit $X_t$ follows:**
+$$\ln X_t = \ln C_t - S_t$$
+
+**Habit dynamics:**
+$$\ln S_{t+1} = (1-\phi) \bar{\ln S} + \phi \ln S_t + \lambda(S_t) \eta_{t+1}$$
+
+**Sensitivity function:**
+$$\lambda(S_t) = \frac{1}{S_t} \sqrt{1 - 2(S_t - \bar{S})^2 / \sigma^2} - 1$$
+
+**Equity premium:**
+$$E[R_{t+1}^e] - R_f = - \text{Cov}(R_{t+1}^e, \ln M_{t+1})$$
+
+**Where:**
+$$M_{t+1} = \beta \left(\frac{C_{t+1}}{C_t}\right)^{-\gamma} \exp\left( -\frac{1}{2} \gamma(\gamma+1) \lambda(S_t)^2 \sigma^2 \right)$$
+
+## Variance Decomposition
+
+### Return Variance Components
+
+**Campbell (1991) variance decomposition:**
+
+**Total return variance:**
+$$\text{Var}(r_{t+1}) = \text{Var}(E_{t+1} \sum_{j=0}^\infty \rho^j r_{t+1+j}) + \text{Var}(E_{t+1} \sum_{j=0}^\infty \rho^j \Delta d_{t+1+j}) + 2\text{Cov}(\cdot,\cdot) + \text{Var}(\eta_{t+1})$$
+
+**News components:**
+- **Cash flow news:** Variance from dividend expectation revisions
+- **Discount rate news:** Variance from return expectation revisions
+- **Unforecastable component:** Innovation variance
+
+**Empirical findings:**
+- Discount rate news explains 70-90% of return variance
+- Cash flow news explains 10-30%
+- Changes over time with economic conditions
+
+### Long-Horizon Variance
+
+**Multi-period return variance:**
+$$\text{Var}(R_{t,k}) = \text{Var}\left( \sum_{j=1}^k r_{t+j} \right) = \sum_{j=1}^k \text{Var}(r_{t+j}) + 2\sum_{i<j} \text{Cov}(r_{t+i}, r_{t+j})$$
+
+**Asymptotic variance for long horizons:**
+$$\frac{1}{k} \text{Var}(R_{t,k}) \to \frac{\sigma^2}{1-\rho^2} \text{ as } k \to \infty$$
+
+**Where $\rho$ is the autocorrelation of returns**
+
+**Forecasting variance:**
+$$\text{Var}(E_t R_{t,k}) = \text{Var}\left( \sum_{j=1}^k E_t r_{t+j} \right) = \sum_{j=1}^k \text{Var}(E_t r_{t+j}) + 2\sum_{i<j} \text{Cov}(E_t r_{t+i}, E_t r_{t+j})$$
+
+### State Variable Contributions
+
+**VAR-based decomposition:**
+
+**Forecasting system:**
+$$z_{t+1} = \Phi z_t + \epsilon_{t+1}$$
+
+**Where $z_t = [dp_t, r_t, \Delta d_t]'$**
+
+**Variance of k-step-ahead forecast:**
+$$\text{Var}(E_t R_{t,k}) = e_1' \Phi (\Phi')^k \Sigma \Phi' (\Phi')^k e_1$$
+
+**Where:**
+- $e_1$ selects the return equation
+- $\Sigma$ is the innovation covariance matrix
+
+**Impulse response analysis:**
+- Shock to dividend growth
+- Shock to expected returns
+- Decomposition of forecast error variance
+
+## Peso Problems and Rare Events
+
+### Burnside (1998) Peso Problem
+
+**Exchange rate model:**
+$$s_{t+1} = s_t + \mu + \sigma \eta_{t+1}$$
+
+**With rare devaluation:**
+- Probability π of large negative shock
+- Probability 1-π of normal shock
+
+**Risk-neutral valuation:**
+$$E^*[e^{-r f s_{t+1}}] = 1$$
+
+**Actual expectation:**
+$$E[e^{-r f s_{t+1}}] = \pi e^{-r f (\mu + \Delta)} + (1-\pi) e^{-r f \mu} < 1$$
+
+**Forward premium puzzle:**
+- Forward rate biased predictor of future spot rate
+- Due to peso problem in expectations
+
+### Rare Disaster Models
+
+**Rietz (1988) model:**
+
+**Consumption disaster:**
+$$C_{t+1} = \begin{cases} C_t (1 + g + \epsilon_{t+1}) & \text{with prob } 1-p \\ C_t (1 - d) & \text{with prob } p \end{cases}$$
+
+**Asset pricing with disasters:**
+$$P_t = E_t \left[ \frac{u(C_{t+1})}{u(C_t)} (1 + R_{t+1}) P_{t+1} \right]$$
+
+**Equity premium with rare disasters:**
+$$E[R^e] - R_f \approx \frac{p d}{1-p} \cdot \frac{u'(C)(1-d) - u'(C(1-d))}{u'(C)}$$
+
+**For power utility:**
+$$E[R^e] - R_f \approx \frac{p d}{1-p} \cdot \gamma d$$
+
+### Learning and Peso Problems
+
+**Evans (1991) adaptive learning:**
+
+**Perceived law of motion:**
+$$s_{t+1} = a_t + b_t s_t + \epsilon_{t+1}$$
+
+**Recursive least squares:**
+$$a_{t+1} = a_t + \frac{1}{t} R_t^{-1} (s_{t+1} - a_t - b_t s_t)$$
+$$b_{t+1} = b_t + \frac{s_t}{t} R_t^{-1} (s_{t+1} - a_t - b_t s_t)$$
+
+**Where $R_t = \sum_{j=1}^t s_j^2$**
+
+**Convergence to true parameters:**
+- If disaster never occurs, learning converges to normal parameters
+- If disaster occurs, abrupt parameter change
+- Creates time-varying risk premia
+
+## Mathematical Methods for Long Horizons
+
+### Overlapping Observations
+
+**Hansen-Hodrick (1980) standard errors:**
+
+**For overlapping k-period returns:**
+$$\hat{\beta} = \left( \sum_{t=1}^{T-k+1} x_t x_t' \right)^{-1} \left( \sum_{t=1}^{T-k+1} x_t R_{t,k} \right)$$
+
+**Variance estimator:**
+$$\hat{V} = \hat{\sigma}^2 \left( \sum_{t=1}^{T-k+1} x_t x_t' \right)^{-1} \left( \sum_{j=-q}^q w_j \hat{\Gamma}_j \right) \left( \sum_{t=1}^{T-k+1} x_t x_t' \right)^{-1}$$
+
+**Where:**
+- $\hat{\Gamma}_j = \sum_{t=1}^{T-k+1-|j|} x_{t+|j|} \epsilon_{t+|j|} \epsilon_t'$
+- $w_j$ is kernel weight
+- q is truncation lag
+
+### Bootstrap Methods
+
+**Block bootstrap for long-horizon tests:**
+
+**Stationary bootstrap (Politis-Romano 1994):**
+- Draw blocks of random length
+- Geometric distribution for block length
+- Maintain dependence structure
+
+**Application to predictability:**
+- Generate bootstrap distribution of t-statistics
+- Account for overlapping observations
+- Control for persistence in predictors
+
+### Local-to-Unity Asymptotics
+
+**Near-unit root processes:**
+$$dp_t = \rho dp_{t-1} + \epsilon_t, \quad \rho = 1 - c/T$$
+
+**Asymptotic distribution:**
+$$\frac{\sqrt{T} (\hat{\rho} - 1)}{c} \to \frac{1}{2} (W(1)^2 - 1)$$
+
+**Where W(1) is standard Brownian motion**
+
+**Implications for predictability:**
+- Standard asymptotics fail when ρ near 1
+- Local-to-unity provides correct inference
+- Important for dividend-price ratio regressions
+
+## Applications and Extensions
+
+### Portfolio Choice with Predictability
+
+**Dynamic portfolio choice:**
+$$\max E \sum_{t=0}^\infty \beta^t u(W_{t+1})$$
+
+**Subject to:**
+$$W_{t+1} = R_{t+1}^p W_t + Y_{t+1}$$
+
+**With predictable returns:**
+$$R_{t+1}^p = \alpha + \beta' z_t + \epsilon_{t+1}$$
+
+**Optimal allocation:**
+$$w_t^* = \frac{1}{\gamma} \left( \frac{E_t R_{t+1}^p - R_f}{\text{Var}_t(R_{t+1}^p)} \right)$$
+
+**Time-varying allocation due to predictability**
+
+### Welfare Costs of Business Cycles
+
+**Lucas (1987) calculation:**
+
+**Consumption equivalent:**
+$$\frac{u(C^*)}{u(C)} = 1$$
+
+**Where C* solves:**
+$$E \sum \beta^t u(C_t^*) = E \sum \beta^t u(C_t)$$
+
+**With log utility:**
+$$\ln C^* - \ln C = -\frac{\gamma}{2} \frac{\text{Var}(\ln C_t)}{1-\beta}$$
+
+**Empirical magnitude:**
+- Standard deviation of consumption growth: 2-3%
+- Welfare cost: Less than 1% of consumption
+
+### Long-Horizon Bond Returns
+
+**Bond return predictability:**
+$$R_{t,k}^b = \alpha_k + \beta_k y_t + \epsilon_{t,k}$$
+
+**Where:**
+- $R_{t,k}^b = k^{-1} \sum_{j=1}^k r_{t+j}^b$
+- $y_t$ is yield to maturity
+
+**Theoretical foundation:**
+- Expectations hypothesis
+- Time-varying risk premia
+- Term premium predictability
+
+## Conclusion
+
+**Core Insights:**
+- **Return predictability** exists at long horizons due to accumulation
+- **Present value models** link prices to expected future cash flows
+- **Long-run risk** drives equity premia through Epstein-Zin preferences
+- **Variance decomposition** shows discount rate news dominates
+- **Peso problems** create time-varying risk premia
+
+**Mathematical Rigor:**
+- **Campbell-Shiller log-linear approximation** for present value analysis
+- **VAR methods** for return decomposition and forecasting
+- **Epstein-Zin recursive utility** for long-run risk pricing
+- **Overlapping observations** require specialized statistical methods
+
+**Empirical Evidence:**
+- **Dividend-price ratio** predicts returns at 3-5 year horizons
+- **Discount rate news** explains 70-90% of return variance
+- **Rare disasters** can explain equity premium puzzle
+- **Learning dynamics** create time-varying predictability
+
+**Policy Implications:**
+- **Business cycle fluctuations** have small welfare costs
+- **Long-horizon predictability** affects portfolio choice
+- **Rare events** require robust risk management
+- **Market expectations** evolve with learning and experience

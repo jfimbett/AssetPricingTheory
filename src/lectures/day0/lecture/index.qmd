@@ -1,0 +1,47 @@
+---
+title: "Day 0: Course Introduction"
+subtitle: "Asset Pricing Theory"
+author: "Juan F. Imbet"
+institute: "Paris Dauphine University-PSL"
+format:
+  revealjs:
+    theme: white
+    css: ../../../assets/styles.css
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    footer: "Asset Pricing Theory - Day 0"
+---
+
+## About the Instructor {.center}
+
+::: {.key-concept}
+- Engineering background with a Ph.D. in Finance. 
+- Academic Research in Big Data and Textual Analysis to understand financial decisions. 
+- Teaching experience in programming, Large Language Models, and Asset Pricing. 
+- Consulting in private equity implementing AI tools for investment decisions.
+:::
+
+- Contact details: juan.imbet@dauphine.psl.eu 
+- Office Hours: Appointment via email
+- Office P606
+
+### Grading Breakdown
+
+- **Final Exam: 70%**
+
+- **Homework Assignments: 30%**
+
+## Prerequisites (optional but highly recommended)
+
+### Mathematical Background
+
+-   Calculus and optimization theory
+-   Linear algebra and matrix operations
+-   Probability theory and stochastic processes
+
+### Economic Background
+
+-   Microeconomic theory (consumer choice, general equilibrium)
+-   Financial economics fundamentals
+
