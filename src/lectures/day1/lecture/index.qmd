@@ -154,115 +154,121 @@ Arbitrage portfolio: $\theta=(1, -1)$.
 
 ## Existence of the SDF
 
-Consider a one–period economy. Let $\mathcal{X}$ be a linear space of payoffs at date $T$, e.g. bounded random variables $L^\infty(\Omega,\mathcal{F},\mathbb{P})$.\
-Traded assets $i=1,\dots,n$ have prices $p_i$ and payoffs $X_i \in \mathcal{X}$.\
-The pricing map on portfolios is linear: $$
+We work in a one–period economy. Let $\mathcal{X}$ be the linear space of payoffs at $1$ (e.g. bounded random variables $L^\infty(\Omega,\mathcal{F},\mathbb{P})$).  
+Assets $i=1,\dots,n$ have prices $p_i$ and payoffs $X_i \in \mathcal{X}$.  
+
+The pricing map on portfolios is linear:
+$$
 f\!\left(\sum_i \theta_i X_i\right) = \sum_i \theta_i p_i.
 $$
 
--   There are no arbitrage opportunities, anything with non-negative payoffs has a non-negative price. If at least one state has a strictly positive payoff, then the price must be strictly positive as well.
+- **No arbitrage (NA):** any nonnegative payoff must have a nonnegative price.  
+  If the payoff is strictly positive in some state, its price must be strictly positive.
 
-Define the cone of zero-cost payoffs. A cone in a vector space is a subset that is closed under positive scalar multiplication and addition.
+Define the **cone of zero-cost or negative payoffs**:
+$$
+\mathcal{C} = \Bigl\{\, Y=\sum_i \theta_i X_i : \sum_i \theta_i p_i \leq 0 \,\Bigr\}.
+$$
+This is the set of payoffs that can be obtained at zero or negative cost.
 
-$$
-\mathcal{C} = \left\{\, Y=\sum_i \theta_i X_i : \sum_i \theta_i p_i = 0 \,\right\}.
-$$
+---
 
 ## Hyperplane Separation Theorem
 
--   **Idea:** No-arbitrage means the set of zero-cost payoffs\
-    $$\mathcal{C} = \{ Y : f(Y)=0 \}$$\
-    cannot intersect the strictly positive cone of payoffs.
+- **Economic idea:**  
+  Under NA, the set of non positive costs $\mathcal{C}$ cannot produce strictly positive payoffs.  
+  That is, $\mathcal{C}$ intersects the positive cone of payoffs $\mathcal{X}_+$ only at the origin:
+  $$
+  \mathcal{C} \cap \mathcal{X}_+ = \{0\}.
+  $$
 
--   Both $\mathcal{C}$ and $\mathcal{X}_+$ are convex sets.\
-    Since $\mathcal{C}\cap \mathcal{X}_+ = \{0\}$, we can apply the **Separating Hyperplane Theorem**.
+- **Mathematical idea:**  
+  Both $\mathcal{C}$ and $\mathcal{X}_+$ are convex.  
+  If two convex sets intersect only at $0$, the **Separating Hyperplane Theorem** guarantees the existence of a linear functional $\varphi$ that “separates” them.
 
--   **Result:** There exists a nonzero linear functional\
-    $$\varphi:\mathcal{X}\to\mathbb{R}$$\
-    such that $$
-    \varphi(Y)=0 \;\;\; \forall Y\in\mathcal{C},
-    \qquad
-    X \ge 0 \implies \varphi(X) \ge 0.
-    $$
+- **Result:**  
+  There exists a nonzero linear functional $\varphi:\mathcal{X}\to\mathbb{R}$ such that
+  $$
+  \varphi(Y) \leq 0 \quad \forall Y \in \mathcal{C}, 
+  \qquad 
+  X \ge 0 \implies \varphi(X) \ge 0.
+  $$
 
--   In words: prices can be represented by a *positive linear functional* that supports the no-arbitrage pricing rule.
+- **Interpretation:**  
+  $\varphi$ is a *positive pricing rule*: it prices every portfolio consistently with NA and vanishes on zero-cost trades.  
+  Geometrically, $\varphi$ is the “supporting hyperplane” separating feasible trades from arbitrage opportunities.
 
-- Vectors vs functionals: A vector $v \in \mathbb{R}^n$ can be seen as a linear functional $\varphi_v:\mathbb{R}^n \to \mathbb{R}$ defined by $\varphi_v(x) = v^\top x$.
-
-------------------------------------------------------------------------
+---
 
 ## Representation Theorem
 
--   **Step 2 of the argument:** Every positive linear functional on a suitable space of payoffs can be represented as an **expectation**.
+- **Step 2:** Positive linear functionals on payoff spaces can be represented as expectations.
 
--   **Theorem (Riesz / Yosida–Hewitt):**\
-    If $\varphi:\mathcal{X}\to\mathbb{R}$ is a positive continuous linear functional on $L^p$ (e.g. $L^2$), then there exists a nonnegative random variable $M$ such that $$
-    \varphi(X) \;=\; \mathbb{E}[M X] \quad \forall X\in\mathcal{X}.
-    $$
+- **Theorem (Riesz / Yosida–Hewitt):**  
+  If $\varphi:\mathcal{X}\to\mathbb{R}$ is positive and continuous on $L^p$ (e.g. $L^2$), then there exists a nonnegative random variable $M$ such that
+  $$
+  \varphi(X) = \mathbb{E}[M X], \quad \forall X \in \mathcal{X}.
+  $$
 
-------------------------------------------------------------------------
+---
 
-## Simple Proof of Riesz/Yosida-Hewitt (Finite Case)
+## Simple Proof in Finite States
 
-Consider the finite state case with $S = \{s_1, s_2, \ldots, s_n\}$ and probabilities $\pi(s_i) > 0$.
+Let $S = \{s_1,\dots,s_n\}$ with probabilities $\pi(s_i) > 0$.
 
-**Step 1:** Express the functional as a linear combination:
-$$\varphi(X) = a_1 X_1 + a_2 X_2 + \cdots + a_n X_n$$
+1. Write $\psi(X) = a_1 X_1 + \cdots + a_n X_n$.  
+2. Multiply and divide by $\pi_i$:  
+   $$
+   \psi(X) = \sum_{i=1}^n \pi_i \frac{a_i}{\pi_i} X_i.
+   $$  
+3. Define $M_i = \tfrac{a_i}{\pi_i}$:  
+   $$
+   \psi(X) = \sum_{i=1}^n \pi_i M_i X_i = \mathbb{E}[M X].
+   $$
 
-**Step 2:** Since every $\pi(s_i) > 0$, multiply and divide by $\pi_i$:
-$$\varphi(X) = \pi_1 \frac{a_1}{\pi_1} X_1 + \pi_2 \frac{a_2}{\pi_2} X_2 + \cdots + \pi_n \frac{a_n}{\pi_n} X_n$$
+Thus $\psi$ is an expectation with respect to the random variable $M$. 
 
-**Step 3:** Define $M_i = \frac{a_i}{\pi_i}$ for each state $i$:
-$$\varphi(X) = \sum_{i=1}^n \pi_i M_i X_i = \mathbb{E}[M X]$$
+- If $\psi$ is strictly positive for nonnegative $X \neq 0$, then all $a_i > 0$ and hence $M_i > 0$.
 
-where $M(s_i) = M_i$ is the random variable that takes value $M_i$ in state $s_i$.
+---
 
-**Result:** The functional $\varphi$ can be represented as an expectation with respect to the random variable $M$.
+## From No-Arbitrage to SDF
 
-------------------------------------------------------------------------
-
-## Sketch of Proof: From No-Arbitrage to SDF
-
-**Step 1: Separating Hyperplane**
-
-NA implies $\mathcal{C}\cap \mathcal{X}_+ = \{0\}$.\
-By the separating hyperplane theorem, there exists a positive linear functional\
-$\varphi:\mathcal{X}\to\mathbb{R}$ such that $$
-\varphi(Y)=0 \quad \forall Y\in \mathcal{C}, 
-\qquad 
-X\ge 0 \;\Rightarrow\; \varphi(X)\ge 0.
+**Step 1. Separation:**  
+NA $\implies$ $\mathcal{C} \cap \mathcal{X}_+ = \{0\}$.  
+By the separating hyperplane theorem, there exists $\varphi$ with
+$$
+\varphi(Y) \leq 0 \;\;\forall Y \in \mathcal{C}, \qquad
+X \ge 0 \implies \varphi(X) \ge 0.
 $$
 
-**Step 2: Representation**
+**Step 2. Representation:**  
+By the representation theorem,  
+$$
+\varphi(X) = \mathbb{E}[M X]
+$$
 
--   By the **representation theorem**, any positive linear functional\
-    $\varphi:\mathcal{X}\to\mathbb{R}$ can be written as an expectation.
+- Recall that $\varphi$ is strictly positive for non arbitrage payoffs, so $M > 0$ a.s.
 
--   Therefore, there exists a nonnegative random variable $M$ such that: $$
-    \varphi(X) = \mathbb{E}[M X] = \sum_{s \in S} \pi(s) M(s) X(s),
-    \quad \forall X \in \mathcal{X}.
-    $$
-
--   $M$ is called the **Stochastic Discount Factor (SDF)** or **pricing kernel**.
-
--   The positivity of the function $\phi$ comes from the no-arbitrage assumption.
-
-------------------------------------------------------------------------
+---
 
 ## Prices as Expectations
 
--   Recall that by construction, for any portfolio with weights $\theta$: $$
-    f\!\left(\sum_i \theta_i X^{(i)}\right) = \sum_i \theta_i p^{(i)}.
-    $$
+For any portfolio $\theta$,
+$$
+f\!\left(\sum_i \theta_i X^{(i)}\right) = \sum_i \theta_i p^{(i)}.
+$$
 
--   But since $f$ coincides with $\varphi$, we have: $$
-    \sum_i \theta_i p^{(i)} = \varphi\!\left(\sum_i \theta_i X^{(i)}\right) 
-    = \mathbb{E}\!\left[M \sum_i \theta_i X^{(i)}\right].
-    $$
+But $f=\varphi$, so
+$$
+\sum_i \theta_i p^{(i)}
+= \mathbb{E}\!\left[M \sum_i \theta_i X^{(i)}\right].
+$$
 
--   Because this holds for any choice of weights $\theta$, it must hold asset by asset: $$
-    p^{(i)} = \mathbb{E}[M X^{(i)}], \quad i=1,\ldots,N.
-    $$
+Therefore, asset by asset:
+$$
+p^{(i)} = \mathbb{E}[M X^{(i)}], \quad i=1,\ldots,N.
+$$
 
 ------------------------------------------------------------------------
 

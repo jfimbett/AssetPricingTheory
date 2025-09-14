@@ -126,6 +126,7 @@
     }
   </style>
   <script src="https://tikzjax.com/v1/tikzjax.js"></script>
+
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -277,101 +278,84 @@ P = \mathbb{E}[M(s) X(s)] = \sum_{s \in S} \pi(s) M(s) X(s)
 </section>
 <section class="slide level2">
 <h2>Existence of the SDF</h2>
-<p>We work in a one–period economy. Let <span class="math inline">\(\mathcal{X}\)</span> be the linear space of payoffs at <span class="math inline">\(1\)</span> (e.g.&nbsp;bounded random variables <span class="math inline">\(L^\infty(\Omega,\mathcal{F},\mathbb{P})\)</span>).<br>
-Assets <span class="math inline">\(i=1,\dots,n\)</span> have prices <span class="math inline">\(p_i\)</span> and payoffs <span class="math inline">\(X_i \in \mathcal{X}\)</span>.</p>
-<p>The pricing map on portfolios is linear: <span class="math display">\[
+<p>Consider a one–period economy. Let <span class="math inline">\(\mathcal{X}\)</span> be a linear space of payoffs at date <span class="math inline">\(T\)</span>, e.g.&nbsp;bounded random variables <span class="math inline">\(L^\infty(\Omega,\mathcal{F},\mathbb{P})\)</span>.<br>
+Traded assets <span class="math inline">\(i=1,\dots,n\)</span> have prices <span class="math inline">\(p_i\)</span> and payoffs <span class="math inline">\(X_i \in \mathcal{X}\)</span>.<br>
+The pricing map on portfolios is linear: <span class="math display">\[
 f\!\left(\sum_i \theta_i X_i\right) = \sum_i \theta_i p_i.
 \]</span></p>
 <ul>
-<li><strong>No arbitrage (NA):</strong> any nonnegative payoff must have a nonnegative price.<br>
-If the payoff is strictly positive in some state, its price must be strictly positive.</li>
+<li>There are no arbitrage opportunities, anything with non-negative payoffs has a non-negative price. If at least one state has a strictly positive payoff, then the price must be strictly positive as well.</li>
 </ul>
-<p>Define the <strong>cone of zero-cost or negative payoffs</strong>: <span class="math display">\[
-\mathcal{C} = \Bigl\{\, Y=\sum_i \theta_i X_i : \sum_i \theta_i p_i \leq 0 \,\Bigr\}.
-\]</span> This is the set of payoffs that can be obtained at zero or negative cost.</p>
+<p>Define the cone of zero-cost payoffs. A cone in a vector space is a subset that is closed under positive scalar multiplication and addition.</p>
+<p><span class="math display">\[
+\mathcal{C} = \left\{\, Y=\sum_i \theta_i X_i : \sum_i \theta_i p_i = 0 \,\right\}.
+\]</span></p>
 </section>
 <section class="slide level2">
 <h2>Hyperplane Separation Theorem</h2>
 <ul>
-<li><p><strong>Economic idea:</strong><br>
-Under NA, the set of non positive costs <span class="math inline">\(\mathcal{C}\)</span> cannot produce strictly positive payoffs.<br>
-That is, <span class="math inline">\(\mathcal{C}\)</span> intersects the positive cone of payoffs <span class="math inline">\(\mathcal{X}_+\)</span> only at the origin: <span class="math display">\[
-\mathcal{C} \cap \mathcal{X}_+ = \{0\}.
-\]</span></p></li>
-<li><p><strong>Mathematical idea:</strong><br>
-Both <span class="math inline">\(\mathcal{C}\)</span> and <span class="math inline">\(\mathcal{X}_+\)</span> are convex.<br>
-If two convex sets intersect only at <span class="math inline">\(0\)</span>, the <strong>Separating Hyperplane Theorem</strong> guarantees the existence of a linear functional <span class="math inline">\(\varphi\)</span> that “separates” them.</p></li>
-<li><p><strong>Result:</strong><br>
-There exists a nonzero linear functional <span class="math inline">\(\varphi:\mathcal{X}\to\mathbb{R}\)</span> such that <span class="math display">\[
-\varphi(Y) \leq 0 \quad \forall Y \in \mathcal{C},
+<li><p><strong>Idea:</strong> No-arbitrage means the set of zero-cost payoffs<br>
+<span class="math display">\[\mathcal{C} = \{ Y : f(Y)=0 \}\]</span><br>
+cannot intersect the strictly positive cone of payoffs.</p></li>
+<li><p>Both <span class="math inline">\(\mathcal{C}\)</span> and <span class="math inline">\(\mathcal{X}_+\)</span> are convex sets.<br>
+Since <span class="math inline">\(\mathcal{C}\cap \mathcal{X}_+ = \{0\}\)</span>, we can apply the <strong>Separating Hyperplane Theorem</strong>.</p></li>
+<li><p><strong>Result:</strong> There exists a nonzero linear functional<br>
+<span class="math display">\[\varphi:\mathcal{X}\to\mathbb{R}\]</span><br>
+such that <span class="math display">\[
+\varphi(Y)=0 \;\;\; \forall Y\in\mathcal{C},
 \qquad
 X \ge 0 \implies \varphi(X) \ge 0.
 \]</span></p></li>
-<li><p><strong>Interpretation:</strong><br>
-<span class="math inline">\(\varphi\)</span> is a <em>positive pricing rule</em>: it prices every portfolio consistently with NA and vanishes on zero-cost trades.<br>
-Geometrically, <span class="math inline">\(\varphi\)</span> is the “supporting hyperplane” separating feasible trades from arbitrage opportunities.</p></li>
+<li><p>In words: prices can be represented by a <em>positive linear functional</em> that supports the no-arbitrage pricing rule.</p></li>
+<li><p>Vectors vs functionals: A vector <span class="math inline">\(v \in \mathbb{R}^n\)</span> can be seen as a linear functional <span class="math inline">\(\varphi_v:\mathbb{R}^n \to \mathbb{R}\)</span> defined by <span class="math inline">\(\varphi_v(x) = v^\top x\)</span>.</p></li>
 </ul>
 </section>
 <section class="slide level2">
 <h2>Representation Theorem</h2>
 <ul>
-<li><p><strong>Step 2:</strong> Positive linear functionals on payoff spaces can be represented as expectations.</p></li>
+<li><p><strong>Step 2 of the argument:</strong> Every positive linear functional on a suitable space of payoffs can be represented as an <strong>expectation</strong>.</p></li>
 <li><p><strong>Theorem (Riesz / Yosida–Hewitt):</strong><br>
-If <span class="math inline">\(\varphi:\mathcal{X}\to\mathbb{R}\)</span> is positive and continuous on <span class="math inline">\(L^p\)</span> (e.g.&nbsp;<span class="math inline">\(L^2\)</span>), then there exists a nonnegative random variable <span class="math inline">\(M\)</span> such that <span class="math display">\[
-\varphi(X) = \mathbb{E}[M X], \quad \forall X \in \mathcal{X}.
+If <span class="math inline">\(\varphi:\mathcal{X}\to\mathbb{R}\)</span> is a positive continuous linear functional on <span class="math inline">\(L^p\)</span> (e.g.&nbsp;<span class="math inline">\(L^2\)</span>), then there exists a nonnegative random variable <span class="math inline">\(M\)</span> such that <span class="math display">\[
+\varphi(X) \;=\; \mathbb{E}[M X] \quad \forall X\in\mathcal{X}.
 \]</span></p></li>
 </ul>
 </section>
 <section class="slide level2">
-<h2>Simple Proof in Finite States</h2>
-<p>Let <span class="math inline">\(S = \{s_1,\dots,s_n\}\)</span> with probabilities <span class="math inline">\(\pi(s_i) &gt; 0\)</span>.</p>
-<ol type="1">
-<li>Write <span class="math inline">\(\psi(X) = a_1 X_1 + \cdots + a_n X_n\)</span>.<br>
-</li>
-<li>Multiply and divide by <span class="math inline">\(\pi_i\)</span>:<br>
-<span class="math display">\[
-\psi(X) = \sum_{i=1}^n \pi_i \frac{a_i}{\pi_i} X_i.
-\]</span><br>
-</li>
-<li>Define <span class="math inline">\(M_i = \tfrac{a_i}{\pi_i}\)</span>:<br>
-<span class="math display">\[
-\psi(X) = \sum_{i=1}^n \pi_i M_i X_i = \mathbb{E}[M X].
-\]</span></li>
-</ol>
-<p>Thus <span class="math inline">\(\psi\)</span> is an expectation with respect to the random variable <span class="math inline">\(M\)</span>.</p>
-<ul>
-<li>If <span class="math inline">\(\psi\)</span> is strictly positive for nonnegative <span class="math inline">\(X \neq 0\)</span>, then all <span class="math inline">\(a_i &gt; 0\)</span> and hence <span class="math inline">\(M_i &gt; 0\)</span>.</li>
-</ul>
-</section>
-<section class="slide level2">
-<h2>From No-Arbitrage to SDF</h2>
-<p><strong>Step 1. Separation:</strong><br>
-NA <span class="math inline">\(\implies\)</span> <span class="math inline">\(\mathcal{C} \cap \mathcal{X}_+ = \{0\}\)</span>.<br>
-By the separating hyperplane theorem, there exists <span class="math inline">\(\varphi\)</span> with <span class="math display">\[
-\varphi(Y) \leq 0 \;\;\forall Y \in \mathcal{C}, \qquad
-X \ge 0 \implies \varphi(X) \ge 0.
+<h2>Sketch of Proof: From No-Arbitrage to SDF</h2>
+<p><strong>Step 1: Separating Hyperplane</strong></p>
+<p>NA implies <span class="math inline">\(\mathcal{C}\cap \mathcal{X}_+ = \{0\}\)</span>.<br>
+By the separating hyperplane theorem, there exists a positive linear functional<br>
+<span class="math inline">\(\varphi:\mathcal{X}\to\mathbb{R}\)</span> such that <span class="math display">\[
+\varphi(Y)=0 \quad \forall Y\in \mathcal{C},
+\qquad
+X\ge 0 \;\Rightarrow\; \varphi(X)\ge 0.
 \]</span></p>
-<p><strong>Step 2. Representation:</strong><br>
-By the representation theorem,<br>
-<span class="math display">\[
-\varphi(X) = \mathbb{E}[M X]
-\]</span></p>
+<p><strong>Step 2: Representation</strong></p>
 <ul>
-<li>Recall that <span class="math inline">\(\varphi\)</span> is strictly positive for non arbitrage payoffs, so <span class="math inline">\(M &gt; 0\)</span> a.s.</li>
+<li><p>By the <strong>representation theorem</strong>, any positive linear functional<br>
+<span class="math inline">\(\varphi:\mathcal{X}\to\mathbb{R}\)</span> can be written as an expectation.</p></li>
+<li><p>Therefore, there exists a nonnegative random variable <span class="math inline">\(M\)</span> such that: <span class="math display">\[
+\varphi(X) = \mathbb{E}[M X] = \sum_{s \in S} \pi(s) M(s) X(s),
+\quad \forall X \in \mathcal{X}.
+\]</span></p></li>
+<li><p><span class="math inline">\(M\)</span> is called the <strong>Stochastic Discount Factor (SDF)</strong> or <strong>pricing kernel</strong>.</p></li>
+<li><p>The positivity of the function <span class="math inline">\(\phi\)</span> comes from the no-arbitrage assumption.</p></li>
 </ul>
 </section>
 <section class="slide level2">
 <h2>Prices as Expectations</h2>
-<p>For any portfolio <span class="math inline">\(\theta\)</span>, <span class="math display">\[
+<ul>
+<li><p>Recall that by construction, for any portfolio with weights <span class="math inline">\(\theta\)</span>: <span class="math display">\[
 f\!\left(\sum_i \theta_i X^{(i)}\right) = \sum_i \theta_i p^{(i)}.
-\]</span></p>
-<p>But <span class="math inline">\(f=\varphi\)</span>, so <span class="math display">\[
-\sum_i \theta_i p^{(i)}
+\]</span></p></li>
+<li><p>But since <span class="math inline">\(f\)</span> coincides with <span class="math inline">\(\varphi\)</span>, we have: <span class="math display">\[
+\sum_i \theta_i p^{(i)} = \varphi\!\left(\sum_i \theta_i X^{(i)}\right)
 = \mathbb{E}\!\left[M \sum_i \theta_i X^{(i)}\right].
-\]</span></p>
-<p>Therefore, asset by asset: <span class="math display">\[
+\]</span></p></li>
+<li><p>Because this holds for any choice of weights <span class="math inline">\(\theta\)</span>, it must hold asset by asset: <span class="math display">\[
 p^{(i)} = \mathbb{E}[M X^{(i)}], \quad i=1,\ldots,N.
-\]</span></p>
+\]</span></p></li>
+</ul>
 </section>
 <section class="slide level2">
 <h2>Complete Markets</h2>
