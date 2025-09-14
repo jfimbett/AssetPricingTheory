@@ -16,7 +16,7 @@ execute:
   enabled: false
 ---
 
----
+------------------------------------------------------------------------
 
 ## What is an Asset?
 
@@ -26,7 +26,7 @@ execute:
 -   **Asset Pricing** is the process of determining the **fair** value of an asset, taking into account its expected future cash flows, risks, and the time value of money.
 -   The concept of **fairness** is delicate, and hopefully by the end of this course we should understand the difference between what prices **should** be and what they actually are.
 
----
+------------------------------------------------------------------------
 
 ## States of nature
 
@@ -39,7 +39,7 @@ execute:
 -   A payoff of an asset is a $|S|$-dimensional vector $X = (X_1, X_2, \ldots, X_n)$, where $X_i$ is the payoff in state $s_i$.
 -   For now consider the case in which known probabilities are assigned to each state of nature denoted by $\pi(s_i)$.
 
----
+------------------------------------------------------------------------
 
 ## Arbitrage
 
@@ -49,7 +49,7 @@ execute:
 -   In an efficient market, arbitrage opportunities are quickly exploited and eliminated.
 -   Early work by Fama during the 1960s laid the foundation for modern asset pricing theory and the efficient market hypothesis.
 
----
+------------------------------------------------------------------------
 
 ## The Efficient Market Hypothesis
 
@@ -62,7 +62,7 @@ The view about efficiency in financial markets accepted in the 60s and 70s state
     -   **Semi-strong form**: Prices reflect all publicly available information (e.g., financial statements, news).
     -   **Strong form**: Prices reflect all information, both public and private (e.g., insider information).
 
----
+------------------------------------------------------------------------
 
 ## Arbitrage and the EMH
 
@@ -80,7 +80,7 @@ An arbitrage opportunity is a portfolio with zero or negative price, but non-neg
     P = \sum_{i=1}^N \theta_i P^{(i)}
     $$
 
----
+------------------------------------------------------------------------
 
 ## Arbitrage and the EMH (continued.)
 
@@ -98,7 +98,7 @@ A formal definition of an arbitrage states that there exist weights $\theta = (\
     \mathbb{P}(X^P(s) > 0) > 0
     $$
 
----
+------------------------------------------------------------------------
 
 ## Existence of an arbitrage opportunity
 
@@ -114,7 +114,7 @@ $$
 
 where $A$ is the matrix of payoffs, $\vec{p}$ is the vector of prices, and $\epsilon$ is a small positive number. This deals with the strict inequality imposed by condition 3.
 
----
+------------------------------------------------------------------------
 
 ## Example
 
@@ -140,6 +140,8 @@ Arbitrage portfolio: $\theta=(1, -1)$.
 -   Under no arbitrage, if $X^A(s) = X^B(s)$ for all states $s$, then $P^A = P^B$.
 -   If not, a quick arbitrage strategy of buying cheap and selling expensive can be formed.
 
+------------------------------------------------------------------------
+
 ## The Stochastic Discount Factor
 
 -   If you know payoffs $X(s)$ and probabilities $\pi(s)$ how can we **map** payoffs to prices?
@@ -148,15 +150,14 @@ Arbitrage portfolio: $\theta=(1, -1)$.
     $$
 -   Under no arbitrage opportunities, there exists a strictly positive SDF.
 
----
-
+------------------------------------------------------------------------
 
 ## Existence of the SDF
 
 Consider a one–period economy. Let $\mathcal{X}$ be a linear space of payoffs at date $T$, e.g. bounded random variables $L^\infty(\Omega,\mathcal{F},\mathbb{P})$.\
 Traded assets $i=1,\dots,n$ have prices $p_i$ and payoffs $X_i \in \mathcal{X}$.\
 The pricing map on portfolios is linear: $$
-f\!\left(\sum_i \theta_i X_i\right) = \sum_i \theta_i f(X_i) = \sum_i \theta_i p_i.
+f\!\left(\sum_i \theta_i X_i\right) = \sum_i \theta_i p_i.
 $$
 
 -   There are no arbitrage opportunities, anything with non-negative payoffs has a non-negative price. If at least one state has a strictly positive payoff, then the price must be strictly positive as well.
@@ -164,47 +165,31 @@ $$
 Define the cone of zero-cost payoffs. A cone in a vector space is a subset that is closed under positive scalar multiplication and addition.
 
 $$
-\mathcal{C} = \left\{\, Y=\sum_i \theta_i X_i : \sum_i \theta_i p_i = 0 \,\right\} \subset \mathcal{X}.
+\mathcal{C} = \left\{\, Y=\sum_i \theta_i X_i : \sum_i \theta_i p_i = 0 \,\right\}.
 $$
 
 ## Hyperplane Separation Theorem
 
 -   **Idea:** No-arbitrage means the set of zero-cost payoffs\
     $$\mathcal{C} = \{ Y : f(Y)=0 \}$$\
-    cannot intersect the nonnegative cone of payoffs $$\mathcal{X}_+ = \{ X : X \ge 0 \}.$$ except at zero.
+    cannot intersect the strictly positive cone of payoffs.
 
 -   Both $\mathcal{C}$ and $\mathcal{X}_+$ are convex sets.\
     Since $\mathcal{C}\cap \mathcal{X}_+ = \{0\}$, we can apply the **Separating Hyperplane Theorem**.
 
-- We will use the separating hyperplane theorem in the dual space. 
+-   **Result:** There exists a nonzero linear functional\
+    $$\varphi:\mathcal{X}\to\mathbb{R}$$\
+    such that $$
+    \varphi(Y)=0 \;\;\; \forall Y\in\mathcal{C},
+    \qquad
+    X \ge 0 \implies \varphi(X) \ge 0.
+    $$
 
----
+-   In words: prices can be represented by a *positive linear functional* that supports the no-arbitrage pricing rule.
 
-## The dual space
+- Vectors vs functionals: A vector $v \in \mathbb{R}^n$ can be seen as a linear functional $\varphi_v:\mathbb{R}^n \to \mathbb{R}$ defined by $\varphi_v(x) = v^\top x$.
 
--  The dual space $\mathcal{X}^*$ of a vector space $\mathcal{X}$ is the set of all linear functionals from $\mathcal{X}$ to its field of scalars (e.g., $\mathbb{R}$).
--  A linear functional is a function that satisfies linearity: for all $x, y \in \mathcal{X}$ and scalars $a, b$, we have $\varphi(ax + by) = a\varphi(x) + b\varphi(y)$.
--  The dual space is itself a vector space, with addition and scalar multiplication defined pointwise.
--  In finite-dimensional spaces, the dual space is isomorphic to the original space, meaning they have the same dimension and structure.
-
-## Separating Hyperplane Theorem
-
-- If two convex sets do not intersect, there exists a hyperplane that separates them.
-- If they intersect only at a single point, there exists a hyperplane that touches them at that point.
-- This hyperplane can be represented by a linear functional $\varphi$ such that:
-    - $\varphi(x) \leq \alpha$ for all $x$ in the first set.
-    - $\varphi(y) \geq \alpha$ for all $y$ in the second set.
-    - For some scalar $\alpha$.
-    - In two dimensions this is very simple to visualize, but it is true in any dimension.
-- The theorem states that there exists a non-zero linear functional $\varphi \in \mathcal{X}^*$ such that 
-$$
-\varphi(Y) = 0 \quad \forall Y \in \mathcal{C}, 
-\qquad
-X \ge 0 \;\Rightarrow\; \varphi(X) \ge 0.
-$$
-- In other words, positive payoffs have positive prices.
-
----
+------------------------------------------------------------------------
 
 ## Representation Theorem
 
@@ -215,7 +200,26 @@ $$
     \varphi(X) \;=\; \mathbb{E}[M X] \quad \forall X\in\mathcal{X}.
     $$
 
----
+------------------------------------------------------------------------
+
+## Simple Proof of Riesz/Yosida-Hewitt (Finite Case)
+
+Consider the finite state case with $S = \{s_1, s_2, \ldots, s_n\}$ and probabilities $\pi(s_i) > 0$.
+
+**Step 1:** Express the functional as a linear combination:
+$$\varphi(X) = a_1 X_1 + a_2 X_2 + \cdots + a_n X_n$$
+
+**Step 2:** Since every $\pi(s_i) > 0$, multiply and divide by $\pi_i$:
+$$\varphi(X) = \pi_1 \frac{a_1}{\pi_1} X_1 + \pi_2 \frac{a_2}{\pi_2} X_2 + \cdots + \pi_n \frac{a_n}{\pi_n} X_n$$
+
+**Step 3:** Define $M_i = \frac{a_i}{\pi_i}$ for each state $i$:
+$$\varphi(X) = \sum_{i=1}^n \pi_i M_i X_i = \mathbb{E}[M X]$$
+
+where $M(s_i) = M_i$ is the random variable that takes value $M_i$ in state $s_i$.
+
+**Result:** The functional $\varphi$ can be represented as an expectation with respect to the random variable $M$.
+
+------------------------------------------------------------------------
 
 ## Sketch of Proof: From No-Arbitrage to SDF
 
@@ -243,7 +247,7 @@ $$
 
 -   The positivity of the function $\phi$ comes from the no-arbitrage assumption.
 
----
+------------------------------------------------------------------------
 
 ## Prices as Expectations
 
@@ -260,7 +264,7 @@ $$
     p^{(i)} = \mathbb{E}[M X^{(i)}], \quad i=1,\ldots,N.
     $$
 
----
+------------------------------------------------------------------------
 
 ## Complete Markets
 
@@ -274,7 +278,7 @@ $$
     Y(s) = \sum_{i=1}^N \theta_i X^{(i)}(s), \quad \forall s \in S.
     $$
 
----
+------------------------------------------------------------------------
 
 ## Arrow–Debreu Securities and Historical Context
 
@@ -298,7 +302,7 @@ $$
 -   Their 1954 paper *"Existence of an Equilibrium for a Competitive Economy"* gave the first rigorous proof of general equilibrium existence.\
 -   Arrow won the Nobel Prize in 1972 (with John Hicks), Debreu in 1983.
 
----
+------------------------------------------------------------------------
 
 ## Existence of Arrow–Debreu Securities
 
@@ -316,7 +320,7 @@ $$
     q(s) = \sum_{i=1}^N \theta^{(s)}_i \, p^{(i)}.
     $$
 
----
+------------------------------------------------------------------------
 
 ## Pricing Any Payoff with State Prices
 
@@ -333,7 +337,29 @@ $$
     \quad \text{where } M(s) = \tfrac{q(s)}{\pi(s)}.
     $$
 
----
+------------------------------------------------------------------------
+
+## From Arrow-Debreu to Risk-Neutral Pricing
+
+-   In Arrow-Debreu framework, the price of any asset is: $$
+    P(X) = \sum_{s \in S} X(s) \, q(s)
+    $$
+
+-   The risk-free asset pays $1$ in all states, so its price is: $$
+    \sum_{s \in S} q(s) = \frac{1}{1 + r}
+    $$ where $r$ is the risk-free rate.
+
+-   Define risk-neutral probabilities: $$
+    \pi^{\mathbb{Q}}(s) = \frac{q(s)}{\sum_{s' \in S} q(s)} = q(s) (1 + r)
+    $$
+
+-   Then, the price becomes: $$
+    P(X) = \sum_{s \in S} X(s) \, q(s) = \sum_{s \in S} X(s) \, \frac{\pi^{\mathbb{Q}}(s)}{1 + r} = \frac{1}{1 + r} \sum_{s \in S} X(s) \, \pi^{\mathbb{Q}}(s) = \frac{1}{1 + r} \mathbb{E}^{\mathbb{Q}}[X]
+    $$
+
+-   This is the **change of measure** from physical probabilities $\pi$ to risk-neutral probabilities $\pi^{\mathbb{Q}}$.
+
+------------------------------------------------------------------------
 
 ## Uniqueness of the SDF and Extensions
 
@@ -364,7 +390,7 @@ What do we need to extend these concepts to infinite dimensional spaces?
 -   Generalized representation theorems (exist)\
 -   **Challenge:** Uniqueness, since infinite dimensional payoff spaces can only be spanned approximately.
 
----
+------------------------------------------------------------------------
 
 ## Projection View of the SDF (Discrete Case)
 
@@ -372,14 +398,13 @@ What do we need to extend these concepts to infinite dimensional spaces?
     $$
     \langle X, Y \rangle = \sum_{s\in S} \pi(s)\,X(s)Y(s).
     $$
--   An inner product is a way of multiplying (with some weights) two vectors to get a scalar. 
--   It is zero if the vectors are orthogonal (perpendicular).
+
 -   Span of traded payoffs:\
     $$
     \mathcal{S} = \{ A\theta : \theta \in \mathbb{R}^N \}.
     $$
 
--   For a fixed $X$, any SDF $M$ decomposes uniquely as\
+-   Any SDF $M$ decomposes uniquely as\
     $$
     M = M_{\parallel} + M_{\perp}, 
     \quad M_{\parallel} \in \mathcal{S},\; M_{\perp} \in \mathcal{S}^\perp.
@@ -390,7 +415,7 @@ What do we need to extend these concepts to infinite dimensional spaces?
     \mathbb{E}[M Y] = \mathbb{E}[M_{\parallel} Y].
     $$
 
----
+------------------------------------------------------------------------
 
 ## Projection Geometry of the SDF
 
@@ -413,6 +438,3 @@ $$
 **Consequence:** All SDFs with the same projection $M_{\parallel}$ yield identical prices: $$
 M_1 = M_{\parallel} + M_{\perp}^{(1)}, \quad M_2 = M_{\parallel} + M_{\perp}^{(2)} \quad \Rightarrow \quad \langle M_1, Y \rangle = \langle M_2, Y \rangle \text{ for all } Y \in \mathcal{S}
 $$
-
-- In complete markets, no two different SDFs can have the same orthogonal projection to the space of traded payoffs, hence the SDF is unique.
-- For the same $M$, $M_{\parallel}$ will be different for every asset that it prices, but there is only one $M$ that prices all at the same time.
