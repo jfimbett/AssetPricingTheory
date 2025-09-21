@@ -1,0 +1,140 @@
+---
+title: "Asset Pricing Theory — Homework 1 (Solutions)"
+format: html
+toc: true
+number-sections: true
+---
+
+**Due:** October 5, 23:59  
+**Format:** Show all steps. You may use LaTeX/Markdown and attach figures.
+
+---
+
+## Problem 1 — SDF geometry in $\mathbb{R}^2$
+
+Consider a two-period, two-state economy with equally likely states. There is a single asset with payoff vector
+$$
+x=(2,1)
+$$
+and price $p=1.5$. No arbitrage holds.
+
+### (1) Find one SDF that prices the asset
+Pricing uses the physical measure with equal probabilities:
+$$
+p=\mathbb{E}[m x]=\tfrac12(2m_1+m_2)=1.5
+\;\;\Longleftrightarrow\;\; 2m_1+m_2=3 .
+$$
+Any $m$ on the line $2m_1+m_2=3$ is an SDF for the span of traded payoffs (here just $x$).  
+A convenient choice is the non-negative solution
+$$
+m=(1.2,\,0.6),\quad \text{since } 2(1.2)+0.6=3.
+$$
+(Generally $m=(t,\,3-2t)$ with $t\in[0,1.5]$ also satisfies $m\ge 0$.)
+
+### (2) Plot the payoff line and the SDF line
+- **Payoff line (in payoff space):**
+  $$
+  \mathrm{span}\{x\}=\{t(2,1):t\in\mathbb{R}\},
+  $$
+  a line through the origin with slope $1/2$.
+
+- **SDF line (in SDF space):**
+  $$
+  \{m\in\mathbb{R}^2:\tfrac12(2m_1+m_2)=1.5\}
+  \;\equiv\; \{(m_1,m_2): m_2=3-2m_1\},
+  $$
+  a line with intercept $3$ and slope $-2$. Under no-arbitrage we additionally look at the non-negative segment $m_1\in[0,1.5]$, $m_2\in[0,3]$.
+
+*(When plotting, keep payoff and SDF spaces separate; they are dual under the pricing inner product below.)*
+
+### (3) Parallel/orthogonal decomposition of an SDF relative to $x$
+Use the pricing inner product
+$$
+\langle a,b\rangle=\tfrac12(a_1 b_1 + a_2 b_2).
+$$
+For any $m$ on the SDF line, define
+$$
+m_{\parallel}=\frac{\langle m,x\rangle}{\langle x,x\rangle}\,x,
+\qquad
+m_{\perp}=m-m_{\parallel}.
+$$
+Compute the ingredients:
+$$
+\langle m,x\rangle=\tfrac12(2m_1+m_2)=1.5=p,\qquad
+\langle x,x\rangle=\tfrac12(2^2+1^2)=\tfrac12(5)=2.5.
+$$
+Hence
+$$
+m_{\parallel}=\frac{1.5}{2.5}\,x=0.6\,(2,1)=(1.2,0.6),
+\qquad
+m_{\perp}=m-m_{\parallel}.
+$$
+For the particular $m=(1.2,0.6)$ chosen above, $m_{\perp}=(0,0)$. For any other SDF on the line, $m_{\perp}\neq 0$ but satisfies $\langle m_{\perp},x\rangle=0$.
+
+### (4) Only the parallel component prices the asset
+$$
+p=\langle m,x\rangle=\langle m_{\parallel}+m_{\perp},x\rangle
+=\langle m_{\parallel},x\rangle+\underbrace{\langle m_{\perp},x\rangle}_{=0}
+=\langle m_{\parallel},x\rangle.
+$$
+Thus $m_{\perp}$ has no effect on the price of $x$; only the component parallel to $x$ matters. Geometrically, prices depend on the projection of $m$ onto $\mathrm{span}\{x\}$.
+
+---
+
+## Problem 2 — Risk-neutral probabilities in a trinomial one-step model
+
+At date 1 the risky asset takes values $\{uS,\,S,\,dS\}$ (with $u>1>d>0$). The risk-free asset has price $1$ and payoff $1+r_f$. There is a European call **at-the-money** (strike $K=S$) with price $C$.
+
+Let the risk-neutral probabilities be $q_u,q_m,q_d$ for $\{uS,\,S,\,dS\}$.
+
+### (1) Risk-neutral pricing relations
+- **Total probability:** $q_u+q_m+q_d=1$.
+- **Stock martingale condition:**
+  $$
+  S=\frac{1}{1+r_f}\big(q_u\,uS+q_m\,S+q_d\,dS\big)
+  \;\Longleftrightarrow\;
+  1+r_f=q_u\,u+q_m+q_d\,d.
+  $$
+- **Call price (since $K=S$):** payoff is $(uS-S)_+=(u-1)S$ in the up state, and $0$ otherwise:
+  $$
+  C=\frac{1}{1+r_f}\,q_u\,(u-1)S.
+  $$
+
+### (2) Solution for $(q_u,q_m,q_d)$
+From the call price,
+$$
+\boxed{\; q_u=\frac{C(1+r_f)}{(u-1)S}\; }.
+$$
+Use the stock martingale condition with $q_m=1-q_u-q_d$:
+$$
+1+r_f=q_u u+(1-q_u-q_d)+q_d d
+=1+q_u(u-1)+q_d(d-1).
+$$
+Solve for $q_d$:
+$$
+\boxed{\; q_d=\frac{\,r_f - q_u(u-1)\,}{\,d-1\,}\; }.
+$$
+Then
+$$
+\boxed{\; q_m=1-q_u-q_d \; }.
+$$
+
+**Admissibility (no-arbitrage) conditions.** For a valid risk-neutral measure,
+$$
+q_u,q_m,q_d\in[0,1].
+$$
+Given $d<1$, the denominator $d-1<0$; thus $q_d\ge 0$ requires $r_f - q_u(u-1)\le 0$, i.e.
+$$
+q_u\ge \frac{r_f}{u-1}
+\quad\Longleftrightarrow\quad
+C \;\ge\; \frac{r_f}{1+r_f}\,S \;\;\text{(after substituting $q_u$)}.
+$$
+Combined with $q_u\le 1$, we also need
+$$
+0 \;\le\; C \;\le\; \frac{(u-1)S}{1+r_f}.
+$$
+Finally check $q_m=1-q_u-q_d\ge 0$ after plugging the expressions above; this places the usual additional (model-consistent) bounds on $(u,d,r_f,C)$.
+
+*(Remark: In a complete market you would typically have two traded derivatives (or one plus the stock) to pin down all three $q$'s; here the ATM call and the stock/risk-free pair suffice because the middle-state payoff of the call is zero.)*
+
+---

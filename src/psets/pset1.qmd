@@ -1,0 +1,35 @@
+---
+title: "Asset Pricing Theory — Homework 1"
+format: html
+toc: true
+number-sections: true
+---
+
+Send individually to juan.imbet@dauphine.psl.eu before October 5, 23:59.
+
+## Problem 1 — SDF geometry in $\mathbb{R}^2$
+
+Two equally likely states ($\mathbb{P}=(\tfrac12,\tfrac12)$). One asset with payoff
+$x=(2,1)$
+and price $p=1.5$. No arbitrage holds. Use the **pricing inner product**
+
+### 1) Find one SDF $m=(m_1,m_2)$ that prices the asset
+State the SDF pricing condition and identify one valid $m$.
+
+### 2) Plot the payoff line and all SDFs in the same space. 
+
+### 3) Decompose an SDF into parallel/orthogonal components to $x$
+Define $m_{\parallel}$ and $m_{\perp}$ relative to $x$ using the pricing inner product, and explain which component determines price.
+
+### 4) Only the parallel component prices the asset
+Show algebraically that only $m_{\parallel}$ affects $p=\langle m,x\rangle$ and interpret geometrically.
+
+---
+
+## Problem 2 — Risk-neutral probabilities in a one-step trinomial model
+
+Consider an extension of the binomial model seen in class. At date 1 the stock takes $\{uS,\,S,\,dS\}$ with $u>1>d>0$. Risk-free asset: price $1$, payoff $1+r_f$. There is an **ATM European call** (strike $K=S$) with price $C$. All three states are equally likely.
+
+### Tasks
+1) Find the risk neutral probabilities in this economy. 
+2) Determine the bounds on $C$ so that there are no arbitrage opportunities.
