@@ -57,6 +57,7 @@ format:
   revealjs:
     theme: white
     css: src/assets/styles.css
+    slide-level: 0
     slide-number: true
     chalkboard: true
     preview-links: auto
