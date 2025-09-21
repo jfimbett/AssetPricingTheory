@@ -1,5 +1,5 @@
 ---
-title: "Portfolio Choice and Static Asset-Pricing Models"
+title: "Asset Pricing Theory - Binary Trees and Consumption Based Asset Pricing"
 subtitle: "Asset Pricing Theory"
 author: "Juan F. Imbet"
 institute: "Paris Dauphine University-PSL"
@@ -10,406 +10,261 @@ format:
     slide-number: true
     chalkboard: true
     preview-links: auto
-    footer: "Asset Pricing Theory - Portfolio Choice and Equilibrium"
+    footer: "Asset Pricing Theory - Binary Trees and Consumption Based Asset Pricing"
 execute:
   enabled: false
 ---
 
 ------------------------------------------------------------------------
 
-## The Portfolio Choice Problem
-
-From Day 1, we established that arbitrage-free prices satisfy
-$$P = \mathbb{E}[MX]$$
-
-**Question:** How is the stochastic discount factor $M$ determined in equilibrium?
-
-**Answer:** Individual optimization + market clearing
-
-Individual investors solve:
-$$\max_{w} \mathbb{E}[u(W_0(1 + r_p))]$$
-where $r_p = \sum_i w_i r_i$ is the portfolio return and $w_i$ are portfolio weights.
-
-Market clearing requires:
-$$\sum_h w_h = w^{market}$$
-
-------------------------------------------------------------------------
-
-## Expected Utility Theory
-
-Consider an investor with initial wealth $W_0$ choosing portfolio weights $w = (w_1, \ldots, w_N)$ over $N$ risky assets with returns $r = (r_1, \ldots, r_N)$.
-
-**Von Neumann-Morgenstern utility:**
-$$\mathbb{E}[u(W)] = \sum_s \pi_s u(W_s)$$
-
-**Properties:**
-
-- $u'(W) > 0$ (monotonicity)
-
-- $u''(W) < 0$ (risk aversion)
-
-**Portfolio optimization problem:**
-$$\max_w \mathbb{E}[u(W_0(1 + w'r))]$$
-$$\text{subject to } \sum_{i=1}^N w_i = 1$$
-
-**Lagrangian:**
-$$\mathcal{L} = \mathbb{E}[u(W_0(1 + w'r))] + \lambda\left(1 - \sum_{i=1}^N w_i\right)$$
-
-**First-order conditions:**
-$$\frac{\partial \mathcal{L}}{\partial w_i} = \mathbb{E}[u'(W_0(1 + w'r)) \cdot W_0 \cdot r_i] - \lambda = 0$$
-
-Therefore:
-$$\mathbb{E}[u'(W_0(1 + w'r)) \cdot W_0 \cdot r_i] = \lambda, \quad i = 1, \ldots, N$$
-
-------------------------------------------------------------------------
-
-## Mean-Variance Analysis
-
-**Assumption:** Investors care only about mean and variance of portfolio returns.
-
-**Portfolio optimization problem:**
-$$\min_w \frac{1}{2} w' \Sigma w$$
-$$\text{subject to } w' \mu = \mu_p$$
-$$\text{subject to } w' \mathbf{1} = 1$$
-
-where $\Sigma$ is the covariance matrix and $\mu$ is the vector of expected returns.
-
-**Lagrangian:**
-$$\mathcal{L} = \frac{1}{2} w' \Sigma w + \lambda_1(\mu_p - w'\mu) + \lambda_2(1 - w'\mathbf{1})$$
-
-**First-order conditions:**
-$$\frac{\partial \mathcal{L}}{\partial w} = \Sigma w - \lambda_1 \mu - \lambda_2 \mathbf{1} = 0$$
-
-**Solving the system:**
-$$w = \lambda_1 \Sigma^{-1} \mu + \lambda_2 \Sigma^{-1} \mathbf{1}$$
-
-Using the constraints to solve for $\lambda_1$ and $\lambda_2$, we get:
-
-**Solution:**
-$$w^*(\mu_p) = g + h\mu_p$$
-
-where 
-$$g = \frac{A\Sigma^{-1}\mu - B\Sigma^{-1}\mathbf{1}}{AC - B^2}, \quad h = \frac{C\Sigma^{-1}\mathbf{1} - B\Sigma^{-1}\mu}{AC - B^2}$$
-
-and $A = \mathbf{1}'\Sigma^{-1}\mathbf{1}$, $B = \mathbf{1}'\Sigma^{-1}\mu$, $C = \mu'\Sigma^{-1}\mu$.
-
-------------------------------------------------------------------------
-
-## Efficient Frontier
-
-**Minimum variance for given expected return:**
-$$\sigma_p^2(\mu_p) = \frac{1}{A} + \frac{(B - A\mu_p)^2}{A(AC - B^2)}$$
-
-This defines a hyperbola in $(\sigma, \mu)$ space.
-
-**Two-fund separation:** Every efficient portfolio can be written as:
-$$w^*(\mu_p) = \alpha w_{mvp} + (1-\alpha) w_1$$
-
-where $w_{mvp}$ is the minimum variance portfolio and $w_1$ is any other efficient portfolio.
-
-**With risk-free asset:** If a risk-free asset with return $r_f$ exists, the tangency portfolio $w_t$ satisfies:
-$$w_t = \frac{\Sigma^{-1}(\mu - r_f \mathbf{1})}{\mathbf{1}'\Sigma^{-1}(\mu - r_f \mathbf{1})}$$
-
-All efficient portfolios are combinations of the risk-free asset and the tangency portfolio.
-
-------------------------------------------------------------------------
-
-## HARA Utility and Two-Fund Separation
-
-**Hyperbolic Absolute Risk Aversion (HARA) utility:**
-$$u(W) = \frac{1-\gamma}{\gamma} \left( \frac{aW + b}{1-\gamma} \right)^{\gamma}$$
-
-where $\gamma \neq 0, 1$ and $aW + b > 0$.
-
-**Absolute risk aversion:**
-$$A(W) = -\frac{u''(W)}{u'(W)} = \frac{1-\gamma}{aW + b}$$
-
-**Cass-Stiglitz Two-Fund Separation Theorem:** If all investors have HARA utility with the same parameter $\gamma$, then all investors hold combinations of the same two mutual funds regardless of their wealth or risk aversion level.
-
-**Proof sketch:** With HARA utility, the first-order condition becomes:
-$$\mathbb{E}[(aW_0(1 + w'r) + b)^{\gamma-1} \cdot W_0 \cdot r_i] = \lambda$$
-
-The solution is independent of individual characteristics $a$ and $b$.
-
-------------------------------------------------------------------------
-
-## Capital Asset Pricing Model (CAPM)
-
-**Assumptions:**
-
-1. All investors have mean-variance preferences
-
-2. Homogeneous expectations about $\mu$ and $\Sigma$
-
-3. All investors can borrow and lend at risk-free rate $r_f$
-
-4. Markets are frictionless
-
-**Derivation:**
-
-**Step 1:** Individual optimization gives tangency portfolio:
-$$w_t = \frac{\Sigma^{-1}(\mu - r_f \mathbf{1})}{\mathbf{1}'\Sigma^{-1}(\mu - r_f \mathbf{1})}$$
-
-**Step 2:** Market clearing requires tangency portfolio = market portfolio:
-$$w_t = w_m$$
-
-**Step 3:** This implies:
-$$\Sigma^{-1}(\mu - r_f \mathbf{1}) = k \Sigma w_m$$
-
-for some scalar $k$.
-
-**Step 4:** Multiplying by $\Sigma$:
-$$\mu - r_f \mathbf{1} = k \Sigma w_m$$
-
-------------------------------------------------------------------------
-
-## CAPM Beta Formula
-
-**Step 5:** Taking covariance with market return $r_m$:
-$$\text{Cov}(r_i, r_m) = k \cdot \text{Cov}(r_m, r_m) = k \sigma_m^2$$
-
-**Step 6:** From Step 4, we have:
-$$\mathbb{E}[r_i] - r_f = k \cdot \text{Cov}(r_i, r_m)$$
-
-**Step 7:** For the market portfolio itself:
-$$\mathbb{E}[r_m] - r_f = k \sigma_m^2$$
-
-Therefore: $k = \frac{\mathbb{E}[r_m] - r_f}{\sigma_m^2}$
-
-**Final CAPM equation:**
-$$\mathbb{E}[r_i] - r_f = \beta_i (\mathbb{E}[r_m] - r_f)$$
-
-where $\beta_i = \frac{\text{Cov}(r_i, r_m)}{\text{Var}(r_m)}$
-
-------------------------------------------------------------------------
-
-## Security Market Line
-
-**CAPM implications:**
-
-1. **Security Market Line:** Linear relationship between expected return and beta:
-   $$\mathbb{E}[r_i] = r_f + \beta_i(\mathbb{E}[r_m] - r_f)$$
-
-2. **Market price of risk:** $\frac{\mathbb{E}[r_m] - r_f}{\sigma_m}$
-
-3. **Systematic vs. idiosyncratic risk:** Only systematic risk (correlated with market) is priced.
-
-**Beta decomposition:**
-$$\beta_i = \rho_{i,m} \frac{\sigma_i}{\sigma_m}$$
-
-where $\rho_{i,m}$ is correlation between asset $i$ and market.
-
-**Connection to SDF:** Under CAPM, the stochastic discount factor is:
-$$M = a + b r_m$$
-
-for constants $a, b$ with $b < 0$.
-
-------------------------------------------------------------------------
-
-## Arbitrage Pricing Theory (APT)
-
-**Motivation:** CAPM relies on strong assumptions. Can we derive similar results using arbitrage arguments?
-
-**APT assumptions:**
-
-1. Asset returns follow a factor structure:
-   $$r_i = \mathbb{E}[r_i] + \sum_{k=1}^K \beta_{i,k} f_k + \varepsilon_i$$
-
-2. Factors $f_k$ are common to all assets
-
-3. $\mathbb{E}[f_k] = 0$ and $\mathbb{E}[\varepsilon_i] = 0$
-
-4. Idiosyncratic errors $\varepsilon_i$ are uncorrelated across assets
-
-5. Large number of assets $N$
-
-**Arbitrage argument:** Consider a portfolio $w$ with:
-
-- Zero net investment: $\sum_i w_i = 0$
-
-- Zero exposure to factors: $\sum_i w_i \beta_{i,k} = 0$ for all $k$
-
-**Portfolio return:**
-$$r_p = \sum_i w_i r_i = \sum_i w_i \mathbb{E}[r_i] + \sum_i w_i \varepsilon_i$$
-
-Since $\varepsilon_i$ are uncorrelated, $\text{Var}(r_p) \to 0$ as $N \to \infty$.
-
-------------------------------------------------------------------------
-
-## APT Pricing Formula
-
-**No-arbitrage condition:** $\mathbb{E}[r_p] = 0$ for any zero-investment, zero-beta portfolio.
-
-This requires:
-$$\sum_i w_i \mathbb{E}[r_i] = 0$$
-
-for all $w$ satisfying the constraints.
-
-**Linear pricing relationship:** There exist risk premia $\lambda_0, \lambda_1, \ldots, \lambda_K$ such that:
-$$\mathbb{E}[r_i] = \lambda_0 + \sum_{k=1}^K \beta_{i,k} \lambda_k$$
-
-**Interpretation:**
-
-- $\lambda_0 = r_f$ (risk-free rate)
-
-- $\lambda_k$ = risk premium for factor $k$
-
-**APT equation:**
-$$\mathbb{E}[r_i] - r_f = \sum_{k=1}^K \beta_{i,k} \lambda_k$$
-
-**Differences from CAPM:**
-
-- Multiple risk factors instead of just market
-
-- Based on arbitrage, not equilibrium optimization
-
-- Weaker assumptions about preferences
-
-------------------------------------------------------------------------
-
-## APT in Equilibrium: Mimic Portfolios
-
-**Theoretical Foundation:** What happens when APT meets equilibrium?
-
-**Setup:** Assume all investors have mean-variance preferences and agree on the factor structure:
-$$r_i = \mathbb{E}[r_i] + \sum_{k=1}^K \beta_{i,k} f_k + \varepsilon_i$$
-
-**Mimic Portfolio Definition:** For each factor $k$, define the **mimic portfolio** $m_k$ as the portfolio that has:
-
-- Unit exposure to factor $k$: $\beta_{m_k,k} = 1$
-
-- Zero exposure to all other factors: $\beta_{m_k,j} = 0$ for $j \neq k$
-
-- Minimum tracking error variance
-
-**Optimization Problem for Mimic Portfolio:**
-$$\min_{w_k} \text{Var}(\varepsilon_{m_k})$$
-$$\text{subject to } \sum_i w_{k,i} \beta_{i,k} = 1$$
-$$\text{subject to } \sum_i w_{k,i} \beta_{i,j} = 0, \quad j \neq k$$
-
-**Lagrangian:**
-$$\mathcal{L} = \frac{1}{2} w_k' \Omega w_k + \lambda_k \left(1 - \sum_i w_{k,i} \beta_{i,k}\right) + \sum_{j \neq k} \mu_j \left(\sum_i w_{k,i} \beta_{i,j}\right)$$
-
-where $\Omega$ is the covariance matrix of idiosyncratic errors.
-
-**First-order conditions:**
-$$\frac{\partial \mathcal{L}}{\partial w_k} = \Omega w_k - \lambda_k \beta_k - \sum_{j \neq k} \mu_j \beta_j = 0$$
-
-where $\beta_j$ is the vector of factor $j$ loadings across all assets.
-
-**Solution:** 
-$$w_k^* = \Omega^{-1} \left( \lambda_k \beta_k + \sum_{j \neq k} \mu_j \beta_j \right)$$
-
-The multipliers $\lambda_k$ and $\mu_j$ are determined by the constraints.
-
-**Key Result:** The mimic portfolio return is:
-$$r_{m_k} = f_k + \text{tracking error}$$
-
-where the tracking error has minimum variance among all portfolios with the same factor exposures.
-
-------------------------------------------------------------------------
-
-## Equilibrium with Mimic Portfolios
-
-**Mean-Variance Optimization with Factors:**
-
-Investors now optimize over the original assets OR equivalently over:
-
-- Risk-free asset
-
-- $K$ mimic portfolios (one for each factor)
-
-- Diversified portfolio of idiosyncratic risks
-
-**Spanning Result:** Under no-arbitrage, any asset return can be written as:
-$$r_i = r_f + \sum_{k=1}^K \beta_{i,k} (r_{m_k} - r_f) + \varepsilon_i$$
-
-**Equilibrium Condition:** In equilibrium, investors hold mean-variance efficient portfolios. This requires:
-$$\mathbb{E}[r_i] - r_f = \sum_{k=1}^K \beta_{i,k} (\mathbb{E}[r_{m_k}] - r_f)$$
-
-**Factor Risk Premia:** The risk premium for factor $k$ is:
-$$\lambda_k = \mathbb{E}[r_{m_k}] - r_f$$
-
-This is the excess return of the mimic portfolio, determined by equilibrium.
-
-------------------------------------------------------------------------
-
-## Individual Optimization and APT
-
-**Investor's Problem:** Each investor $h$ solves:
-$$\max_{w_h} w_h' \mu - \frac{\gamma_h}{2} w_h' \Sigma w_h$$
-$$\text{subject to } w_h' \mathbf{1} = 1$$
-
-where $\gamma_h$ is investor $h$'s risk aversion coefficient.
-
-**With Factor Structure:** The covariance matrix decomposes as:
-$$\Sigma = B \Phi B' + \Omega$$
-
-where:
-
-- $B$ is the $N \times K$ matrix of factor loadings
-
-- $\Phi$ is the $K \times K$ covariance matrix of factors
-
-- $\Omega$ is the diagonal matrix of idiosyncratic variances
-
-**Lagrangian:**
-$$\mathcal{L}_h = w_h' \mu - \frac{\gamma_h}{2} w_h' \Sigma w_h + \lambda_h(1 - w_h' \mathbf{1})$$
-
-**First-order condition:**
-$$\mu - \gamma_h \Sigma w_h - \lambda_h \mathbf{1} = 0$$
-
-**Solution:**
-$$w_h^* = \frac{1}{\gamma_h} \Sigma^{-1} (\mu - \lambda_h \mathbf{1})$$
-
-**Market Clearing:** 
-$$\sum_h \alpha_h w_h^* = w_{market}$$
-
-where $\alpha_h$ is the wealth share of investor $h$ and $w_{market}$ are market capitalization weights.
-
-**Aggregation:**
-$$\sum_h \frac{\alpha_h}{\gamma_h} \Sigma^{-1} (\mu - \lambda_h \mathbf{1}) = w_{market}$$
-
-**Representative Agent:** Define aggregate risk aversion:
-$$\frac{1}{\bar{\gamma}} = \sum_h \frac{\alpha_h}{\gamma_h}$$
-
-**Market Clearing Condition:**
-$$\Sigma^{-1} (\mu - \bar{\lambda} \mathbf{1}) = \bar{\gamma} w_{market}$$
-
-where $\bar{\lambda}$ is the equilibrium risk-free rate.
-
-**APT Pricing Formula:** Multiplying by $\Sigma$:
-$$\mu - \bar{\lambda} \mathbf{1} = \bar{\gamma} \Sigma w_{market}$$
-
-**With Factor Structure:**
-$$\mu - r_f \mathbf{1} = \bar{\gamma} (B \Phi B' + \Omega) w_{market}$$
-
-**Taking expectations and using the law of large numbers:**
-$$\mathbb{E}[r_i] - r_f = \bar{\gamma} \sum_{k=1}^K \beta_{i,k} \text{Cov}(f_k, r_{market})$$
-
-**Final APT Result:**
-$$\mathbb{E}[r_i] - r_f = \sum_{k=1}^K \beta_{i,k} \lambda_k$$
-
-where $\lambda_k = \bar{\gamma} \text{Cov}(f_k, r_{market})$ is the equilibrium risk premium for factor $k$.
-
-------------------------------------------------------------------------
-
-## Connection to Consumption-Based Asset Pricing
-
-**Linking portfolio and consumption choice:**
-
-In a complete markets setting, the first-order condition for optimal portfolio choice gives:
-$$\mathbb{E}[M_{t+1} r_{i,t+1}] = 1$$
-
-where the stochastic discount factor is:
-$$M_{t+1} = \beta \frac{u'(C_{t+1})}{u'(C_t)}$$
-
-**CAPM from consumption:** If consumption growth is perfectly correlated with market return:
-$$C_{t+1} = C_t(1 + g + \alpha r_{m,t+1})$$
-
-Then CAPM beta equals consumption beta:
-$$\beta_i = \frac{\text{Cov}(r_i, r_m)}{\text{Var}(r_m)} = \frac{\text{Cov}(r_i, \Delta c)}{\text{Var}(\Delta c)}$$
-
-where $\Delta c$ is log consumption growth.
-
-**This links static portfolio models to dynamic consumption-based asset pricing.**
+## Binary Trees
+
+Consider the following economy. 
+
+- Two periods, today and tomorrow, and two states of nature (up **u**, down **d**). 
+- One risky asset (stock) and one riskless asset (bond).
+- The price of the stock today is $S$; the bond price today is $1$.
+- The risk-free bond pays $1+r_f$ tomorrow in every state.
+- The stock pays $uS$ in state **u** and $dS$ in state **d**, with $u>d>0$.
+- The (physical) probabilities are $\mathbb P(u)=\pi$ and $\mathbb P(d)=1-\pi$.
+
+**No-Arbitrage (NA) feasibility region:** $d < 1+r_f < u$.
+
+---
+
+## No-Arbitrage Pricing by Replication
+
+Let $X$ be any asset with payoffs $X_u$ (state **u**) and $X_d$ (state **d**).
+- What is its price today, $p$?
+- Replicate its payoffs with $b$ units of the bond and $\theta$ of the stock.
+
+**Payoffs of the replicating portfolio:**
+$$
+\begin{aligned}
+	\text{state }u: &\quad b(1+r_f) + \theta\,uS \\
+	\text{state }d: &\quad b(1+r_f) + \theta\,dS
+\end{aligned}
+$$
+Match payoffs:
+$$
+\begin{aligned}
+b(1+r_f) + \theta\,uS &= X_u,\\
+b(1+r_f) + \theta\,dS &= X_d.
+\end{aligned}
+$$
+
+---
+
+## Solving for the Replicating Weights
+
+Subtract the two equations:
+$$
+	\theta (u-d)S = X_u - X_d
+\quad\Longrightarrow\quad
+\boxed{\;\theta = \dfrac{X_u - X_d}{(u-d)S}\;}
+$$
+
+Back-out the bond position (use, e.g., the **u** equation):
+$$
+\boxed{\;b
+= \frac{X_u - \theta\,uS}{1+r_f}
+= \frac{u X_d - d X_u}{(u-d)(1+r_f)}\;}
+$$
+
+**Price today** (cost of the replicating portfolio):
+$$
+\begin{aligned}
+p &= b + \theta S \\
+&= \frac{u X_d - d X_u}{(u-d)(1+r_f)} \;+\; \frac{X_u - X_d}{u-d} \\
+&= \frac{(1+r_f - d) X_u + (u - (1+r_f)) X_d}{(u-d)(1+r_f)} \\
+&= \frac{1}{1+r_f} \Big[ \frac{1+r_f -d}{u-d} X_u + \frac{u - (1+r_f)}{u-d} X_d \Big]\\
+&= \frac{1}{1+r_f} \big[ \tilde{q} X_u + (1-\tilde{q}) X_d \big] \\
+&= \frac{1}{1+r_f}\mathbb{E}^Q\Big[X\Big]
+\end{aligned}
+$$
+
+---
+
+## Arrow-Debreu Securities
+
+- Price of an asset that pays 1 in state **u** and 0 in state **d**:
+$$
+  \begin{aligned}
+  q_u = \frac{(1+r_f) - d}{(u - d)(1+r_f)} \\
+  q_d = \frac{u - (1+r_f)}{(u - d)(1+r_f)}
+  \end{aligned}
+$$
+
+Price of a bond is $(1+r_f)$ times the sum of the prices of the Arrow-Debreu securities:
+$$
+  (q_u + q_d)(1+r_f) = 1
+$$
+
+## The S.D.F.
+
+- Start with the linear pricing formula:
+$$
+  p = \frac{1}{1+r_f} \big[ \tilde{q} X_u + (1-\tilde{q}) X_d \big]
+$$
+- Multiply and divide by their respective probabilities ($\pi$ and $1-\pi$):
+$$
+\begin{aligned}
+  p &= \frac{1}{1+r_f} \big[ \tilde{q} X_u + (1-\tilde{q}) X_d \big] \\
+    &= \mathbb{E}\Big[\frac{1}{1+r_f}\Big(\frac{\tilde{q}}{\pi} X_u + \frac{1-\tilde{q}}{1-\pi} X_d\Big)\Big] = \mathbb{E}[M X]
+\end{aligned}
+$$
+
+
+---
+
+## Consumption Based Asset Pricing
+
+- So far we have proved the existence and some conditions on $M$, but what does it capture?
+- We will get some insights by understanding how investors make investment decisions to smooth consumption. 
+- Consider an investor with initial wealth $W_0$ who invests in a risk-free bond and a risky stock.
+- The investor has Von Neumann-Morgenstern preferences over consumption at $t=0$ and $t=1$:
+
+## Von Neumann-Morgenstern preferences
+- Preferences over lotteries are complete, transitive, continuous and independent (Axioms of choice). 
+- These preferences can be represented by computing expectations of an utility function $u(x)$ on wealth (or consumption).
+- The utility function is unique up to positive affine transformations.
+
+## Setup
+- The risky asset has price $p$ today and pays $X$ tomorrow.
+- The risk free rate is $r_f$. 
+- Today the investor chooses how many units $\theta$ of the risky asset to buy and how many units $b$ of the risk free bond to buy.
+
+
+---
+
+## Investor's problem
+
+- The investor consumes today $C_0 = W_0 - p\theta - b$, and consumes tomorrow $C_1 = (1+r_f)b + \theta X$ which is a random variable. 
+- The investor maximizes expected utility:
+$$
+\max_{\theta,b} u(C_0) + \beta \mathbb{E}[u(C_1)]
+$$
+subject to the budget constraint ($C_0$ and $C_1$ defined above).
+- Replace the constraints in the objective function to make it unconstrained:
+$$
+\max_{\theta,b} u(W_0 - p\theta - b) + \beta \mathbb{E}[u((1+r_f)b + \theta X)]
+$$
+- The first order conditions are:
+$$
+\begin{aligned}
+\frac{\partial \mathcal{L}}{\partial b} &= -u'(C_0) + \beta (1+r_f) \mathbb{E}[u'(C_1)] = 0 \\
+\frac{\partial \mathcal{L}}{\partial \theta} &= -p u'(C_0) + \beta \mathbb{E}[X u'(C_1)] = 0
+\end{aligned}
+$$
+- Solve for $p$
+$$
+p =  \mathbb{E}[\beta \frac{u'(C_1)}{u'(C_0)} X]
+$$
+
+
+---
+
+## Interpretation of the S.D.F.
+
+- In this setup, the S.D.F. is the intertemporal marginal rate of substitution of consumption.
+- The S.D.F. is high when consumption tomorrow is low (i.e., $u'(C_1)$ is high) relative to consumption today (i.e., $u'(C_0)$ is low).
+- The S.D.F. is low when consumption tomorrow is high (i.e., $u'(C_1)$ is low) relative to consumption today (i.e., $u'(C_0)$ is high).
+- Investors are willing to pay more for assets that pay off in bad times (when consumption is low) and less for assets that pay off in good times (when consumption is high).
+- Partial Equilibrium view: Aggregate Consumption is given exogenously and investors optimize their portfolios given their consumption paths.
+- General Equilibrium view: Asset prices and consumption are determined simultaneously. Investors choose their consumption and investment plans to maximize their utility subject to their budget constraints and the market clearing conditions.
+
+---
+
+## Some useful tools
+
+- CARA (exponential utility) is very tractable with normal asset payoffs. 
+- If $u(X) = -e^{-\gamma X}$ and $X \sim \mathcal{N}(\mu, \sigma^2)$, then
+$$
+\mathbb{E}[u(X)] = -\exp\left(-\gamma \mu + \frac{1}{2} \gamma^2 \sigma^2\right)
+$$
+- This identity can be proven using the moment generating function and the certain equivalent interpretation of CARA utility.
+
+---
+
+## Continuous-States (1-period) CARA–Normal 
+
+### Setup
+- Preferences (CARA): $u(C) = -e^{-\gamma C}$, $\gamma>0$.
+- Today’s consumption: $C_0 = W_0 - p\,\theta - b$.
+- Tomorrow’s consumption: $C_1 = (1+r_f)\,b + \theta X$, with $X \sim \mathcal N(\mu,\sigma^2)$.
+- Objective:
+$$
+\max_{\theta,b}\; -e^{-\gamma (W_0 - p\theta - b)} \;+\; \beta\,\mathbb E\!\left[-e^{-\gamma\big((1+r_f)b+\theta X\big)}\right].
+$$
+
+Using normality of $X$ and CARA (certainty-equivalent for the second term):
+$$
+\mathbb E\!\left[-e^{-\gamma\big((1+r_f)b+\theta X\big)}\right]
+= -\exp\!\left(-\gamma\big((1+r_f)b+\theta\mu\big) + \tfrac12 \gamma^2 \theta^2\sigma^2\right).
+$$
+
+Define
+$$
+\Phi(b,\theta) \equiv -e^{-\gamma (W_0 - p\theta - b)}
+\;-\;\beta\,\exp\!\left(-\gamma\big((1+r_f)b+\theta\mu\big) + \tfrac12 \gamma^2 \theta^2\sigma^2\right).
+$$
+
+---
+
+## First-order conditions
+
+1) FOC in $b$:
+$$
+\frac{\partial \Phi}{\partial b}
+= -\gamma e^{-\gamma (W_0 - p\theta - b)}
+\;+\;\beta\,\gamma(1+r_f)\,e^{-\gamma\big((1+r_f)b+\theta\mu\big) + \tfrac12 \gamma^2 \theta^2\sigma^2}
+=0.
+$$
+Hence
+$$
+ e^{-\gamma (W_0 - p\theta - b)}
+= \beta(1+r_f)\,e^{-\gamma\big((1+r_f)b+\theta\mu\big) + \tfrac12 \gamma^2 \theta^2\sigma^2}.
+$$
+
+2) FOC in $\theta$:
+$$
+\frac{\partial \Phi}{\partial \theta}
+= -\gamma p\,e^{-\gamma (W_0 - p\theta - b)}
+\;+\;\beta\,e^{-\gamma\big((1+r_f)b+\theta\mu\big) + \tfrac12 \gamma^2 \theta^2\sigma^2}
+\big(\gamma\mu - \gamma^2 \theta \sigma^2\big)
+=0.
+$$
+
+Use FOC-$b$ to eliminate the exponential terms:
+$$
+-\gamma p \cdot \big[\beta(1+r_f)\,e^{-\gamma(\cdots)}\big]
++ \beta\,e^{-\gamma(\cdots)}\big(\gamma\mu - \gamma^2 \theta \sigma^2\big)=0,
+$$
+so (divide by $\beta e^{-\gamma(\cdots)}\gamma>0$):
+$$
+-\,p(1+r_f) + \mu - \gamma\theta\sigma^2 = 0.
+$$
+
+---
+
+## Demand and Price
+
+- **Optimal risky demand (given price $p$)**:
+$$
+\boxed{\;\theta^*(p) \;=\; \frac{\mu - (1+r_f)\,p}{\gamma\,\sigma^2}\; }.
+$$
+
+- **Equilibrium price with outside supply $\bar\theta$** (market clearing $\theta^*=\bar\theta$):
+$$
+\boxed{\;p \;=\; \frac{\mu - \gamma\,\bar\theta\,\sigma^2}{\,1+r_f\,}\; }.
+$$
+
+- **Partial-equilibrium “mean–variance” pricing identity** (from the FOC directly):
+$$
+\boxed{\;p \;=\; \frac{\mu - \gamma\,\theta^*\,\sigma^2}{\,1+r_f\,}\;}
+\quad\Longleftrightarrow\quad
+(1+r_f)\,p \;=\; \mu \;-\; \gamma\,\theta^*\,\sigma^2.
+$$
+
+> Interpretation: price equals discounted mean payoff minus a **risk discount**
+> proportional to risk aversion $\gamma$, position size $\theta^*$, and variance $\sigma^2$.
