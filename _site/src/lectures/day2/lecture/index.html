@@ -362,6 +362,130 @@ e^{-\gamma (W_0 - p\theta - b)}
 <blockquote>
 <p>Interpretation: price equals discounted mean payoff minus a <strong>risk discount</strong> proportional to risk aversion <span class="math inline">\(\gamma\)</span>, position size <span class="math inline">\(\theta^*\)</span>, and variance <span class="math inline">\(\sigma^2\)</span>.</p>
 </blockquote>
+</section>
+<section class="slide level0">
+
+<h2>Log-Linearization as a Toolbox</h2>
+<p>We often need to connect expected returns with properties of the SDF.</p>
+<ul>
+<li>Fundamental pricing: <span class="math inline">\(\;1 = \mathbb E[M R]\,\)</span> for any gross return <span class="math inline">\(R\)</span>.</li>
+<li>Covariance decomposition: <span class="math inline">\(\;\mathbb E[M] \mathbb E[R] + \operatorname{Cov}(M,R) = 1\,\)</span> so <span class="math display">\[
+\boxed{\;\mathbb E[R] = R_f \;-\; \frac{\operatorname{Cov}(M,R)}{\mathbb E[M]}\;}\quad\text{with}\quad R_f = \frac{1}{\mathbb E[M]}.
+\]</span> Risk premia are negative multiples of <span class="math inline">\(\operatorname{Cov}(M,R)\)</span>.</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h3>Lognormal/log-linear relations</h3>
+<p>Let <span class="math inline">\(x=\log M\)</span> and <span class="math inline">\(r=\log R\)</span>. If <span class="math inline">\((x+r)\)</span> is (approximately) normal, then <span class="math display">\[
+1 = \mathbb E[M R] = \mathbb E\big[e^{x+r}\big] = \exp\Big(\mathbb E[x+r] + \tfrac12\operatorname{Var}(x+r)\Big),
+\]</span> which implies <span class="math display">\[
+\boxed{\;\mathbb E[r] = -\mathbb E[x] - \tfrac12\operatorname{Var}(x+r)\;}
+\;=\; -\mathbb E[\log M] - \tfrac12\Big(\operatorname{Var}(\log M) + \operatorname{Var}(\log R) + 2\operatorname{Cov}(\log M,\log R)\Big).
+\]</span></p>
+<p>For the risk-free rate, using <span class="math inline">\(1=\mathbb E[M R_f] = R_f\,\mathbb E[M]\)</span> and (approximate) lognormal <span class="math inline">\(M\)</span>: <span class="math display">\[
+\boxed{\;\log R_f = -\log\mathbb E[M] \approx -\mathbb E[\log M] - \tfrac12\operatorname{Var}(\log M)\; }.
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h3>Specialization to CRRA (power utility)</h3>
+<p>With one-period CRRA, <span class="math inline">\(u(C)=\tfrac{C^{1-\gamma}}{1-\gamma}\)</span>, <span class="math display">\[
+M = \beta\,\Big(\frac{C_1}{C_0}\Big)^{-\gamma} \quad\Rightarrow\quad \log M = \log\beta - \gamma\,\Delta c,
+\]</span> where <span class="math inline">\(\Delta c \equiv \log C_1 - \log C_0\)</span>. If <span class="math inline">\(\Delta c\)</span> is (approximately) normal with mean <span class="math inline">\(\mu_c\)</span> and variance <span class="math inline">\(\sigma_c^2\)</span>, then <span class="math display">\[
+\log R_f \approx -\log\beta + \gamma\,\mu_c - \tfrac12\gamma^2\sigma_c^2.
+\]</span> Risk premia follow from <span class="math inline">\(\mathbb E[R]-R_f \approx -\dfrac{\operatorname{Cov}(M,R)}{\mathbb E[M]}\)</span> or, in logs, <span class="math display">\[
+\mathbb E[r] \approx \log R_f \; -\; \operatorname{Cov}(\log M,\log R) \; -\; \tfrac12\operatorname{Var}(\log R).
+\]</span></p>
+<div class="financial-concept">
+<p>Why this is useful: log-linearization converts nonlinear pricing conditions into linear relations among means, variances and covariances that are easy to interpret and calibrate.</p>
+</div>
+</section>
+<section class="slide level0">
+
+<h3>The risk-free rate puzzle (Weil, 1989)</h3>
+<ul>
+<li>Matching the equity premium with CRRA often requires high <span class="math inline">\(\gamma\)</span>, but then the model predicts too high <span class="math inline">\(\log R_f\)</span> via <span class="math inline">\(-\log\beta + \gamma\mu_c - \tfrac12\gamma^2\sigma_c^2\)</span>.</li>
+<li>Conversely, matching the low observed <span class="math inline">\(R_f\)</span> calls for low <span class="math inline">\(\gamma\)</span> (or implausibly high <span class="math inline">\(\beta\)</span>), then the equity premium becomes too small.</li>
+<li>This tension motivates enriched preferences or endowment risk, e.g., habit formation or disaster risk.</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Simple Growth-Based Habit (one-period)</h2>
+<p>We adopt a tractable specification where utility depends on current consumption and recent growth: <span class="math display">\[
+u_t \;=\; \frac{1}{1-\gamma}\, C_t^{\,1-\gamma}\,\Big(\frac{C_{t-1}}{C_t}\Big)^{\kappa}
+\;=\; \frac{1}{1-\gamma}\, C_t^{\,1-\gamma-\kappa}\,C_{t-1}^{\,\kappa},\qquad \gamma&gt;0,\;\kappa\ge 0.
+\]</span> This penalizes low consumption relative to last period (a simple habit flavor) yet keeps closed-form expressions.</p>
+</section>
+<section class="slide level0">
+
+<h3>SDF and pricing equation</h3>
+<p>Marginal utility: <span class="math inline">\(\;u_C(C_t) = C_t^{-\gamma-\kappa}\,C_{t-1}^{\kappa}\)</span>. The one-period SDF is <span class="math display">\[
+\boxed{\; M = \beta\,\frac{u_C(C_1)}{u_C(C_0)}
+\;=\; \beta\,\Big(\frac{C_1}{C_0}\Big)^{-(\gamma+\kappa)} \times \underbrace{\Big(\frac{C_0}{C_{-1}}\Big)^{\kappa}}_{\text{known at }t=0}\;,\quad 1=\mathbb E[MR].\;}
+\]</span> The known term can be absorbed in normalization, so the random part is <span class="math display">\[
+\log M = \log\beta - (\gamma+\kappa)\,\Delta c,\qquad \Delta c \equiv \log C_1 - \log C_0.
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h3>Log-linearization and the risk-free rate</h3>
+<p>If <span class="math inline">\(\Delta c \sim \mathcal N(\mu_c,\sigma_c^2)\)</span> (or is approximately normal): <span class="math display">\[
+\boxed{\;\log R_f \approx -\log\beta + (\gamma+\kappa)\,\mu_c - \tfrac12(\gamma+\kappa)^2\,\sigma_c^2\; }.
+\]</span> Risk premia (levels or logs) follow the usual covariance rules with <span class="math inline">\(\log M\)</span>; habit simply shifts the effective sensitivity from <span class="math inline">\(\gamma\)</span> to <span class="math inline">\(\gamma+\kappa\)</span>.</p>
+</section>
+<section class="slide level0">
+
+<h3>Why this helps</h3>
+<ul>
+<li>With <span class="math inline">\(\kappa&gt;0\)</span>, the SDF is more cyclical (responds more to <span class="math inline">\(\Delta c\)</span>): larger premia for a given <span class="math inline">\(\gamma\)</span>.</li>
+<li>The extra parameter <span class="math inline">\(\kappa\)</span> lets us jointly fit a low <span class="math inline">\(R_f\)</span> and sizable premia without resorting to extreme <span class="math inline">\(\gamma\)</span>.</li>
+<li>Still keeps the same clean log-linear formulas.</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Rare Disasters: A Simple Model</h2>
+<p>We add low-probability, high-severity consumption drops to study their impact on policy and prices.</p>
+<h3>Setup</h3>
+<ul>
+<li>CRRA agent with SDF <span class="math inline">\(M = \beta (C_1/C_0)^{-\gamma}\)</span>.</li>
+<li>Consumption growth with rare disasters (Barro-style): <span class="math display">\[
+\Delta c = \mu_c + \sigma_c\,\varepsilon - J D,\quad \varepsilon\sim\mathcal N(0,1),\; D\sim\text{Bernoulli}(p),\; J&gt;0,\; p\ll 1.
+\]</span> With probability <span class="math inline">\(p\)</span>, a disaster reduces consumption by a fraction <span class="math inline">\(1-e^{-J}\)</span>.</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h3>Risk-free rate with disaster risk</h3>
+<p>Using <span class="math inline">\(R_f = 1/\mathbb E[M]\)</span> and independence of <span class="math inline">\(\varepsilon\)</span> and <span class="math inline">\(D\)</span>: <span class="math display">\[
+\mathbb E[M] = \beta\,\mathbb E\big[e^{-\gamma\Delta c}\big] = \beta\,e^{-\gamma\mu_c + \tfrac12\gamma^2\sigma_c^2}\,\underbrace{\big[(1-p) + p\,e^{\gamma J}\big]}_{&gt;1},
+\]</span> so <span class="math display">\[
+\boxed{\;\log R_f = -\log\beta + \gamma\mu_c - \tfrac12\gamma^2\sigma_c^2 \; -\; \log\big[(1-p) + p\,e^{\gamma J}\big].\;}
+\]</span> The last (negative) term lowers <span class="math inline">\(R_f\)</span>, helping resolve the risk‑free rate puzzle.</p>
+</section>
+<section class="slide level0">
+
+<h3>Portfolio choice and expected returns</h3>
+<p>For any asset return <span class="math inline">\(R\)</span>, <span class="math inline">\(\;1=\mathbb E[M R]\)</span> and the risk premium obeys <span class="math display">\[
+\mathbb E[R]-R_f = -\frac{\operatorname{Cov}(M,R)}{\mathbb E[M]}.
+\]</span> Disasters make <span class="math inline">\(M\)</span> spike when <span class="math inline">\(R\)</span> tends to be low (bad times), making <span class="math inline">\(\operatorname{Cov}(M,R)\)</span> more negative and thus raising required premia.</p>
+</section>
+<section class="slide level0">
+
+<h4>A toy linear exposure</h4>
+<p>Suppose <span class="math inline">\(\log R = a + k\,\Delta c + \eta\)</span>, with <span class="math inline">\(\eta\)</span> i.i.d. and independent of <span class="math inline">\(\Delta c\)</span>. Then (using the log-normal/jump approximation) <span class="math display">\[
+\mathbb E[\log R] \approx a + k\mu_c - k\,p\,J + \tfrac12 k^2\sigma_c^2,
+\quad
+\operatorname{Cov}(\log M,\log R) \approx -\gamma k\,\sigma_c^2 + k\,\gamma\,p\,J.
+\]</span> Higher <span class="math inline">\(p\)</span> or <span class="math inline">\(J\)</span> increases disaster-state covariance in magnitude, raising risk premia and lowering optimal risky demand in standard mean–variance intuition.</p>
+</section>
+<section class="slide level0">
+
+<div class="financial-concept">
+<p>Takeaway: rare disasters simultaneously reduce <span class="math inline">\(R_f\)</span> and increase equity premia, improving joint fit without extreme <span class="math inline">\(\gamma\)</span>.</p>
+</div>
 
 
 </section>
