@@ -14,27 +14,27 @@ website:
     left:
       - text: "Home"
         href: index.html
-      - text: "Course Days"
+      - text: "Topics"
         menu:
-          - text: "Day 0: Introduction"
+          - text: "Topic 0: Introduction"
             href: src/lectures/day0/lecture/index.qmd
-          - text: "Day 1: Fundamentals"
+          - text: "Topic 1: Fundamentals"
             href: src/lectures/day1/lecture/index.qmd
-          - text: "Day 2: Portfolio Choice"
+          - text: "Topic 2: Portfolio Choice"
             href: src/lectures/day2/lecture/index.qmd
-          - text: "Day 3: Dynamic Models"
+          - text: "Topic 3: Dynamic Models"
             href: src/lectures/day3/lecture/index.qmd
-          - text: "Day 4: Fixed Income"
+          - text: "Topic 4: Fixed Income"
             href: src/lectures/day4/lecture/index.qmd
-          - text: "Day 5: Market Frictions"
+          - text: "Topic 5: Market Frictions"
             href: src/lectures/day5/lecture/index.qmd
-          - text: "Day 6: Information"
+          - text: "Topic 6: Information"
             href: src/lectures/day6/lecture/index.qmd
-          - text: "Day 7: Long-Horizon"
+          - text: "Topic 7: Long-Horizon"
             href: src/lectures/day7/lecture/index.qmd
-          - text: "Day 8: Macro-Finance"
+          - text: "Topic 8: Macro-Finance"
             href: src/lectures/day8/lecture/index.qmd
-          - text: "Day 9: Behavioral Finance"
+          - text: "Topic 9: Behavioral Finance"
             href: src/lectures/day9/lecture/index.qmd
     right:
       - icon: github

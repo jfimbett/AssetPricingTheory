@@ -6,8 +6,8 @@
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.24">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.23">
 
   <meta name="author" content="Juan F. Imbet">
   <title>Asset Pricing Theory – Asset Pricing Theory - Binary Trees and Consumption Based Asset Pricing</title>
@@ -446,14 +446,26 @@ u_t \;=\; \frac{1}{1-\gamma}\, C_t^{\,1-\gamma}\,\Big(\frac{C_{t-1}}{C_t}\Big)^{
 </section>
 <section class="slide level0">
 
-<h2>Rare Disasters: A Simple Model</h2>
+<h2>Rare Disasters: A Simple Model based on Barro (2006)</h2>
+<ul>
+<li>Rietz (1988) — “The Equity Risk Premium: A Solution.” Journal of Monetary Economics</li>
+<li>Robert J. Barro (2006) — “Rare Disasters and Asset Markets in the Twentieth Century.” The Quarterly Journal of Economics,</li>
+</ul>
 <p>We add low-probability, high-severity consumption drops to study their impact on policy and prices.</p>
 <h3>Setup</h3>
 <ul>
-<li>CRRA agent with SDF <span class="math inline">\(M = \beta (C_1/C_0)^{-\gamma}\)</span>.</li>
-<li>Consumption growth with rare disasters (Barro-style): <span class="math display">\[
+<li><p>CRRA agent with SDF <span class="math inline">\(M = \beta (C_1/C_0)^{-\gamma}\)</span>.</p></li>
+<li><p>Consumption growth with rare disasters (Barro-style): <span class="math display">\[
 \Delta c = \mu_c + \sigma_c\,\varepsilon - J D,\quad \varepsilon\sim\mathcal N(0,1),\; D\sim\text{Bernoulli}(p),\; J&gt;0,\; p\ll 1.
-\]</span> With probability <span class="math inline">\(p\)</span>, a disaster reduces consumption by a fraction <span class="math inline">\(1-e^{-J}\)</span>.</li>
+\]</span> With probability <span class="math inline">\(p\)</span>, a disaster reduces consumption growth by <span class="math inline">\(J\)</span> and overall consumption by by a fraction <span class="math inline">\(1-e^{-J}\)</span>.</p></li>
+<li><p>Rare disasters can be thought as any large negative shock to consumption that is rare</p>
+<ul>
+<li>Famines</li>
+<li>Wars</li>
+<li>Pandemics</li>
+<li>Financial crises</li>
+<li>Natural disasters</li>
+</ul></li>
 </ul>
 </section>
 <section class="slide level0">
@@ -464,40 +476,83 @@ u_t \;=\; \frac{1}{1-\gamma}\, C_t^{\,1-\gamma}\,\Big(\frac{C_{t-1}}{C_t}\Big)^{
 <li>Endowment economy: aggregate consumption equals the endowment; investors trade Arrow-Debreu or assets with payoffs at <span class="math inline">\(t=1\)</span>.</li>
 <li>Information/timing: at <span class="math inline">\(t=0\)</span> choose portfolios, at <span class="math inline">\(t=1\)</span> shocks <span class="math inline">\((\varepsilon, D)\)</span> realize and payoffs are delivered.</li>
 <li>SDF from marginal rate of substitution: <span class="math display">\[\boxed{\;M \;=\; \beta\,\Big(\tfrac{C_1}{C_0}\Big)^{-\gamma}\;}.\]</span></li>
+<li>The exponential properties of the CRRA utility allows us to separate the normal and jump parts of <span class="math inline">\(\Delta c\)</span> in a tractable way.</li>
 </ul>
 </section>
 <section class="slide level0">
 
 <h3>Optimization and Euler equations</h3>
 <ul>
-<li>Representative agent chooses <span class="math inline">\((b,\{\theta_i\})\)</span> to maximize <span class="math inline">\(u(C_0)+\beta\,\mathbb E[u(C_1)]\)</span> subject to budget constraints.</li>
-<li>First-order conditions deliver, for each asset <span class="math inline">\(i\)</span> with gross return <span class="math inline">\(R_i\)</span>: <span class="math display">\[\boxed{\;1 = \mathbb E\big[M\,R_i\big] \;},\qquad \boxed{\;R_f^{-1} = \mathbb E[M]\;}.\]</span></li>
-<li>With CRRA and the disaster process above, all pricing results boil down to computing <span class="math inline">\(\mathbb E[\exp(\cdot)]\)</span> under a Normal–Bernoulli mixture.</li>
+<li>Since the SDF depends on aggregate consumption, and consumption growth is exogenous we don’t need to setup a maximization program. We just need to understand the risk free and risky asset dynamics.</li>
 </ul>
-</section>
-<section class="slide level0">
-
-<h3>Risk-free rate with disaster risk</h3>
-<p>Using <span class="math inline">\(R_f = 1/\mathbb E[M]\)</span> and independence of <span class="math inline">\(\varepsilon\)</span> and <span class="math inline">\(D\)</span>: <span class="math display">\[
-\begin{aligned}
-\mathbb E[M]
-&amp;= \beta\,\mathbb E\big[e^{-\gamma\Delta c}\big] \\
-&amp;= \beta\,\mathbb E\big[\exp\{-\gamma(\mu_c+\sigma_c\varepsilon - JD)\}\big] \\
-&amp;= \beta\,e^{-\gamma\mu_c}\,\underbrace{\mathbb E\big[e^{-\gamma\sigma_c\varepsilon}\big]}_{\exp(\tfrac12\gamma^2\sigma_c^2)}\;\underbrace{\mathbb E\big[e^{\gamma J D}\big]}_{(1-p)+p e^{\gamma J}} \\
-&amp;= \beta\,e^{-\gamma\mu_c + \tfrac12\gamma^2\sigma_c^2}\,\big[(1-p) + p\,e^{\gamma J}\big],
-\end{aligned}
-\]</span> so <span class="math display">\[
-\boxed{\;\log R_f = -\log\beta + \gamma\mu_c - \tfrac12\gamma^2\sigma_c^2 \; -\; \log\big[(1-p) + p\,e^{\gamma J}\big].\;}
-\]</span> The last (negative) term lowers <span class="math inline">\(R_f\)</span>, helping resolve the risk‑free rate puzzle.</p>
+<p><span class="math display">\[
+\begin{align}
+\mathbb{E}[M] &amp;= \mathbb{E}[\beta \Big( \frac{C_1}{C_0} \Big)^{-\gamma}] \\
+&amp;= \mathbb{E}[\beta e^{-\gamma \Delta c}] \\
+&amp;= \beta \mathbb{E}[e^{-\gamma(\mu_c + \sigma_c \varepsilon - J D)}] \\
+&amp;= \beta e^{-\gamma \mu_c} \mathbb{E}[e^{-\gamma \sigma_c \varepsilon}] \mathbb{E}[e^{\gamma J D}] \text{  Independence}\\
+&amp;= \beta e^{-\gamma \mu_c + \frac{1}{2} \gamma^2 \sigma_c^2} \big[(1-p) + p e^{\gamma J}\big]
+\end{align}
+\]</span> If <span class="math inline">\(R_f = 1/\mathbb{E}[M]\)</span> then we can compute the risk free rate in logs as <span class="math display">\[
+\log R_f = r_f = -\log\beta + \gamma\mu_c - \tfrac12\gamma^2\sigma_c^2 - \log\big[(1-p) + p\,e^{\gamma J}\big].
+\]</span></p>
+<p>A reasonable <span class="math inline">\(p\)</span> and large consumption drop <span class="math inline">\(J\)</span> can generate a lower risk free rate.</p>
 </section>
 <section class="slide level0">
 
 <h3>Pricing assets with disaster exposure</h3>
 <ul>
+<li>To study risk premia we need to model how returns and consumption growth are related.</li>
 <li>Consider an asset with log return <span class="math inline">\(r \equiv \log R\)</span> that loads linearly on consumption growth: <span class="math display">\[\boxed{\; r = a + k\,\Delta c + \eta,\;\; \eta\perp (\varepsilon,D),\; \eta\sim\mathcal N(0, s^2).\;}\]</span> The parameter <span class="math inline">\(k\)</span> captures exposure to consumption risk and to disasters through <span class="math inline">\(\Delta c\)</span>.</li>
-<li>Pricing condition in logs uses the Normal–Bernoulli mixture: <span class="math display">\[
-1 = \mathbb E[e^{\log M + r}]
-= e^{\log\beta + a + (k-\gamma)\mu_c}\,\underbrace{\mathbb E\big[e^{(k-\gamma)\sigma_c\varepsilon + \eta}\big]}_{\exp(\tfrac12[(k-\gamma)^2\sigma_c^2 + s^2])}\;\underbrace{\mathbb E\big[e^{-(k-\gamma)J D}\big]}_{(1-p)+p\,e^{-(k-\gamma)J}}.
+<li>Pricing condition in logs uses the Normal–Bernoulli mixture: $$ <span class="math display">\[\begin{align*}
+1 &amp;= \mathbb{E}[M R] = \mathbb{E}\!\big[e^{\log M + \log R}\big]
+    = \mathbb{E}\!\big[e^{m + r}\big] \\[4pt]
+&amp; \text{with } m = \log M = \log\beta - \gamma \Delta c,\quad
+    r = a + k \Delta c + \eta \\[4pt]
+m + r &amp;= (\log\beta - \gamma \Delta c) + (a + k \Delta c + \eta)
+    = \log\beta + a + (k-\gamma)\Delta c + \eta \\[4pt]
+\Delta c &amp;= \mu_c + \sigma_c \varepsilon - J D \\[4pt]
+\Rightarrow\quad
+m + r &amp;= \log\beta + a + (k-\gamma)(\mu_c + \sigma_c \varepsilon - J D) + \eta \\[4pt]
+&amp;= \underbrace{\log\beta + a + (k-\gamma)\mu_c}_{\text{constant}}
+   \;+\; (k-\gamma)\sigma_c \varepsilon
+   \;-\; (k-\gamma)J D
+   \;+\; \eta \\[6pt]
+\end{align*}\]</span></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h3>Pricing assets with disaster exposure (cont’d)</h3>
+<p><span class="math display">\[
+\begin{align*}
+\text{Independence } &amp;(\varepsilon, D, \eta) \ \Longrightarrow \
+\mathbb{E}\!\big[e^{m+r}\big]
+   = e^{\log\beta + a + (k-\gamma)\mu_c}
+     \;\mathbb{E}\!\big[e^{(k-\gamma)\sigma_c \varepsilon + \eta}\big]
+     \;\mathbb{E}\!\big[e^{-(k-\gamma)J D}\big] \\[6pt]
+\text{Normal part: } &amp; (k-\gamma)\sigma_c \varepsilon + \eta
+   \sim \mathcal N\!\Big(0,\ (k-\gamma)^2\sigma_c^2 + s^2\Big) \\[4pt]
+\Rightarrow\quad
+\mathbb{E}\!\big[e^{(k-\gamma)\sigma_c \varepsilon + \eta}\big]
+  &amp;= \exp\!\Big(\tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]\Big) \\[6pt]
+\text{Bernoulli part: }&amp;
+\mathbb{E}\!\big[e^{-(k-\gamma)J D}\big]
+  = (1-p)\,e^{0} + p\,e^{-(k-\gamma)J}
+  = (1-p)+p e^{-(k-\gamma)J} \\[6pt]
+\therefore\quad
+1 &amp;= e^{\log\beta + a + (k-\gamma)\mu_c}
+      \exp\!\Big(\tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]\Big)
+      \big[(1-p)+p e^{-(k-\gamma)J}\big] \\[8pt]
+0 &amp;= \log\beta + a + (k-\gamma)\mu_c
+      + \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
+      + \log\big[(1-p)+p e^{-(k-\gamma)J}\big] \\[8pt]
+\Longrightarrow\quad
+a &amp;= -\log\beta
+     -(k-\gamma)\mu_c
+     - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
+     - \log\big[(1-p)+p e^{-(k-\gamma)J}\big].
+\end{align*}
 \]</span> Taking logs of both sides (RHS is positive) and rearranging to isolate <span class="math inline">\(a\)</span>: <span class="math display">\[
 \begin{aligned}
 0
@@ -512,60 +567,65 @@ a
 \boxed{\; a
 = -\log\beta -(k-\gamma)\mu_c - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
   - \log\big[(1-p)+p\,e^{-(k-\gamma)J}\big].\;}
-\]</span> Why this is needed: <span class="math inline">\(a\)</span> is not free once exposure <span class="math inline">\(k\)</span> and the distributional parameters are fixed. The Euler equation <span class="math inline">\(1=\mathbb E[MR]\)</span> pins the unconditional level of returns so the asset is correctly priced by the SDF; otherwise we would violate no-arbitrage.</li>
-<li>Expected log return and comparison to <span class="math inline">\(\log R_f\)</span> then follow directly.</li>
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Risk Premium under Rare Disasters</h2>
+<p>We now subtract the (log) risk‑free rate <span class="math inline">\(r_f = \log R_f\)</span> from the expected (log) return to expose parameter effects on the risk premium.</p>
+<h3>Expected log return</h3>
+<p>With <span class="math inline">\(r = a + k\Delta c + \eta\)</span>, <span class="math inline">\(\Delta c = \mu_c + \sigma_c\varepsilon - J D\)</span>, <span class="math inline">\(\eta\sim\mathcal N(0,s^2)\)</span> and <span class="math inline">\(\mathbb E[\Delta c]=\mu_c - pJ\)</span>: <span class="math display">\[
+\begin{align*}
+\mathbb E[r]
+&amp;= a + k(\mu_c - pJ) + \tfrac12 k^2\sigma_c^2 + \tfrac12 s^2 \\
+&amp;= -\log\beta -(k-\gamma)\mu_c - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big] - \log\big[(1-p)+p e^{-(k-\gamma)J}\big] \\
+&amp;\qquad + k(\mu_c - pJ) + \tfrac12 k^2\sigma_c^2 + \tfrac12 s^2 \\
+&amp;= -\log\beta + \gamma\mu_c + k\gamma\sigma_c^2 - k p J - \log\big[(1-p)+p e^{-(k-\gamma)J}\big].
+\end{align*}
+\]</span></p>
+<h3>Log risk‑free rate</h3>
+<p>Previously derived: <span class="math display">\[
+r_f = -\log\beta + \gamma\mu_c - \tfrac12\gamma^2\sigma_c^2 - \log\big[(1-p)+p e^{\gamma J}\big].
+\]</span></p>
+<h3>Exact log risk premium</h3>
+<p>Subtracting yields <span class="math display">\[
+\boxed{\;\mathbb E[r]-r_f = k\gamma\sigma_c^2 - k p J + \log\frac{(1-p)+p e^{\gamma J}}{(1-p)+p e^{-(k-\gamma)J}}\; }.
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Rare / small-disaster approximation</h2>
+<p>If <span class="math inline">\(p\)</span> is small, <span class="math inline">\(\log[(1-p)+p e^{\alpha}] \approx p(e^{\alpha}-1)\)</span> so <span class="math display">\[
+\mathbb E[r]-r_f \approx k\gamma\sigma_c^2 - k p J + p\big(e^{\gamma J} - e^{-(k-\gamma)J}\big).
+\]</span></p>
+<p>Approximation detail (why <span class="math inline">\(\log[(1-p)+p e^{\alpha}] \approx p(e^{\alpha}-1)\)</span>):</p>
+<p><span class="math display">\[
+\log\big[(1-p)+p e^{\alpha}\big]
+= \log\big(1 - p + p e^{\alpha}\big)
+= \log\Big(1 + p(e^{\alpha}-1)\Big).
+\]</span> Let <span class="math inline">\(x \equiv p(e^{\alpha}-1)\)</span>. For fixed <span class="math inline">\(\alpha\)</span>, small <span class="math inline">\(p\)</span> implies <span class="math inline">\(|x|\)</span> small. Use the Taylor series <span class="math inline">\(\log(1+x) = x - \tfrac12 x^2 + \tfrac13 x^3 - \cdots\)</span> to obtain the first-order (in <span class="math inline">\(p\)</span>) approximation: <span class="math display">\[
+\log\big[(1-p)+p e^{\alpha}\big] \approx p(e^{\alpha}-1), \qquad \text{error } = \mathcal O\!\big(p^2 (e^{\alpha}-1)^2\big).
+\]</span> If additionally <span class="math inline">\(\alpha\)</span> is small, <span class="math inline">\(e^{\alpha}-1 \approx \alpha + \tfrac12\alpha^2\)</span>, yielding <span class="math display">\[
+\log\big[(1-p)+p e^{\alpha}\big] \approx p\alpha + \tfrac12 p\alpha^2.
+\]</span> Retaining only the linear term in <span class="math inline">\(p\)</span> (and optionally the leading terms in <span class="math inline">\(\alpha\)</span>) delivers the expression used above.</p>
+</section>
+<section class="slide level0">
+
+<h3>Parameter sensitivities</h3>
+<ul>
+<li>Diffusive term <span class="math inline">\(k\gamma\sigma_c^2\)</span>: higher exposure <span class="math inline">\(k\)</span>, risk aversion <span class="math inline">\(\gamma\)</span>, or volatility <span class="math inline">\(\sigma_c\)</span> raise premia.</li>
+<li>Disaster drag <span class="math inline">\(-k p J\)</span>: procyclical assets (<span class="math inline">\(k&gt;0\)</span>) lose more in disasters, requiring higher compensation.</li>
+<li>Jump convexity <span class="math inline">\(\log\frac{(1-p)+p e^{\gamma J}}{(1-p)+p e^{-(k-\gamma)J}}\)</span>: amplifies premia when <span class="math inline">\((p,J)\)</span> or the mismatch <span class="math inline">\((k-\gamma)\)</span> grow.</li>
+<li>Calibration leverage: <span class="math inline">\((p,J)\)</span> allow matching large premia without implausibly large <span class="math inline">\(\gamma\)</span>; small <span class="math inline">\(p\)</span> with sizable <span class="math inline">\(J\)</span> can materially boost premia.</li>
+<li>Cross-section: varying <span class="math inline">\(k\)</span> maps differential disaster and diffusion exposure into heterogeneous premia; hedging assets (low/negative <span class="math inline">\(k\)</span>) earn low premia.</li>
 </ul>
 </section>
 <section class="slide level0">
 
-<h3>Lognormal–jump approximation: how it works</h3>
+<h2>Risk Premia under Habit</h2>
+<h3>Campbell–Cochrane Habit: Setup and SDF</h3>
 <ul>
-<li>Key building block: for <span class="math inline">\(D\sim\text{Bernoulli}(p)\)</span>, <span class="math inline">\(\;\mathbb E[e^{t(-J D)}] = (1-p) + p\,e^{-tJ}\)</span>.</li>
-<li>Cumulant (log-MGF) decomposition for <span class="math inline">\(x\equiv\log M\)</span> and <span class="math inline">\(r\equiv\log R\)</span>: <span class="math display">\[
-\log \mathbb E[e^{x+r}] = \underbrace{\mathbb E[x+r]}_{\text{mean}} + \tfrac12\underbrace{\operatorname{Var}(x+r)}_{\text{Gaussian part}} \; +\; \underbrace{\log\big[(1-p)+p\,e^{\Delta_t}\big]}_{\text{jump correction}},
-\]</span> where <span class="math inline">\(\Delta_t\)</span> is the coefficient on <span class="math inline">\(D\)</span> inside <span class="math inline">\((x+r)\)</span> evaluated at <span class="math inline">\(t=1\)</span>; here <span class="math inline">\(\Delta_1 = -(k-\gamma)J\)</span>.</li>
-<li>Small-<span class="math inline">\(p\)</span> or small-<span class="math inline">\(J\)</span> expansion: <span class="math display">\[
-\log\big[(1-p)+p\,e^{\Delta}\big]
-= \log\big(1 + p\,(e^{\Delta}-1)\big)
-\approx p\,(e^{\Delta}-1)\;\;\text{(FO in $p$)} \\
-e^{\Delta} \approx 1 + \Delta + \tfrac12\Delta^2\;\;\text{(SO in $\Delta$ near 0)} \\
-\Rightarrow\; \log\big[(1-p)+p\,e^{\Delta}\big] \approx p\,(\Delta + \tfrac12\Delta^2)\;\;\text{(neglecting $\mathcal O(p^2)$ terms)}.
-\]</span> This yields “lognormal + jump correction” formulas that are accurate when disasters are rare and/or modest in size.</li>
-</ul>
-</section>
-<section class="slide level0">
-
-<h3>Toy linear exposure: step-by-step derivations</h3>
-<p>With <span class="math inline">\(r=a+k\Delta c+\eta\)</span> and <span class="math inline">\(x=\log M=\log\beta-\gamma\Delta c\)</span>:</p>
-<ol type="1">
-<li>Moments under the Normal–Bernoulli mixture (purely statistical):</li>
-</ol>
-<ul>
-<li><span class="math inline">\(\mathbb E[r] = a + k\mu_c - k p J + \tfrac12 k^2\sigma_c^2 + \tfrac12 s^2\)</span>.</li>
-<li><span class="math inline">\(\operatorname{Cov}(x,r) = -\gamma k\,\sigma_c^2 + \gamma k\,p\,J\)</span>.</li>
-</ul>
-<ol start="2" type="1">
-<li><p>Pricing via <span class="math inline">\(1=\mathbb E[e^{x+r}]\)</span> pins down <span class="math inline">\(a\)</span> (see box above). Subtracting <span class="math inline">\(\log R_f\)</span> gives an approximate expected excess log return: <span class="math display">\[
-\mathbb E[r] - \log R_f
-\;\approx\; -\operatorname{Cov}(x,r) \; - \tfrac12\operatorname{Var}(r)
-\; +\; \underbrace{p\Big(e^{-(k-\gamma)J}-e^{\gamma J}\Big)}_{\text{jump premium adj.}}\;\text{(small)}.
-\]</span> Approximation detail: expand the jump terms using <span class="math inline">\(\log[(1-p)+p e^{\alpha}] \approx p\alpha\)</span> for small <span class="math inline">\(p\)</span> (FO in <span class="math inline">\(p\)</span>) and, if needed, <span class="math inline">\(e^{\alpha}\approx 1+\alpha+\tfrac12\alpha^2\)</span> (SO in <span class="math inline">\(\alpha\)</span>). Higher-order <span class="math inline">\(\mathcal O(p^2)\)</span> terms are dropped. Keeping leading terms delivers the intuition: larger <span class="math inline">\(p\)</span> or <span class="math inline">\(J\)</span> increases the disaster-state covariance in magnitude, raising risk premia.</p></li>
-<li><p>Special case: an equity claim with <span class="math inline">\(k&gt;0\)</span> (procyclical). Then disasters both lower <span class="math inline">\(\log R_f\)</span> and increase required premia, moving the model toward the data.</p></li>
-</ol>
-</section>
-<section class="slide level0">
-
-<h3>Notes on accuracy and limits</h3>
-<ul>
-<li>Approximations rely on (i) Gaussian core for <span class="math inline">\(\Delta c\)</span>, (ii) independence across normal and jump parts, and (iii) rare/modest disasters when using Taylor expansions.</li>
-<li>For larger <span class="math inline">\(p\)</span> or <span class="math inline">\(J\)</span>, prefer exact mixture formulas (those with the explicit <span class="math inline">\(\log[(1-p)+p e^{\cdot}]\)</span> terms) rather than Taylor series.</li>
-<li>Exposure <span class="math inline">\(k\)</span> can be generalized (multiple factors, leverage); the same mixture logic applies asset-by-asset.</li>
-</ul>
-</section>
-<section class="slide level0">
-
-<h2>Campbell–Cochrane Habit: Setup and SDF</h2>
-<ul>
+<li>Campbell and Cochrane (1999) — “By Force of Habit: A Consumption-Based Explanation of Aggregate Stock Market Behavior.” Journal of Political Economy</li>
 <li>Preferences feature external habit <span class="math inline">\(X_t\)</span> and surplus consumption ratio <span class="math inline">\(S_t \equiv \dfrac{C_t - X_t}{C_t} \in (0,1)\)</span>.</li>
 <li>Utility is time-separable CRRA over surplus consumption: <span class="math inline">\(u(C_t, X_t) = \dfrac{(C_t - X_t)^{1-\gamma}}{1-\gamma} = \dfrac{\big(S_t C_t\big)^{1-\gamma}}{1-\gamma}\)</span>, with <span class="math inline">\(\gamma&gt;0\)</span>.</li>
 <li>Intertemporal marginal rate of substitution (one-period SDF): <span class="math display">\[M_{t+1} = \beta\,\left(\frac{S_{t+1} C_{t+1}}{S_t C_t}\right)^{-\gamma} = \beta\,\left(\frac{C_{t+1}}{C_t}\right)^{-\gamma}\,\left(\frac{S_{t+1}}{S_t}\right)^{-\gamma}.\]</span></li>
@@ -577,9 +637,9 @@ e^{\Delta} \approx 1 + \Delta + \tfrac12\Delta^2\;\;\text{(SO in $\Delta$ near 0
 
 <h2>Habit Dynamics and Surplus Ratio Law of Motion</h2>
 <ul>
-<li>Let consumption growth be i.i.d. lognormal: <span class="math inline">\(\Delta c_{t+1} = g + \sigma_c \varepsilon_{t+1}\)</span>, <span class="math inline">\(\varepsilon\sim \mathcal N(0,1)\)</span>.</li>
-<li>Surplus ratio follows: <span class="math inline">\(\log S_{t+1} - \log S_t = \phi\,(\bar s - \log S_t) + \lambda\,\sigma_c\,\varepsilon_{t+1}\)</span> (mean reversion plus sensitivity), with <span class="math inline">\(\phi\in(0,1)\)</span>.</li>
-<li>In levels, an equivalent approximation: <span class="math inline">\(S_{t+1} = S_t^{1-\phi}\,e^{\phi \bar s}\,\exp\{\lambda\,\sigma_c\,\varepsilon_{t+1}\}\)</span>.</li>
+<li>Let consumption growth be i.i.d. normal: <span class="math inline">\(\Delta c_{t+1} = g + \sigma_c \varepsilon_{t+1}\)</span>, <span class="math inline">\(\varepsilon\sim \mathcal N(0,1)\)</span>.</li>
+<li>Surplus ratio follows: <span class="math inline">\(\log S_{t+1} - \log S_t = \Delta s_{t+1} = \phi\,(\bar s - s_t) + \lambda\,\sigma_c\,\varepsilon_{t+1}\)</span> (mean reversion plus sensitivity), with <span class="math inline">\(\phi\in(0,1)\)</span>.</li>
+<li>In levels, an equivalent approximation: <span class="math inline">\(S_{t+1} = S_t^{1-\phi}\,e^{\phi \bar s + \lambda \sigma_c \varepsilon_{t+1}}\)</span>.</li>
 <li>State dependence: when <span class="math inline">\(S_t\)</span> is low (habit close to consumption), marginal utility is very sensitive; risk premia rise in recessions.</li>
 <li>Calibration pins <span class="math inline">\(\lambda\)</span> to damp the risk-free rate volatility: set <span class="math inline">\(\lambda\)</span> to offset the consumption term in <span class="math inline">\(\log R_{f,t}\)</span> (see next slide).</li>
 </ul>
@@ -590,22 +650,20 @@ e^{\Delta} \approx 1 + \Delta + \tfrac12\Delta^2\;\;\text{(SO in $\Delta$ near 0
 <ul>
 <li>Definition: <span class="math inline">\(R_{f,t}^{-1} = \mathbb E_t[M_{t+1}]\)</span>.</li>
 <li>Use lognormality conditional on <span class="math inline">\(S_t\)</span>: write <span class="math inline">\(x_{t+1} \equiv \log M_{t+1} = \log\beta - \gamma\,\Delta c_{t+1} - \gamma\,\Delta s_{t+1}\)</span>.</li>
-<li>With <span class="math inline">\(\Delta c_{t+1} = g + \sigma_c\varepsilon_{t+1}\)</span> and <span class="math inline">\(\Delta s_{t+1} = \phi(\bar s - \log S_t) + \lambda\sigma_c\varepsilon_{t+1}\)</span>: <span class="math display">\[x_{t+1} = \log\beta - \gamma\,g - \gamma\,\phi(\bar s - \log S_t) - \gamma(1+\lambda)\sigma_c\,\varepsilon_{t+1}.\]</span></li>
-<li>Then <span class="math inline">\(\mathbb E_t[M_{t+1}] = \exp\big(\mathbb E_t[x_{t+1}] + \tfrac12\operatorname{Var}_t(x_{t+1})\big)\)</span> gives <span class="math display">\[\log R_{f,t} = -\log\beta + \gamma g + \gamma\,\phi(\bar s - \log S_t) - \tfrac12\gamma^2(1+\lambda)^2\sigma_c^2.\]</span></li>
-<li>Smooth <span class="math inline">\(R_f\)</span>: choose <span class="math inline">\(\lambda\)</span> so <span class="math inline">\(\gamma\,\phi(\bar s - \log S_t)\)</span> variation is minimized; in CC (1999) <span class="math inline">\(\lambda\)</span> is set to cancel shocks so <span class="math inline">\(R_{f,t}\)</span> is nearly constant.</li>
-<li>Approximation detail: conditional lognormality gives <span class="math inline">\(\log R_{f,t} = -\log\mathbb E_t[M_{t+1}] \approx -\mathbb E_t[\log M_{t+1}] - \tfrac12\operatorname{Var}_t(\log M_{t+1})\)</span>; with <span class="math inline">\(\log M_{t+1}\)</span> affine in <span class="math inline">\(\varepsilon_{t+1}\)</span>, this is exact.</li>
+<li>With <span class="math inline">\(\Delta c_{t+1} = g + \sigma_c\varepsilon_{t+1}\)</span> and <span class="math inline">\(\Delta s_{t+1} = \phi(\bar s - \log S_t) + \lambda\sigma_c\varepsilon_{t+1}\)</span>: <span class="math display">\[x_{t+1} = \log\beta - \gamma\,g - \gamma\,\phi(\bar s - s_t) - \gamma(1+\lambda)\sigma_c\,\varepsilon_{t+1}.\]</span></li>
+<li>Then <span class="math inline">\(\mathbb E_t[M_{t+1}] = \exp\big(\mathbb E_t[x_{t+1}] + \tfrac12\operatorname{Var}_t(x_{t+1})\big)\)</span> gives <span class="math display">\[\log R_{f,t} = -\log\beta + \gamma g + \gamma\,\phi(\bar s - s_t) - \tfrac12\gamma^2(1+\lambda)^2\sigma_c^2.\]</span></li>
+<li>Smooth <span class="math inline">\(R_f\)</span>: choose <span class="math inline">\(\lambda\)</span> so <span class="math inline">\(\gamma\,\phi(\bar s - s_t)\)</span> variation is minimized; in CC (1999) <span class="math inline">\(\lambda\)</span> is set to cancel shocks so <span class="math inline">\(R_{f,t}\)</span> is nearly constant.</li>
 </ul>
 </section>
 <section class="slide level0">
 
-<h2>Risk Premia and Time-Varying Price of Risk</h2>
+<h2>Risk Premia and Time-Varying Price of Risk (General Case)</h2>
 <ul>
+<li>Derivation (log form): start from <span class="math inline">\(1 = \mathbb E_t[M_{t+1} R_{i,t+1}]\)</span>. Write <span class="math inline">\(m_{t+1}=\log M_{t+1}\)</span> and <span class="math inline">\(r_{i,t+1}=\log R_{i,t+1}\)</span>. Then <span class="math display">\[0 = \log \mathbb E_t\big[e^{m_{t+1}+r_{i,t+1}}\big].\]</span> Apply a second-order (lognormal) approximation (exact if <span class="math inline">\(m_{t+1}+r_{i,t+1}\)</span> is conditionally normal): <span class="math display">\[0 \approx \mathbb E_t[m_{t+1}+r_{i,t+1}] + \tfrac12\operatorname{Var}_t(m_{t+1}+r_{i,t+1}).\]</span> Rearranging for the conditional expected log return gives <span class="math display">\[\mathbb E_t[r_{i,t+1}] \approx -\mathbb E_t[m_{t+1}] - \tfrac12\operatorname{Var}_t(m_{t+1}) - \tfrac12\operatorname{Var}_t(r_{i,t+1}) - \operatorname{Cov}_t(m_{t+1}, r_{i,t+1}).\]</span> Using <span class="math inline">\(\log R_{f,t} = -\log \mathbb E_t[M_{t+1}] \approx -\mathbb E_t[m_{t+1}] - \tfrac12\operatorname{Var}_t(m_{t+1})\)</span> we substitute and obtain the slide’s relation.</li>
 <li>Pricing condition: <span class="math inline">\(1 = \mathbb E_t[M_{t+1} R_{i,t+1}]\)</span> and in logs <span class="math inline">\(\mathbb E_t[r_{i,t+1}] \approx \log R_{f,t} - \operatorname{Cov}_t(\log M_{t+1}, r_{i,t+1}) - \tfrac12\operatorname{Var}_t(r_{i,t+1})\)</span>.</li>
 <li>Let asset <span class="math inline">\(i\)</span> have log return <span class="math inline">\(r_{i,t+1} = \mu_i + b_i\,\sigma_c\,\varepsilon_{t+1} + \eta_{i,t+1}\)</span> with <span class="math inline">\(\eta\)</span> idiosyncratic and independent.</li>
 <li>Instantaneous market price of risk (per unit shock): <span class="math inline">\(\Lambda_t \equiv -\operatorname{Cov}_t(\log M_{t+1}, \varepsilon_{t+1}) = \gamma(1+\lambda)\sigma_c\)</span>.</li>
-<li>State dependence enters through <span class="math inline">\(S_t\)</span> if <span class="math inline">\(\lambda\)</span> is itself a function of <span class="math inline">\(S_t\)</span>; in CC, <span class="math inline">\(\lambda(S_t)\)</span> rises as <span class="math inline">\(S_t\)</span> falls, making <span class="math inline">\(\Lambda_t\)</span> countercyclical.</li>
-<li>Expected excess log return: <span class="math inline">\(\mathbb E_t[r_{i,t+1}] - \log R_{f,t} \approx b_i\,\Lambda_t\,\sigma_c - \tfrac12\operatorname{Var}_t(r_{i,t+1})\)</span>, increasing when <span class="math inline">\(S_t\)</span> is low.</li>
-<li>Approximation detail: from <span class="math inline">\(\log\mathbb E_t[e^{\log M_{t+1}+r_{i,t+1}}]=0\)</span>, use the second-order expansion and the linear shock representation for both terms; higher-order covariances are neglected.</li>
+<li>Expected excess log return: with <span class="math inline">\(\operatorname{Var}_t(r_{i,t+1}) = b_i^2\sigma_c^2 + s_i^2\)</span> (define <span class="math inline">\(s_i^2\equiv\operatorname{Var}(\eta_{i,t+1})\)</span>), <span class="math display">\[\mathbb E_t[r_{i,t+1}] - \log R_{f,t} \approx b_i\,\Lambda_t\,\sigma_c - \tfrac12\big(b_i^2\sigma_c^2 + s_i^2\big).\]</span> Equivalently, <span class="math display">\[\mathbb E_t[r_{i,t+1}] \approx \log R_{f,t} + b_i\gamma(1+\lambda)\sigma_c^2 - \tfrac12 b_i^2\sigma_c^2 - \tfrac12 s_i^2.\]</span></li>
 </ul>
 </section>
 <section class="slide level0">

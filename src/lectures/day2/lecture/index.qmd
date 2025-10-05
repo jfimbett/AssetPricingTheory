@@ -379,7 +379,12 @@ Risk premia (levels or logs) follow the usual covariance rules with $\log M$; ha
 
 ---
 
-## Rare Disasters: A Simple Model
+## Rare Disasters: A Simple Model based on Barro (2006)
+
+- Rietz (1988) — “The Equity Risk Premium: A Solution.”
+Journal of Monetary Economics
+- Robert J. Barro (2006) — “Rare Disasters and Asset Markets in the Twentieth Century.”
+The Quarterly Journal of Economics,
 
 We add low-probability, high-severity consumption drops to study their impact on policy and prices.
 
@@ -390,7 +395,16 @@ We add low-probability, high-severity consumption drops to study their impact on
   $$
   \Delta c = \mu_c + \sigma_c\,\varepsilon - J D,\quad \varepsilon\sim\mathcal N(0,1),\; D\sim\text{Bernoulli}(p),\; J>0,\; p\ll 1.
   $$
-  With probability $p$, a disaster reduces consumption by a fraction $1-e^{-J}$.
+  With probability $p$, a disaster reduces consumption growth by $J$ and overall consumption by
+  by a fraction $1-e^{-J}$.
+
+- Rare disasters can be thought as any large negative shock to consumption that is rare
+  - Famines
+  - Wars
+  - Pandemics
+  - Financial crises
+  - Natural disasters
+
 
 ---
 
@@ -401,122 +415,182 @@ We add low-probability, high-severity consumption drops to study their impact on
 - Information/timing: at $t=0$ choose portfolios, at $t=1$ shocks $(\varepsilon, D)$ realize and payoffs are delivered.
 - SDF from marginal rate of substitution:
   $$\boxed{\;M \;=\; \beta\,\Big(\tfrac{C_1}{C_0}\Big)^{-\gamma}\;}.$$
+- The exponential properties of the CRRA utility allows us to separate the normal and jump parts of $\Delta c$ in a tractable way.
 
 ---
 
 ### Optimization and Euler equations
 
-- Representative agent chooses $(b,\{\theta_i\})$ to maximize $u(C_0)+\beta\,\mathbb E[u(C_1)]$ subject to budget constraints.
-- First-order conditions deliver, for each asset $i$ with gross return $R_i$:
-  $$\boxed{\;1 = \mathbb E\big[M\,R_i\big] \;},\qquad \boxed{\;R_f^{-1} = \mathbb E[M]\;}.$$
-- With CRRA and the disaster process above, all pricing results boil down to computing $\mathbb E[\exp(\cdot)]$ under a Normal–Bernoulli mixture.
+- Since the SDF depends on aggregate consumption, and consumption growth is exogenous we don't need to setup a maximization program. We just need to understand the risk free and risky asset dynamics. 
 
----
+$$
+\begin{align}
+\mathbb{E}[M] &= \mathbb{E}[\beta \Big( \frac{C_1}{C_0} \Big)^{-\gamma}] \\
+&= \mathbb{E}[\beta e^{-\gamma \Delta c}] \\
+&= \beta \mathbb{E}[e^{-\gamma(\mu_c + \sigma_c \varepsilon - J D)}] \\
+&= \beta e^{-\gamma \mu_c} \mathbb{E}[e^{-\gamma \sigma_c \varepsilon}] \mathbb{E}[e^{\gamma J D}] \text{  Independence}\\
+&= \beta e^{-\gamma \mu_c + \frac{1}{2} \gamma^2 \sigma_c^2} \big[(1-p) + p e^{\gamma J}\big]
+\end{align}
+$$
+If $R_f = 1/\mathbb{E}[M]$ then we can compute the risk free rate in logs as 
+$$
+\log R_f = r_f = -\log\beta + \gamma\mu_c - \tfrac12\gamma^2\sigma_c^2 - \log\big[(1-p) + p\,e^{\gamma J}\big].
+$$
 
-### Risk-free rate with disaster risk
-
-Using $R_f = 1/\mathbb E[M]$ and independence of $\varepsilon$ and $D$:
-$$
-\begin{aligned}
-\mathbb E[M]
-&= \beta\,\mathbb E\big[e^{-\gamma\Delta c}\big] \\
-&= \beta\,\mathbb E\big[\exp\{-\gamma(\mu_c+\sigma_c\varepsilon - JD)\}\big] \\
-&= \beta\,e^{-\gamma\mu_c}\,\underbrace{\mathbb E\big[e^{-\gamma\sigma_c\varepsilon}\big]}_{\exp(\tfrac12\gamma^2\sigma_c^2)}\;\underbrace{\mathbb E\big[e^{\gamma J D}\big]}_{(1-p)+p e^{\gamma J}} \\
-&= \beta\,e^{-\gamma\mu_c + \tfrac12\gamma^2\sigma_c^2}\,\big[(1-p) + p\,e^{\gamma J}\big],
-\end{aligned}
-$$
-so
-$$
-\boxed{\;\log R_f = -\log\beta + \gamma\mu_c - \tfrac12\gamma^2\sigma_c^2 \; -\; \log\big[(1-p) + p\,e^{\gamma J}\big].\;}
-$$
-The last (negative) term lowers $R_f$, helping resolve the risk‑free rate puzzle.
+A reasonable $p$ and large consumption drop $J$ can generate a lower risk free rate.
 
 ---
 
 ### Pricing assets with disaster exposure
 
+- To study risk premia we need to model how returns and consumption growth are related.
 - Consider an asset with log return $r \equiv \log R$ that loads linearly on consumption growth:
   $$\boxed{\; r = a + k\,\Delta c + \eta,\;\; \eta\perp (\varepsilon,D),\; \eta\sim\mathcal N(0, s^2).\;}$$
   The parameter $k$ captures exposure to consumption risk and to disasters through $\Delta c$.
 - Pricing condition in logs uses the Normal–Bernoulli mixture:
   $$
-  1 = \mathbb E[e^{\log M + r}]
-  = e^{\log\beta + a + (k-\gamma)\mu_c}\,\underbrace{\mathbb E\big[e^{(k-\gamma)\sigma_c\varepsilon + \eta}\big]}_{\exp(\tfrac12[(k-\gamma)^2\sigma_c^2 + s^2])}\;\underbrace{\mathbb E\big[e^{-(k-\gamma)J D}\big]}_{(1-p)+p\,e^{-(k-\gamma)J}}.
-  $$
-  Taking logs of both sides (RHS is positive) and rearranging to isolate $a$:
-  $$
-  \begin{aligned}
-  0
-  &= \log\beta + a + (k-\gamma)\mu_c + \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
-    + \log\big[(1-p)+p\,e^{-(k-\gamma)J}\big] \\
-  \Longrightarrow\quad
-  a
-  &= -\log\beta -(k-\gamma)\mu_c - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
-    - \log\big[(1-p)+p\,e^{-(k-\gamma)J}\big].
-  \end{aligned}
-  $$
-  Hence the pricing-implied intercept is
-  $$
-  \boxed{\; a
-  = -\log\beta -(k-\gamma)\mu_c - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
-    - \log\big[(1-p)+p\,e^{-(k-\gamma)J}\big].\;}
-  $$
-  Why this is needed: $a$ is not free once exposure $k$ and the distributional parameters are fixed. The Euler equation $1=\mathbb E[MR]$ pins the unconditional level of returns so the asset is correctly priced by the SDF; otherwise we would violate no-arbitrage.
-- Expected log return and comparison to $\log R_f$ then follow directly.
+  \begin{align*}
+1 &= \mathbb{E}[M R] = \mathbb{E}\!\big[e^{\log M + \log R}\big] 
+      = \mathbb{E}\!\big[e^{m + r}\big] \\[4pt]
+  & \text{with } m = \log M = \log\beta - \gamma \Delta c,\quad
+      r = a + k \Delta c + \eta \\[4pt]
+m + r &= (\log\beta - \gamma \Delta c) + (a + k \Delta c + \eta)
+      = \log\beta + a + (k-\gamma)\Delta c + \eta \\[4pt]
+\Delta c &= \mu_c + \sigma_c \varepsilon - J D \\[4pt]
+\Rightarrow\quad
+m + r &= \log\beta + a + (k-\gamma)(\mu_c + \sigma_c \varepsilon - J D) + \eta \\[4pt]
+  &= \underbrace{\log\beta + a + (k-\gamma)\mu_c}_{\text{constant}}
+     \;+\; (k-\gamma)\sigma_c \varepsilon
+     \;-\; (k-\gamma)J D
+     \;+\; \eta \\[6pt]
+\end{align*}
 
 ---
 
-### Lognormal–jump approximation: how it works
+### Pricing assets with disaster exposure (cont'd)
 
-- Key building block: for $D\sim\text{Bernoulli}(p)$, $\;\mathbb E[e^{t(-J D)}] = (1-p) + p\,e^{-tJ}$.
-- Cumulant (log-MGF) decomposition for $x\equiv\log M$ and $r\equiv\log R$:
-  $$
-  \log \mathbb E[e^{x+r}] = \underbrace{\mathbb E[x+r]}_{\text{mean}} + \tfrac12\underbrace{\operatorname{Var}(x+r)}_{\text{Gaussian part}} \; +\; \underbrace{\log\big[(1-p)+p\,e^{\Delta_t}\big]}_{\text{jump correction}},
-  $$
-  where $\Delta_t$ is the coefficient on $D$ inside $(x+r)$ evaluated at $t=1$; here $\Delta_1 = -(k-\gamma)J$.
-- Small-$p$ or small-$J$ expansion:
-  $$
-  \log\big[(1-p)+p\,e^{\Delta}\big]
-  = \log\big(1 + p\,(e^{\Delta}-1)\big)
-\approx p\,(e^{\Delta}-1)\;\;\text{(FO in $p$)} \\
-e^{\Delta} \approx 1 + \Delta + \tfrac12\Delta^2\;\;\text{(SO in $\Delta$ near 0)} \\
-\Rightarrow\; \log\big[(1-p)+p\,e^{\Delta}\big] \approx p\,(\Delta + \tfrac12\Delta^2)\;\;\text{(neglecting $\mathcal O(p^2)$ terms)}.
-  $$
-  This yields “lognormal + jump correction” formulas that are accurate when disasters are rare and/or modest in size.
-
----
-
-### Toy linear exposure: step-by-step derivations
-
-With $r=a+k\Delta c+\eta$ and $x=\log M=\log\beta-\gamma\Delta c$:
-
-1) Moments under the Normal–Bernoulli mixture (purely statistical):
-- $\mathbb E[r] = a + k\mu_c - k p J + \tfrac12 k^2\sigma_c^2 + \tfrac12 s^2$.
-- $\operatorname{Cov}(x,r) = -\gamma k\,\sigma_c^2 + \gamma k\,p\,J$.
-
-2) Pricing via $1=\mathbb E[e^{x+r}]$ pins down $a$ (see box above). Subtracting $\log R_f$ gives an approximate expected excess log return:
 $$
-\mathbb E[r] - \log R_f
-\;\approx\; -\operatorname{Cov}(x,r) \; - \tfrac12\operatorname{Var}(r)
-\; +\; \underbrace{p\Big(e^{-(k-\gamma)J}-e^{\gamma J}\Big)}_{\text{jump premium adj.}}\;\text{(small)}.
+\begin{align*}
+\text{Independence } &(\varepsilon, D, \eta) \ \Longrightarrow \ 
+\mathbb{E}\!\big[e^{m+r}\big]
+   = e^{\log\beta + a + (k-\gamma)\mu_c}
+     \;\mathbb{E}\!\big[e^{(k-\gamma)\sigma_c \varepsilon + \eta}\big]
+     \;\mathbb{E}\!\big[e^{-(k-\gamma)J D}\big] \\[6pt]
+\text{Normal part: } & (k-\gamma)\sigma_c \varepsilon + \eta 
+   \sim \mathcal N\!\Big(0,\ (k-\gamma)^2\sigma_c^2 + s^2\Big) \\[4pt]
+\Rightarrow\quad
+\mathbb{E}\!\big[e^{(k-\gamma)\sigma_c \varepsilon + \eta}\big]
+  &= \exp\!\Big(\tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]\Big) \\[6pt]
+\text{Bernoulli part: }&
+\mathbb{E}\!\big[e^{-(k-\gamma)J D}\big]
+  = (1-p)\,e^{0} + p\,e^{-(k-\gamma)J}
+  = (1-p)+p e^{-(k-\gamma)J} \\[6pt]
+\therefore\quad
+1 &= e^{\log\beta + a + (k-\gamma)\mu_c}
+      \exp\!\Big(\tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]\Big)
+      \big[(1-p)+p e^{-(k-\gamma)J}\big] \\[8pt]
+0 &= \log\beta + a + (k-\gamma)\mu_c
+      + \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
+      + \log\big[(1-p)+p e^{-(k-\gamma)J}\big] \\[8pt]
+\Longrightarrow\quad
+a &= -\log\beta
+     -(k-\gamma)\mu_c
+     - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
+     - \log\big[(1-p)+p e^{-(k-\gamma)J}\big].
+\end{align*}
 $$
-Approximation detail: expand the jump terms using $\log[(1-p)+p e^{\alpha}] \approx p\alpha$ for small $p$ (FO in $p$) and, if needed, $e^{\alpha}\approx 1+\alpha+\tfrac12\alpha^2$ (SO in $\alpha$). Higher-order $\mathcal O(p^2)$ terms are dropped.
-Keeping leading terms delivers the intuition: larger $p$ or $J$ increases the disaster-state covariance in magnitude, raising risk premia.
+Taking logs of both sides (RHS is positive) and rearranging to isolate $a$:
+$$
+\begin{aligned}
+0
+&= \log\beta + a + (k-\gamma)\mu_c + \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
+  + \log\big[(1-p)+p\,e^{-(k-\gamma)J}\big] \\
+\Longrightarrow\quad
+a
+&= -\log\beta -(k-\gamma)\mu_c - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
+  - \log\big[(1-p)+p\,e^{-(k-\gamma)J}\big].
+\end{aligned}
+$$
+Hence the pricing-implied intercept is
+$$
+\boxed{\; a
+= -\log\beta -(k-\gamma)\mu_c - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big]
+  - \log\big[(1-p)+p\,e^{-(k-\gamma)J}\big].\;}
+$$
 
-3) Special case: an equity claim with $k>0$ (procyclical). Then disasters both lower $\log R_f$ and increase required premia, moving the model toward the data.
 
 ---
 
-### Notes on accuracy and limits
+## Risk Premium under Rare Disasters
 
-- Approximations rely on (i) Gaussian core for $\Delta c$, (ii) independence across normal and jump parts, and (iii) rare/modest disasters when using Taylor expansions.
-- For larger $p$ or $J$, prefer exact mixture formulas (those with the explicit $\log[(1-p)+p e^{\cdot}]$ terms) rather than Taylor series.
-- Exposure $k$ can be generalized (multiple factors, leverage); the same mixture logic applies asset-by-asset.
+We now subtract the (log) risk‑free rate $r_f = \log R_f$ from the expected (log) return to expose parameter effects on the risk premium.
+
+### Expected log return
+With $r = a + k\Delta c + \eta$, $\Delta c = \mu_c + \sigma_c\varepsilon - J D$, $\eta\sim\mathcal N(0,s^2)$ and $\mathbb E[\Delta c]=\mu_c - pJ$:
+$$
+\begin{align*}
+\mathbb E[r]
+&= a + k(\mu_c - pJ) + \tfrac12 k^2\sigma_c^2 + \tfrac12 s^2 \\
+&= -\log\beta -(k-\gamma)\mu_c - \tfrac12\big[(k-\gamma)^2\sigma_c^2 + s^2\big] - \log\big[(1-p)+p e^{-(k-\gamma)J}\big] \\
+&\qquad + k(\mu_c - pJ) + \tfrac12 k^2\sigma_c^2 + \tfrac12 s^2 \\
+&= -\log\beta + \gamma\mu_c + k\gamma\sigma_c^2 - k p J - \log\big[(1-p)+p e^{-(k-\gamma)J}\big].
+\end{align*}
+$$
+
+### Log risk‑free rate
+Previously derived:
+$$
+r_f = -\log\beta + \gamma\mu_c - \tfrac12\gamma^2\sigma_c^2 - \log\big[(1-p)+p e^{\gamma J}\big].
+$$
+
+### Exact log risk premium
+Subtracting yields
+$$
+\boxed{\;\mathbb E[r]-r_f = k\gamma\sigma_c^2 - k p J + \log\frac{(1-p)+p e^{\gamma J}}{(1-p)+p e^{-(k-\gamma)J}}\; }.
+$$
 
 ---
 
-## Campbell–Cochrane Habit: Setup and SDF
+## Rare / small-disaster approximation
+If $p$ is small, $\log[(1-p)+p e^{\alpha}] \approx p(e^{\alpha}-1)$ so
+$$
+\mathbb E[r]-r_f \approx k\gamma\sigma_c^2 - k p J + p\big(e^{\gamma J} - e^{-(k-\gamma)J}\big).
+$$
 
+Approximation detail (why $\log[(1-p)+p e^{\alpha}] \approx p(e^{\alpha}-1)$):
+
+$$
+\log\big[(1-p)+p e^{\alpha}\big]
+= \log\big(1 - p + p e^{\alpha}\big)
+= \log\Big(1 + p(e^{\alpha}-1)\Big).
+$$
+Let $x \equiv p(e^{\alpha}-1)$. For fixed $\alpha$, small $p$ implies $|x|$ small. Use the Taylor series $\log(1+x) = x - \tfrac12 x^2 + \tfrac13 x^3 - \cdots$ to obtain the first-order (in $p$) approximation:
+$$
+\log\big[(1-p)+p e^{\alpha}\big] \approx p(e^{\alpha}-1), \qquad \text{error } = \mathcal O\!\big(p^2 (e^{\alpha}-1)^2\big).
+$$
+If additionally $\alpha$ is small, $e^{\alpha}-1 \approx \alpha + \tfrac12\alpha^2$, yielding
+$$
+\log\big[(1-p)+p e^{\alpha}\big] \approx p\alpha + \tfrac12 p\alpha^2.
+$$
+Retaining only the linear term in $p$ (and optionally the leading terms in $\alpha$) delivers the expression used above.
+
+---
+
+### Parameter sensitivities 
+- Diffusive term $k\gamma\sigma_c^2$: higher exposure $k$, risk aversion $\gamma$, or volatility $\sigma_c$ raise premia.
+- Disaster drag $-k p J$: procyclical assets ($k>0$) lose more in disasters, requiring higher compensation.
+- Jump convexity $\log\frac{(1-p)+p e^{\gamma J}}{(1-p)+p e^{-(k-\gamma)J}}$: amplifies premia when $(p,J)$ or the mismatch $(k-\gamma)$ grow.
+- Calibration leverage: $(p,J)$ allow matching large premia without implausibly large $\gamma$; small $p$ with sizable $J$ can materially boost premia.
+- Cross-section: varying $k$ maps differential disaster and diffusion exposure into heterogeneous premia; hedging assets (low/negative $k$) earn low premia.
+
+---
+
+## Risk Premia under Habit
+
+### Campbell–Cochrane Habit: Setup and SDF
+
+- Campbell and Cochrane (1999) — “By Force of Habit: A Consumption-Based Explanation of Aggregate Stock Market Behavior.”
+Journal of Political Economy
 - Preferences feature external habit $X_t$ and surplus consumption ratio $S_t \equiv \dfrac{C_t - X_t}{C_t} \in (0,1)$.
 - Utility is time-separable CRRA over surplus consumption: $u(C_t, X_t) = \dfrac{(C_t - X_t)^{1-\gamma}}{1-\gamma} = \dfrac{\big(S_t C_t\big)^{1-\gamma}}{1-\gamma}$, with $\gamma>0$.
 - Intertemporal marginal rate of substitution (one-period SDF):
@@ -528,9 +602,9 @@ Keeping leading terms delivers the intuition: larger $p$ or $J$ increases the di
 
 ## Habit Dynamics and Surplus Ratio Law of Motion
 
-- Let consumption growth be i.i.d. lognormal: $\Delta c_{t+1} = g + \sigma_c \varepsilon_{t+1}$, $\varepsilon\sim \mathcal N(0,1)$.
-- Surplus ratio follows: $\log S_{t+1} - \log S_t = \phi\,(\bar s - \log S_t) + \lambda\,\sigma_c\,\varepsilon_{t+1}$ (mean reversion plus sensitivity), with $\phi\in(0,1)$.
-- In levels, an equivalent approximation: $S_{t+1} = S_t^{1-\phi}\,e^{\phi \bar s}\,\exp\{\lambda\,\sigma_c\,\varepsilon_{t+1}\}$.
+- Let consumption growth be i.i.d. normal: $\Delta c_{t+1} = g + \sigma_c \varepsilon_{t+1}$, $\varepsilon\sim \mathcal N(0,1)$.
+- Surplus ratio follows: $\log S_{t+1} - \log S_t = \Delta s_{t+1} = \phi\,(\bar s - s_t) + \lambda\,\sigma_c\,\varepsilon_{t+1}$ (mean reversion plus sensitivity), with $\phi\in(0,1)$.
+- In levels, an equivalent approximation: $S_{t+1} = S_t^{1-\phi}\,e^{\phi \bar s + \lambda \sigma_c \varepsilon_{t+1}}$.
 - State dependence: when $S_t$ is low (habit close to consumption), marginal utility is very sensitive; risk premia rise in recessions.
 - Calibration pins $\lambda$ to damp the risk-free rate volatility: set $\lambda$ to offset the consumption term in $\log R_{f,t}$ (see next slide).
 
@@ -541,22 +615,29 @@ Keeping leading terms delivers the intuition: larger $p$ or $J$ increases the di
 - Definition: $R_{f,t}^{-1} = \mathbb E_t[M_{t+1}]$.
 - Use lognormality conditional on $S_t$: write $x_{t+1} \equiv \log M_{t+1} = \log\beta - \gamma\,\Delta c_{t+1} - \gamma\,\Delta s_{t+1}$.
 - With $\Delta c_{t+1} = g + \sigma_c\varepsilon_{t+1}$ and $\Delta s_{t+1} = \phi(\bar s - \log S_t) + \lambda\sigma_c\varepsilon_{t+1}$:
-  $$x_{t+1} = \log\beta - \gamma\,g - \gamma\,\phi(\bar s - \log S_t) - \gamma(1+\lambda)\sigma_c\,\varepsilon_{t+1}.$$
+  $$x_{t+1} = \log\beta - \gamma\,g - \gamma\,\phi(\bar s - s_t) - \gamma(1+\lambda)\sigma_c\,\varepsilon_{t+1}.$$
 - Then $\mathbb E_t[M_{t+1}] = \exp\big(\mathbb E_t[x_{t+1}] + \tfrac12\operatorname{Var}_t(x_{t+1})\big)$ gives
-  $$\log R_{f,t} = -\log\beta + \gamma g + \gamma\,\phi(\bar s - \log S_t) - \tfrac12\gamma^2(1+\lambda)^2\sigma_c^2.$$
- - Smooth $R_f$: choose $\lambda$ so $\gamma\,\phi(\bar s - \log S_t)$ variation is minimized; in CC (1999) $\lambda$ is set to cancel shocks so $R_{f,t}$ is nearly constant.
- - Approximation detail: conditional lognormality gives $\log R_{f,t} = -\log\mathbb E_t[M_{t+1}] \approx -\mathbb E_t[\log M_{t+1}] - \tfrac12\operatorname{Var}_t(\log M_{t+1})$; with $\log M_{t+1}$ affine in $\varepsilon_{t+1}$, this is exact.
+  $$\log R_{f,t} = -\log\beta + \gamma g + \gamma\,\phi(\bar s - s_t) - \tfrac12\gamma^2(1+\lambda)^2\sigma_c^2.$$
+ - Smooth $R_f$: choose $\lambda$ so $\gamma\,\phi(\bar s - s_t)$ variation is minimized; in CC (1999) $\lambda$ is set to cancel shocks so $R_{f,t}$ is nearly constant.
 
 ---
 
-## Risk Premia and Time-Varying Price of Risk
+## Risk Premia and Time-Varying Price of Risk (General Case)
 
+- Derivation (log form): start from $1 = \mathbb E_t[M_{t+1} R_{i,t+1}]$. Write $m_{t+1}=\log M_{t+1}$ and $r_{i,t+1}=\log R_{i,t+1}$. Then
+  $$0 = \log \mathbb E_t\big[e^{m_{t+1}+r_{i,t+1}}\big].$$
+  Apply a second-order (lognormal) approximation (exact if $m_{t+1}+r_{i,t+1}$ is conditionally normal):
+  $$0 \approx \mathbb E_t[m_{t+1}+r_{i,t+1}] + \tfrac12\operatorname{Var}_t(m_{t+1}+r_{i,t+1}).$$
+  Rearranging for the conditional expected log return gives
+  $$\mathbb E_t[r_{i,t+1}] \approx -\mathbb E_t[m_{t+1}] - \tfrac12\operatorname{Var}_t(m_{t+1}) - \tfrac12\operatorname{Var}_t(r_{i,t+1}) - \operatorname{Cov}_t(m_{t+1}, r_{i,t+1}).$$
+  Using $\log R_{f,t} = -\log \mathbb E_t[M_{t+1}] \approx -\mathbb E_t[m_{t+1}] - \tfrac12\operatorname{Var}_t(m_{t+1})$ we substitute and obtain the slide’s relation.
 - Pricing condition: $1 = \mathbb E_t[M_{t+1} R_{i,t+1}]$ and in logs $\mathbb E_t[r_{i,t+1}] \approx \log R_{f,t} - \operatorname{Cov}_t(\log M_{t+1}, r_{i,t+1}) - \tfrac12\operatorname{Var}_t(r_{i,t+1})$.
 - Let asset $i$ have log return $r_{i,t+1} = \mu_i + b_i\,\sigma_c\,\varepsilon_{t+1} + \eta_{i,t+1}$ with $\eta$ idiosyncratic and independent.
 - Instantaneous market price of risk (per unit shock): $\Lambda_t \equiv -\operatorname{Cov}_t(\log M_{t+1}, \varepsilon_{t+1}) = \gamma(1+\lambda)\sigma_c$.
-- State dependence enters through $S_t$ if $\lambda$ is itself a function of $S_t$; in CC, $\lambda(S_t)$ rises as $S_t$ falls, making $\Lambda_t$ countercyclical.
-- Expected excess log return: $\mathbb E_t[r_{i,t+1}] - \log R_{f,t} \approx b_i\,\Lambda_t\,\sigma_c - \tfrac12\operatorname{Var}_t(r_{i,t+1})$, increasing when $S_t$ is low.
- - Approximation detail: from $\log\mathbb E_t[e^{\log M_{t+1}+r_{i,t+1}}]=0$, use the second-order expansion and the linear shock representation for both terms; higher-order covariances are neglected.
+- Expected excess log return: with $\operatorname{Var}_t(r_{i,t+1}) = b_i^2\sigma_c^2 + s_i^2$ (define $s_i^2\equiv\operatorname{Var}(\eta_{i,t+1})$),
+  $$\mathbb E_t[r_{i,t+1}] - \log R_{f,t} \approx b_i\,\Lambda_t\,\sigma_c - \tfrac12\big(b_i^2\sigma_c^2 + s_i^2\big).$$
+  Equivalently,
+  $$\mathbb E_t[r_{i,t+1}] \approx \log R_{f,t} + b_i\gamma(1+\lambda)\sigma_c^2 - \tfrac12 b_i^2\sigma_c^2 - \tfrac12 s_i^2.$$ 
 
 ---
 
