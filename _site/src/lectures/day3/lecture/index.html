@@ -285,7 +285,10 @@ V(W,t) = \frac{1}{1-\gamma} W^{1-\gamma} v(t)
 C^{-\gamma} W^{-\gamma} - v(t) W^{-1} = 0
 \]</span> <span class="math display">\[
 C^{-\gamma} = v(t) W^{-1}
-\]</span> C^* = [v(t) W^{-1}]^{-1/} = W v(t)^{1/} $$</p>
+\]</span></p>
+<p><span class="math display">\[
+C^* = [v(t) W^{-1}]^{-1/\gamma} = W \cdot v(t)^{1/\gamma}
+\]</span></p>
 <p><strong>First-order condition for portfolio:</strong></p>
 <p><span class="math display">\[
 \frac{\partial}{\partial \omega} [v(t) \omega (\mu - r) - \frac{1}{2} \gamma v(t) \omega^2 \sigma^2] = 0
@@ -480,10 +483,15 @@ C^* = W
 u'(t) = \rho u(t) - r + 1 - \frac{(\mu - r)^2}{2 \sigma^2}
 \]</span></p>
 <p><strong>Solution:</strong></p>
+<p>This is a linear ODE of the form</p>
 <p><span class="math display">\[
-u(t) = A e^{\rho t} + B
+u'(t) = \rho u(t) + c,
 \]</span></p>
-<p>where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are constants determined by boundary conditions.</p>
+<p>which has the general solution</p>
+<p><span class="math display">\[
+u(t) = K e^{\rho t} - \frac{c}{\rho},
+\]</span></p>
+<p>where <span class="math inline">\(K\)</span> is a constant determined by boundary conditions.</p>
 </section>
 <section class="slide level0">
 

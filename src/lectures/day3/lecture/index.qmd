@@ -187,8 +187,11 @@ $$
 $$
 C^{-\gamma} = v(t) W^{-1}
 $$
+
+$$
 C^* = [v(t) W^{-1}]^{-1/\gamma} = W \cdot v(t)^{1/\gamma}
 $$
+
 
 **First-order condition for portfolio:**
 
@@ -446,11 +449,19 @@ $$
 
 **Solution:**
 
+This is a linear ODE of the form
+
 $$
-u(t) = A e^{\rho t} + B
+u'(t) = \rho u(t) + c,
 $$
 
-where $A$ and $B$ are constants determined by boundary conditions.
+which has the general solution
+
+$$
+u(t) = K e^{\rho t} - \frac{c}{\rho},
+$$
+
+where $K$ is a constant determined by boundary conditions.
 
 ---
 
