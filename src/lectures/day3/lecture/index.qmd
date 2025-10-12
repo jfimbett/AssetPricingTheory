@@ -1,5 +1,5 @@
 ---
-title: "Day 3: Dynamic Asset Pricing Models"
+title: "Dynamic Asset Pricing Models"
 subtitle: "Asset Pricing Theory"
 author: "Juan F. Imbet"
 institute: "Paris Dauphine University-PSL"
@@ -10,313 +10,453 @@ format:
     slide-number: true
     chalkboard: true
     preview-links: auto
-    footer: "Asset Pricing Theory - Day 3"
+    footer: "Asset Pricing Theory - Dynamic Asset Pricing Models"
+execute:
+  enabled: false
 ---
 
 ## Dynamic Asset Pricing Models {.center}
 
 **Hamilton-Jacobi-Bellman Equations and Term Structure Models**
 
-## Continuous-Time Portfolio Choice
-
 ### Basic Setup and Assumptions
 
 **Assumptions:**
-1. **Time horizon:** Infinite horizon $t \in [0, \infty)$
-2. **Investment opportunity set:** Single risky asset with return dynamics
-3. **Investor preferences:** Time-separable utility with constant relative risk aversion
-4. **Markets:** Frictionless, continuous trading
-5. **Information:** Full information about state variables
+
+- **Time horizon:** Infinite horizon $t \in [0, \infty)$
+- **Investment opportunity set:** Single risky asset with return dynamics
+- **Investor preferences:** Time-separable utility with constant relative risk aversion
+- **Markets:** Frictionless, continuous trading
+- **Information:** Full information about state variables
 
 **State variables:**
+
 - Wealth: $W_t$ (investor's financial wealth)
 - Time: $t$ (for time-varying preferences/parameters)
 
 **Controls:**
-- Consumption: $C_t \geq 0$
-- Portfolio allocation: $\pi_t$ (fraction in risky asset)
 
-### The Hamilton-Jacobi-Bellman Equation
+- Consumption: $C_t \geq 0$
+- Portfolio allocation: $\omega_t$ (fraction in risky asset)
+
+---
+
+## The HJB Equation in Continuous-Time Optimization
+
+- The HJB equation arises from the dynamic programming principle. The solution to a continuous-time optimization problem can be characterized by a partial differential equation (PDE) known as the HJB equation.
+
+**General Case**:
+
+- Assume a general dynamic optimization problem with state variable $X_t$ and control variable $u_t$.
+
+$$
+dX_t = \mu(X_t, u_t) dt + \sigma(X_t, u_t) dW_t
+$$
+
+- Standard Discounted Utility:
+
+$$
+\max_{u_t} E_t \left[ \int_t^\infty e^{-\rho (s-t)} U(X_s, u_s) ds \right]
+$$
+
+**HJB Equation:**
+
+$$
+\rho V(X_t, t) = \max_{u_t} \left\{ U(X_t, u_t) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial X} \mu(X_t, u_t) + \frac{1}{2} \frac{\partial^2 V}{\partial X^2} \sigma^2(X_t, u_t) \right\}
+$$
+
+where $\mu(X_t, u_t) = \text{drift of } X_t$, $\sigma^2(X_t, u_t) = \text{variance of } X_t$
+
+---
+
+## The Hamilton-Jacobi-Bellman Equation in Dynamic Portfolio Choice
+
+- A representative investor chooses how much to consume and how to allocate wealth between a risky asset and a risk-free asset to maximize expected utility over an infinite horizon. $\omega_t$ is the fraction of wealth invested in the risky asset.
 
 **Value function definition:**
-$$V(W, t) = \max_{C_s, \pi_s} E_t\left[ \int_t^\infty e^{-\rho(s-t)} U(C_s) ds \right]$$
+
+$$
+V(W, t) = \max_{C_s, \omega_s} E_t\left[ \int_t^\infty e^{-\rho(s-t)} U(C_s) ds \right]
+$$
 
 **Dynamic programming principle:**
-$$V(W, t) = \max_{C, \pi} \left\{ U(C) + E_t\left[ V(W_{t+dt}, t+dt) \right] \right\}$$
+
+$$
+V(W, t) = \max_{C, \omega} \left\{ U(C) + E_t\left[ V(W_{t+dt}, t+dt) \right] \right\}
+$$
 
 **Taylor expansion:**
-$$V(W + dW, t + dt) \approx V(W,t) + V_t dt + V_W dW + \frac{1}{2} V_{WW} (dW)^2$$
+
+$$
+V(W + dW, t + dt) \approx V(W,t) + V_t dt + V_W dW + \frac{1}{2} V_{WW} (dW)^2
+$$
+
+---
+
+## Wealth Dynamics (continued)
 
 **HJB equation derivation:**
-$$\rho V = \max_{C, \pi} \left\{ U(C) + V_t + V_W \mu_W + \frac{1}{2} V_{WW} \sigma_W^2 \right\}$$
+
+$$
+\rho V(W,t) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial W} \mu_W + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} \sigma_W^2 \right\}
+$$
 
 where:
-- $\mu_W = r W + \pi W (\mu - r) - C$ (wealth drift)
-- $\sigma_W^2 = W^2 \pi^2 \sigma^2$ (wealth variance)
+
+- $\mu_W = \omega W \mu + (1-\omega) W r - C = \omega W (\mu - r) + W r - C$ (wealth drift)
+- $\sigma_W^2 = W^2 \omega^2 \sigma^2$ (wealth variance)
 
 **Final HJB equation:**
-$$\rho V(W,t) = \max_{C,\pi} \left\{ U(C) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial W} [r W + \pi W (\mu - r) - C] + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} W^2 \pi^2 \sigma^2 \right\}$$
+
+$$
+\rho V(W,t) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial W} [r W + \omega W (\mu - r) - C] + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} W^2 \omega^2 \sigma^2 \right\}
+$$
+
+---
 
 ## Power Utility Solution
 
 ### Assumptions for Power Utility
 
 **Utility function:**
-$$U(C) = \frac{C^{1-\gamma}}{1-\gamma}, \quad \gamma > 0, \gamma \neq 1$$
 
+$$
+U(C) = \frac{C^{1-\gamma}}{1-\gamma}, \quad \gamma > 0, \gamma \neq 1
+$$
 **Key properties:**
+
 - Constant relative risk aversion: $RRA = -\frac{U''(C) C}{U'(C)} = \gamma$
 - Elasticity of intertemporal substitution: $EIS = \frac{1}{\gamma}$
+- Solving a HJB required a guess for the value function. How it depends on wealth and time.
+- A common assumption that simplifies the problem is to assume that the value function is separable in wealth and time.
 
 **Guess for value function:**
-$$V(W,t) = \frac{1}{1-\gamma} W^{1-\gamma} v(t)$$
 
-**Motivation:** Homothetic preferences suggest power form in wealth
+$$
+V(W,t) = \frac{1}{1-\gamma} W^{1-\gamma} v(t)
+$$
 
-### Step-by-Step HJB Solution
+**Motivation:** Homothetic preferences (scaling wealth scales utility proportionally) allow separation of wealth and time effects.
+
+---
+
+## Step-by-Step HJB Solution
 
 **Substitute guess into HJB:**
-$$\rho \cdot \frac{1}{1-\gamma} W^{1-\gamma} v(t) = \max_{C,\pi} \left\{ \frac{C^{1-\gamma}}{1-\gamma} + \frac{\partial V}{\partial t} + V_W [r W + \pi W (\mu - r) - C] + \frac{1}{2} V_{WW} W^2 \pi^2 \sigma^2 \right\}$$
+
+$$
+\rho \cdot \frac{1}{1-\gamma} W^{1-\gamma} v(t) = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} + \frac{\partial V}{\partial t} + V_W [r W + \omega W (\mu - r) - C] + \frac{1}{2} V_{WW} W^2 \omega^2 \sigma^2 \right\}
+$$
 
 **Compute partial derivatives:**
-$$\frac{\partial V}{\partial t} = \frac{1}{1-\gamma} W^{1-\gamma} v'(t)$$
-$$\frac{\partial V}{\partial W} = W^{-\gamma} v(t)$$
-$$\frac{\partial^2 V}{\partial W^2} = -\gamma W^{-\gamma-1} v(t)$$
+
+$$
+\frac{\partial V}{\partial t} = \frac{1}{1-\gamma} W^{1-\gamma} v'(t)
+$$
+$$
+\frac{\partial V}{\partial W} = W^{-\gamma} v(t)
+$$
+$$
+\frac{\partial^2 V}{\partial W^2} = -\gamma W^{-\gamma-1} v(t)
+$$
 
 **Substitute derivatives:**
-$$\rho v(t) W^{1-\gamma} = \max_{C,\pi} \left\{ \frac{C^{1-\gamma}}{1-\gamma} + W^{1-\gamma} v'(t) + W^{-\gamma} v(t) [r W + \pi W (\mu - r) - C] + \frac{1}{2} (-\gamma W^{-\gamma-1} v(t)) W^2 \pi^2 \sigma^2 \right\}$$
+
+$$
+\rho v(t) W^{1-\gamma} = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} + W^{1-\gamma} v'(t) + W^{-\gamma} v(t) [r W + \omega W (\mu - r) - C] + \frac{1}{2} (-\gamma W^{-\gamma-1} v(t)) W^2 \omega^2 \sigma^2 \right\}
+$$
 
 **Divide both sides by $W^{1-\gamma}$:**
-$$\rho v(t) = \max_{C,\pi} \left\{ \frac{C^{1-\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) [r + \pi (\mu - r) - C W^{-1}] - \frac{1}{2} \gamma v(t) \pi^2 \sigma^2 \right\}$$
+
+$$
+\rho v(t) = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) [r + \omega (\mu - r) - C W^{-1}] - \frac{1}{2} \gamma v(t) \omega^2 \sigma^2 \right\}
+$$
+
+---
+
+## Continued HJB Solution
 
 **First-order condition for consumption:**
-$$\frac{\partial}{\partial C} \left[ \frac{C^{1-\gamma}}{1-\gamma} W^{-\gamma} - v(t) C W^{-1} \right] = 0$$
-$$C^{-\gamma} W^{-\gamma} - v(t) W^{-1} = 0$$
-$$C^{-\gamma} = v(t) W^{-1}$$
-$$C^* = [v(t) W^{-1}]^{-1/\gamma} = W \cdot v(t)^{1/\gamma}$$
+
+$$
+\frac{\partial}{\partial C} \left[ \frac{C^{1-\gamma}}{1-\gamma} W^{-\gamma} - v(t) C W^{-1} \right] = 0
+$$
+$$
+C^{-\gamma} W^{-\gamma} - v(t) W^{-1} = 0
+$$
+$$
+C^{-\gamma} = v(t) W^{-1}
+$$
+C^* = [v(t) W^{-1}]^{-1/\gamma} = W \cdot v(t)^{1/\gamma}
+$$
 
 **First-order condition for portfolio:**
-$$\frac{\partial}{\partial \pi} [v(t) \pi (\mu - r) - \frac{1}{2} \gamma v(t) \pi^2 \sigma^2] = 0$$
-$$v(t) (\mu - r) - \gamma v(t) \pi \sigma^2 = 0$$
-$$\pi^* = \frac{\mu - r}{\gamma \sigma^2}$$
+
+$$
+\frac{\partial}{\partial \omega} [v(t) \omega (\mu - r) - \frac{1}{2} \gamma v(t) \omega^2 \sigma^2] = 0
+$$
+$$
+v(t) (\mu - r) - \gamma v(t) \omega \sigma^2 = 0
+$$
+$$
+\omega^* = \frac{\mu - r}{\gamma \sigma^2}
+$$
 
 **Substitute optimal controls back into HJB:**
-$$\rho v(t) = \frac{[W \cdot v(t)^{1/\gamma}]^{1-\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) \left[ r + \frac{\mu - r}{\gamma \sigma^2} (\mu - r) - \frac{W \cdot v(t)^{1/\gamma}}{W} \right] - \frac{1}{2} \gamma v(t) \left( \frac{\mu - r}{\gamma \sigma^2} \right)^2 \sigma^2$$
+
+$$
+\rho v(t) = \frac{[W \cdot v(t)^{1/\gamma}]^{1-\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) \left[ r + \frac{\mu - r}{\gamma \sigma^2} (\mu - r) - v(t)^{1/\gamma} \right] - \frac{1}{2} \gamma v(t) \left( \frac{\mu - r}{\gamma \sigma^2} \right)^2 \sigma^2
+$$
+
+---
+
+## Continued HJB Solution
 
 **Simplify step by step:**
-$$\rho v(t) = \frac{W^{1-\gamma} v(t)^{(1-\gamma)/\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) \left[ r + \frac{(\mu - r)^2}{\gamma \sigma^2} - v(t)^{1/\gamma} \right] - \frac{1}{2} \gamma v(t) \frac{(\mu - r)^2}{\gamma^2 \sigma^2}$$
 
-$$\rho v(t) = \frac{v(t)^{(1-\gamma)/\gamma} W^{1-\gamma - \gamma}}{1-\gamma} + v'(t) + v(t) \left[ r + \frac{(\mu - r)^2}{\gamma \sigma^2} - v(t)^{1/\gamma} \right] - \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t)$$
+$$
+\begin{align*}
+\rho v(t) &= \frac{v(t)}{1-\gamma} + v'(t) + r v(t) + \frac{(\mu - r)^2}{\gamma \sigma^2} v(t) - v(t)^{1 + 1/\gamma} - \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t) \\
+\rho v(t) &= v'(t) + \frac{v(t)}{1-\gamma} + r v(t) + \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t) - v(t)^{1 + 1/\gamma} \\
+\rho v(t) &= v'(t) + v(t) \left[ \frac{1}{1-\gamma} + r + \frac{(\mu - r)^2}{2 \gamma \sigma^2} \right] - v(t)^{1 + 1/\gamma} \\
+v'(t) + \Big[ \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} - \rho \Big] v(t) &= v(t)^{1 + 1/\gamma}\\
+v'(t) &= \Big[ \rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} \Big] v(t) + v(t)^{1 + 1/\gamma}
+\end{align*}
+$$
 
-$$\rho v(t) = \frac{v(t)}{1-\gamma} + v'(t) + r v(t) + \frac{(\mu - r)^2}{\gamma \sigma^2} v(t) - v(t)^{1 + 1/\gamma} - \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t)$$
+- This is a nonlinear ODE (Bernoulli type): 
+$$
+v'(t) = a\,v(t) + b\,v(t)^{1+1/\gamma}
+$$
 
-**Collect terms:**
-$$\rho v(t) = v'(t) + \frac{v(t)}{1-\gamma} + r v(t) + \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t) - v(t)^{1 + 1/\gamma}$$
+---
 
-**Final ODE for $v(t)$:**
-$$v'(t) = \rho v(t) - \frac{v(t)}{1-\gamma} - r v(t) - \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t) + v(t)^{1 + 1/\gamma}$$
+## Bernoulli reduction and solution (step by step)
 
-**Solution method:** This nonlinear ODE requires numerical solution or specific functional form assumptions for $v(t)$.
+Let $a,b\in\mathbb{R}$ and $\gamma>0$. Consider
+$$
+v'(t)= a\,v(t)+b\,v(t)^{1+1/\gamma}.
+$$
+
+**1) Substitution.** Set
+$$
+u(t)=v(t)^{-1/\gamma}\quad\Longrightarrow\quad u'(t)
+= -\frac{1}{\gamma}\,v(t)^{-1/\gamma-1}\,v'(t).
+$$
+
+**2) Express $u'$ using the ODE.** From the ODE,
+$$
+v'(t)=a\,v(t)+b\,v(t)^{1+1/\gamma}.
+$$
+Multiply both sides by $-\dfrac{1}{\gamma}v(t)^{-1/\gamma-1}$:
+$$
+-\frac{1}{\gamma}v^{-1/\gamma-1}v'
+= -\frac{a}{\gamma}v^{-1/\gamma}-\frac{b}{\gamma}.
+$$
+The left-hand side is exactly $u'(t)$, and $v^{-1/\gamma}=u$, hence
+$$
+u'(t)+\frac{a}{\gamma}u(t)=-\frac{b}{\gamma}.
+$$
+
+- This is a linear ODE in $u$. 
+
+---
+
+## Linear ODEs
+
+Consider the general linear ODE
+
+$$
+u'(t) = a u(t) + b,
+$$
+where $a,b \in \mathbb{R}$.
+
+The solution is given by
+$$
+u(t) = -\frac{b}{a} + C e^{a t},\qquad C \in \mathbb{R},
+$$
+
+Check by differentiation:
+$$
+u'(t) = C a e^{a t} = a \left( -\frac{b}{a} + C e^{a t} \right) + b = a u(t) + b.
+$$
+
+---
+
+## Continued Bernoulli reduction and solution
+
+- Back to our setup, we have
+
+$$
+u'(t) = - \frac{a}{\gamma} u(t)  -\frac{b}{\gamma}.
+$$
+
+- The solution is
+$$
+u(t) = -\frac{-b/\gamma}{-a/\gamma} + C e^{-\frac{a}{\gamma} t} = -\frac{b}{a} + C e^{-\frac{a}{\gamma} t},\qquad C \in \mathbb{R}.
+$$
+
+Compute $C$ using initial condition $u(0) = v(0)^{-1/\gamma}$:
+
+$$
+u(0) = -\frac{b}{a} + C = v(0)^{-1/\gamma} \implies C = v(0)^{-1/\gamma} + \frac{b}{a}.
+$$
+
+- Hence
+
+$$
+u(t) = -\frac{b}{a} + \left( v(0)^{-1/\gamma} + \frac{b}{a} \right) e^{-\frac{a}{\gamma} t}.
+$$
+
+$$
+v(t) = \left( -\frac{b}{a} + \left( v(0)^{-1/\gamma} + \frac{b}{a} \right) e^{-\frac{a}{\gamma} t} \right)^{-\gamma}.
+$$
+
+---
+
+## Original parameters
+
+Recall that
+
+$$
+\begin{align*}
+a &= \Big[ \rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} \Big], \\
+b &= 1.
+\end{align*}
+$$
+
+Replace 
+$$
+v(t) = \left( -\frac{1}{a} + \left( v(0)^{-1/\gamma} + \frac{1}{a} \right) e^{-\frac{a}{\gamma} t} \right)^{-\gamma}.
+$$
+
+$$
+v(t) = \left( -\frac{1}{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}} + \left( v(0)^{-1/\gamma} + \frac{1}{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}} \right) e^{-\frac{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}}{\gamma} t} \right)^{-\gamma}.
+$$
+
+---
 
 ## Log Utility Solution
 
 ### Log Utility Assumptions
 
 **Utility function:**
-$$U(C) = \ln C$$
+
+$$
+U(C) = \ln C
+$$
 
 **Properties:**
+
 - Constant relative risk aversion: $RRA = 1$
 - Elasticity of intertemporal substitution: $EIS = 1$
 
 **Guess for value function:**
-$$V(W,t) = \ln W + u(t)$$
+
+$$
+V(W,t) = \ln W + u(t)
+$$
 
 ### Log Utility HJB Solution
 
 **Substitute into HJB:**
-$$\rho (\ln W + u(t)) = \max_{C,\pi} \left\{ \ln C + \frac{\partial V}{\partial t} + V_W [r W + \pi W (\mu - r) - C] + \frac{1}{2} V_{WW} W^2 \pi^2 \sigma^2 \right\}$$
+
+$$
+\rho (\ln W + u(t)) = \max_{C,\omega} \left\{ \ln C + \frac{\partial V}{\partial t} + V_W [r W + \omega W (\mu - r) - C] + \frac{1}{2} V_{WW} W^2 \omega^2 \sigma^2 \right\}
+$$
 
 **Compute derivatives:**
-$$\frac{\partial V}{\partial t} = u'(t)$$
-$$\frac{\partial V}{\partial W} = \frac{1}{W}$$
-$$\frac{\partial^2 V}{\partial W^2} = -\frac{1}{W^2}$$
+
+$$
+\frac{\partial V}{\partial t} = u'(t),
+\frac{\partial V}{\partial W} = \frac{1}{W}, \frac{\partial^2 V}{\partial W^2} = -\frac{1}{W^2}
+$$
+
+---
+
+## Continued Log Utility HJB Solution
 
 **Substitute:**
-$$\rho (\ln W + u(t)) = \max_{C,\pi} \left\{ \ln C + u'(t) + \frac{1}{W} [r W + \pi W (\mu - r) - C] - \frac{1}{2} \frac{1}{W^2} W^2 \pi^2 \sigma^2 \right\}$$
 
-$$\rho \ln W + \rho u(t) = \max_{C,\pi} \left\{ \ln C + u'(t) + r + \pi (\mu - r) - \frac{C}{W} - \frac{1}{2} \pi^2 \sigma^2 \right\}$$
+$$
+\rho (\ln W + u(t)) = \max_{C,\omega} \left\{ \ln C + u'(t) + \frac{1}{W} [r W + \omega W (\mu - r) - C] - \frac{1}{2} \frac{1}{W^2} W^2 \omega^2 \sigma^2 \right\}
+$$
+
+$$
+\rho \ln W + \rho u(t) = \max_{C,\omega} \left\{ \ln C + u'(t) + r + \omega (\mu - r) - \frac{C}{W} - \frac{1}{2} \omega^2 \sigma^2 \right\}
+$$
 
 **First-order condition for consumption:**
-$$\frac{\partial}{\partial C} [\ln C - \frac{C}{W}] = 0$$
-$$\frac{1}{C} - \frac{1}{W} = 0$$
-$$C^* = W$$
+
+$$
+\frac{\partial}{\partial C} [\ln C - \frac{C}{W}] = 0
+$$
+$$
+\frac{1}{C} - \frac{1}{W} = 0
+$$
+$$
+C^* = W
+$$
+
+---
+
+## Final Log Utility HJB Solution
 
 **First-order condition for portfolio:**
-$$\frac{\partial}{\partial \pi} [\pi (\mu - r) - \frac{1}{2} \pi^2 \sigma^2] = 0$$
-$$(\mu - r) - \pi \sigma^2 = 0$$
-$$\pi^* = \frac{\mu - r}{\sigma^2}$$
+
+$$
+\frac{\partial}{\partial \omega} [\omega (\mu - r) - \frac{1}{2} \omega^2 \sigma^2] = 0
+$$
+$$
+(\mu - r) - \omega \sigma^2 = 0
+$$
+$$
+\omega^* = \frac{\mu - r}{\sigma^2}
+$$
 
 **Substitute back:**
-$$\rho \ln W + \rho u(t) = \ln W + u'(t) + r + \frac{\mu - r}{\sigma^2} (\mu - r) - 1 - \frac{1}{2} \left( \frac{\mu - r}{\sigma^2} \right)^2 \sigma^2$$
 
-$$\rho \ln W + \rho u(t) = \ln W + u'(t) + r + \frac{(\mu - r)^2}{\sigma^2} - 1 - \frac{(\mu - r)^2}{2 \sigma^2}$$
+$$
+\rho \ln W + \rho u(t) = \ln W + u'(t) + r + \frac{\mu - r}{\sigma^2} (\mu - r) - 1 - \frac{1}{2} \left( \frac{\mu - r}{\sigma^2} \right)^2 \sigma^2
+$$
 
-$$\rho \ln W + \rho u(t) = \ln W + u'(t) + r + \frac{(\mu - r)^2}{2 \sigma^2} - 1$$
+$$
+\rho \ln W + \rho u(t) = \ln W + u'(t) + r + \frac{(\mu - r)^2}{\sigma^2} - 1 - \frac{(\mu - r)^2}{2 \sigma^2}
+$$
+
+$$
+\rho \ln W + \rho u(t) = \ln W + u'(t) + r + \frac{(\mu - r)^2}{2 \sigma^2} - 1
+$$
+
+---
+
+## Final Log Utility HJB Solution
 
 **Collect constant terms:**
-$$\rho u(t) = u'(t) + r - 1 + \frac{(\mu - r)^2}{2 \sigma^2}$$
+
+$$
+\rho u(t) = u'(t) + r - 1 + \frac{(\mu - r)^2}{2 \sigma^2}
+$$
 
 **ODE for $u(t)$:**
-$$u'(t) = \rho u(t) - r + 1 - \frac{(\mu - r)^2}{2 \sigma^2}$$
+
+$$
+u'(t) = \rho u(t) - r + 1 - \frac{(\mu - r)^2}{2 \sigma^2}
+$$
 
 **Solution:**
-$$u(t) = A e^{\rho t} + B$$
+
+$$
+u(t) = A e^{\rho t} + B
+$$
 
 where $A$ and $B$ are constants determined by boundary conditions.
 
-## Term Structure Models
+---
 
-### Vasicek Model Assumptions
+## Boundary Conditions and Long-Term Behavior
 
-**Short rate dynamics:**
-$$dr_t = \kappa (\theta - r_t) dt + \sigma dW_t$$
-
-**Assumptions:**
-1. **Mean reversion:** Short rate reverts to long-run mean $\theta$
-2. **Constant volatility:** Diffusion term independent of $r_t$
-3. **Risk-neutral measure:** Same dynamics under Q and P (complete markets)
-
-**Economic interpretation:**
-- $\kappa$: Speed of mean reversion
-- $\theta$: Long-run average short rate
-- $\sigma$: Volatility of short rate
-
-### Vasicek Bond Price Derivation
-
-**Bond price:**
-$$P(t,T) = E_t^Q \left[ e^{-\int_t^T r_s ds} \right]$$
-
-**Assume affine form:**
-$$P(t,T) = e^{A(t,T) - B(t,T) r_t}$$
-
-**Feynman-Kac equation:**
-$$\frac{\partial P}{\partial t} + \frac{1}{2} \sigma^2 \frac{\partial^2 P}{\partial r^2} + \kappa (\theta - r) \frac{\partial P}{\partial r} - r P + 1 = 0$$
-
-**Substitute affine form:**
-$$\frac{\partial P}{\partial t} = P \left( \frac{\partial A}{\partial t} - \frac{\partial B}{\partial t} r \right)$$
-$$\frac{\partial P}{\partial r} = -B P$$
-$$\frac{\partial^2 P}{\partial r^2} = B^2 P$$
-
-**Substitute into Feynman-Kac:**
-$$P \left( \frac{\partial A}{\partial t} - \frac{\partial B}{\partial t} r \right) + \frac{1}{2} \sigma^2 B^2 P + \kappa (\theta - r) (-B P) - r P + 1 = 0$$
-
-**Divide by P:**
-$$\frac{\partial A}{\partial t} - \frac{\partial B}{\partial t} r - \frac{1}{2} \sigma^2 B^2 - \kappa (\theta - r) B - r + \frac{1}{P} = 0$$
-
-**Collect terms:**
-$$\frac{\partial A}{\partial t} - \frac{\partial B}{\partial t} r - \frac{1}{2} \sigma^2 B^2 - \kappa \theta B + \kappa r B - r + \frac{1}{P} = 0$$
-
-**Group by powers of r:**
-$$\frac{\partial A}{\partial t} - \frac{1}{2} \sigma^2 B^2 - \kappa \theta B + \frac{1}{P} + r \left( -\frac{\partial B}{\partial t} + \kappa B - 1 \right) = 0$$
-
-**Set coefficients to zero:**
-$$-\frac{\partial B}{\partial t} + \kappa B - 1 = 0$$
-$$\frac{\partial B}{\partial t} = \kappa B - 1$$
-$$B'(t,T) = \kappa B(t,T) - 1$$
-
-**With boundary condition $B(T,T) = 0$:**
-$$B(t,T) = \frac{1 - e^{-\kappa (T-t)}}{\kappa}$$
-
-**For A(t,T):**
-$$\frac{\partial A}{\partial t} - \frac{1}{2} \sigma^2 B^2 - \kappa \theta B + \frac{1}{P} = 0$$
-
-**But P = e^{A - B r}, so 1/P = e^{-A + B r}**
-
-**This creates a Riccati equation that must be solved numerically or with specific assumptions.**
-
-### CIR Model Assumptions
-
-**Cox-Ingersoll-Ross dynamics:**
-$$dr_t = \kappa (\theta - r_t) dt + \sigma \sqrt{r_t} dW_t$$
-
-**Key differences from Vasicek:**
-1. **State-dependent volatility:** $\sigma \sqrt{r_t}$ prevents negative rates
-2. **Feller condition:** $2\kappa \theta > \sigma^2$ ensures strictly positive rates
-3. **More realistic term structure shapes**
-
-**Economic interpretation:**
-- Square-root diffusion captures volatility clustering
-- Mean reversion prevents explosive behavior
-- Feller condition ensures stationarity
-
-### CIR Bond Price Derivation
-
-**Affine form assumption:**
-$$P(t,T) = e^{A(t,T) - B(t,T) r_t}$$
-
-**Feynman-Kac equation:**
-$$\frac{\partial P}{\partial t} + \frac{1}{2} \sigma^2 r \frac{\partial^2 P}{\partial r^2} + \kappa (\theta - r) \frac{\partial P}{\partial r} - r P + 1 = 0$$
-
-**Substitute affine form:**
-$$\frac{\partial P}{\partial t} = P \left( \frac{\partial A}{\partial t} - \frac{\partial B}{\partial t} r \right)$$
-$$\frac{\partial P}{\partial r} = -B P$$
-$$\frac{\partial^2 P}{\partial r^2} = B^2 P + \frac{\partial B}{\partial r} (-B P) = B^2 P - B \frac{\partial B}{\partial r} P$$
-
-**Wait, this is getting complex. Let me use the standard CIR derivation approach.**
-
-**The CIR model satisfies:**
-$$B'(t,T) = -1 + \kappa B(t,T) + \frac{1}{2} \sigma^2 B(t,T)^2$$
-
-**With B(T,T) = 0, the solution is:**
-$$B(t,T) = \frac{2 \gamma e^{-\gamma (T-t)}}{(\gamma + \kappa)(1 - e^{-\gamma (T-t)}) + 2\gamma}$$
-
-**Where $\gamma = \sqrt{\kappa^2 + 2\sigma^2}$**
-
-**And A(t,T) satisfies a complex Riccati equation that requires numerical solution.**
-
-## Affine Term Structure Models
-
-### General Affine Framework
-
-**State vector X_t follows:**
-$$dX_t = \mu(X_t) dt + \Sigma(X_t) dW_t$$
-
-**Short rate:**
-$$r_t = r_0 + r_1' X_t$$
-
-**Bond price:**
-$$P(t,T) = e^{A(t,T) + B(t,T)' X_t}$$
-
-**This framework encompasses Vasicek, CIR, and many extensions.**
-
-### Key Results and Applications
-
-**Yield curve shapes:**
-- Vasicek: Always humped
-- CIR: Can be increasing or decreasing
-- Affine models: Flexible shapes
-
-**Model comparison:**
-- Vasicek: Simple but can produce negative rates
-- CIR: More realistic but computationally intensive
-- Affine: General framework for extensions
-
-**Empirical performance:**
-- CIR generally fits better than Vasicek
-- Affine models capture most variation in yields
-- Extensions add time-varying volatility, jumps, etc.
-
-## Conclusion
-
-**Key Mathematical Insights:**
-- HJB equation provides foundation for dynamic optimization
-- Affine structure enables tractable solutions
-- Mean reversion and volatility specifications crucial for realism
-- Boundary conditions determine specific functional forms
-
-**Extensions and Applications:**
-- Time-varying parameters
-- Jump-diffusion processes
-- Multi-factor models
-- Empirical estimation and calibration
+- How to pin down any constants in the solution?
+- Look at behavior at time 0 and as time goes to infinity.
+- For example, make the value function bounded as time goes to infinity.
+- Value functions at zero normally are set depending on the context of the problem.
