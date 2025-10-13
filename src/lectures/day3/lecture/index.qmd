@@ -17,15 +17,24 @@ execute:
 
 ## Dynamic Asset Pricing Models {.center}
 
-**Hamilton-Jacobi-Bellman Equations and Term Structure Models**
+**Hamilton-Jacobi-Bellman Equations**
 
-### Basic Setup and Assumptions
+- Hamilton: William Rowan Hamilton (1805-1865), Irish mathematician and physicist, formulated the Hamiltonian mechanics framework.
+- Jacobi: Carl Gustav Jacob Jacobi (1804-1851), German mathematician, contributed to the development of the Hamiltonian formalism and the Hamilton-Jacobi equation.
+- Bellman: Richard Bellman (1920-1984), American mathematician, developed dynamic programming and the Bellman equation. His book "Dynamic Programming" (1957) laid the foundation for modern optimal control theory.
+
+- Idea behind HJB: Break down a dynamic optimization problem into smaller subproblems, solve each subproblem optimally, and use these solutions to construct the overall optimal solution.
+- The Dynamic Programming Principle (DPP) states that the value of an optimal control problem at any given time depends only on the current state and the optimal strategy from that point onward.
+
+---
+
+## Basic Setup and Assumptions
 
 **Assumptions:**
 
 - **Time horizon:** Infinite horizon $t \in [0, \infty)$
 - **Investment opportunity set:** Single risky asset with return dynamics
-- **Investor preferences:** Time-separable utility with constant relative risk aversion
+- **Investor preferences:** Time-separable utility 
 - **Markets:** Frictionless, continuous trading
 - **Information:** Full information about state variables
 
@@ -47,11 +56,13 @@ execute:
 
 **General Case**:
 
-- Assume a general dynamic optimization problem with state variable $X_t$ and control variable $u_t$.
+- Assume a general dynamic optimization problem with state variable $X_t$ and control variable $u_t$. 
 
 $$
 dX_t = \mu(X_t, u_t) dt + \sigma(X_t, u_t) dW_t
 $$
+
+where $W_t$ is a standard Brownian motion ($dW_t \sim N(0, dt)$).
 
 - Standard Discounted Utility:
 
@@ -59,17 +70,142 @@ $$
 \max_{u_t} E_t \left[ \int_t^\infty e^{-\rho (s-t)} U(X_s, u_s) ds \right]
 $$
 
-**HJB Equation:**
+---
 
+## Ito's Lemma
+
+- Ito's lemma is a fundamental result in stochastic calculus that provides a way to compute the differential of a function of a stochastic process.
+- If $X_t$ follows the stochastic differential equation (SDE):
 $$
-\rho V(X_t, t) = \max_{u_t} \left\{ U(X_t, u_t) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial X} \mu(X_t, u_t) + \frac{1}{2} \frac{\partial^2 V}{\partial X^2} \sigma^2(X_t, u_t) \right\}
+dX_t = \mu(X_t, t) dt + \sigma(X_t, t) dW_t,
+$$
+and $f(X_t, t)$ is a twice-differentiable function, then Ito's lemma states that:
+$$
+df(X_t, t) = \left( \frac{\partial f}{\partial t} + \mu(X_t, t) \frac{\partial f}{\partial X} + \frac{1}{2} \sigma^2(X_t, t) \frac{\partial^2 f}{\partial X^2} \right) dt + \sigma(X_t, t) \frac{\partial f}{\partial X} dW_t
 $$
 
-where $\mu(X_t, u_t) = \text{drift of } X_t$, $\sigma^2(X_t, u_t) = \text{variance of } X_t$
 
 ---
 
-## The Hamilton-Jacobi-Bellman Equation in Dynamic Portfolio Choice
+## Derivation of the HJB Equation (1D case)
+
+- **Objective (infinite horizon, discounted):**
+  
+  $$
+  V(X_t,t)=\max_{u_s,\,s\ge t}\; \mathbb E_t\!\left[\int_t^\infty e^{-\rho (s-t)}\,U(X_s,u_s)\,ds\right],\qquad \rho>0.
+  $$
+
+- **Dynamic Programming Principle (DPP):** for small $dt>0$,
+  
+  $$
+  V(X_t,t)=\max_{u_t}\left\{U(X_t,u_t)\,dt + e^{-\rho dt}\,\mathbb E_t\big[V(X_{t+dt},t+dt)\big]\right\}.
+  $$
+
+- **State dynamics (controlled Itô diffusion, 1D):**
+  
+  $$
+  dX_t=\mu(X_t,u_t,t)\,dt+\sigma(X_t,u_t,t)\,dW_t.
+  $$
+
+---
+
+## First-order expansions
+
+- **Discount factor:** $e^{-\rho dt}=1-\rho dt+o(dt)$.
+
+- **Second-order Taylor–Itô expansion of $V$ around $(X_t,t)$:**
+  
+  $$
+  \begin{aligned}
+  V(X_{t+dt},t+dt)
+  &\approx V(X_t,t)+V_t\,dt+V_x\,dX_t+\tfrac12 V_{xx}\,(dX_t)^2+o(dt).
+  \end{aligned}
+  $$
+
+- **Itô moments:**
+  
+  $$
+  \mathbb E_t[dW_t]=0,\quad \mathbb E_t[(dW_t)^2]=dt,\quad 
+  \mathbb E_t[dX_t]=\mu\,dt,\quad \mathbb E_t[(dX_t)^2]=\sigma^2\,dt.
+  $$
+
+---
+
+## Expected next value
+
+Plug $dX_t$ into the expansion and take conditional expectation:
+
+$$
+\begin{aligned}
+\mathbb E_t\!\big[V(X_{t+dt},t+dt)\big]
+&= \mathbb E_t\!\Big[V + V_t\,dt + V_x\,dX_t + \tfrac12 V_{xx}(dX_t)^2\Big] + o(dt) \\
+&= V + \Big(V_t + \mu V_x + \tfrac12 \sigma^2 V_{xx}\Big)\,dt + o(dt).
+\end{aligned}
+$$
+
+
+## Substitute into DPP
+
+Start from
+$$
+V = \max_{u_t}\left\{U\,dt + e^{-\rho dt}\,\mathbb E_t[V(X_{t+dt},t+dt)]\right\}.
+$$
+
+Insert the two expansions:
+$$
+\begin{aligned}
+V
+&=\max_{u_t}\Big\{U\,dt + (1-\rho dt)\Big[V + \big(V_t+\mu V_x+\tfrac12\sigma^2 V_{xx}\big)\,dt\Big] + o(dt)\Big\}\\
+&=\max_{u_t}\Big\{U\,dt + V + \big(V_t+\mu V_x+\tfrac12\sigma^2 V_{xx}\big)\,dt - \rho V\,dt + o(dt)\Big\} \\
+\rho V &=\max_{u_t}\Big\{U + V_t+\mu V_x+\tfrac12\sigma^2 V_{xx} - \rho V + \frac{o(dt)}{dt}\Big\}.
+\end{aligned}
+$$
+
+Letting $dt\to0$ yields the **HJB equation** which is a Partial Differential Equation (PDE).
+$$
+\rho V = \max_{u}\left\{U + V_t + \mu V_x + \tfrac12\sigma^2 V_{xx}\right\}.
+$$  
+
+---
+
+## Boundary / terminal conditions
+
+- The HJB equations captures the shape of the value function in the interior of the domain. To pin down a unique solution, we need to specify appropriate boundary/terminal conditions.
+
+- **E.g. Finite horizon $[0,T]$ with terminal payoff $G$:**
+  
+  $$
+  V(x,T)=G(x),\quad 
+  0=\max_u\left\{U(x,u) + V_t + \mu V_x + \tfrac12\sigma^2 V_{xx} - \rho V\right\}\ \text{on } [0,T).
+  $$
+
+- **Exit/reflecting boundaries:** specify appropriate boundary conditions at the domain ends (e.g., Dirichlet $V=\phi$ or Neumann $V_x=0$) depending on the economics.
+
+
+
+## Optimal control characterization (generic)
+
+- **Hamiltonian (1D):**
+  
+  $$
+  \mathcal H(x,t,u;V,V_x,V_{xx})=U(x,u)+\mu(x,u,t)\,V_x+\tfrac12\,\sigma^2(x,u,t)\,V_{xx}.
+  $$
+
+- **Optimizer:**
+  
+  $$
+  u^*(x,t)\in \arg\max_{u\in\mathcal U}\ \mathcal H(x,t,u;V,V_x,V_{xx}).
+  $$
+
+- **Interior FOC (plus lagrangian in case of constrained control):**
+
+  $$
+  \frac{\partial}{\partial u}\Big[U(x,u)+\mu(x,u,t)\,V_x+\tfrac12\,\sigma^2(x,u,t)\,V_{xx}\Big]\Big|_{u=u^*}=0,
+  $$
+  
+---
+
+## The Hamilton-Jacobi-Bellman Equation in Dynamic Portfolio Choice (Merton, 1971)
 
 - A representative investor chooses how much to consume and how to allocate wealth between a risky asset and a risk-free asset to maximize expected utility over an infinite horizon. $\omega_t$ is the fraction of wealth invested in the risky asset.
 
@@ -78,22 +214,6 @@ where $\mu(X_t, u_t) = \text{drift of } X_t$, $\sigma^2(X_t, u_t) = \text{varian
 $$
 V(W, t) = \max_{C_s, \omega_s} E_t\left[ \int_t^\infty e^{-\rho(s-t)} U(C_s) ds \right]
 $$
-
-**Dynamic programming principle:**
-
-$$
-V(W, t) = \max_{C, \omega} \left\{ U(C) + E_t\left[ V(W_{t+dt}, t+dt) \right] \right\}
-$$
-
-**Taylor expansion:**
-
-$$
-V(W + dW, t + dt) \approx V(W,t) + V_t dt + V_W dW + \frac{1}{2} V_{WW} (dW)^2
-$$
-
----
-
-## Wealth Dynamics (continued)
 
 **HJB equation derivation:**
 
@@ -106,11 +226,8 @@ where:
 - $\mu_W = \omega W \mu + (1-\omega) W r - C = \omega W (\mu - r) + W r - C$ (wealth drift)
 - $\sigma_W^2 = W^2 \omega^2 \sigma^2$ (wealth variance)
 
-**Final HJB equation:**
-
-$$
-\rho V(W,t) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial W} [r W + \omega W (\mu - r) - C] + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} W^2 \omega^2 \sigma^2 \right\}
-$$
+**Final HJB equation:** $\rho V(W,t) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial W} [r W + \omega W (\mu - r) - C] + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} W^2 \omega^2 \sigma^2 \right\}
+$
 
 ---
 
@@ -471,3 +588,13 @@ where $K$ is a constant determined by boundary conditions.
 - Look at behavior at time 0 and as time goes to infinity.
 - For example, make the value function bounded as time goes to infinity.
 - Value functions at zero normally are set depending on the context of the problem.
+
+---
+
+## Boundary conditions in portfolio choice
+
+- Initial wealth: $W_0 > 0$ (given)
+- Terminal condition: as $t \to \infty$, we typically want the value function to remain bounded.
+- This often implies that $u(t)$ should not grow faster than exponentially with rate $\rho$.
+- In the log utility case, we can set $K = 0$ to ensure boundedness as $t \to \infty$.
+- How to pin down $v(0)$ in the power utility case? Merton assumes stationarity, so $v(t)$ is constant over time. But in finite horizon setups, this would be determined by the terminal condition.

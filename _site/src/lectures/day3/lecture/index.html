@@ -149,13 +149,23 @@ Juan F. Imbet
 <section class="slide level0">
 
 <h2>Dynamic Asset Pricing Models</h2>
-<p><strong>Hamilton-Jacobi-Bellman Equations and Term Structure Models</strong></p>
-<h3>Basic Setup and Assumptions</h3>
+<p><strong>Hamilton-Jacobi-Bellman Equations</strong></p>
+<ul>
+<li><p>Hamilton: William Rowan Hamilton (1805-1865), Irish mathematician and physicist, formulated the Hamiltonian mechanics framework.</p></li>
+<li><p>Jacobi: Carl Gustav Jacob Jacobi (1804-1851), German mathematician, contributed to the development of the Hamiltonian formalism and the Hamilton-Jacobi equation.</p></li>
+<li><p>Bellman: Richard Bellman (1920-1984), American mathematician, developed dynamic programming and the Bellman equation. His book “Dynamic Programming” (1957) laid the foundation for modern optimal control theory.</p></li>
+<li><p>Idea behind HJB: Break down a dynamic optimization problem into smaller subproblems, solve each subproblem optimally, and use these solutions to construct the overall optimal solution.</p></li>
+<li><p>The Dynamic Programming Principle (DPP) states that the value of an optimal control problem at any given time depends only on the current state and the optimal strategy from that point onward.</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Basic Setup and Assumptions</h2>
 <p><strong>Assumptions:</strong></p>
 <ul>
 <li><strong>Time horizon:</strong> Infinite horizon <span class="math inline">\(t \in [0, \infty)\)</span></li>
 <li><strong>Investment opportunity set:</strong> Single risky asset with return dynamics</li>
-<li><strong>Investor preferences:</strong> Time-separable utility with constant relative risk aversion</li>
+<li><strong>Investor preferences:</strong> Time-separable utility</li>
 <li><strong>Markets:</strong> Frictionless, continuous trading</li>
 <li><strong>Information:</strong> Full information about state variables</li>
 </ul>
@@ -183,21 +193,121 @@ Juan F. Imbet
 <p><span class="math display">\[
 dX_t = \mu(X_t, u_t) dt + \sigma(X_t, u_t) dW_t
 \]</span></p>
+<p>where <span class="math inline">\(W_t\)</span> is a standard Brownian motion (<span class="math inline">\(dW_t \sim N(0, dt)\)</span>).</p>
 <ul>
 <li>Standard Discounted Utility:</li>
 </ul>
 <p><span class="math display">\[
 \max_{u_t} E_t \left[ \int_t^\infty e^{-\rho (s-t)} U(X_s, u_s) ds \right]
 \]</span></p>
-<p><strong>HJB Equation:</strong></p>
-<p><span class="math display">\[
-\rho V(X_t, t) = \max_{u_t} \left\{ U(X_t, u_t) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial X} \mu(X_t, u_t) + \frac{1}{2} \frac{\partial^2 V}{\partial X^2} \sigma^2(X_t, u_t) \right\}
-\]</span></p>
-<p>where <span class="math inline">\(\mu(X_t, u_t) = \text{drift of } X_t\)</span>, <span class="math inline">\(\sigma^2(X_t, u_t) = \text{variance of } X_t\)</span></p>
 </section>
 <section class="slide level0">
 
-<h2>The Hamilton-Jacobi-Bellman Equation in Dynamic Portfolio Choice</h2>
+<h2>Ito’s Lemma</h2>
+<ul>
+<li>Ito’s lemma is a fundamental result in stochastic calculus that provides a way to compute the differential of a function of a stochastic process.</li>
+<li>If <span class="math inline">\(X_t\)</span> follows the stochastic differential equation (SDE): <span class="math display">\[
+dX_t = \mu(X_t, t) dt + \sigma(X_t, t) dW_t,
+\]</span> and <span class="math inline">\(f(X_t, t)\)</span> is a twice-differentiable function, then Ito’s lemma states that: <span class="math display">\[
+df(X_t, t) = \left( \frac{\partial f}{\partial t} + \mu(X_t, t) \frac{\partial f}{\partial X} + \frac{1}{2} \sigma^2(X_t, t) \frac{\partial^2 f}{\partial X^2} \right) dt + \sigma(X_t, t) \frac{\partial f}{\partial X} dW_t
+\]</span></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Derivation of the HJB Equation (1D case)</h2>
+<ul>
+<li><p><strong>Objective (infinite horizon, discounted):</strong></p>
+<p><span class="math display">\[
+V(X_t,t)=\max_{u_s,\,s\ge t}\; \mathbb E_t\!\left[\int_t^\infty e^{-\rho (s-t)}\,U(X_s,u_s)\,ds\right],\qquad \rho&gt;0.
+\]</span></p></li>
+<li><p><strong>Dynamic Programming Principle (DPP):</strong> for small <span class="math inline">\(dt&gt;0\)</span>,</p>
+<p><span class="math display">\[
+V(X_t,t)=\max_{u_t}\left\{U(X_t,u_t)\,dt + e^{-\rho dt}\,\mathbb E_t\big[V(X_{t+dt},t+dt)\big]\right\}.
+\]</span></p></li>
+<li><p><strong>State dynamics (controlled Itô diffusion, 1D):</strong></p>
+<p><span class="math display">\[
+dX_t=\mu(X_t,u_t,t)\,dt+\sigma(X_t,u_t,t)\,dW_t.
+\]</span></p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>First-order expansions</h2>
+<ul>
+<li><p><strong>Discount factor:</strong> <span class="math inline">\(e^{-\rho dt}=1-\rho dt+o(dt)\)</span>.</p></li>
+<li><p><strong>Second-order Taylor–Itô expansion of <span class="math inline">\(V\)</span> around <span class="math inline">\((X_t,t)\)</span>:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+V(X_{t+dt},t+dt)
+&amp;\approx V(X_t,t)+V_t\,dt+V_x\,dX_t+\tfrac12 V_{xx}\,(dX_t)^2+o(dt).
+\end{aligned}
+\]</span></p></li>
+<li><p><strong>Itô moments:</strong></p>
+<p><span class="math display">\[
+\mathbb E_t[dW_t]=0,\quad \mathbb E_t[(dW_t)^2]=dt,\quad
+\mathbb E_t[dX_t]=\mu\,dt,\quad \mathbb E_t[(dX_t)^2]=\sigma^2\,dt.
+\]</span></p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Expected next value</h2>
+<p>Plug <span class="math inline">\(dX_t\)</span> into the expansion and take conditional expectation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb E_t\!\big[V(X_{t+dt},t+dt)\big]
+&amp;= \mathbb E_t\!\Big[V + V_t\,dt + V_x\,dX_t + \tfrac12 V_{xx}(dX_t)^2\Big] + o(dt) \\
+&amp;= V + \Big(V_t + \mu V_x + \tfrac12 \sigma^2 V_{xx}\Big)\,dt + o(dt).
+\end{aligned}
+\]</span></p>
+<h2>Substitute into DPP</h2>
+<p>Start from <span class="math display">\[
+V = \max_{u_t}\left\{U\,dt + e^{-\rho dt}\,\mathbb E_t[V(X_{t+dt},t+dt)]\right\}.
+\]</span></p>
+<p>Insert the two expansions: <span class="math display">\[
+\begin{aligned}
+V
+&amp;=\max_{u_t}\Big\{U\,dt + (1-\rho dt)\Big[V + \big(V_t+\mu V_x+\tfrac12\sigma^2 V_{xx}\big)\,dt\Big] + o(dt)\Big\}\\
+&amp;=\max_{u_t}\Big\{U\,dt + V + \big(V_t+\mu V_x+\tfrac12\sigma^2 V_{xx}\big)\,dt - \rho V\,dt + o(dt)\Big\} \\
+\rho V &amp;=\max_{u_t}\Big\{U + V_t+\mu V_x+\tfrac12\sigma^2 V_{xx} - \rho V + \frac{o(dt)}{dt}\Big\}.
+\end{aligned}
+\]</span></p>
+<p>Letting <span class="math inline">\(dt\to0\)</span> yields the <strong>HJB equation</strong> which is a Partial Differential Equation (PDE). <span class="math display">\[
+\rho V = \max_{u}\left\{U + V_t + \mu V_x + \tfrac12\sigma^2 V_{xx}\right\}.
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Boundary / terminal conditions</h2>
+<ul>
+<li><p>The HJB equations captures the shape of the value function in the interior of the domain. To pin down a unique solution, we need to specify appropriate boundary/terminal conditions.</p></li>
+<li><p><strong>E.g. Finite horizon <span class="math inline">\([0,T]\)</span> with terminal payoff <span class="math inline">\(G\)</span>:</strong></p>
+<p><span class="math display">\[
+V(x,T)=G(x),\quad
+0=\max_u\left\{U(x,u) + V_t + \mu V_x + \tfrac12\sigma^2 V_{xx} - \rho V\right\}\ \text{on } [0,T).
+\]</span></p></li>
+<li><p><strong>Exit/reflecting boundaries:</strong> specify appropriate boundary conditions at the domain ends (e.g., Dirichlet <span class="math inline">\(V=\phi\)</span> or Neumann <span class="math inline">\(V_x=0\)</span>) depending on the economics.</p></li>
+</ul>
+<h2>Optimal control characterization (generic)</h2>
+<ul>
+<li><p><strong>Hamiltonian (1D):</strong></p>
+<p><span class="math display">\[
+\mathcal H(x,t,u;V,V_x,V_{xx})=U(x,u)+\mu(x,u,t)\,V_x+\tfrac12\,\sigma^2(x,u,t)\,V_{xx}.
+\]</span></p></li>
+<li><p><strong>Optimizer:</strong></p>
+<p><span class="math display">\[
+u^*(x,t)\in \arg\max_{u\in\mathcal U}\ \mathcal H(x,t,u;V,V_x,V_{xx}).
+\]</span></p></li>
+<li><p><strong>Interior FOC (plus lagrangian in case of constrained control):</strong></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial u}\Big[U(x,u)+\mu(x,u,t)\,V_x+\tfrac12\,\sigma^2(x,u,t)\,V_{xx}\Big]\Big|_{u=u^*}=0,
+\]</span></p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>The Hamilton-Jacobi-Bellman Equation in Dynamic Portfolio Choice (Merton, 1971)</h2>
 <ul>
 <li>A representative investor chooses how much to consume and how to allocate wealth between a risky asset and a risk-free asset to maximize expected utility over an infinite horizon. <span class="math inline">\(\omega_t\)</span> is the fraction of wealth invested in the risky asset.</li>
 </ul>
@@ -205,18 +315,6 @@ dX_t = \mu(X_t, u_t) dt + \sigma(X_t, u_t) dW_t
 <p><span class="math display">\[
 V(W, t) = \max_{C_s, \omega_s} E_t\left[ \int_t^\infty e^{-\rho(s-t)} U(C_s) ds \right]
 \]</span></p>
-<p><strong>Dynamic programming principle:</strong></p>
-<p><span class="math display">\[
-V(W, t) = \max_{C, \omega} \left\{ U(C) + E_t\left[ V(W_{t+dt}, t+dt) \right] \right\}
-\]</span></p>
-<p><strong>Taylor expansion:</strong></p>
-<p><span class="math display">\[
-V(W + dW, t + dt) \approx V(W,t) + V_t dt + V_W dW + \frac{1}{2} V_{WW} (dW)^2
-\]</span></p>
-</section>
-<section class="slide level0">
-
-<h2>Wealth Dynamics (continued)</h2>
 <p><strong>HJB equation derivation:</strong></p>
 <p><span class="math display">\[
 \rho V(W,t) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial W} \mu_W + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} \sigma_W^2 \right\}
@@ -226,10 +324,7 @@ V(W + dW, t + dt) \approx V(W,t) + V_t dt + V_W dW + \frac{1}{2} V_{WW} (dW)^2
 <li><span class="math inline">\(\mu_W = \omega W \mu + (1-\omega) W r - C = \omega W (\mu - r) + W r - C\)</span> (wealth drift)</li>
 <li><span class="math inline">\(\sigma_W^2 = W^2 \omega^2 \sigma^2\)</span> (wealth variance)</li>
 </ul>
-<p><strong>Final HJB equation:</strong></p>
-<p><span class="math display">\[
-\rho V(W,t) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial W} [r W + \omega W (\mu - r) - C] + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} W^2 \omega^2 \sigma^2 \right\}
-\]</span></p>
+<p><strong>Final HJB equation:</strong> <span class="math inline">\(\rho V(W,t) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial t} + \frac{\partial V}{\partial W} [r W + \omega W (\mu - r) - C] + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} W^2 \omega^2 \sigma^2 \right\}\)</span></p>
 </section>
 <section class="slide level0">
 
@@ -501,6 +596,17 @@ u(t) = K e^{\rho t} - \frac{c}{\rho},
 <li>Look at behavior at time 0 and as time goes to infinity.</li>
 <li>For example, make the value function bounded as time goes to infinity.</li>
 <li>Value functions at zero normally are set depending on the context of the problem.</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Boundary conditions in portfolio choice</h2>
+<ul>
+<li>Initial wealth: <span class="math inline">\(W_0 &gt; 0\)</span> (given)</li>
+<li>Terminal condition: as <span class="math inline">\(t \to \infty\)</span>, we typically want the value function to remain bounded.</li>
+<li>This often implies that <span class="math inline">\(u(t)\)</span> should not grow faster than exponentially with rate <span class="math inline">\(\rho\)</span>.</li>
+<li>In the log utility case, we can set <span class="math inline">\(K = 0\)</span> to ensure boundedness as <span class="math inline">\(t \to \infty\)</span>.</li>
+<li>How to pin down <span class="math inline">\(v(0)\)</span> in the power utility case? Merton assumes stationarity, so <span class="math inline">\(v(t)\)</span> is constant over time. But in finite horizon setups, this would be determined by the terminal condition.</li>
 </ul>
 
 
