@@ -456,6 +456,50 @@ $$
 
 ---
 
+## Stationary consumption (fixed fraction of wealth)
+
+- Assume a stationary policy with consumption a constant fraction of wealth:
+  $$
+  C_t = \kappa W_t,\qquad \kappa>0\ \text{constant}.
+  $$
+- From the FOC obtained earlier, $C_t^* = W_t\,v(t)^{1/\gamma}$. Stationarity therefore requires $v(t)\equiv \bar v$ constant and
+  $$
+  \kappa = \bar v^{1/\gamma}.
+  $$
+- Set $v'(t)=0$ in the ODE $v'(t)=a\,v(t)+v(t)^{1+1/\gamma}$ to get
+  $$
+  0= a\,\bar v + \bar v^{\,1+1/\gamma} = \bar v\Big(a + \bar v^{1/\gamma}\Big).
+  $$
+  With $\bar v>0$, this yields
+  $$
+  \bar v^{1/\gamma} = -a \quad\Longrightarrow\quad \bar v = (-a)^{\gamma},\qquad \kappa = -a.
+  $$
+- Using the original parameters for $a$:
+  $$
+  \kappa = -a = -\Big[\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2\gamma\sigma^2}\Big]
+  = \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2\gamma\sigma^2} - \rho.
+  $$
+- Feasibility/boundedness: $\kappa>0\ \Leftrightarrow\ a<0$.
+
+---
+
+## Stationary solution summary
+
+- Constant value-function coefficient:
+  $$
+  v(t) \equiv \bar v = (-a)^{\gamma},\qquad a=\Big[\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2\gamma\sigma^2}\Big].
+  $$
+- Optimal stationary policies:
+  $$
+  \frac{C_t^*}{W_t} = \kappa = -a,\qquad \omega_t^* = \frac{\mu - r}{\gamma\,\sigma^2}.
+  $$
+- Stationarity and bounded value require
+  $$
+  \kappa>0 \ \Leftrightarrow\ a<0 \ \Leftrightarrow\ \rho < \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2\gamma\sigma^2}.
+  $$
+
+---
+
 ## Log Utility Solution
 
 ### Log Utility Assumptions
