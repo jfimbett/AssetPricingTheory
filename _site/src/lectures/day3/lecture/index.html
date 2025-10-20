@@ -363,11 +363,11 @@ V(W,t) = \frac{1}{1-\gamma} W^{1-\gamma} v(t)
 \]</span></p>
 <p><strong>Substitute derivatives:</strong></p>
 <p><span class="math display">\[
-\rho v(t) W^{1-\gamma} = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} + W^{1-\gamma} v'(t) + W^{-\gamma} v(t) [r W + \omega W (\mu - r) - C] + \frac{1}{2} (-\gamma W^{-\gamma-1} v(t)) W^2 \omega^2 \sigma^2 \right\}
+\rho \cdot \frac{1}{1-\gamma} v(t) W^{1-\gamma} = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} + \frac{1}{1-\gamma} W^{1-\gamma} v'(t) + W^{-\gamma} v(t) [r W + \omega W (\mu - r) - C] + \frac{1}{2} (-\gamma W^{-\gamma-1} v(t)) W^2 \omega^2 \sigma^2 \right\}
 \]</span></p>
-<p><strong>Divide both sides by <span class="math inline">\(W^{1-\gamma}\)</span>:</strong></p>
+<p><strong>Divide both sides by <span class="math inline">\(\dfrac{W^{1-\gamma}}{1-\gamma}\)</span> (i.e., multiply by <span class="math inline">\(\tfrac{1-\gamma}{W^{1-\gamma}}\)</span>):</strong></p>
 <p><span class="math display">\[
-\rho v(t) = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) [r + \omega (\mu - r) - C W^{-1}] - \frac{1}{2} \gamma v(t) \omega^2 \sigma^2 \right\}
+\rho v(t) = \max_{C,\omega} \left\{ C^{1-\gamma} W^{-(1-\gamma)} + v'(t) + (1-\gamma) v(t) \big[ r + \omega (\mu - r) - C/W \big] - \tfrac{1}{2} \gamma (1-\gamma) v(t) \omega^2 \sigma^2 \right\}
 \]</span></p>
 </section>
 <section class="slide level0">
@@ -375,14 +375,14 @@ V(W,t) = \frac{1}{1-\gamma} W^{1-\gamma} v(t)
 <h2>Continued HJB Solution</h2>
 <p><strong>First-order condition for consumption:</strong></p>
 <p><span class="math display">\[
-\frac{\partial}{\partial C} \left[ \frac{C^{1-\gamma}}{1-\gamma} W^{-\gamma} - v(t) C W^{-1} \right] = 0
+\frac{\partial}{\partial C} \left[ C^{1-\gamma} W^{-(1-\gamma)} - (1-\gamma) v(t) \frac{C}{W} \right] = 0
 \]</span> <span class="math display">\[
-C^{-\gamma} W^{-\gamma} - v(t) W^{-1} = 0
+C^{-\gamma} W^{-(1-\gamma)} - v(t) W^{-1} = 0
 \]</span> <span class="math display">\[
-C^{-\gamma} = v(t) W^{-1}
+C^{-\gamma} = v(t) W^{-\gamma}
 \]</span></p>
 <p><span class="math display">\[
-C^* = [v(t) W^{-1}]^{-1/\gamma} = W \cdot v(t)^{1/\gamma}
+\frac{C^*}{W} = v(t)^{-1/\gamma} \quad \Longrightarrow \quad C^* = W\, v(t)^{-1/\gamma}
 \]</span></p>
 <p><strong>First-order condition for portfolio:</strong></p>
 <p><span class="math display">\[
@@ -392,9 +392,9 @@ v(t) (\mu - r) - \gamma v(t) \omega \sigma^2 = 0
 \]</span> <span class="math display">\[
 \omega^* = \frac{\mu - r}{\gamma \sigma^2}
 \]</span></p>
-<p><strong>Substitute optimal controls back into HJB:</strong></p>
+<p><strong>Substitute optimal controls back into the normalized HJB and simplify:</strong></p>
 <p><span class="math display">\[
-\rho v(t) = \frac{[W \cdot v(t)^{1/\gamma}]^{1-\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) \left[ r + \frac{\mu - r}{\gamma \sigma^2} (\mu - r) - v(t)^{1/\gamma} \right] - \frac{1}{2} \gamma v(t) \left( \frac{\mu - r}{\gamma \sigma^2} \right)^2 \sigma^2
+\rho v(t) = v'(t) + (1-\gamma) r \, v(t) + (1-\gamma) \, \frac{(\mu - r)^2}{2\,\gamma\,\sigma^2} \, v(t) + \gamma\, v(t)^{1 - 1/\gamma}
 \]</span></p>
 </section>
 <section class="slide level0">
@@ -403,120 +403,55 @@ v(t) (\mu - r) - \gamma v(t) \omega \sigma^2 = 0
 <p><strong>Simplify step by step:</strong></p>
 <p><span class="math display">\[
 \begin{align*}
-\rho v(t) &amp;= \frac{v(t)}{1-\gamma} + v'(t) + r v(t) + \frac{(\mu - r)^2}{\gamma \sigma^2} v(t) - v(t)^{1 + 1/\gamma} - \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t) \\
-\rho v(t) &amp;= v'(t) + \frac{v(t)}{1-\gamma} + r v(t) + \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t) - v(t)^{1 + 1/\gamma} \\
-\rho v(t) &amp;= v'(t) + v(t) \left[ \frac{1}{1-\gamma} + r + \frac{(\mu - r)^2}{2 \gamma \sigma^2} \right] - v(t)^{1 + 1/\gamma} \\
-v'(t) + \Big[ \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} - \rho \Big] v(t) &amp;= v(t)^{1 + 1/\gamma}\\
-v'(t) &amp;= \Big[ \rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} \Big] v(t) + v(t)^{1 + 1/\gamma}
+v'(t) = \Big[ \rho - (1-\gamma) r - (1-\gamma) \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} \Big] v(t) - \gamma\, v(t)^{1 - 1/\gamma}
 \end{align*}
 \]</span></p>
 <ul>
-<li>This is a nonlinear ODE (Bernoulli type): <span class="math display">\[
-v'(t) = a\,v(t) + b\,v(t)^{1+1/\gamma}
-\]</span></li>
+<li>This is a nonlinear ODE. It becomes linear after the change of variables <span class="math display">\[
+y(t) := v(t)^{1/\gamma} \quad\Longrightarrow\quad v(t) = y(t)^\gamma,\ \ v'(t) = \gamma y(t)^{\gamma-1} y'(t).
+\]</span> Derivation (holds for any <span class="math inline">\(t\)</span>): starting from <span class="math display">\[
+v'(t) = a\,v(t) - \gamma\,v(t)^{1 - 1/\gamma},\quad a := \rho - (1-\gamma) r - (1-\gamma)\,\frac{(\mu-r)^2}{2\gamma\sigma^2},
+\]</span> use <span class="math inline">\(v=y^\gamma\)</span> and <span class="math inline">\(v' = \gamma y^{\gamma-1} y'\)</span> to get <span class="math display">\[
+\gamma\,y^{\gamma-1}\,y' = a\,y^\gamma - \gamma\,y^{\gamma-1}.
+\]</span> Divide both sides by <span class="math inline">\(\gamma\,y^{\gamma-1}&gt;0\)</span> (since <span class="math inline">\(v&gt;0\)</span> under power utility) to obtain the linear ODE <span class="math display">\[
+y'(t) = \frac{a}{\gamma}\,y(t) - 1,\qquad a := \rho - (1-\gamma) r - (1-\gamma)\,\frac{(\mu-r)^2}{2\gamma\sigma^2}.
+\]</span> Under stationarity, set <span class="math inline">\(y'(t)=0\)</span> to recover <span class="math inline">\(\bar y = \gamma/a\)</span>.</li>
 </ul>
 </section>
 <section class="slide level0">
 
-<h2>Bernoulli reduction and solution (step by step)</h2>
-<p>Let <span class="math inline">\(a,b\in\mathbb{R}\)</span> and <span class="math inline">\(\gamma&gt;0\)</span>. Consider <span class="math display">\[
-v'(t)= a\,v(t)+b\,v(t)^{1+1/\gamma}.
-\]</span></p>
-<p><strong>1) Substitution.</strong> Set <span class="math display">\[
-u(t)=v(t)^{-1/\gamma}\quad\Longrightarrow\quad u'(t)
-= -\frac{1}{\gamma}\,v(t)^{-1/\gamma-1}\,v'(t).
-\]</span></p>
-<p><strong>2) Express <span class="math inline">\(u'\)</span> using the ODE.</strong> From the ODE, <span class="math display">\[
-v'(t)=a\,v(t)+b\,v(t)^{1+1/\gamma}.
-\]</span> Multiply both sides by <span class="math inline">\(-\dfrac{1}{\gamma}v(t)^{-1/\gamma-1}\)</span>: <span class="math display">\[
--\frac{1}{\gamma}v^{-1/\gamma-1}v'
-= -\frac{a}{\gamma}v^{-1/\gamma}-\frac{b}{\gamma}.
-\]</span> The left-hand side is exactly <span class="math inline">\(u'(t)\)</span>, and <span class="math inline">\(v^{-1/\gamma}=u\)</span>, hence <span class="math display">\[
-u'(t)+\frac{a}{\gamma}u(t)=-\frac{b}{\gamma}.
-\]</span></p>
+<h2>Closed-form solution for v(t)</h2>
 <ul>
-<li>This is a linear ODE in <span class="math inline">\(u\)</span>.</li>
+<li>The linear ODE for <span class="math inline">\(y\)</span> has the explicit solution (for <span class="math inline">\(a\ne0\)</span>) <span class="math display">\[
+y(t) = \frac{\gamma}{a} + \Big(y(0) - \frac{\gamma}{a}\Big) e^{\frac{a}{\gamma} t},\qquad y(0)=v(0)^{1/\gamma}.
+\]</span> Hence <span class="math display">\[
+v(t) = y(t)^{\gamma} = \left( \frac{\gamma}{a} + \Big(v(0)^{1/\gamma} - \frac{\gamma}{a}\Big) e^{\frac{a}{\gamma} t} \right)^{\!\gamma}.
+\]</span> If <span class="math inline">\(a=0\)</span>, then <span class="math inline">\(y'(t)=-1\)</span> so <span class="math inline">\(y(t)=y(0)-t\)</span> and <span class="math inline">\(v(t)=y(t)^{\gamma}\)</span> until the horizon where <span class="math inline">\(y\)</span> remains positive.</li>
 </ul>
-</section>
-<section class="slide level0">
-
-<h2>Linear ODEs</h2>
-<p>Consider the general linear ODE</p>
-<p><span class="math display">\[
-u'(t) = a u(t) + b,
-\]</span> where <span class="math inline">\(a,b \in \mathbb{R}\)</span>.</p>
-<p>The solution is given by <span class="math display">\[
-u(t) = -\frac{b}{a} + C e^{a t},\qquad C \in \mathbb{R},
-\]</span></p>
-<p>Check by differentiation: <span class="math display">\[
-u'(t) = C a e^{a t} = a \left( -\frac{b}{a} + C e^{a t} \right) + b = a u(t) + b.
-\]</span></p>
-</section>
-<section class="slide level0">
-
-<h2>Continued Bernoulli reduction and solution</h2>
-<ul>
-<li>Back to our setup, we have</li>
-</ul>
-<p><span class="math display">\[
-u'(t) = - \frac{a}{\gamma} u(t)  -\frac{b}{\gamma}.
-\]</span></p>
-<ul>
-<li>The solution is <span class="math display">\[
-u(t) = -\frac{-b/\gamma}{-a/\gamma} + C e^{-\frac{a}{\gamma} t} = -\frac{b}{a} + C e^{-\frac{a}{\gamma} t},\qquad C \in \mathbb{R}.
-\]</span></li>
-</ul>
-<p>Compute <span class="math inline">\(C\)</span> using initial condition <span class="math inline">\(u(0) = v(0)^{-1/\gamma}\)</span>:</p>
-<p><span class="math display">\[
-u(0) = -\frac{b}{a} + C = v(0)^{-1/\gamma} \implies C = v(0)^{-1/\gamma} + \frac{b}{a}.
-\]</span></p>
-<ul>
-<li>Hence</li>
-</ul>
-<p><span class="math display">\[
-u(t) = -\frac{b}{a} + \left( v(0)^{-1/\gamma} + \frac{b}{a} \right) e^{-\frac{a}{\gamma} t}.
-\]</span></p>
-<p><span class="math display">\[
-v(t) = \left( -\frac{b}{a} + \left( v(0)^{-1/\gamma} + \frac{b}{a} \right) e^{-\frac{a}{\gamma} t} \right)^{-\gamma}.
-\]</span></p>
-</section>
-<section class="slide level0">
-
-<h2>Original parameters</h2>
-<p>Recall that</p>
-<p><span class="math display">\[
-\begin{align*}
-a &amp;= \Big[ \rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} \Big], \\
-b &amp;= 1.
-\end{align*}
-\]</span></p>
-<p>Replace <span class="math display">\[
-v(t) = \left( -\frac{1}{a} + \left( v(0)^{-1/\gamma} + \frac{1}{a} \right) e^{-\frac{a}{\gamma} t} \right)^{-\gamma}.
-\]</span></p>
-<p><span class="math display">\[
-v(t) = \left( -\frac{1}{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}} + \left( v(0)^{-1/\gamma} + \frac{1}{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}} \right) e^{-\frac{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}}{\gamma} t} \right)^{-\gamma}.
-\]</span></p>
 </section>
 <section class="slide level0">
 
 <h2>Stationary consumption (fixed fraction of wealth)</h2>
 <ul>
-<li>Assume a stationary policy with consumption a constant fraction of wealth: <span class="math display">\[
+<li><p>Assume a stationary policy with consumption a constant fraction of wealth: <span class="math display">\[
 C_t = \kappa W_t,\qquad \kappa&gt;0\ \text{constant}.
+\]</span></p></li>
+<li><p>From the FOC obtained earlier, <span class="math inline">\(\dfrac{C_t^*}{W_t} = v(t)^{-1/\gamma} = y(t)^{-1}\)</span>. Stationarity therefore requires <span class="math inline">\(v(t)\equiv \bar v\)</span> (equivalently <span class="math inline">\(y(t)\equiv \bar y\)</span>) constant and <span class="math display">\[
+0 = y'(t) = \frac{a}{\gamma}\,\bar y - 1 \quad\Longrightarrow\quad \bar y = \frac{\gamma}{a},\qquad \kappa = \frac{C_t^*}{W_t} = \bar y^{-1} = \frac{a}{\gamma}.
+\]</span></p>
+<p>Small derivation and link to the FOC:</p>
+<ul>
+<li>Recall the linear ODE for <span class="math inline">\(y\)</span>: <span class="math inline">\(\;y'(t)=\dfrac{a}{\gamma}\,y(t)-1\)</span>. A stationary policy means <span class="math inline">\(y(t)\)</span> is constant over time, so <span class="math inline">\(y'(t)=0\)</span> and hence <span class="math display">\[
+0 = \frac{a}{\gamma}\,\bar y - 1 \quad \Longrightarrow \quad \bar y = \frac{\gamma}{a}.
 \]</span></li>
-<li>From the FOC obtained earlier, <span class="math inline">\(C_t^* = W_t\,v(t)^{1/\gamma}\)</span>. Stationarity therefore requires <span class="math inline">\(v(t)\equiv \bar v\)</span> constant and <span class="math display">\[
-\kappa = \bar v^{1/\gamma}.
-\]</span></li>
-<li>Set <span class="math inline">\(v'(t)=0\)</span> in the ODE <span class="math inline">\(v'(t)=a\,v(t)+v(t)^{1+1/\gamma}\)</span> to get <span class="math display">\[
-0= a\,\bar v + \bar v^{\,1+1/\gamma} = \bar v\Big(a + \bar v^{1/\gamma}\Big).
-\]</span> With <span class="math inline">\(\bar v&gt;0\)</span>, this yields <span class="math display">\[
-\bar v^{1/\gamma} = -a \quad\Longrightarrow\quad \bar v = (-a)^{\gamma},\qquad \kappa = -a.
-\]</span></li>
-<li>Using the original parameters for <span class="math inline">\(a\)</span>: <span class="math display">\[
-\kappa = -a = -\Big[\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2\gamma\sigma^2}\Big]
-= \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2\gamma\sigma^2} - \rho.
-\]</span></li>
-<li>Feasibility/boundedness: <span class="math inline">\(\kappa&gt;0\ \Leftrightarrow\ a&lt;0\)</span>.</li>
+<li>From the consumption FOC we already obtained <span class="math inline">\(\dfrac{C_t^*}{W_t}=v(t)^{-1/\gamma}=y(t)^{-1}\)</span>. Evaluated at stationarity, this gives <span class="math display">\[
+\kappa := \frac{C_t^*}{W_t}=\bar y^{-1}=\frac{a}{\gamma}.
+\]</span> Interpretation: a larger <span class="math inline">\(a\)</span> (effective impatience net of return and risk adjustments) raises the optimal consumption-wealth ratio <span class="math inline">\(\kappa\)</span>.</li>
+</ul></li>
+<li><p>Using the definition of <span class="math inline">\(a\)</span>: <span class="math display">\[
+\kappa = \frac{1}{\gamma}\Big[\rho - (1-\gamma) r - (1-\gamma)\,\frac{(\mu - r)^2}{2\gamma\sigma^2}\Big].
+\]</span></p></li>
+<li><p>Feasibility/boundedness: <span class="math inline">\(\kappa&gt;0\ \Leftrightarrow\ a&gt;0\ \Leftrightarrow\ \rho &gt; (1-\gamma) r + (1-\gamma)\,\dfrac{(\mu - r)^2}{2\gamma\sigma^2}\)</span>.</p></li>
 </ul>
 </section>
 <section class="slide level0">
@@ -524,13 +459,13 @@ C_t = \kappa W_t,\qquad \kappa&gt;0\ \text{constant}.
 <h2>Stationary solution summary</h2>
 <ul>
 <li>Constant value-function coefficient: <span class="math display">\[
-v(t) \equiv \bar v = (-a)^{\gamma},\qquad a=\Big[\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2\gamma\sigma^2}\Big].
+v(t) \equiv \bar v = \Big(\tfrac{\gamma}{a}\Big)^{\!\gamma},\qquad a=\Big[\rho - (1-\gamma) r - (1-\gamma)\,\tfrac{(\mu - r)^2}{2\gamma\sigma^2}\Big].
 \]</span></li>
 <li>Optimal stationary policies: <span class="math display">\[
-\frac{C_t^*}{W_t} = \kappa = -a,\qquad \omega_t^* = \frac{\mu - r}{\gamma\,\sigma^2}.
+\frac{C_t^*}{W_t} = \kappa = \frac{a}{\gamma},\qquad \omega_t^* = \frac{\mu - r}{\gamma\,\sigma^2}.
 \]</span></li>
 <li>Stationarity and bounded value require <span class="math display">\[
-\kappa&gt;0 \ \Leftrightarrow\ a&lt;0 \ \Leftrightarrow\ \rho &lt; \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2\gamma\sigma^2}.
+\kappa&gt;0 \ \Leftrightarrow\ a&gt;0 \ \Leftrightarrow\ \rho &gt; (1-\gamma) r + (1-\gamma)\,\tfrac{(\mu - r)^2}{2\gamma\sigma^2}.
 \]</span></li>
 </ul>
 </section>

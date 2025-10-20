@@ -280,13 +280,13 @@ $$
 **Substitute derivatives:**
 
 $$
-\rho v(t) W^{1-\gamma} = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} + W^{1-\gamma} v'(t) + W^{-\gamma} v(t) [r W + \omega W (\mu - r) - C] + \frac{1}{2} (-\gamma W^{-\gamma-1} v(t)) W^2 \omega^2 \sigma^2 \right\}
+\rho \cdot \frac{1}{1-\gamma} v(t) W^{1-\gamma} = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} + \frac{1}{1-\gamma} W^{1-\gamma} v'(t) + W^{-\gamma} v(t) [r W + \omega W (\mu - r) - C] + \frac{1}{2} (-\gamma W^{-\gamma-1} v(t)) W^2 \omega^2 \sigma^2 \right\}
 $$
 
-**Divide both sides by $W^{1-\gamma}$:**
+**Divide both sides by $\dfrac{W^{1-\gamma}}{1-\gamma}$ (i.e., multiply by $\tfrac{1-\gamma}{W^{1-\gamma}}$):**
 
 $$
-\rho v(t) = \max_{C,\omega} \left\{ \frac{C^{1-\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) [r + \omega (\mu - r) - C W^{-1}] - \frac{1}{2} \gamma v(t) \omega^2 \sigma^2 \right\}
+\rho v(t) = \max_{C,\omega} \left\{ C^{1-\gamma} W^{-(1-\gamma)} + v'(t) + (1-\gamma) v(t) \big[ r + \omega (\mu - r) - C/W \big] - \tfrac{1}{2} \gamma (1-\gamma) v(t) \omega^2 \sigma^2 \right\}
 $$
 
 ---
@@ -296,17 +296,17 @@ $$
 **First-order condition for consumption:**
 
 $$
-\frac{\partial}{\partial C} \left[ \frac{C^{1-\gamma}}{1-\gamma} W^{-\gamma} - v(t) C W^{-1} \right] = 0
+\frac{\partial}{\partial C} \left[ C^{1-\gamma} W^{-(1-\gamma)} - (1-\gamma) v(t) \frac{C}{W} \right] = 0
 $$
 $$
-C^{-\gamma} W^{-\gamma} - v(t) W^{-1} = 0
+C^{-\gamma} W^{-(1-\gamma)} - v(t) W^{-1} = 0
 $$
 $$
-C^{-\gamma} = v(t) W^{-1}
+C^{-\gamma} = v(t) W^{-\gamma}
 $$
 
 $$
-C^* = [v(t) W^{-1}]^{-1/\gamma} = W \cdot v(t)^{1/\gamma}
+\frac{C^*}{W} = v(t)^{-1/\gamma} \quad \Longrightarrow \quad C^* = W\, v(t)^{-1/\gamma}
 $$
 
 
@@ -322,10 +322,10 @@ $$
 \omega^* = \frac{\mu - r}{\gamma \sigma^2}
 $$
 
-**Substitute optimal controls back into HJB:**
+**Substitute optimal controls back into the normalized HJB and simplify:**
 
 $$
-\rho v(t) = \frac{[W \cdot v(t)^{1/\gamma}]^{1-\gamma}}{1-\gamma} W^{-\gamma} + v'(t) + v(t) \left[ r + \frac{\mu - r}{\gamma \sigma^2} (\mu - r) - v(t)^{1/\gamma} \right] - \frac{1}{2} \gamma v(t) \left( \frac{\mu - r}{\gamma \sigma^2} \right)^2 \sigma^2
+\rho v(t) = v'(t) + (1-\gamma) r \, v(t) + (1-\gamma) \, \frac{(\mu - r)^2}{2\,\gamma\,\sigma^2} \, v(t) + \gamma\, v(t)^{1 - 1/\gamma}
 $$
 
 ---
@@ -336,123 +336,41 @@ $$
 
 $$
 \begin{align*}
-\rho v(t) &= \frac{v(t)}{1-\gamma} + v'(t) + r v(t) + \frac{(\mu - r)^2}{\gamma \sigma^2} v(t) - v(t)^{1 + 1/\gamma} - \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t) \\
-\rho v(t) &= v'(t) + \frac{v(t)}{1-\gamma} + r v(t) + \frac{(\mu - r)^2}{2 \gamma \sigma^2} v(t) - v(t)^{1 + 1/\gamma} \\
-\rho v(t) &= v'(t) + v(t) \left[ \frac{1}{1-\gamma} + r + \frac{(\mu - r)^2}{2 \gamma \sigma^2} \right] - v(t)^{1 + 1/\gamma} \\
-v'(t) + \Big[ \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} - \rho \Big] v(t) &= v(t)^{1 + 1/\gamma}\\
-v'(t) &= \Big[ \rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} \Big] v(t) + v(t)^{1 + 1/\gamma}
+v'(t) = \Big[ \rho - (1-\gamma) r - (1-\gamma) \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} \Big] v(t) - \gamma\, v(t)^{1 - 1/\gamma}
 \end{align*}
 $$
 
-- This is a nonlinear ODE (Bernoulli type): 
+- This is a nonlinear ODE. It becomes linear after the change of variables
 $$
-v'(t) = a\,v(t) + b\,v(t)^{1+1/\gamma}
+y(t) := v(t)^{1/\gamma} \quad\Longrightarrow\quad v(t) = y(t)^\gamma,\ \ v'(t) = \gamma y(t)^{\gamma-1} y'(t).
 $$
+Derivation (holds for any $t$): starting from
+$$
+v'(t) = a\,v(t) - \gamma\,v(t)^{1 - 1/\gamma},\quad a := \rho - (1-\gamma) r - (1-\gamma)\,\frac{(\mu-r)^2}{2\gamma\sigma^2},
+$$
+use $v=y^\gamma$ and $v' = \gamma y^{\gamma-1} y'$ to get
+$$
+\gamma\,y^{\gamma-1}\,y' = a\,y^\gamma - \gamma\,y^{\gamma-1}.
+$$
+Divide both sides by $\gamma\,y^{\gamma-1}>0$ (since $v>0$ under power utility) to obtain the linear ODE
+$$
+y'(t) = \frac{a}{\gamma}\,y(t) - 1,\qquad a := \rho - (1-\gamma) r - (1-\gamma)\,\frac{(\mu-r)^2}{2\gamma\sigma^2}.
+$$
+Under stationarity, set $y'(t)=0$ to recover $\bar y = \gamma/a$.
 
 ---
 
-## Bernoulli reduction and solution (step by step)
+## Closed-form solution for v(t)
 
-Let $a,b\in\mathbb{R}$ and $\gamma>0$. Consider
+- The linear ODE for $y$ has the explicit solution (for $a\ne0$)
 $$
-v'(t)= a\,v(t)+b\,v(t)^{1+1/\gamma}.
+y(t) = \frac{\gamma}{a} + \Big(y(0) - \frac{\gamma}{a}\Big) e^{\frac{a}{\gamma} t},\qquad y(0)=v(0)^{1/\gamma}.
 $$
-
-**1) Substitution.** Set
+Hence
 $$
-u(t)=v(t)^{-1/\gamma}\quad\Longrightarrow\quad u'(t)
-= -\frac{1}{\gamma}\,v(t)^{-1/\gamma-1}\,v'(t).
+v(t) = y(t)^{\gamma} = \left( \frac{\gamma}{a} + \Big(v(0)^{1/\gamma} - \frac{\gamma}{a}\Big) e^{\frac{a}{\gamma} t} \right)^{\!\gamma}.
 $$
-
-**2) Express $u'$ using the ODE.** From the ODE,
-$$
-v'(t)=a\,v(t)+b\,v(t)^{1+1/\gamma}.
-$$
-Multiply both sides by $-\dfrac{1}{\gamma}v(t)^{-1/\gamma-1}$:
-$$
--\frac{1}{\gamma}v^{-1/\gamma-1}v'
-= -\frac{a}{\gamma}v^{-1/\gamma}-\frac{b}{\gamma}.
-$$
-The left-hand side is exactly $u'(t)$, and $v^{-1/\gamma}=u$, hence
-$$
-u'(t)+\frac{a}{\gamma}u(t)=-\frac{b}{\gamma}.
-$$
-
-- This is a linear ODE in $u$. 
-
----
-
-## Linear ODEs
-
-Consider the general linear ODE
-
-$$
-u'(t) = a u(t) + b,
-$$
-where $a,b \in \mathbb{R}$.
-
-The solution is given by
-$$
-u(t) = -\frac{b}{a} + C e^{a t},\qquad C \in \mathbb{R},
-$$
-
-Check by differentiation:
-$$
-u'(t) = C a e^{a t} = a \left( -\frac{b}{a} + C e^{a t} \right) + b = a u(t) + b.
-$$
-
----
-
-## Continued Bernoulli reduction and solution
-
-- Back to our setup, we have
-
-$$
-u'(t) = - \frac{a}{\gamma} u(t)  -\frac{b}{\gamma}.
-$$
-
-- The solution is
-$$
-u(t) = -\frac{-b/\gamma}{-a/\gamma} + C e^{-\frac{a}{\gamma} t} = -\frac{b}{a} + C e^{-\frac{a}{\gamma} t},\qquad C \in \mathbb{R}.
-$$
-
-Compute $C$ using initial condition $u(0) = v(0)^{-1/\gamma}$:
-
-$$
-u(0) = -\frac{b}{a} + C = v(0)^{-1/\gamma} \implies C = v(0)^{-1/\gamma} + \frac{b}{a}.
-$$
-
-- Hence
-
-$$
-u(t) = -\frac{b}{a} + \left( v(0)^{-1/\gamma} + \frac{b}{a} \right) e^{-\frac{a}{\gamma} t}.
-$$
-
-$$
-v(t) = \left( -\frac{b}{a} + \left( v(0)^{-1/\gamma} + \frac{b}{a} \right) e^{-\frac{a}{\gamma} t} \right)^{-\gamma}.
-$$
-
----
-
-## Original parameters
-
-Recall that
-
-$$
-\begin{align*}
-a &= \Big[ \rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2} \Big], \\
-b &= 1.
-\end{align*}
-$$
-
-Replace 
-$$
-v(t) = \left( -\frac{1}{a} + \left( v(0)^{-1/\gamma} + \frac{1}{a} \right) e^{-\frac{a}{\gamma} t} \right)^{-\gamma}.
-$$
-
-$$
-v(t) = \left( -\frac{1}{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}} + \left( v(0)^{-1/\gamma} + \frac{1}{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}} \right) e^{-\frac{\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2 \gamma \sigma^2}}{\gamma} t} \right)^{-\gamma}.
-$$
+If $a=0$, then $y'(t)=-1$ so $y(t)=y(0)-t$ and $v(t)=y(t)^{\gamma}$ until the horizon where $y$ remains positive.
 
 ---
 
@@ -462,24 +380,27 @@ $$
   $$
   C_t = \kappa W_t,\qquad \kappa>0\ \text{constant}.
   $$
-- From the FOC obtained earlier, $C_t^* = W_t\,v(t)^{1/\gamma}$. Stationarity therefore requires $v(t)\equiv \bar v$ constant and
+- From the FOC obtained earlier, $\dfrac{C_t^*}{W_t} = v(t)^{-1/\gamma} = y(t)^{-1}$. Stationarity therefore requires $v(t)\equiv \bar v$ (equivalently $y(t)\equiv \bar y$) constant and
   $$
-  \kappa = \bar v^{1/\gamma}.
+  0 = y'(t) = \frac{a}{\gamma}\,\bar y - 1 \quad\Longrightarrow\quad \bar y = \frac{\gamma}{a},\qquad \kappa = \frac{C_t^*}{W_t} = \bar y^{-1} = \frac{a}{\gamma}.
   $$
-- Set $v'(t)=0$ in the ODE $v'(t)=a\,v(t)+v(t)^{1+1/\gamma}$ to get
+
+  Small derivation and link to the FOC:
+
+  - Recall the linear ODE for $y$: $\;y'(t)=\dfrac{a}{\gamma}\,y(t)-1$. A stationary policy means $y(t)$ is constant over time, so $y'(t)=0$ and hence
+    $$
+    0 = \frac{a}{\gamma}\,\bar y - 1 \quad \Longrightarrow \quad \bar y = \frac{\gamma}{a}.
+    $$
+  - From the consumption FOC we already obtained $\dfrac{C_t^*}{W_t}=v(t)^{-1/\gamma}=y(t)^{-1}$. Evaluated at stationarity, this gives
+    $$
+    \kappa := \frac{C_t^*}{W_t}=\bar y^{-1}=\frac{a}{\gamma}.
+    $$
+  Interpretation: a larger $a$ (effective impatience net of return and risk adjustments) raises the optimal consumption-wealth ratio $\kappa$.
+- Using the definition of $a$:
   $$
-  0= a\,\bar v + \bar v^{\,1+1/\gamma} = \bar v\Big(a + \bar v^{1/\gamma}\Big).
+  \kappa = \frac{1}{\gamma}\Big[\rho - (1-\gamma) r - (1-\gamma)\,\frac{(\mu - r)^2}{2\gamma\sigma^2}\Big].
   $$
-  With $\bar v>0$, this yields
-  $$
-  \bar v^{1/\gamma} = -a \quad\Longrightarrow\quad \bar v = (-a)^{\gamma},\qquad \kappa = -a.
-  $$
-- Using the original parameters for $a$:
-  $$
-  \kappa = -a = -\Big[\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2\gamma\sigma^2}\Big]
-  = \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2\gamma\sigma^2} - \rho.
-  $$
-- Feasibility/boundedness: $\kappa>0\ \Leftrightarrow\ a<0$.
+- Feasibility/boundedness: $\kappa>0\ \Leftrightarrow\ a>0\ \Leftrightarrow\ \rho > (1-\gamma) r + (1-\gamma)\,\dfrac{(\mu - r)^2}{2\gamma\sigma^2}$.
 
 ---
 
@@ -487,15 +408,15 @@ $$
 
 - Constant value-function coefficient:
   $$
-  v(t) \equiv \bar v = (-a)^{\gamma},\qquad a=\Big[\rho - \tfrac{1}{1-\gamma} - r - \tfrac{(\mu - r)^2}{2\gamma\sigma^2}\Big].
+  v(t) \equiv \bar v = \Big(\tfrac{\gamma}{a}\Big)^{\!\gamma},\qquad a=\Big[\rho - (1-\gamma) r - (1-\gamma)\,\tfrac{(\mu - r)^2}{2\gamma\sigma^2}\Big].
   $$
 - Optimal stationary policies:
   $$
-  \frac{C_t^*}{W_t} = \kappa = -a,\qquad \omega_t^* = \frac{\mu - r}{\gamma\,\sigma^2}.
+  \frac{C_t^*}{W_t} = \kappa = \frac{a}{\gamma},\qquad \omega_t^* = \frac{\mu - r}{\gamma\,\sigma^2}.
   $$
 - Stationarity and bounded value require
   $$
-  \kappa>0 \ \Leftrightarrow\ a<0 \ \Leftrightarrow\ \rho < \tfrac{1}{1-\gamma} + r + \tfrac{(\mu - r)^2}{2\gamma\sigma^2}.
+  \kappa>0 \ \Leftrightarrow\ a>0 \ \Leftrightarrow\ \rho > (1-\gamma) r + (1-\gamma)\,\tfrac{(\mu - r)^2}{2\gamma\sigma^2}.
   $$
 
 ---
