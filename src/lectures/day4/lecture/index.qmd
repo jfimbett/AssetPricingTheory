@@ -273,7 +273,7 @@ E_t[R_{t+1}^i]-R_{t+1}^f \approx b\;\text{Cov}_t(R_{t+1}^i,R^K_{t+1}),
 $$
 which is the **investment-based CAPM** form.
 
-**Remark**: The exact SDF is the MRS; the return-on-capital representation is an **approximation** or **factor model** motivated by the investment FOCs and equilibrium relations.
+
 
 ---
 
