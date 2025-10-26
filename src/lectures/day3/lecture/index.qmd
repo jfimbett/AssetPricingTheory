@@ -391,6 +391,11 @@ If $a=0$, then $y'(t)=-1$ so $y(t)=y(0)-t$ and $v(t)=y(t)^{\gamma}$ until the ho
     $$
     0 = \frac{a}{\gamma}\,\bar y - 1 \quad \Longrightarrow \quad \bar y = \frac{\gamma}{a}.
     $$
+
+---
+
+## Stationary consumption (fixed fraction of wealth) continued
+
   - From the consumption FOC we already obtained $\dfrac{C_t^*}{W_t}=v(t)^{-1/\gamma}=y(t)^{-1}$. Evaluated at stationarity, this gives
     $$
     \kappa := \frac{C_t^*}{W_t}=\bar y^{-1}=\frac{a}{\gamma}.
@@ -418,6 +423,185 @@ If $a=0$, then $y'(t)=-1$ so $y(t)=y(0)-t$ and $v(t)=y(t)^{\gamma}$ until the ho
   $$
   \kappa>0 \ \Leftrightarrow\ a>0 \ \Leftrightarrow\ \rho > (1-\gamma) r + (1-\gamma)\,\tfrac{(\mu - r)^2}{2\gamma\sigma^2}.
   $$
+
+---
+
+## Solve for the stationary Part 2
+
+- We assumed separability between $W$ and $t$ in the value function, e.g. $V(W,t)=f(W)v(t)$ and realized that a good candidate for $f(W)$ would have the same shape as the utility function.
+- This is because a permanent increase in consumption in the infinite horizon problem, should have the same impact on the value function. 
+
+For $\Delta>0$,
+$$
+\begin{aligned}
+ \mathbb{E}\Big[\int_t^\infty e^{-\rho(s-t)} U(C_s\times \Delta) ds \Big] &= \Delta^{1-\gamma} \mathbb{E}\Big[\int_t^\infty e^{-\rho(s-t)} U(C_s) ds \Big] \\
+ &= \Delta^{1-\gamma} V(W, t) \\
+ &= V(\Delta W,t)
+ \end{aligned}
+$$
+
+---
+
+## Continuation, retrieving the shape of the value function. 
+
+- Assume a stationary problem $V=V(W)$
+- The HJB becomes 
+
+$$
+\rho V(W) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial W} (\omega W (\mu - r) + W r - C) + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} W^2 \omega^2 \sigma^2 \right\}
+$$
+
+First Order Conditions
+
+$$
+\begin{aligned}
+U'(C) &= \frac{\partial V}{\partial W}\\
+C^{-\gamma} = \frac{\partial V}{\partial W} \\
+C = \Big(\frac{\partial V}{\partial W}\Big)^{-\frac{1}{\gamma}} \\
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\frac{\partial V}{\partial W} (W(\mu-r)) + \frac{\partial^2 V}{\partial W^2}(\omega W^2 \sigma^2) &= 0\\
+\omega &= \frac{- \frac{\partial V}{\partial W} (W(\mu-r)) }{\frac{\partial^2 V}{\partial W^2} W^2 \sigma^2}
+\end{aligned}
+$$
+
+---
+
+## Continuation
+
+From the FOCs
+$$
+C=(V_W)^{-1/\gamma},\qquad 
+\omega^*=-\,\frac{V_W\,W(\mu-r)}{V_{WW}\,W^2\sigma^2}=-\,\frac{\mu-r}{\sigma^2}\,\frac{V_W}{W V_{WW}},
+$$
+plug back into the HJB:
+$$
+\rho V(W)
+= \frac{(V_W)^{-\frac{1-\gamma}{\gamma}}}{1-\gamma}
++ V_W\big(\omega^* W(\mu-r)+Wr-C\big)
++ \tfrac12 V_{WW} W^2 (\omega^*)^2 \sigma^2.
+$$
+
+Compute the $\omega$-parts:
+
+$$
+\omega^* W(\mu-r)=-\,\frac{V_W(\mu-r)^2}{V_{WW}\sigma^2},\qquad
+\tfrac12 V_{WW}W^2(\omega^*)^2\sigma^2=\frac12\,\frac{V_W^2(\mu-r)^2}{V_{WW}\sigma^2}.
+$$
+Hence
+$$
+V_W\big(\omega^* W(\mu-r)\big)+\tfrac12 V_{WW}W^2(\omega^*)^2\sigma^2
+= -\,\frac12\,\frac{(\mu-r)^2}{\sigma^2}\,\frac{V_W^2}{V_{WW}}.
+$$
+
+Also $C=(V_W)^{-1/\gamma}$ gives
+
+$$
+U(C)=\frac{(V_W)^{-\frac{1-\gamma}{\gamma}}}{1-\gamma},\qquad
+-\,V_W C = -(V_W)^{1-\frac1\gamma}.
+$$
+
+---
+
+## Continuation
+
+Therefore, the HJB reduces to the following **nonlinear second-order ODE in $V$**:
+$$
+\begin{aligned}
+\rho V(W)
+&=\frac{(V_W)^{1-\frac{1}{\gamma}}}{1-\gamma}
++ r\,W\,V_W
+-(V_W)^{1-\frac1\gamma}
+-\frac{1}{2}\,\frac{(\mu-r)^2}{\sigma^2}\,\frac{V_W^{2}}{V_{WW}} \\
+&=\Big[\frac{1}{1-\gamma}-1\Big](V_W)^{1-\frac{1}{\gamma}}
++ r\,W\,V_W
+-\frac{1}{2}\,\frac{(\mu-r)^2}{\sigma^2}\,\frac{V_W^{2}}{V_{WW}}
+\end{aligned}
+$$
+
+What do we know about $V$? 
+
+$$
+V(\Delta W) = \Delta^{1-\gamma} V(W)
+$$
+
+Only a function of the form $\kappa W^{1-\gamma}$ has that property. Define the guess
+
+$$
+V(W) = \frac{K}{1-\gamma} W^{1-\gamma}
+$$
+
+---
+
+## Solving the ODE (by homogeneity)
+
+The problem is scale-invariant (CRRA utility, linear wealth dynamics, no other state),
+so $V(\lambda W)=\lambda^{\,1-\gamma}V(W)$. Hence
+$$
+V(W)=\frac{K}{1-\gamma}\,W^{1-\gamma},\qquad K>0.
+$$
+Then
+$$
+V_W=K\,W^{-\gamma},\qquad V_{WW}=-\gamma K\,W^{-\gamma-1}.
+$$
+
+Plug into the ODE:
+
+- $(V_W)^{-\frac{1-\gamma}{\gamma}}=K^{-\frac{1-\gamma}{\gamma}}W^{1-\gamma}$,
+- $(V_W)^{1-\frac1\gamma}=K^{\frac{\gamma-1}{\gamma}}W^{1-\gamma}$,
+- $\dfrac{V_W^2}{V_{WW}}=-\dfrac{K}{\gamma}\,W^{1-\gamma}$,
+- $r\,W\,V_W=rK\,W^{1-\gamma}$,
+- $\rho V=\rho\,\dfrac{K}{1-\gamma}\,W^{1-\gamma}$.
+
+---
+
+## Continuation
+
+Divide by $W^{1-\gamma}$ to obtain an algebraic equation for $K$:
+$$
+\rho\,\frac{K}{1-\gamma}
+=\frac{K^{-\frac{1-\gamma}{\gamma}}}{1-\gamma}
++rK
+- K^{\frac{\gamma-1}{\gamma}}
++\frac{1}{2}\frac{(\mu-r)^2}{\sigma^2}\,\frac{K}{\gamma}.
+$$
+
+Let $y:=K^{1/\gamma}$ (so $K=y^\gamma$). Using $K^{-\frac{1-\gamma}{\gamma}}=y^{\gamma-1}$ and
+$K^{\frac{\gamma-1}{\gamma}}=y^{\gamma-1}$, this collapses to
+$$
+\rho\,y
+=\gamma+(1-\gamma)\,r\,y
++\frac{1-\gamma}{2\gamma}\frac{(\mu-r)^2}{\sigma^2}\,y.
+$$
+Thus
+$$
+\boxed{\;
+y=\frac{\gamma}{\rho-(1-\gamma)\!\left(r+\frac{(\mu-r)^2}{2\gamma\sigma^2}\right)}
+\;},\qquad
+K=y^\gamma.
+$$
+
+---
+
+## Continuation
+
+Therefore the **value function** and **policies** are
+$$
+\boxed{\;
+V(W)=\frac{W^{1-\gamma}}{1-\gamma}\left[\frac{\gamma}{\rho-(1-\gamma)\!\left(r+\frac{(\mu-r)^2}{2\gamma\sigma^2}\right)}\right]^{\!\gamma}
+\;}
+$$
+
+Optimal controls:
+$$
+\omega^*=\frac{\mu-r}{\gamma\sigma^2},\qquad
+\frac{C^*}{W}=(V_W)^{-1/\gamma}=y^{-1}
+=\frac{\rho-(1-\gamma)\!\left(r+\frac{(\mu-r)^2}{2\gamma\sigma^2}\right)}{\gamma}.
+$$
+
 
 ---
 
@@ -563,3 +747,8 @@ where $K$ is a constant determined by boundary conditions.
 - This often implies that $u(t)$ should not grow faster than exponentially with rate $\rho$.
 - In the log utility case, we can set $K = 0$ to ensure boundedness as $t \to \infty$.
 - How to pin down $v(0)$ in the power utility case? Merton assumes stationarity, so $v(t)$ is constant over time. But in finite horizon setups, this would be determined by the terminal condition.
+
+
+
+
+

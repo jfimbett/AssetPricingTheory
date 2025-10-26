@@ -1,5 +1,5 @@
 ---
-title: "Day 4: Fixed Income Securities"
+title: "Production-Based Asset Pricing"
 subtitle: "Asset Pricing Theory"
 author: "Juan F. Imbet"
 institute: "Paris Dauphine University-PSL"
@@ -10,415 +10,502 @@ format:
     slide-number: true
     chalkboard: true
     preview-links: auto
-    footer: "Asset Pricing Theory - Day 4"
+    footer: "Asset Pricing Theory"
 ---
 
-## Fixed Income Securities {.center}
+## Production-Based Asset Pricing {.center}
 
-**Mathematical Foundations of Bond Pricing, Credit Risk, and Derivatives**
+**Advanced Equilibrium Models**
 
-## Bond Pricing Theory
+How firm investment and production decisions affect asset prices through the stochastic discount factor
 
-### Present Value Framework
+---
 
-**Assumptions:**
-1. **Risk-neutral pricing:** Asset prices are expectations under risk-neutral measure Q
-2. **No arbitrage:** Law of one price holds
-3. **Complete markets:** All contingent claims can be priced
-4. **Time-additive discounting:** Exponential discounting
+## Overview & Agenda
 
-**Bond price as discounted cash flows:**
-$$P(t,T) = E_t^Q\left[\sum_{i=1}^n c_i e^{-\int_t^{T_i} r_s ds} + F e^{-\int_t^T r_s ds}\right]$$
+**Focus**: Production economies where firms make investment decisions
 
-**Under risk-neutral measure Q:**
-- Discount factor: $P(t,T) = E_t^Q[e^{-\int_t^T r_s ds}]$
-- Forward rates: $f(t,T,T+\delta) = -\frac{\partial}{\partial \delta} \ln P(t,T+\delta)$
+**Key Insight**: Asset prices reflect both consumption and investment opportunities
 
-**Derivation of forward rates:**
-$$\frac{\partial}{\partial \delta} \ln P(t,T+\delta) = \frac{1}{P(t,T+\delta)} \frac{\partial P(t,T+\delta)}{\partial \delta}$$
-$$f(t,T,T+\delta) = -\frac{1}{P(t,T+\delta)} \frac{\partial P(t,T+\delta)}{\partial \delta}$$
+**Main Contributors**: Cochrane (1991, 1996), Jermann (1998), Zhang (2005), Belo (2010), etc.
 
-### Duration and Convexity
+**Topics**:
 
-**Macaulay duration derivation:**
-- Weighted average time to receive cash flows
-- Weights are present values of cash flows
-$$D_{mac} = \frac{\sum_{i=1}^n t_i \cdot \frac{c_i}{(1+y)^i} + T \cdot \frac{F}{(1+y)^T}}{P}$$
+1. Production Economy Setup  
+2. Household SDF and Firm Optimality  
+3. q-Theory and the Return on Capital  
+4. Cochrane's Production-Based Model  
+5. Investment-Specific Technology (IST)  
+6. Equilibrium & Empirical Implications
 
-**Modified duration:**
-- Measures percentage price change for small yield changes
-$$D_{mod} = -\frac{1}{P} \frac{\partial P}{\partial y}$$
+---
 
-**Relationship to Macaulay duration:**
-$$D_{mod} = \frac{D_{mac}}{1+y}$$
+## Production Economy Framework
 
-**Convexity derivation:**
-- Second derivative measures curvature of price-yield relationship
-$$C = \frac{1}{P} \frac{\partial^2 P}{\partial y^2}$$
+### Objects and Notation
 
-**For coupon bond:**
-$$C = \frac{1}{P(1+y)^2} \sum_{i=1}^n t_i(t_i+1) \frac{c_i}{(1+y)^i} + \frac{T(T+1)F}{P(1+y)^T}$$
+- Time is discrete, $t=0,1,2,\dots$.
+- A single **consumption good** is the numeraire. Let $P_t^C \equiv 1$.
+- Firms use capital $K_t$ and labor $L_t$ to produce output $Y_t$.
+- Capital accumulates with depreciation $\delta \in (0,1)$ and possibly **convex adjustment costs**.
 
-**Taylor expansion approximation:**
-$$\frac{\Delta P}{P} \approx -D_{mod} \Delta y + \frac{1}{2} C (\Delta y)^2$$
+### Technology
 
-**Error bound:** Higher-order terms become important for large yield changes
+$$
+Y_t = F(K_t, Z_t L_t),\qquad F_K>0,\;F_L>0,\;F_{KK}<0,\;F_{LL}<0,
+$$
 
-## Term Structure Models
+$$
+K_{t+1} = (1-\delta)K_t + \Phi(I_t,K_t),\qquad \Phi_I>0,\;\Phi_{II}\le 0,
+$$
 
-### Vasicek Model
+where $\Phi(I,K)$ converts investment goods $I_t$ into installed capital; with no adjustment costs, $\Phi(I,K)=I$.
 
-**Short rate dynamics:**
-$$dr_t = \kappa(\theta - r_t)dt + \sigma dW_t$$
+---
 
-**Assumptions:**
-1. **Ornstein-Uhlenbeck process:** Mean-reverting Gaussian process
-2. **Constant volatility:** Diffusion term independent of r_t
-3. **Complete markets:** Risk-neutral dynamics same as physical
+## Household Problem
 
-**Economic interpretation:**
-- $\kappa$: Speed of mean reversion (higher = faster reversion)
-- $\theta$: Long-run mean of short rate
-- $\sigma$: Volatility of short rate innovations
+### Representative Household
 
-**Bond price solution:**
-$$P(t,T) = e^{A(t,T) - B(t,T) r_t}$$
+Preferences:
+$$
+\max_{\{C_t,L_t,\{x^i_t\}\}} E_0 \sum_{t=0}^{\infty} \beta^t u(C_t,1-L_t),\qquad 0<\beta<1,
+$$
+with $u_C>0$, $u_{CC}<0$, $u_{1-L}>0$, $u_{(1-L)(1-L)}<0$.
 
-**Derivation of B(t,T):**
-- Satisfies Riccati equation: $B'(t,T) = -1 + \kappa B(t,T)$
-- Boundary condition: $B(T,T) = 0$
-- Solution: $B(t,T) = \frac{1 - e^{-\kappa(T-t)}}{\kappa}$
+Budget constraint in units of consumption:
+$$
+C_t + \sum_i p_t^i x_t^i \le w_t L_t + \sum_i x_{t-1}^i d_t^i + \Pi_t,
+$$
+where $x_t^i$ is holdings of asset $i$, $p_t^i$ its ex-dividend price, $d_t^i$ its dividend, $w_t$ the wage, and $\Pi_t$ firm profits rebated to households.
 
-**Derivation of A(t,T):**
-- Satisfies: $A'(t,T) = -\frac{1}{2} \sigma^2 B(t,T)^2 - \kappa \theta B(t,T)$
-- Solution: $A(t,T) = \left(\theta - \frac{\sigma^2}{2\kappa^2}\right)(B(t,T) - (T-t)) - \frac{\sigma^2}{4\kappa} B(t,T)^2$
+---
 
-### Cox-Ingersoll-Ross (CIR) Model
+## Stochastic Discount Factor (SDF)
 
-**Square-root diffusion:**
-$$dr_t = \kappa(\theta - r_t)dt + \sigma \sqrt{r_t} dW_t$$
+Household optimality implies for any traded payoff $R_{t+1}^i \equiv \dfrac{p_{t+1}^i+d_{t+1}^i}{p_t^i}$:
+$$
+1 = E_t\big[M_{t+1} R_{t+1}^i\big],\qquad
+M_{t+1} \equiv \beta\,\frac{u_C(C_{t+1},1-L_{t+1})}{u_C(C_t,1-L_t)}.
+$$
 
-**Key assumptions:**
-1. **State-dependent volatility:** Prevents negative interest rates
-2. **Affine structure:** Bond prices remain exponential-affine
-3. **Feller condition:** $2\kappa\theta > \sigma^2$ ensures strictly positive rates
+**Proof**: The Lagrangian for the household problem includes:
+$$
+\mathcal{L} = E_0 \sum_{t=0}^{\infty} \beta^t \left[u(C_t,1-L_t) + \mu_t\left(w_t L_t + \sum_i x_{t-1}^i(p_t^i+d_t^i) + \Pi_t - C_t - \sum_i p_t^i x_t^i\right)\right].
+$$
+First-order condition (FOC) w.r.t. $x_t^i$:
+$$
+-\beta^t u_C(C_t,\cdot)\,p_t^i + \beta^{t+1} E_t\!\left[u_C(C_{t+1},\cdot)(p_{t+1}^i+d_{t+1}^i)\right]=0.
+$$
+Dividing by $\beta^t u_C(C_t,\cdot)p_t^i$:
+$$
+1 = E_t\left[\beta\frac{u_C(C_{t+1},\cdot)}{u_C(C_t,\cdot)}\frac{p_{t+1}^i+d_{t+1}^i}{p_t^i}\right] = E_t[M_{t+1}R_{t+1}^i].
+$$
 
-**Economic motivation:**
-- Volatility increases with rate level (realistic)
-- Square-root ensures non-negativity
-- Captures volatility clustering in rates
+---
 
-**Bond price:**
-$$P(t,T) = e^{A(t,T) - B(t,T) r_t}$$
+## Firm Problem: Setup
 
-**Derivation of B(t,T):**
-- Satisfies: $B'(t,T) = -1 + \kappa B(t,T) + \frac{1}{2} \sigma^2 B(t,T)^2$
-- With $\gamma = \sqrt{\kappa^2 + 2\sigma^2}$
-- Solution: $B(t,T) = \frac{2\gamma e^{-\gamma(T-t)}}{(\gamma + \kappa)(1 - e^{-\gamma(T-t)}) + 2\gamma}$
+### Competitive Firm
 
-**Feller condition derivation:**
-- Stationary distribution: $\sqrt{r} \sim \chi^2$ with 4κθ/σ² degrees of freedom
-- Mean: E[r] = θ
-- Variance: Var(r) = σ²θ/(2κ)
-- Condition 2κθ > σ² ensures finite variance
+The representative firm maximizes its value (priced by $M_{t+1}$):
+$$
+\max_{\{I_t,L_t\}} E_0 \sum_{t=0}^{\infty} \left[\prod_{s=0}^{t-1} M_{s+1}\right] D_t,
+$$
+with **dividends**
+$$
+D_t \equiv Y_t - I_t - \mathcal{G}(I_t,K_t) - w_t L_t,
+$$
+where $\mathcal{G}$ captures (convex) **adjustment costs** in units of consumption, typically $\mathcal{G}(I,K)=\frac{\kappa}{2}\left(\frac{I}{K}-\delta\right)^2 K$.
 
-## Credit Risk Models
+Capital accumulation:
+$$
+K_{t+1}=(1-\delta)K_t+\Phi(I_t,K_t).
+$$
 
-### Structural Models
+Let $\lambda_t$ denote the Lagrange multiplier on capital accumulation in units of consumption (the **marginal value of installed capital**).
 
-**Merton (1974) model assumptions:**
-1. **Firm value follows geometric Brownian motion:** $dV_t = (r + \pi)V_t dt + \sigma_V V_t dW_t$
-2. **Debt is zero-coupon bond with face value D**
-3. **Default occurs if V_T < D at maturity T**
-4. **Absolute priority:** Debt holders get min(V_T, D), equity gets max(V_T - D, 0)
+---
 
-**Equity as call option derivation:**
-$$E = V N(d_1) - D e^{-rT} N(d_2)$$
+## Firm Problem: First-Order Conditions
 
-where:
-$$d_1 = \frac{\ln(V/D) + (r + \frac{1}{2}\sigma_V^2)T}{\sigma_V \sqrt{T}}$$
-$$d_2 = d_1 - \sigma_V \sqrt{T}$$
+W.r.t. $L_t$:
+$$
+F_L(K_t,Z_t L_t)\,Z_t = w_t.
+$$
 
-**Credit spread derivation:**
-- Risk-neutral bond price: $P = E^Q[\min(V_T, D) e^{-rT}]$
-- Default probability: $PD = N(-d_2)$
-- Recovery: $R = V_T/D$ conditional on default
-- Credit spread: $s = -\frac{1}{T} \ln\left(\frac{V N(d_1) - D N(d_2)}{D}\right)$
+W.r.t. $I_t$:
+$$
+-1 - \frac{\partial \mathcal{G}(I_t,K_t)}{\partial I_t} + \lambda_t\,\Phi_I(I_t,K_t)=0.
+$$
 
-**Black-Cox model:**
-- Endogenous default boundary $V_B(t)$
-- Optimal exercise condition: $V_B(t) = \frac{\alpha D}{1-\alpha}$
-- Where $\alpha = \frac{1-e^{-r(T-t)}}{r(T-t)}$ (present value factor)
+Envelope (shadow value of capital):
+$$
+\lambda_t = F_K(K_t,Z_t L_t) - \frac{\partial \mathcal{G}(I_t,K_t)}{\partial K_t} + E_t\left[M_{t+1}\,\lambda_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))\right].
+$$
 
-### Reduced-Form Models
+**Definition (Marginal q).** $q_t \equiv \lambda_t$ is the marginal value of installed capital in consumption units.
 
-**Hazard rate framework:**
-- Default intensity $\lambda_t$: instantaneous default probability
-- Survival probability: $S(t,T) = E[e^{-\int_t^T \lambda_s ds}]$
-- Risk-neutral bond price: $P(t,T) = E_t^Q\left[e^{-\int_t^T (r_s + \lambda_s) ds}\right]$
+---
 
-**Credit spread decomposition:**
-$$s(t,T) = \frac{E_t[\int_t^T \lambda_s S(t,s) ds]}{E_t[S(t,T)]}$$
+## The Return on Installed Capital
 
-**Derivation:**
-- Total yield: $y = r + s$
-- Bond price: $P = E^Q[e^{-\int_t^T (r_s + \lambda_s) ds}]$
-- Spread: $s(t,T) = -\frac{1}{T-t} \ln E^Q[e^{-\int_t^T \lambda_s ds}]$
-- Approximation: $s \approx E[\int_t^T \lambda_s ds]$ for small spreads
+Consider the payoff of **one marginal unit of installed capital** at $t$ (priced at $q_t$). Holding this unit from $t$ to $t+1$ delivers:
 
-### Copula Models for Portfolio Credit Risk
+- a **cash flow** (dividend) equal to the marginal contribution to profits:
+$$
+d^K_{t+1} = F_K(K_{t+1},Z_{t+1}L_{t+1}) - \frac{\partial \mathcal{G}(I_{t+1},K_{t+1})}{\partial K_{t+1}},
+$$
 
-**Gaussian copula:**
-$$C(u_1,\dots,u_n) = \Phi_\rho(\Phi^{-1}(u_1),\dots,\Phi^{-1}(u_n))$$
+- plus a **resale value** equal to its continuation marginal value after depreciation and spillovers:
+$$
+q_{t+1}\cdot\big(1-\delta+\Phi_K(I_{t+1},K_{t+1})\big).
+$$
 
-**Assumptions:**
-1. **Marginal distributions:** Each default time has CDF F_i(t)
-2. **Copula dependence:** Captures correlation in default times
-3. **Time-homogeneous dependence:** Constant correlation parameter
+Thus, the **gross return on installed capital** is
+$$
+R^K_{t+1} \equiv \frac{d^K_{t+1} + q_{t+1}\big(1-\delta+\Phi_K(I_{t+1},K_{t+1})\big)}{q_t}.
+$$
 
-**Default time correlation:**
-$$\rho_{ij} = \frac{\partial^2 C}{\partial u_i \partial u_j} \bigg|_{\mathbf{u}=\mathbf{1}}$$
+By the firm FOC and no-arbitrage:
+$$
+1=E_t\big[M_{t+1} R^K_{t+1}\big].
+$$
 
-**Large portfolio approximation:**
-$$PD_{portfolio} \approx \Phi\left(\frac{\sqrt{\rho} \Phi^{-1}(PD) + \sqrt{1-\rho} \Phi^{-1}(q)}{\sqrt{1 - \rho(1-q)/(1-PD)}}\right)$$
+---
 
-**Derivation:**
-- Conditional PD given systematic factor Z ~ N(0,1)
-- Individual PD: $PD_i = \Phi\left(\frac{\sqrt{\rho} Z + \sqrt{1-\rho} \epsilon_i}{\sqrt{1-\rho}}\right)$
-- Portfolio loss distribution via law of large numbers
+## Proof: Return on Capital Euler Equation
 
-## Interest Rate Derivatives
+The firm's Lagrangian is:
+$$
+\mathcal{L} = E_0 \sum_{t=0}^{\infty} \left[\prod_{s=0}^{t-1} M_{s+1}\right] \left[D_t + \lambda_t(K_{t+1}-(1-\delta)K_t-\Phi(I_t,K_t))\right].
+$$
 
-### Forward Rate Agreements
+FOC w.r.t. $I_t$:
+$$
+-1 - \mathcal{G}_I(I_t,K_t) + \lambda_t\Phi_I(I_t,K_t)=0 \quad \Rightarrow \quad \lambda_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\Phi_I(I_t,K_t)} \equiv q_t.
+$$
 
-**FRA mechanics:**
-- Contract to borrow/lend at predetermined rate K
-- Reference period [T, T+δ]
-- Settlement at time T
+FOC w.r.t. $K_{t+1}$ (envelope condition):
+$$
+\lambda_t = E_t\left[M_{t+1}\left(F_K(K_{t+1},Z_{t+1}L_{t+1}) - \mathcal{G}_K(I_{t+1},K_{t+1}) + \lambda_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))\right)\right].
+$$
 
-**Payoff derivation:**
-$$\text{Payoff} = N \cdot \frac{\delta (L - K)}{1 + \delta L}$$
+Recognize $d^K_{t+1} = F_K(K_{t+1},Z_{t+1}L_{t+1}) - \mathcal{G}_K(I_{t+1},K_{t+1})$ and $\lambda_{t+1}=q_{t+1}$:
+$$
+q_t = E_t\left[M_{t+1}\left(d^K_{t+1} + q_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))\right)\right].
+$$
 
-**No-arbitrage pricing:**
-$$F(t,T,T+\delta) = \frac{1}{\delta}\left(\frac{P(t,T)}{P(t,T+\delta)} - 1\right)$$
+Dividing by $q_t$:
+$$
+1 = E_t\left[M_{t+1}\frac{d^K_{t+1} + q_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))}{q_t}\right] = E_t[M_{t+1}R^K_{t+1}].
+$$
 
-**Derivation:**
-- Forward contract: Long FRA = Long bond + Short zero
-- Value at maturity: $\frac{N}{1 + \delta L} - \frac{N}{1 + \delta K}$
-- Present value: $N \cdot \frac{F - K}{1 + \delta F} \cdot P(t,T+\delta)$
+---
 
-### Interest Rate Swaps
+## q-Theory Link: Investment FOC
 
-**Swap mechanics:**
-- Exchange fixed payments for floating payments
-- Notional amount N, payment dates T_1 to T_n
-- Fixed rate S, floating rate resets
+From the $I_t$-FOC:
+$$
+q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\Phi_I(I_t,K_t)}.
+$$
 
-**Swap rate derivation:**
-$$S(t,T_0,T_n) = \frac{P(t,T_0) - P(t,T_n)}{\sum_{i=1}^n \delta_i P(t,T_i)}$$
+- With no adjustment costs and linear installation $\Phi(I,K)=I$, we get $q_t=1$ (price of a new unit equals one unit of the consumption good).  
+- With convex adjustment, $q_t$ varies with $I_t/K_t$: **high investment raises $q_t$**.
 
-**Value of fixed leg:**
-$$V_{fixed} = N \cdot S \cdot \sum_{i=1}^n \delta_i P(t,T_i)$$
+This connects **marginal q** (a valuation object) to **average q** and investment rates, delivering testable implications.
 
-**Value of floating leg:**
-$$V_{float} = N \cdot (P(t,T_0) - P(t,T_n))$$
+---
 
-**No-arbitrage condition:** At inception, V_fixed = V_float
+## Cochrane’s Production-Based Model
 
-### Black's Model for Caps
+### Core Pricing Condition
 
-**Forward rate dynamics under T-forward measure:**
-$$dF(t,T,T+\delta) = \sigma F(t,T,T+\delta) dW_T(t)$$
+For any asset $i$:
+$$
+E_t[R_{t+1}^i] - R_{t+1}^f = -\frac{\text{Cov}_t(R_{t+1}^i,M_{t+1})}{E_t[M_{t+1}]},\qquad
+R_{t+1}^f \equiv \frac{1}{E_t[M_{t+1}]}.
+$$
 
-**Assumptions:**
-1. **Log-normal forward rates:** Geometric Brownian motion
-2. **Constant volatility:** σ independent of F and time
-3. **T-forward measure:** Measure where P(t,T) is numeraire
+For **installed capital**:
+$$
+1=E_t[M_{t+1}R^K_{t+1}]\quad \Longrightarrow \quad
+E_t[R^K_{t+1}]-R_{t+1}^f = -\frac{\text{Cov}_t(R^K_{t+1},M_{t+1})}{E_t[M_{t+1}]}.
+$$
 
-**Caplet price derivation:**
-$$C = N \cdot \delta \cdot P(t,T+\delta) \cdot [F N(d_1) - K N(d_2)]$$
+### Production-Based SDF Proxies
 
-where:
-$$d_1 = \frac{\ln(F/K) + \frac{1}{2}\sigma^2 (T-t)}{\sigma \sqrt{T-t}}$$
-$$d_2 = d_1 - \sigma \sqrt{T-t}$$
+In equilibrium $M_{t+1}=\beta \dfrac{u_C(C_{t+1},1-L_{t+1})}{u_C(C_t,1-L_t)}$.  
+Cochrane shows that **innovations in investment opportunities**—measured by $q_t$, investment-to-capital $I_t/K_t$, or related marginal conditions—serve as **simple linear proxies** for the SDF in the data:
+$$
+M_{t+1}\approx a - b \cdot \Delta \log q_{t+1} \quad \text{or} \quad
+M_{t+1}\approx a' - b'\cdot \frac{I_{t}}{K_{t}} + \varepsilon_{t+1},
+$$
+yielding the **investment CAPM**: assets that covary positively with **good investment states** (high $q$, high $I/K$) have **low expected returns**.
 
-**Derivation:**
-- Payoff: N·δ·max(F - K, 0)
-- Risk-neutral pricing: E^T[max(F - K, 0)] · P(t,T+δ)
-- Black-Scholes analogy for forward rates
+---
 
-### Swaptions
+## Intuition and Investment CAPM
 
-**Swaption mechanics:**
-- Option to enter into swap at fixed rate K
-- Payer swaption: Right to pay fixed, receive floating
-- Receiver swaption: Right to receive fixed, pay floating
+**Intuition**: Good times for investment (high $q$) are times when the marginal utility of consumption is low (low $M$). Assets that pay off in those states hedge poorly and must offer higher premia.
 
-**Black's formula:**
-$$\text{Swaption} = A(t) \cdot [S N(d_1) - K N(d_2)]$$
+This is the key insight of **production-based asset pricing**: investment opportunities serve as a state variable that proxies for the SDF.
 
-where $A(t) = N \sum_{i=1}^n \delta_i P(t,T_i)$
+Start from $1=E_t[M_{t+1}R^K_{t+1}]$. 
 
-**Volatility calibration:**
-- Implied volatility from market prices
-- Term structure of volatility
-- Smile effects in swaption markets
+Using the standard asset pricing equation, for any asset $i$:
+$$
+1 = E_t[M_{t+1}R_{t+1}^i] = E_t[M_{t+1}]E_t[R_{t+1}^i] + \text{Cov}_t(M_{t+1}, R_{t+1}^i).
+$$
 
-## Mortgage-Backed Securities
+Rearranging:
+$$
+E_t[R_{t+1}^i] = R_{t+1}^f - \frac{\text{Cov}_t(M_{t+1}, R_{t+1}^i)}{E_t[M_{t+1}]}.
+$$
 
-### Mortgage Mathematics
+If we use the **return on capital** as a factor proxy (linear SDF approximation),
+$$
+M_{t+1}\approx a - b\,R^K_{t+1},
+$$
+then
+$$
+E_t[R_{t+1}^i]-R_{t+1}^f \approx b\;\text{Cov}_t(R_{t+1}^i,R^K_{t+1}),
+$$
+which is the **investment-based CAPM** form.
 
-**Fixed-rate mortgage payment:**
-$$PMT = \frac{P_0 r}{1 - (1+r)^{-n}}$$
+**Remark**: The exact SDF is the MRS; the return-on-capital representation is an **approximation** or **factor model** motivated by the investment FOCs and equilibrium relations.
 
-**Derivation:**
-- Present value of payments equals loan amount
-- Annuity formula for level payments
+---
 
-**Outstanding balance:**
-$$B_t = PMT \cdot \frac{1 - (1+r)^{-(n-t)}}{r}$$
+## Investment-Specific Technology (IST): Setup
 
-**Principal and interest split:**
-$$\text{Interest}_t = r B_{t-1}$$
-$$\text{Principal}_t = PMT - \text{Interest}_t$$
+Suppose the **investment good** has a **relative price** $Q_t$ in consumption units, or—equivalently—an **efficiency** $\mu_t \equiv 1/Q_t$ so that one unit of consumption buys $\mu_t$ units of effective investment:
 
-### Prepayment Modeling
+$$
+K_{t+1}=(1-\delta)K_t+\mu_t\,\Phi(I_t,K_t), \qquad \mu_t>0.
+$$
 
-**PSA prepayment function:**
-$$CPR_t = \begin{cases} 0.002 \cdot \min(t, 30) & t \leq 30 \\ 0.06 & t > 30 \end{cases}$$
+Output is still in consumption units:
+$$
+Y_t=F(K_t,Z_t L_t).
+$$
 
-**Single Monthly Mortality:**
-$$SMM_t = 1 - (1 - CPR_t)^{1/12}$$
+Dividends (in consumption units):
+$$
+D_t = Y_t - I_t - \mathcal{G}(I_t,K_t) - w_t L_t.
+$$
 
-**Conditional prepayment rate:**
-$$CPR_t = 1 - (1 - SMM_t)^{12}$$
+Let $q_t$ again denote the marginal value of installed capital in consumption units.
 
-**Derivation:**
-- CPR: Annual prepayment rate
-- SMM: Monthly prepayment rate
-- Relationship: $SMM = 1 - (1 - CPR)^{1/12}$
+---
 
-### Option-Adjusted Spread (OAS)
+## IST: First-Order Conditions
 
-**OAS calculation:**
-$$P_{market} = E^Q\left[\sum_{t=1}^T \frac{CF_t}{(1 + r_t + OAS)^t}\right]$$
+$L_t$-FOC (unchanged):
+$$
+F_L(K_t,Z_tL_t)\,Z_t = w_t.
+$$
 
-**Simulation approach:**
-1. Generate interest rate paths $\{r_t^{(i)}\}_{i=1}^N$
-2. Compute prepayments and cash flows for each path
-3. Discount at Treasury + OAS
-4. Average across paths to match market price
+$I_t$-FOC:
+$$
+-1 - \mathcal{G}_I(I_t,K_t) + q_t\,\mu_t\,\Phi_I(I_t,K_t)=0
+\quad \Rightarrow \quad
+q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\mu_t\,\Phi_I(I_t,K_t)}.
+$$
 
-**Mathematical foundation:**
-- OAS captures compensation for prepayment risk
-- Monte Carlo simulation for path-dependent cash flows
-- Numerical root-finding to solve for OAS
+Envelope / shadow value:
+$$
+q_t = F_K(K_t,Z_t L_t) - \mathcal{G}_K(I_t,K_t) + E_t\!\left[M_{t+1}\,q_{t+1}\left(1-\delta+\mu_{t+1}\Phi_K(I_{t+1},K_{t+1})\right)\right].
+$$
 
-### Negative Convexity
+---
 
-**Price-yield relationship:**
-$$\frac{\partial^2 P}{\partial y^2} < 0$$
+## IST: Return on Capital
 
-**Causes:**
-- Prepayment option limits upside potential
-- Extension risk increases downside risk
-- Effective duration can be negative for IO strips
+**Return on installed capital**:
+$$
+R^K_{t+1} \equiv \frac{d^K_{t+1} + q_{t+1}\left(1-\delta+\mu_{t+1}\Phi_K(I_{t+1},K_{t+1})\right)}{q_t},
+$$
+with
+$$
+d^K_{t+1} \equiv F_K(K_{t+1},Z_{t+1}L_{t+1}) - \mathcal{G}_K(I_{t+1},K_{t+1}).
+$$
 
-**Mathematical derivation:**
-- MBS value = Straight bond - Prepayment option
-- Option value increases with volatility
-- Convexity adjustment accounts for optionality
+Pricing:
+$$
+1=E_t\!\left[M_{t+1} R^K_{t+1}\right].
+$$
 
-## Inflation-Linked Bonds
+**Key IST implication**: shocks to $\mu_t$ (or $Q_t=1/\mu_t$) move $q_t$ and $R^K_{t+1}$, altering investment opportunities and thereby **risk premia** through $1=E_t[M_{t+1}R^K_{t+1}]$.
 
-### Real vs. Nominal Pricing
+---
 
-**Fisher equation:**
-$$1 + i_t = (1 + r_t)(1 + \pi_t^e)$$
+## IST and the SDF
 
-**Real bond price:**
-$$P^{real}(t,T) = E_t^Q\left[e^{-\int_t^T r_s ds}\right]$$
+In competitive complete-markets equilibrium the **exact SDF** remains the **MRS**:
+$$
+M_{t+1}=\beta\,\frac{u_C(C_{t+1},1-L_{t+1})}{u_C(C_t,1-L_t)}.
+$$
 
-**TIPS price:**
-$$P^{TIPS}(t,T) = P^{real}(t,T) \cdot \frac{I_t}{I_{t_0}}$$
+IST does **not** change the MRS definition; it changes **returns** via $\mu_t$ (i.e., it changes what is being priced by the same $M_{t+1}$). A helpful linear proxy is:
+$$
+M_{t+1}\approx a - b_1 \cdot \Delta \log q_{t+1} - b_2 \cdot \Delta \log \mu_{t+1},
+$$
+so that
+$$
+E_t[R_{t+1}^i]-R_{t+1}^f \approx
+b_1 \,\text{Cov}_t(R_{t+1}^i,\Delta \log q_{t+1})
++ b_2 \,\text{Cov}_t(R_{t+1}^i,\Delta \log \mu_{t+1}).
+$$
 
-**Breakeven inflation:**
-$$BE_t^T = y_t^{nominal} - y_t^{real}$$
+**Interpretation**: assets that pay off when IST improves (high $\mu_{t+1}$, cheap/effective investment) hedge low-$M$ states poorly and earn **higher premia**.
 
-**Decomposition:**
-$$BE_t^T = E_t[\pi_{t,T}] + IP_t^T + LP_t^T + CB_t^T$$
+---
 
-### Inflation Risk Premium
+## Equilibrium: Market Clearing
 
-**Theoretical foundation:**
-$$IRP_t^T = -\frac{\partial u}{\partial \pi} \cdot \frac{\partial \pi}{\partial c} \cdot \frac{\partial c}{\partial IRP}$$
+Goods:
+$$
+C_t + I_t + \mathcal{G}(I_t,K_t) = Y_t.
+$$
 
-**Empirical estimation:**
-$$IRP_t^T = BE_t^T - E_t[\pi_{t,T}] - CB_t^T$$
+Labor and asset markets:
+$$
+L_t \in [0,1], \qquad \text{and all asset holdings clear with net supply given by firms}.
+$$
 
-### Jarrow-Yildirim Model
+---
 
-**Real rate process:**
-$$dr_t = (\alpha_r + \beta_r r_t) dt + \sigma_r dW_r$$
+## Equilibrium Definition
 
-**Inflation process:**
-$$d\pi_t = (\alpha_\pi + \beta_\pi \pi_t) dt + \sigma_\pi dW_\pi$$
+An equilibrium is $\{C_t,L_t,I_t,K_{t+1},q_t,w_t\}_{t\ge 0}$ and prices $\{M_{t+1},R_{t+1}^i\}$ such that:
 
-**Nominal short rate:**
-$$i_t = r_t + \pi_t + \phi \sigma_r \sigma_\pi \rho_{r\pi}$$
+1. Household chooses $\{C_t,L_t,\{x_t^i\}\}$ to maximize utility given prices.  
+2. Firm chooses $\{I_t,L_t\}$ to maximize value given prices.  
+3. Markets clear and constraints hold.  
+4. Prices satisfy $1=E_t[M_{t+1}R_{t+1}^i]$ for all traded assets $i$.
 
-**Bond pricing:**
-$$P(t,T) = E_t^Q\left[e^{-\int_t^T (r_s + \pi_s + \phi \sigma_r \sigma_\pi \rho_{r\pi}) ds}\right]$$
+---
 
-## Key Mathematical Results
+## Key Results (1): Euler for Capital
 
-### Duration-Convexity Approximation
-$$\frac{\Delta P}{P} = -D \Delta y + \frac{1}{2} C (\Delta y)^2 + \epsilon$$
+$$
+1=E_t\!\left[M_{t+1} \frac{d^K_{t+1} + q_{t+1}\left(1-\delta+\Phi_K^{\text{(IST)}}\right)}{q_t}\right],
+$$
+with $\Phi_K^{\text{(IST)}} \equiv \mu_{t+1}\Phi_K(I_{t+1},K_{t+1})$ (equals $\Phi_K$ without IST).
 
-**Error bound:** $\epsilon \leq \frac{1}{6} \max|\frac{\partial^3 P}{\partial y^3}| (\Delta y)^3$
+---
 
-### Credit Spread Asymptotics
-For small spreads: $s(t,T) \approx \frac{E[\int_t^T \lambda_s ds]}{T-t}$
+## Proof of Result (1)
 
-**Exact relationship:** $s(t,T) = -\frac{1}{T-t} \ln E[e^{-\int_t^T \lambda_s ds}]$
+With IST, the capital accumulation constraint is:
+$$
+K_{t+1}=(1-\delta)K_t+\mu_t\,\Phi(I_t,K_t).
+$$
 
-### Mortgage OAS Convergence
-$$OAS = \lim_{N \to \infty} \frac{1}{N} \sum_{i=1}^N \left( y_t^{Treasury} + \frac{1}{T} \ln \frac{P_{model}^{(i)}}{P_{market}} \right)$$
+The firm's FOC w.r.t. $I_t$ gives:
+$$
+q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\mu_t\,\Phi_I(I_t,K_t)}.
+$$
 
-## Applications and Extensions
+The envelope condition w.r.t. $K_{t+1}$ gives:
+$$
+q_t = E_t\left[M_{t+1}\left(F_K(K_{t+1},Z_{t+1}L_{t+1}) - \mathcal{G}_K(I_{t+1},K_{t+1}) + q_{t+1}(1-\delta+\mu_{t+1}\Phi_K(I_{t+1},K_{t+1}))\right)\right].
+$$
 
-### Portfolio Immunization
-**Duration matching:**
-$$\sum_{i=1}^n w_i D_i = D_{liability}$$
+This can be written as:
+$$
+1 = E_t\left[M_{t+1}\frac{d^K_{t+1} + q_{t+1}(1-\delta+\mu_{t+1}\Phi_K(I_{t+1},K_{t+1}))}{q_t}\right] = E_t[M_{t+1}R^K_{t+1}].
+$$
 
-**Convexity matching:**
-$$\sum_{i=1}^n w_i C_i = C_{liability}$$
+---
 
-### Credit Portfolio Management
-**Value-at-Risk calculation:**
-$$VaR_\alpha = \inf \{ l \in \mathbb{R} : P(L > l) \leq 1-\alpha \}$$
+## Key Results (2): Investment q-FOC
 
-**Expected shortfall:**
-$$ES_\alpha = E[L | L > VaR_\alpha]$$
+$$
+q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\Phi_I(I_t,K_t)}\quad\text{(no IST)},
+$$
+$$
+q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\mu_t\,\Phi_I(I_t,K_t)}\quad\text{(with IST)}.
+$$
 
-### Inflation Hedging
-**Optimal inflation hedge ratio:**
-$$h^* = \frac{\text{Cov}(r_p, \pi)}{\text{Var}(\pi)}$$
+---
 
-**Real return maximization:**
-$$\max_h E[r_p - h \pi] - \frac{\gamma}{2} \text{Var}(r_p - h \pi)$$
+## Proof of Result (2)
 
-## Conclusion
+The firm's Lagrangian (with IST) includes:
+$$
+\mathcal{L} = E_0 \sum_{t=0}^{\infty} \left[\prod_{s=0}^{t-1} M_{s+1}\right] \left[D_t + \lambda_t(K_{t+1}-(1-\delta)K_t-\mu_t\Phi(I_t,K_t))\right],
+$$
+where $D_t = Y_t - I_t - \mathcal{G}(I_t,K_t) - w_t L_t$.
 
-**Key Takeaways:**
-- Bond pricing requires understanding of term structure models
-- Credit risk encompasses both default probability and recovery
-- Derivatives pricing builds on underlying asset valuation
-- Mortgage securities introduce prepayment and extension risk
-- Inflation-linked securities provide real return guarantees
+FOC w.r.t. $I_t$:
+$$
+-1 - \mathcal{G}_I(I_t,K_t) - \lambda_t \mu_t\Phi_I(I_t,K_t)=0.
+$$
 
-**Mathematical Rigor:**
-- Complete derivations of key pricing formulas
-- Understanding of stochastic processes in finance
-- Risk management through Greeks and hedging
-- Portfolio optimization under various constraints
+Solving for $\lambda_t = q_t$:
+$$
+q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\mu_t\,\Phi_I(I_t,K_t)}.
+$$
+
+Without IST, $\mu_t=1$, so:
+$$
+q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\Phi_I(I_t,K_t)}.
+$$
+
+---
+
+## Key Results (3): Risk Premia
+
+For any asset $i$,
+$$
+E_t[R_{t+1}^i]-R_{t+1}^f = -\frac{\text{Cov}_t(R_{t+1}^i,M_{t+1})}{E_t[M_{t+1}]},
+$$
+and using linear SDF proxies in $q$ and IST shocks yields investment-based factor models.
+
+---
+
+## Proof of Result (3)
+
+Start from the fundamental pricing equation:
+$$
+1 = E_t[M_{t+1}R_{t+1}^i] = E_t[M_{t+1}]E_t[R_{t+1}^i] + \text{Cov}_t(M_{t+1},R_{t+1}^i).
+$$
+
+Rearranging:
+$$
+E_t[R_{t+1}^i] = \frac{1 - \text{Cov}_t(M_{t+1},R_{t+1}^i)}{E_t[M_{t+1}]}.
+$$
+
+Since $R_{t+1}^f = 1/E_t[M_{t+1}]$:
+$$
+E_t[R_{t+1}^i] - R_{t+1}^f = -\frac{\text{Cov}_t(M_{t+1},R_{t+1}^i)}{E_t[M_{t+1}]}.
+$$
+
+To obtain factor models, project $M_{t+1}$ onto investment-related variables (e.g., $\Delta \log q_{t+1}$, $\Delta \log \mu_{t+1}$):
+$$
+M_{t+1} = a + \sum_k b_k f_{k,t+1} + \varepsilon_{t+1},
+$$
+where $f_{k,t+1}$ are factors and $E_t[\varepsilon_{t+1}f_{j,t+1}]=0$. Substituting into the risk premium equation yields:
+$$
+E_t[R_{t+1}^i] - R_{t+1}^f \approx -\sum_k \frac{b_k}{E_t[M_{t+1}]}\text{Cov}_t(R_{t+1}^i,f_{k,t+1}).
+$$
+
+---
+
+## Empirical Implications
+
+1. **Investment Growth Predictability**: High $I_t/K_t$ (or high $q_t$) signals **low future returns**, as states with good investment opportunities have low $M_{t+1}$.
+2. **Return–q Covariance**: Cross-sectional premia align with $\text{Cov}(R^i,\Delta \log q)$ or $\text{Cov}(R^i, R^K)$.
+3. **IST Channels**: Improvements in $\mu_t$ (declines in the relative price of investment) strengthen investment opportunities and are **priced** in both time series and cross section.
+
+---
+
+## Connections and Extensions
+
+- **Adjustment Costs** (Jermann, 1998; Zhang, 2005): Quantitatively match volatility and premia via $\mathcal{G}$ and $\Phi$ curvature.  
+- **Labor Frictions** (Belo, 2010): Labor market dynamics amplify variation in $q_t$ and risk premia.  
+- **Multi-Sector** (Belo, Lin, Bazdresch, 2014): Sectoral investment opportunities improve cross-sectional fit.
+
+

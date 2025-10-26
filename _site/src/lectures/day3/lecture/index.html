@@ -444,14 +444,20 @@ C_t = \kappa W_t,\qquad \kappa&gt;0\ \text{constant}.
 <li>Recall the linear ODE for <span class="math inline">\(y\)</span>: <span class="math inline">\(\;y'(t)=\dfrac{a}{\gamma}\,y(t)-1\)</span>. A stationary policy means <span class="math inline">\(y(t)\)</span> is constant over time, so <span class="math inline">\(y'(t)=0\)</span> and hence <span class="math display">\[
 0 = \frac{a}{\gamma}\,\bar y - 1 \quad \Longrightarrow \quad \bar y = \frac{\gamma}{a}.
 \]</span></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Stationary consumption (fixed fraction of wealth) continued</h2>
+<ul>
 <li>From the consumption FOC we already obtained <span class="math inline">\(\dfrac{C_t^*}{W_t}=v(t)^{-1/\gamma}=y(t)^{-1}\)</span>. Evaluated at stationarity, this gives <span class="math display">\[
 \kappa := \frac{C_t^*}{W_t}=\bar y^{-1}=\frac{a}{\gamma}.
 \]</span> Interpretation: a larger <span class="math inline">\(a\)</span> (effective impatience net of return and risk adjustments) raises the optimal consumption-wealth ratio <span class="math inline">\(\kappa\)</span>.</li>
-</ul></li>
-<li><p>Using the definition of <span class="math inline">\(a\)</span>: <span class="math display">\[
+<li>Using the definition of <span class="math inline">\(a\)</span>: <span class="math display">\[
 \kappa = \frac{1}{\gamma}\Big[\rho - (1-\gamma) r - (1-\gamma)\,\frac{(\mu - r)^2}{2\gamma\sigma^2}\Big].
-\]</span></p></li>
-<li><p>Feasibility/boundedness: <span class="math inline">\(\kappa&gt;0\ \Leftrightarrow\ a&gt;0\ \Leftrightarrow\ \rho &gt; (1-\gamma) r + (1-\gamma)\,\dfrac{(\mu - r)^2}{2\gamma\sigma^2}\)</span>.</p></li>
+\]</span></li>
+<li>Feasibility/boundedness: <span class="math inline">\(\kappa&gt;0\ \Leftrightarrow\ a&gt;0\ \Leftrightarrow\ \rho &gt; (1-\gamma) r + (1-\gamma)\,\dfrac{(\mu - r)^2}{2\gamma\sigma^2}\)</span>.</li>
 </ul>
 </section>
 <section class="slide level0">
@@ -468,6 +474,148 @@ v(t) \equiv \bar v = \Big(\tfrac{\gamma}{a}\Big)^{\!\gamma},\qquad a=\Big[\rho -
 \kappa&gt;0 \ \Leftrightarrow\ a&gt;0 \ \Leftrightarrow\ \rho &gt; (1-\gamma) r + (1-\gamma)\,\tfrac{(\mu - r)^2}{2\gamma\sigma^2}.
 \]</span></li>
 </ul>
+</section>
+<section class="slide level0">
+
+<h2>Solve for the stationary Part 2</h2>
+<ul>
+<li>We assumed separability between <span class="math inline">\(W\)</span> and <span class="math inline">\(t\)</span> in the value function, e.g.&nbsp;<span class="math inline">\(V(W,t)=f(W)v(t)\)</span> and realized that a good candidate for <span class="math inline">\(f(W)\)</span> would have the same shape as the utility function.</li>
+<li>This is because a permanent increase in consumption in the infinite horizon problem, should have the same impact on the value function.</li>
+</ul>
+<p>For <span class="math inline">\(\Delta&gt;0\)</span>, <span class="math display">\[
+\begin{aligned}
+\mathbb{E}\Big[\int_t^\infty e^{-\rho(s-t)} U(C_s\times \Delta) ds \Big] &amp;= \Delta^{1-\gamma} \mathbb{E}\Big[\int_t^\infty e^{-\rho(s-t)} U(C_s) ds \Big] \\
+&amp;= \Delta^{1-\gamma} V(W, t) \\
+&amp;= V(\Delta W,t)
+\end{aligned}
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Continuation, retrieving the shape of the value function.</h2>
+<ul>
+<li>Assume a stationary problem <span class="math inline">\(V=V(W)\)</span></li>
+<li>The HJB becomes</li>
+</ul>
+<p><span class="math display">\[
+\rho V(W) = \max_{C,\omega} \left\{ U(C) + \frac{\partial V}{\partial W} (\omega W (\mu - r) + W r - C) + \frac{1}{2} \frac{\partial^2 V}{\partial W^2} W^2 \omega^2 \sigma^2 \right\}
+\]</span></p>
+<p>First Order Conditions</p>
+<p><span class="math display">\[
+\begin{aligned}
+U'(C) &amp;= \frac{\partial V}{\partial W}\\
+C^{-\gamma} = \frac{\partial V}{\partial W} \\
+C = \Big(\frac{\partial V}{\partial W}\Big)^{-\frac{1}{\gamma}} \\
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial V}{\partial W} (W(\mu-r)) + \frac{\partial^2 V}{\partial W^2}(\omega W^2 \sigma^2) &amp;= 0\\
+\omega &amp;= \frac{- \frac{\partial V}{\partial W} (W(\mu-r)) }{\frac{\partial^2 V}{\partial W^2} W^2 \sigma^2}
+\end{aligned}
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Continuation</h2>
+<p>From the FOCs <span class="math display">\[
+C=(V_W)^{-1/\gamma},\qquad
+\omega^*=-\,\frac{V_W\,W(\mu-r)}{V_{WW}\,W^2\sigma^2}=-\,\frac{\mu-r}{\sigma^2}\,\frac{V_W}{W V_{WW}},
+\]</span> plug back into the HJB: <span class="math display">\[
+\rho V(W)
+= \frac{(V_W)^{-\frac{1-\gamma}{\gamma}}}{1-\gamma}
++ V_W\big(\omega^* W(\mu-r)+Wr-C\big)
++ \tfrac12 V_{WW} W^2 (\omega^*)^2 \sigma^2.
+\]</span></p>
+<p>Compute the <span class="math inline">\(\omega\)</span>-parts:</p>
+<p><span class="math display">\[
+\omega^* W(\mu-r)=-\,\frac{V_W(\mu-r)^2}{V_{WW}\sigma^2},\qquad
+\tfrac12 V_{WW}W^2(\omega^*)^2\sigma^2=\frac12\,\frac{V_W^2(\mu-r)^2}{V_{WW}\sigma^2}.
+\]</span> Hence <span class="math display">\[
+V_W\big(\omega^* W(\mu-r)\big)+\tfrac12 V_{WW}W^2(\omega^*)^2\sigma^2
+= -\,\frac12\,\frac{(\mu-r)^2}{\sigma^2}\,\frac{V_W^2}{V_{WW}}.
+\]</span></p>
+<p>Also <span class="math inline">\(C=(V_W)^{-1/\gamma}\)</span> gives</p>
+<p><span class="math display">\[
+U(C)=\frac{(V_W)^{-\frac{1-\gamma}{\gamma}}}{1-\gamma},\qquad
+-\,V_W C = -(V_W)^{1-\frac1\gamma}.
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Continuation</h2>
+<p>Therefore, the HJB reduces to the following <strong>nonlinear second-order ODE in <span class="math inline">\(V\)</span></strong>: <span class="math display">\[
+\begin{aligned}
+\rho V(W)
+&amp;=\frac{(V_W)^{1-\frac{1}{\gamma}}}{1-\gamma}
++ r\,W\,V_W
+-(V_W)^{1-\frac1\gamma}
+-\frac{1}{2}\,\frac{(\mu-r)^2}{\sigma^2}\,\frac{V_W^{2}}{V_{WW}} \\
+&amp;=\Big[\frac{1}{1-\gamma}-1\Big](V_W)^{1-\frac{1}{\gamma}}
++ r\,W\,V_W
+-\frac{1}{2}\,\frac{(\mu-r)^2}{\sigma^2}\,\frac{V_W^{2}}{V_{WW}}
+\end{aligned}
+\]</span></p>
+<p>What do we know about <span class="math inline">\(V\)</span>?</p>
+<p><span class="math display">\[
+V(\Delta W) = \Delta^{1-\gamma} V(W)
+\]</span></p>
+<p>Only a function of the form <span class="math inline">\(\kappa W^{1-\gamma}\)</span> has that property. Define the guess</p>
+<p><span class="math display">\[
+V(W) = \frac{K}{1-\gamma} W^{1-\gamma}
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Solving the ODE (by homogeneity)</h2>
+<p>The problem is scale-invariant (CRRA utility, linear wealth dynamics, no other state), so <span class="math inline">\(V(\lambda W)=\lambda^{\,1-\gamma}V(W)\)</span>. Hence <span class="math display">\[
+V(W)=\frac{K}{1-\gamma}\,W^{1-\gamma},\qquad K&gt;0.
+\]</span> Then <span class="math display">\[
+V_W=K\,W^{-\gamma},\qquad V_{WW}=-\gamma K\,W^{-\gamma-1}.
+\]</span></p>
+<p>Plug into the ODE:</p>
+<ul>
+<li><span class="math inline">\((V_W)^{-\frac{1-\gamma}{\gamma}}=K^{-\frac{1-\gamma}{\gamma}}W^{1-\gamma}\)</span>,</li>
+<li><span class="math inline">\((V_W)^{1-\frac1\gamma}=K^{\frac{\gamma-1}{\gamma}}W^{1-\gamma}\)</span>,</li>
+<li><span class="math inline">\(\dfrac{V_W^2}{V_{WW}}=-\dfrac{K}{\gamma}\,W^{1-\gamma}\)</span>,</li>
+<li><span class="math inline">\(r\,W\,V_W=rK\,W^{1-\gamma}\)</span>,</li>
+<li><span class="math inline">\(\rho V=\rho\,\dfrac{K}{1-\gamma}\,W^{1-\gamma}\)</span>.</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Continuation</h2>
+<p>Divide by <span class="math inline">\(W^{1-\gamma}\)</span> to obtain an algebraic equation for <span class="math inline">\(K\)</span>: <span class="math display">\[
+\rho\,\frac{K}{1-\gamma}
+=\frac{K^{-\frac{1-\gamma}{\gamma}}}{1-\gamma}
++rK
+- K^{\frac{\gamma-1}{\gamma}}
++\frac{1}{2}\frac{(\mu-r)^2}{\sigma^2}\,\frac{K}{\gamma}.
+\]</span></p>
+<p>Let <span class="math inline">\(y:=K^{1/\gamma}\)</span> (so <span class="math inline">\(K=y^\gamma\)</span>). Using <span class="math inline">\(K^{-\frac{1-\gamma}{\gamma}}=y^{\gamma-1}\)</span> and <span class="math inline">\(K^{\frac{\gamma-1}{\gamma}}=y^{\gamma-1}\)</span>, this collapses to <span class="math display">\[
+\rho\,y
+=\gamma+(1-\gamma)\,r\,y
++\frac{1-\gamma}{2\gamma}\frac{(\mu-r)^2}{\sigma^2}\,y.
+\]</span> Thus <span class="math display">\[
+\boxed{\;
+y=\frac{\gamma}{\rho-(1-\gamma)\!\left(r+\frac{(\mu-r)^2}{2\gamma\sigma^2}\right)}
+\;},\qquad
+K=y^\gamma.
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Continuation</h2>
+<p>Therefore the <strong>value function</strong> and <strong>policies</strong> are <span class="math display">\[
+\boxed{\;
+V(W)=\frac{W^{1-\gamma}}{1-\gamma}\left[\frac{\gamma}{\rho-(1-\gamma)\!\left(r+\frac{(\mu-r)^2}{2\gamma\sigma^2}\right)}\right]^{\!\gamma}
+\;}
+\]</span></p>
+<p>Optimal controls: <span class="math display">\[
+\omega^*=\frac{\mu-r}{\gamma\sigma^2},\qquad
+\frac{C^*}{W}=(V_W)^{-1/\gamma}=y^{-1}
+=\frac{\rho-(1-\gamma)\!\left(r+\frac{(\mu-r)^2}{2\gamma\sigma^2}\right)}{\gamma}.
+\]</span></p>
 </section>
 <section class="slide level0">
 

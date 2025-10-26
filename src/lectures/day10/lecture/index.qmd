@@ -1,5 +1,5 @@
 ---
-title: "Day 10: Production-Based Asset Pricing"
+title: "Production-Based Asset Pricing"
 subtitle: "Asset Pricing Theory"
 author: "Juan F. Imbet"
 institute: "Paris Dauphine University-PSL"
@@ -10,16 +10,16 @@ format:
     slide-number: true
     chalkboard: true
     preview-links: auto
-    footer: "Asset Pricing Theory - Day 10"
+    footer: "Asset Pricing Theory"
 ---
 
 ## Production-Based Asset Pricing {.center}
 
-::: financial-concept
+
 **Advanced Equilibrium Models**
 
 How firm investment and production decisions affect asset prices through the stochastic discount factor
-:::
+
 
 ## Overview
 
@@ -29,20 +29,23 @@ How firm investment and production decisions affect asset prices through the sto
 
 ## Agenda
 
-1. **Production Economy Setup**
-2. **The SDF in Production Economies**
-3. **Cochrane's Production-Based Model**
-4. **Belo's Investment-Specific Technology**
-5. **Equilibrium Derivations**
-6. **Empirical Implications**
+1.  **Production Economy Setup**
+2.  **The SDF in Production Economies**
+3.  **Cochrane's Production-Based Model**
+4.  **Belo's Investment-Specific Technology**
+5.  **Equilibrium Derivations**
+6.  **Empirical Implications**
+
+---
 
 ## Production Economy Framework
 
 ### Basic Setup
 
-Consider an economy with:
-- **Households**: Consume and supply labor
-- **Firms**: Produce goods using capital and labor
+Consider an economy with: 
+
+- **Households**: Consume and supply labor 
+- **Firms**: Produce goods using capital and labor 
 - **Markets**: Complete contingent claims markets
 
 ### Firm's Problem
@@ -51,9 +54,9 @@ Firms maximize value by choosing investment and production:
 
 $$\max_{I_t, K_{t+1}} E_0 \sum_{t=0}^\infty \beta^t D_t$$
 
-Subject to:
-$$D_t = Y_t - I_t - w_t L_t$$
-$$K_{t+1} = (1 - \delta) K_t + I_t$$
+Subject to: $$D_t = Y_t - I_t - w_t L_t$$ $$K_{t+1} = (1 - \delta) K_t + I_t$$
+
+---
 
 ## The SDF in Production Economies
 
@@ -61,10 +64,13 @@ $$K_{t+1} = (1 - \delta) K_t + I_t$$
 
 In a production economy, the SDF has two components:
 
-$$M_{t+1} = \beta \frac{u'(C_{t+1})}{u'(C_t)} \cdot \frac{1}{R_{t+1}^k}$$
+$$
+M_{t+1} = \beta \frac{u'(C_{t+1})}{u'(C_t)} \cdot \frac{1}{R_{t+1}^k}
+$$
 
-Where:
-- First term: consumption smoothing
+Where: 
+
+- First term: consumption smoothing 
 - Second term: investment opportunity set
 
 ### Derivation
@@ -76,6 +82,8 @@ $$u'(C_t) = E_t [M_{t+1} u'(C_{t+1})]$$
 Firm's investment optimality:
 
 $$1 = E_t [M_{t+1} R_{t+1}^k]$$
+
+---
 
 ## Cochrane's Production-Based Model (1991)
 
@@ -93,6 +101,8 @@ $$M_{t+1} = \beta \frac{u'(C_{t+1})}{u'(C_t)} \cdot \frac{P_{t+1}}{P_t}$$
 
 Where $P_t$ is the price of installed capital.
 
+---
+
 ### Proof
 
 From firm's first-order condition:
@@ -103,6 +113,8 @@ Rearrange:
 
 $$1 = E_t [M_{t+1} \frac{F_K(K_{t+1}, L_{t+1}) + P_{t+1}(1 - \delta)}{P_t}]$$
 
+---
+
 ## Mathematical Derivation
 
 ### Firm's Dynamic Programming
@@ -111,15 +123,15 @@ The firm's value function satisfies:
 
 $$V(K_t) = \max_{I_t} \left[ D_t + E_t M_{t+1} V(K_{t+1}) \right]$$
 
-With:
-$$D_t = F(K_t, L_t) - I_t$$
-$$K_{t+1} = I_t + (1 - \delta) K_t$$
+With: $$D_t = F(K_t, L_t) - I_t$$ $$K_{t+1} = I_t + (1 - \delta) K_t$$
 
 ### First-Order Condition
 
 $$\frac{\partial V}{\partial I_t} = -1 + E_t M_{t+1} \frac{\partial V}{\partial K_{t+1}} = 0$$
 
 $$\frac{\partial V}{\partial K_{t+1}} = F_K(K_{t+1}, L_{t+1}) + (1 - \delta) \frac{\partial V}{\partial K_{t+1}}$$
+
+---
 
 ## Cochrane's Main Theorem
 
@@ -133,10 +145,12 @@ Where $q_t$ is the marginal value of installed capital.
 
 ### Proof Sketch
 
-1. From firm's optimality: $q_t = E_t [M_{t+1} (F_K + q_{t+1}(1 - \delta))]$
-2. Rearrange: $1 = E_t [M_{t+1} \frac{F_K + q_{t+1}(1 - \delta)}{q_t}]$
-3. Household Euler: $u'(C_t) = E_t [M_{t+1} u'(C_{t+1})]$
-4. Combine to get the decomposition
+1.  From firm's optimality: $q_t = E_t [M_{t+1} (F_K + q_{t+1}(1 - \delta))]$
+2.  Rearrange: $1 = E_t [M_{t+1} \frac{F_K + q_{t+1}(1 - \delta)}{q_t}]$
+3.  Household Euler: $u'(C_t) = E_t [M_{t+1} u'(C_{t+1})]$
+4.  Combine to get the decomposition
+
+---
 
 ## Investment-Based Asset Pricing
 
@@ -144,19 +158,19 @@ Where $q_t$ is the marginal value of installed capital.
 
 The expected return on any asset satisfies:
 
-$$E[R_{t+1}^i] - R_{t+1}^f = \gamma \cdot \cov(R_{t+1}^i, R_{t+1}^k)$$
+$$E[R_{t+1}^i] - R_{t+1}^f = \gamma \cdot \text{Cov}(R_{t+1}^i, R_{t+1}^k)$$
 
-Where:
-- $R_{t+1}^k$ is the return on capital
-- $\gamma$ is the price of risk
+Where: - $R_{t+1}^k$ is the return on capital - $\gamma$ is the price of risk
 
 ### Derivation
 
 From the SDF representation:
 
-$$E[R_{t+1}^i] = R_{t+1}^f - \cov(R_{t+1}^i, M_{t+1})$$
+$$E[R_{t+1}^i] = R_{t+1}^f - \text{Cov}(R_{t+1}^i, M_{t+1})$$
 
 And since $M_{t+1} \propto \frac{1}{R_{t+1}^k}$, we get the investment CAPM.
+
+---
 
 ## Belo's Investment-Specific Technology (2010)
 
@@ -164,17 +178,15 @@ And since $M_{t+1} \propto \frac{1}{R_{t+1}^k}$, we get the investment CAPM.
 
 Belo introduces **investment-specific technological change**:
 
-$$K_{t+1} = I_t + (1 - \delta) K_t$$
-$$Y_t = F(K_t, Z_t L_t)$$
+$$K_{t+1} = I_t + (1 - \delta) K_t$$ $$Y_t = F(K_t, Z_t L_t)$$
 
 Where $Z_t$ is investment-specific technology that affects productivity.
 
 ### Key Insight
 
-Investment-specific shocks affect:
-1. The productivity of new capital
-2. The relative price of investment goods
-3. The SDF through investment opportunities
+Investment-specific shocks affect: 1. The productivity of new capital 2. The relative price of investment goods 3. The SDF through investment opportunities
+
+---
 
 ## Belo's Main Contributions
 
@@ -190,9 +202,11 @@ Investment-specific shocks create variation in investment opportunities that aff
 
 ### Empirical Implications
 
-1. **Stock returns** are more volatile than consumption
-2. **Investment growth** predicts stock returns
-3. **Relative price of investment goods** affects asset prices
+1.  **Stock returns** are more volatile than consumption
+2.  **Investment growth** predicts stock returns
+3.  **Relative price of investment goods** affects asset prices
+
+---
 
 ## Mathematical Proof: Belo's Model
 
@@ -200,8 +214,7 @@ Investment-specific shocks create variation in investment opportunities that aff
 
 $$Y_t = K_t^\alpha (Z_t L_t)^{1-\alpha}$$
 
-Investment technology:
-$$K_{t+1} = \frac{I_t}{Q_t} + (1 - \delta) K_t$$
+Investment technology: $$K_{t+1} = \frac{I_t}{Q_t} + (1 - \delta) K_t$$
 
 Where $Q_t$ is the relative price of investment goods.
 
@@ -209,24 +222,23 @@ Where $Q_t$ is the relative price of investment goods.
 
 $$\max E_0 \sum_{t=0}^\infty \beta^t \frac{D_t}{P_t}$$
 
-Subject to:
-$$D_t = P_t Y_t - Q_t I_t$$
-$$K_{t+1} = \frac{I_t}{Q_t} + (1 - \delta) K_t$$
+Subject to: $$D_t = P_t Y_t - Q_t I_t$$ $$K_{t+1} = \frac{I_t}{Q_t} + (1 - \delta) K_t$$
+
+---
 
 ## Equilibrium Derivations
 
 ### Household Side
 
-Utility maximization:
-$$\max E_0 \sum_{t=0}^\infty \beta^t u(C_t)$$
+Utility maximization: $$\max E_0 \sum_{t=0}^\infty \beta^t u(C_t)$$
 
-Subject to:
-$$P_t C_t + B_t = P_t w_t L_t + R_t B_{t-1} + \Pi_t$$
+Subject to: $$P_t C_t + B_t = P_t w_t L_t + R_t B_{t-1} + \Pi_t$$
 
 ### Market Clearing
 
-$$C_t + I_t = Y_t$$
-$$B_t = 0$$ (no net supply of bonds)
+$$C_t + I_t = Y_t$$ $$B_t = 0$$ (no net supply of bonds)
+
+---
 
 ## Key Results
 
@@ -240,19 +252,23 @@ $$E[R_{t+1}^i] - R_{t+1}^f = \frac{\cov(R_{t+1}^i, M_{t+1})}{E[M_{t+1}]}$$
 
 With IST, this includes both consumption and investment risk.
 
+---
+
 ## Empirical Evidence
 
 ### Cochrane's Findings
 
-1. **Investment growth** predicts stock returns
-2. **Stock returns** forecast future investment
-3. **High investment** periods have low expected returns
+1.  **Investment growth** predicts stock returns
+2.  **Stock returns** forecast future investment
+3.  **High investment** periods have low expected returns
 
 ### Belo's Evidence
 
-1. **Investment-specific shocks** explain 30-50% of stock market volatility
-2. **Relative price of equipment** predicts stock returns
-3. **IST shocks** are priced in the cross-section
+1.  **Investment-specific shocks** explain 30-50% of stock market volatility
+2.  **Relative price of equipment** predicts stock returns
+3.  **IST shocks** are priced in the cross-section
+
+---
 
 ## Applications to Asset Pricing
 
@@ -264,53 +280,19 @@ $$E[R_{t+1}^i] = R_{t+1}^f - \frac{\cov(R_{t+1}^i, \frac{1}{R_{t+1}^k})}{\E[\fra
 
 ### Time-Series Predictability
 
-Investment growth predicts:
-- Stock market returns
-- Bond yields
-- Risk premia
+Investment growth predicts: - Stock market returns - Bond yields - Risk premia
+
+---
 
 ## Extensions and Recent Developments
 
 ### Multi-Sector Models
 
-- **Belo, Lin, and Bazdresch (2014)**: Multi-sector production
-- **Kogan and Papanikolaou (2014)**: Industry-level investment
+-   **Belo, Lin, and Bazdresch (2014)**: Multi-sector production
+-   **Kogan and Papanikolaou (2014)**: Industry-level investment
 
 ### International Dimensions
 
-- **Dumas and Uppal (2001)**: International production-based models
-- **Belo, Gala, and Li (2013)**: Global investment shocks
+-   **Dumas and Uppal (2001)**: International production-based models
+-   **Belo, Gala, and Li (2013)**: Global investment shocks
 
-## Summary
-
-### Key Takeaways
-
-1. **Production matters**: Investment opportunities affect asset prices
-2. **SDF decomposition**: $M_{t+1} = M_{t+1}^c \cdot M_{t+1}^i$
-3. **Investment risk**: Priced beyond consumption risk
-4. **IST shocks**: Important for understanding asset price volatility
-
-### Mathematical Framework
-
-The production-based SDF provides a unified framework for understanding:
-- Stock price volatility
-- Risk-return tradeoffs
-- Cross-sectional return differences
-- Time-series predictability
-
-## References
-
-### Primary Sources
-
-- **Cochrane, J. H. (1991)**. "Production-Based Asset Pricing"
-- **Cochrane, J. H. (1996)**. "A Cross-Sectional Test of an Investment-Based Asset Pricing Model"
-- **Belo, F. (2010)**. "Production-Based Measures of Risk for Asset Pricing"
-
-### Extensions
-
-- **Belo, F., Lin, X., and Bazdresch, S. (2014)**. "Labor Hiring, Investment, and Stock Return Predictability"
-- **Kogan, L., and Papanikolaou, D. (2014)**. "Growth Opportunities, Technology Shocks, and Asset Prices"
-
-## Q&A
-
-Questions and discussion on production-based asset pricing models.

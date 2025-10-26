@@ -21,182 +21,113 @@ format:
 
 ### Fama's Definition and Mathematical Foundation
 
-**Informationally efficient market definition:**
-$$E[\tilde{p}_{t+1} | \Phi_t] = [1 + E(\tilde{r}_{t+1} | \Phi_t)] p_t$$
+**Informationally efficient market definition:** $$E[\tilde{p}_{t+1} | \Phi_t] = [1 + E(\tilde{r}_{t+1} | \Phi_t)] p_t$$
 
-**Key assumptions:**
-1. **No transaction costs**
-2. **Information freely available**
-3. **Rational expectations:** $E[\tilde{r}_{t+1} | \Phi_t] = E[\tilde{r}_{t+1} | \Phi_t^*]$ where $\Phi_t^*$ is true information set
+**Key assumptions:** 1. **No transaction costs** 2. **Information freely available** 3. **Rational expectations:** $E[\tilde{r}_{t+1} | \Phi_t] = E[\tilde{r}_{t+1} | \Phi_t^*]$ where $\Phi_t^*$ is true information set
 
 **Three forms of efficiency:**
 
-**Weak form:** $\Phi_t$ contains only historical prices $\{p_s\}_{s<t}$
-- Implication: $E[\tilde{r}_{t+1} | \{r_s\}_{s<t}] = E[\tilde{r}_{t+1}]$
-- Testable: No predictability from past returns
+**Weak form:** $\Phi_t$ contains only historical prices $\{p_s\}_{s<t}$ - Implication: $E[\tilde{r}_{t+1} | \{r_s\}_{s<t}] = E[\tilde{r}_{t+1}]$ - Testable: No predictability from past returns
 
-**Semi-strong form:** $\Phi_t$ contains all public information
-- Includes: Financial statements, news, analyst reports
-- Implication: Prices adjust immediately to public news
+**Semi-strong form:** $\Phi_t$ contains all public information - Includes: Financial statements, news, analyst reports - Implication: Prices adjust immediately to public news
 
-**Strong form:** $\Phi_t$ contains all information (public + private)
-- Includes: Insider information, private signals
-- Implication: No abnormal returns to any trader
+**Strong form:** $\Phi_t$ contains all information (public + private) - Includes: Insider information, private signals - Implication: No abnormal returns to any trader
 
 ### Random Walk Models and Martingale Properties
 
-**Arithmetic random walk:**
-$$p_t = p_{t-1} + \epsilon_t, \quad \epsilon_t \sim iid(0,\sigma^2)$$
+**Arithmetic random walk:** $$p_t = p_{t-1} + \epsilon_t, \quad \epsilon_t \sim iid(0,\sigma^2)$$
 
-**Properties:**
-- $E[p_t | p_{t-1}] = p_{t-1}$
-- $\text{Var}(p_t | p_{t-1}) = \sigma^2$
-- Independent increments
+**Properties:** - $E[p_t | p_{t-1}] = p_{t-1}$ - $\text{Var}(p_t | p_{t-1}) = \sigma^2$ - Independent increments
 
-**Geometric random walk (log prices):**
-$$\ln p_t = \ln p_{t-1} + \mu + \epsilon_t, \quad \epsilon_t \sim iid(0,\sigma^2)$$
+**Geometric random walk (log prices):** $$\ln p_t = \ln p_{t-1} + \mu + \epsilon_t, \quad \epsilon_t \sim iid(0,\sigma^2)$$
 
-**Equivalent to multiplicative model:**
-$$p_t = p_{t-1} \cdot e^{\mu + \epsilon_t}$$
+**Equivalent to multiplicative model:** $$p_t = p_{t-1} \cdot e^{\mu + \epsilon_t}$$
 
-**Martingale property derivation:**
-- For arithmetic RW: $E[p_t | \mathcal{F}_{t-1}] = p_{t-1}$
-- For geometric RW: $E[\ln p_t | \mathcal{F}_{t-1}] = \ln p_{t-1} + \mu$
+**Martingale property derivation:** - For arithmetic RW: $E[p_t | \mathcal{F}_{t-1}] = p_{t-1}$ - For geometric RW: $E[\ln p_t | \mathcal{F}_{t-1}] = \ln p_{t-1} + \mu$
 
-**Submartingale (with drift):**
-$$E[p_t | \mathcal{F}_{t-1}] = (1 + \mu) p_{t-1} > p_{t-1}$$
+**Submartingale (with drift):** $$E[p_t | \mathcal{F}_{t-1}] = (1 + \mu) p_{t-1} > p_{t-1}$$
 
-**Fair game property:**
-$$E[\tilde{r}_t | \mathcal{F}_{t-1}] = 0$$
+**Fair game property:** $$E[\tilde{r}_t | \mathcal{F}_{t-1}] = 0$$
 
 ### Joint Hypothesis Problem
 
-**Fundamental testing challenge:**
-- Cannot test EMH in isolation
-- Must test joint hypothesis: EMH + Equilibrium model
+**Fundamental testing challenge:** - Cannot test EMH in isolation - Must test joint hypothesis: EMH + Equilibrium model
 
-**Mathematical formulation:**
-$$H_0: \text{EMH holds} \land \text{Model } M \text{ is correct}$$
+**Mathematical formulation:** $$H_0: \text{EMH holds} \land \text{Model } M \text{ is correct}$$
 
-**Rejection possibilities:**
-1. **Type I error:** False rejection of correct EMH + M
-2. **EMH violation:** EMH false, M correct
-3. **Model misspecification:** EMH true, M false
-4. **Both wrong:** EMH false, M false
+**Rejection possibilities:** 1. **Type I error:** False rejection of correct EMH + M 2. **EMH violation:** EMH false, M correct 3. **Model misspecification:** EMH true, M false 4. **Both wrong:** EMH false, M false
 
-**Example with CAPM:**
-- Reject: $E[r_i] \neq \beta_i E[r_M]$ 
-- Could be: EMH violation OR CAPM misspecified OR both
+**Example with CAPM:** - Reject: $E[r_i] \neq \beta_i E[r_M]$ - Could be: EMH violation OR CAPM misspecified OR both
 
 ## Event Study Methodology
 
 ### Abnormal Return Calculation
 
-**Market model estimation (pre-event period):**
-$$R_{it} = \alpha_i + \beta_i R_{mt} + \epsilon_{it}, \quad \epsilon_{it} \sim iid(0,\sigma_i^2)$$
+**Market model estimation (pre-event period):** $$R_{it} = \alpha_i + \beta_i R_{mt} + \epsilon_{it}, \quad \epsilon_{it} \sim iid(0,\sigma_i^2)$$
 
-**Parameter estimation:**
-$$\hat{\alpha}_i = \bar{R}_i - \hat{\beta}_i \bar{R}_m$$
-$$\hat{\beta}_i = \frac{\sum (R_{it} - \bar{R}_i)(R_{mt} - \bar{R}_m)}{\sum (R_{mt} - \bar{R}_m)^2}$$
+**Parameter estimation:** $$\hat{\alpha}_i = \bar{R}_i - \hat{\beta}_i \bar{R}_m$$ $$\hat{\beta}_i = \frac{\sum (R_{it} - \bar{R}_i)(R_{mt} - \bar{R}_m)}{\sum (R_{mt} - \bar{R}_m)^2}$$
 
-**Abnormal return on event day t:**
-$$AR_{it} = R_{it} - (\hat{\alpha}_i + \hat{\beta}_i R_{mt})$$
+**Abnormal return on event day t:** $$AR_{it} = R_{it} - (\hat{\alpha}_i + \hat{\beta}_i R_{mt})$$
 
-**Standardized abnormal return:**
-$$SAR_{it} = \frac{AR_{it}}{\hat{\sigma}_{AR,i}}$$
+**Standardized abnormal return:** $$SAR_{it} = \frac{AR_{it}}{\hat{\sigma}_{AR,i}}$$
 
-**Where residual standard deviation:**
-$$\hat{\sigma}_{AR,i} = \sqrt{\frac{\sum_{t \in \text{estimation}} AR_{it}^2}{T-2}}$$
+**Where residual standard deviation:** $$\hat{\sigma}_{AR,i} = \sqrt{\frac{\sum_{t \in \text{estimation}} AR_{it}^2}{T-2}}$$
 
 ### Cumulative Abnormal Returns
 
-**CAR over window $(\tau_1, \tau_2)$:**
-$$CAR_i(\tau_1, \tau_2) = \sum_{t=\tau_1}^{\tau_2} AR_{it}$$
+**CAR over window** $(\tau_1, \tau_2)$: $$CAR_i(\tau_1, \tau_2) = \sum_{t=\tau_1}^{\tau_2} AR_{it}$$
 
-**Statistical test for single security:**
-- Under null: $AR_{it} \sim iid(0, \sigma_i^2)$
-- Test statistic: $t_i = \frac{CAR_i(\tau_1, \tau_2)}{\hat{\sigma}_{CAR,i}} \sqrt{|\tau_2 - \tau_1| + 1}$
-- Where: $\hat{\sigma}_{CAR,i} = \hat{\sigma}_{AR,i} \sqrt{|\tau_2 - \tau_1| + 1}$
+**Statistical test for single security:** - Under null: $AR_{it} \sim iid(0, \sigma_i^2)$ - Test statistic: $t_i = \frac{CAR_i(\tau_1, \tau_2)}{\hat{\sigma}_{CAR,i}} \sqrt{|\tau_2 - \tau_1| + 1}$ - Where: $\hat{\sigma}_{CAR,i} = \hat{\sigma}_{AR,i} \sqrt{|\tau_2 - \tau_1| + 1}$
 
-**Cross-sectional test for N securities:**
-$$t = \frac{\overline{CAR}}{\hat{\sigma}(\overline{CAR})} \sqrt{N}$$
+**Cross-sectional test for N securities:** $$t = \frac{\overline{CAR}}{\hat{\sigma}(\overline{CAR})} \sqrt{N}$$
 
-**Assumptions:**
-1. **Normality:** $AR_{it} \sim N(0, \sigma_i^2)$
-2. **Independence:** Across securities and time
-3. **Stationarity:** Parameters constant over estimation period
+**Assumptions:** 1. **Normality:** $AR_{it} \sim N(0, \sigma_i^2)$ 2. **Independence:** Across securities and time 3. **Stationarity:** Parameters constant over estimation period
 
 ## Weak Form Tests
 
 ### Serial Correlation Tests
 
-**Autocorrelation function for returns:**
-$$\rho_k = \frac{\sum_{t=k+1}^T (r_t - \bar{r})(r_{t-k} - \bar{r})}{\sum_{t=1}^T (r_t - \bar{r})^2}$$
+**Autocorrelation function for returns:** $$\rho_k = \frac{\sum_{t=k+1}^T (r_t - \bar{r})(r_{t-k} - \bar{r})}{\sum_{t=1}^T (r_t - \bar{r})^2}$$
 
-**Sample autocorrelation properties:**
-- Under independence: $E[\rho_k] = 0$
-- Variance: $\text{Var}(\rho_k) \approx \frac{1}{T}$ for large T
-- Asymptotic normality: $\sqrt{T} \rho_k \sim N(0,1)$
+**Sample autocorrelation properties:** - Under independence: $E[\rho_k] = 0$ - Variance: $\text{Var}(\rho_k) \approx \frac{1}{T}$ for large T - Asymptotic normality: $\sqrt{T} \rho_k \sim N(0,1)$
 
-**Ljung-Box portmanteau test:**
-$$Q = T(T+2) \sum_{k=1}^K \frac{\rho_k^2}{T-k}$$
+**Ljung-Box portmanteau test:** $$Q = T(T+2) \sum_{k=1}^K \frac{\rho_k^2}{T-k}$$
 
-**Derivation:**
-- Under null: $Q \sim \chi^2_K$
-- Tests joint hypothesis: $\rho_1 = \rho_2 = \cdots = \rho_K = 0$
-- More powerful than individual tests
+**Derivation:** - Under null: $Q \sim \chi^2_K$ - Tests joint hypothesis: $\rho_1 = \rho_2 = \cdots = \rho_K = 0$ - More powerful than individual tests
 
-**Box-Pierce test (simpler version):**
-$$Q_{BP} = T \sum_{k=1}^K \rho_k^2 \sim \chi^2_K$$
+**Box-Pierce test (simpler version):** $$Q_{BP} = T \sum_{k=1}^K \rho_k^2 \sim \chi^2_K$$
 
 ### Variance Ratio Tests
 
 **Lo-MacKinlay (1988) variance ratio:**
 
-**Single-period variance:**
-$$\hat{\sigma}^2(1) = \frac{1}{T-1} \sum_{t=2}^T (r_t - \bar{r})^2$$
+**Single-period variance:** $$\hat{\sigma}^2(1) = \frac{1}{T-1} \sum_{t=2}^T (r_t - \bar{r})^2$$
 
-**q-period variance:**
-$$\hat{\sigma}^2(q) = \frac{1}{q(T-q+1)} \sum_{t=q}^T (p_t - p_{t-q})^2$$
+**q-period variance:** $$\hat{\sigma}^2(q) = \frac{1}{q(T-q+1)} \sum_{t=q}^T (p_t - p_{t-q})^2$$
 
-**Variance ratio:**
-$$VR(q) = \frac{\hat{\sigma}^2(q)}{\hat{\sigma}^2(1)}$$
+**Variance ratio:** $$VR(q) = \frac{\hat{\sigma}^2(q)}{\hat{\sigma}^2(1)}$$
 
-**Random walk hypothesis:**
-- For RW: $VR(q) = 1$
-- For mean-reverting: $VR(q) > 1$
-- For momentum: $VR(q) < 1$
+**Random walk hypothesis:** - For RW: $VR(q) = 1$ - For mean-reverting: $VR(q) > 1$ - For momentum: $VR(q) < 1$
 
-**Test statistic:**
-$$z(q) = \frac{VR(q) - 1}{\sqrt{\phi(q)}}$$
+**Test statistic:** $$z(q) = \frac{VR(q) - 1}{\sqrt{\phi(q)}}$$
 
-**Where asymptotic variance:**
-$$\phi(q) = \frac{2(2q-1)(q-1)}{3q(T-q+1)}$$
+**Where asymptotic variance:** $$\phi(q) = \frac{2(2q-1)(q-1)}{3q(T-q+1)}$$
 
 **Intuition:** Variance ratio compares actual variability to RW prediction
 
 ### Runs Tests
 
-**Definition of a run:**
-- Sequence of consecutive positive or negative returns
-- Direction change defines run boundary
+**Definition of a run:** - Sequence of consecutive positive or negative returns - Direction change defines run boundary
 
-**Number of runs in sequence of T returns:**
-$$R = 1 + \sum_{t=2}^T I(r_t r_{t-1} < 0)$$
+**Number of runs in sequence of T returns:** $$R = 1 + \sum_{t=2}^T I(r_t r_{t-1} < 0)$$
 
-**Under independence null hypothesis:**
-- Let $n_+ =$ number of positive returns
-- Let $n_- =$ number of negative returns
-- Total: $n_+ + n_- = T$
+**Under independence null hypothesis:** - Let $n_+ =$ number of positive returns - Let $n_- =$ number of negative returns - Total: $n_+ + n_- = T$
 
-**Expected runs:**
-$$E[R] = \frac{2n_+ n_-}{n_+ + n_-} + 1 = \frac{2n_+ n_-}{T} + 1$$
+**Expected runs:** $$E[R] = \frac{2n_+ n_-}{n_+ + n_-} + 1 = \frac{2n_+ n_-}{T} + 1$$
 
-**Variance:**
-$$\text{Var}(R) = \frac{2n_+ n_- (2n_+ n_- - n_+ - n_-)}{(n_+ + n_-)^2 (n_+ + n_- - 1)}$$
+**Variance:** $$\text{Var}(R) = \frac{2n_+ n_- (2n_+ n_- - n_+ - n_-)}{(n_+ + n_-)^2 (n_+ + n_- - 1)}$$
 
-**Test statistic:**
-$$z = \frac{R - E[R]}{\sqrt{\text{Var}(R)}} \sim N(0,1)$$
+**Test statistic:** $$z = \frac{R - E[R]}{\sqrt{\text{Var}(R)}} \sim N(0,1)$$
 
 **Intuition:** Too few runs suggest positive dependence, too many suggest negative dependence
 
@@ -204,245 +135,152 @@ $$z = \frac{R - E[R]}{\sqrt{\text{Var}(R)}} \sim N(0,1)$$
 
 ### Earnings Announcement Studies
 
-**Standardized unexpected earnings (SUE):**
-$$SUE_t = \frac{X_t - E[X_t | \Phi_{t-1}]}{\hat{\sigma}_X}$$
+**Standardized unexpected earnings (SUE):** $$SUE_t = \frac{X_t - E[X_t | \Phi_{t-1}]}{\hat{\sigma}_X}$$
 
-**Where:**
-- $X_t =$ actual earnings per share
-- $E[X_t | \Phi_{t-1}] =$ analyst consensus forecast
-- $\hat{\sigma}_X =$ standard deviation of forecast errors
+**Where:** - $X_t =$ actual earnings per share - $E[X_t | \Phi_{t-1}] =$ analyst consensus forecast - $\hat{\sigma}_X =$ standard deviation of forecast errors
 
-**Post-earnings announcement drift (PEAD):**
-$$AR_{t+k} = \gamma_k \cdot SUE_t + \epsilon_{t+k}$$
+**Post-earnings announcement drift (PEAD):** $$AR_{t+k} = \gamma_k \cdot SUE_t + \epsilon_{t+k}$$
 
-**Ball and Brown (1968) findings:**
-- Immediate price adjustment: $AR_t \propto SUE_t$
-- Subsequent drift: Positive (negative) SUE predicts positive (negative) AR for months
+**Ball and Brown (1968) findings:** - Immediate price adjustment: $AR_t \propto SUE_t$ - Subsequent drift: Positive (negative) SUE predicts positive (negative) AR for months
 
-**Theoretical explanations:**
-1. **Risk premium:** High SUE firms have higher risk
-2. **Behavioral:** Underreaction to earnings surprise
-3. **Institutional constraints:** Limits to arbitrage
+**Theoretical explanations:** 1. **Risk premium:** High SUE firms have higher risk 2. **Behavioral:** Underreaction to earnings surprise 3. **Institutional constraints:** Limits to arbitrage
 
 ### Dividend Announcement Studies
 
-**Signaling hypothesis (Bhattacharya 1979):**
-- Dividends signal future earnings
-- Managers use dividends to convey private information
+**Signaling hypothesis (Bhattacharya 1979):** - Dividends signal future earnings - Managers use dividends to convey private information
 
-**Price reaction model:**
-$$\Delta P = \gamma \cdot \Delta D + \epsilon$$
+**Price reaction model:** $$\Delta P = \gamma \cdot \Delta D + \epsilon$$
 
-**Where:**
-- $\Delta P =$ price change around announcement
-- $\Delta D =$ dividend change
-- $\gamma > 0$ if signaling valuable
+**Where:** - $\Delta P =$ price change around announcement - $\Delta D =$ dividend change - $\gamma > 0$ if signaling valuable
 
-**Miller-Modigliani irrelevance theorem:**
-- In perfect markets: Dividends irrelevant for firm value
-- Assumptions: No taxes, no transaction costs, perfect information
+**Miller-Modigliani irrelevance theorem:** - In perfect markets: Dividends irrelevant for firm value - Assumptions: No taxes, no transaction costs, perfect information
 
-**Signaling restores relevance:**
-- Asymmetric information creates signaling role
-- Dividend increases signal positive private information
-- Market rationally responds to signal
+**Signaling restores relevance:** - Asymmetric information creates signaling role - Dividend increases signal positive private information - Market rationally responds to signal
 
 ## Strong Form Tests
 
 ### Insider Trading Returns
 
-**Abnormal return calculation:**
-$$AR_{insider} = R_{insider} - R_{benchmark}$$
+**Abnormal return calculation:** $$AR_{insider} = R_{insider} - R_{benchmark}$$
 
-**Where benchmark could be:**
-- Market index
-- Size-matched portfolio
-- Industry-matched portfolio
+**Where benchmark could be:** - Market index - Size-matched portfolio - Industry-matched portfolio
 
-**Jaffe (1974) methodology:**
-- Sample: SEC filings of insider trades
-- Time period: 1960s data
-- Result: Significant positive AR for insider purchases
+**Jaffe (1974) methodology:** - Sample: SEC filings of insider trades - Time period: 1960s data - Result: Significant positive AR for insider purchases
 
-**Seyhun (1986) extensions:**
-- Insider sales show negative AR
-- Returns persist for months after trade
-- Stronger for smaller firms
+**Seyhun (1986) extensions:** - Insider sales show negative AR - Returns persist for months after trade - Stronger for smaller firms
 
 ### Mutual Fund Performance
 
-**Jensen's alpha (risk-adjusted returns):**
-$$\alpha_i = E[R_i] - R_f - \beta_i (E[R_M] - R_f)$$
+**Jensen's alpha (risk-adjusted returns):** $$\alpha_i = E[R_i] - R_f - \beta_i (E[R_M] - R_f)$$
 
-**CAPM benchmark:**
-- If $\alpha_i > 0$: Outperformance
-- If $\alpha_i < 0$: Underperformance
-- If $\alpha_i = 0$: Fair performance
+**CAPM benchmark:** - If $\alpha_i > 0$: Outperformance - If $\alpha_i < 0$: Underperformance - If $\alpha_i = 0$: Fair performance
 
-**Persistence tests:**
-$$P(\alpha_{i,t+1} > 0 | \alpha_{i,t} > 0)$$
+**Persistence tests:** $$P(\alpha_{i,t+1} > 0 | \alpha_{i,t} > 0)$$
 
-**Carhart (1997) four-factor model:**
-$$R_{it} - R_{ft} = \alpha_i + \beta_{i,M} (R_{Mt} - R_{ft}) + \beta_{i,SMB} SMB_t + \beta_{i,HML} HML_t + \beta_{i,MOM} MOM_t$$
+**Carhart (1997) four-factor model:** $$R_{it} - R_{ft} = \alpha_i + \beta_{i,M} (R_{Mt} - R_{ft}) + \beta_{i,SMB} SMB_t + \beta_{i,HML} HML_t + \beta_{i,MOM} MOM_t$$
 
-**Factor definitions:**
-- **SMB (Small Minus Big):** Size effect
-- **HML (High Minus Low):** Value effect  
+**Factor definitions:** - **SMB (Small Minus Big):** Size effect - **HML (High Minus Low):** Value effect\
 - **MOM (Momentum):** Momentum effect
 
 ## Market Microstructure and Efficiency
 
 ### Bid-Ask Spread Effects
 
-**Effective spread:**
-$$S_{effective} = 2 \cdot \frac{|P - P_{mid}|}{P_{mid}}$$
+**Effective spread:** $$S_{effective} = 2 \cdot \frac{|P - P_{mid}|}{P_{mid}}$$
 
-**Where:**
-- $P =$ transaction price
-- $P_{mid} =$ midpoint of bid-ask spread
+**Where:** - $P =$ transaction price - $P_{mid} =$ midpoint of bid-ask spread
 
-**Realized spread:**
-$$S_{realized} = 2 \cdot \frac{|P - P_{VWAP}|}{P_{VWAP}}$$
+**Realized spread:** $$S_{realized} = 2 \cdot \frac{|P - P_{VWAP}|}{P_{VWAP}}$$
 
 **Where VWAP is volume-weighted average price over subsequent period**
 
-**Price impact regression:**
-$$\Delta P = \lambda \cdot \frac{Q}{ADV} + \epsilon$$
+**Price impact regression:** $$\Delta P = \lambda \cdot \frac{Q}{ADV} + \epsilon$$
 
-**Where:**
-- $Q =$ trade size
-- $ADV =$ average daily volume
-- $\lambda =$ price impact coefficient
+**Where:** - $Q =$ trade size - $ADV =$ average daily volume - $\lambda =$ price impact coefficient
 
 ### Information Asymmetry Measures
 
 **Easley-KO-O'Hara PIN model:**
 
-**Model assumptions:**
-- Informed traders: Probability α, trade μ shares
-- Uninformed traders: Trade ε shares (buy or sell)
+**Model assumptions:** - Informed traders: Probability α, trade μ shares - Uninformed traders: Trade ε shares (buy or sell)
 
-**Probability of informed trading:**
-$$PIN = \frac{\alpha \mu}{\alpha \mu + 2\epsilon}$$
+**Probability of informed trading:** $$PIN = \frac{\alpha \mu}{\alpha \mu + 2\epsilon}$$
 
-**Likelihood function:**
-$$L = \prod_{t=1}^T \left[ \alpha \mu e^{-\mu} \frac{(\mu)^B}{B!} \cdot \epsilon e^{-\epsilon} \frac{(\epsilon)^S}{S!} \right]$$
+**Likelihood function:** $$L = \prod_{t=1}^T \left[ \alpha \mu e^{-\mu} \frac{(\mu)^B}{B!} \cdot \epsilon e^{-\epsilon} \frac{(\epsilon)^S}{S!} \right]$$
 
 **Maximum likelihood estimation of (α, μ, ε)**
 
-**Adverse selection component:**
-$$AS = \frac{PIN}{2} \cdot \sigma_V^2$$
+**Adverse selection component:** $$AS = \frac{PIN}{2} \cdot \sigma_V^2$$
 
-**Kyle's lambda (price impact):**
-$$\lambda = \frac{\sqrt{2}}{\sigma_u} \cdot \frac{\sigma_V}{\sqrt{T}}$$
+**Kyle's lambda (price impact):** $$\lambda = \frac{\sqrt{2}}{\sigma_u} \cdot \frac{\sigma_V}{\sqrt{T}}$$
 
-**Derivation from Kyle model:**
-- Informed trade: $x = \beta (V - \mu)$
-- Market maker: $P = \mu + \lambda (x + u)$
-- Equilibrium: $\lambda = \frac{\sigma_V}{\beta \sigma_u}$
+**Derivation from Kyle model:** - Informed trade: $x = \beta (V - \mu)$ - Market maker: $P = \mu + \lambda (x + u)$ - Equilibrium: $\lambda = \frac{\sigma_V}{\beta \sigma_u}$
 
 ## Anomalies and EMH Challenges
 
 ### Size Effect
 
-**Banz (1981) finding:**
-$$E[R_{small}] > E[R_{large}] + \beta_{small} (E[R_M] - R_f)$$
+**Banz (1981) finding:** $$E[R_{small}] > E[R_{large}] + \beta_{small} (E[R_M] - R_f)$$
 
-**Evidence:**
-- Small firms earn 1-2% higher monthly returns
-- Persists after controlling for beta
-- Stronger in January (January effect)
+**Evidence:** - Small firms earn 1-2% higher monthly returns - Persists after controlling for beta - Stronger in January (January effect)
 
-**Fama-French three-factor model:**
-$$R_{it} - R_{ft} = \alpha_i + \beta_{i,M} (R_{Mt} - R_{ft}) + \beta_{i,SMB} SMB_t + \beta_{i,HML} HML_t$$
+**Fama-French three-factor model:** $$R_{it} - R_{ft} = \alpha_i + \beta_{i,M} (R_{Mt} - R_{ft}) + \beta_{i,SMB} SMB_t + \beta_{i,HML} HML_t$$
 
-**SMB factor construction:**
-$$SMB_t = \frac{1}{3} (Small_{value} + Small_{neutral} + Small_{growth} - Big_{value} - Big_{neutral} - Big_{growth})$$
+**SMB factor construction:** $$SMB_t = \frac{1}{3} (Small_{value} + Small_{neutral} + Small_{growth} - Big_{value} - Big_{neutral} - Big_{growth})$$
 
 ### Value Effect
 
-**Value premium discovery:**
-- Basu (1977): High E/P ratios predict higher returns
-- Rosenberg et al. (1985): High B/M ratios predict higher returns
+**Value premium discovery:** - Basu (1977): High E/P ratios predict higher returns - Rosenberg et al. (1985): High B/M ratios predict higher returns
 
-**Value premium:**
-$$E[R_{value}] - E[R_{growth}] \approx 4-5\% \text{ annually}$$
+**Value premium:** $$E[R_{value}] - E[R_{growth}] \approx 4-5\% \text{ annually}$$
 
-**Book-to-market factor (HML):**
-$$HML_t = \frac{1}{3} (Small_{value} + Big_{value} - Small_{growth} - Big_{growth})$$
+**Book-to-market factor (HML):** $$HML_t = \frac{1}{3} (Small_{value} + Big_{value} - Small_{growth} - Big_{growth})$$
 
-**Theoretical explanations:**
-1. **Risk-based:** Value firms have higher distress risk
-2. **Behavioral:** Investor over-optimism for growth stocks
-3. **Institutional:** Value investing requires contrarian behavior
+**Theoretical explanations:** 1. **Risk-based:** Value firms have higher distress risk 2. **Behavioral:** Investor over-optimism for growth stocks 3. **Institutional:** Value investing requires contrarian behavior
 
 ### Momentum Effect
 
-**Jegadeesh-Titman (1993) strategy:**
-- Buy past 6-month winners
-- Sell past 6-month losers
-- Hold for 6 months
-- Result: 1% monthly abnormal returns
+**Jegadeesh-Titman (1993) strategy:** - Buy past 6-month winners - Sell past 6-month losers - Hold for 6 months - Result: 1% monthly abnormal returns
 
-**Momentum factor (MOM):**
-$$MOM_t = \frac{1}{2} (Small_{up} + Big_{up} - Small_{down} - Big_{down})$$
+**Momentum factor (MOM):** $$MOM_t = \frac{1}{2} (Small_{up} + Big_{up} - Small_{down} - Big_{down})$$
 
-**Where:**
-- $Up =$ past 12-month winners (skip most recent month)
-- $Down =$ past 12-month losers (skip most recent month)
+**Where:** - $Up =$ past 12-month winners (skip most recent month) - $Down =$ past 12-month losers (skip most recent month)
 
-**Reversal at longer horizons:**
-- Momentum profits reverse after 3-5 years
-- Suggests overreaction followed by correction
+**Reversal at longer horizons:** - Momentum profits reverse after 3-5 years - Suggests overreaction followed by correction
 
 ## Behavioral Explanations
 
 ### Prospect Theory (Kahneman-Tversky 1979)
 
-**Value function:**
-$$v(x) = \begin{cases} x^\alpha & x \geq 0 \\ -\lambda (-x)^\beta & x < 0 \end{cases}$$
+**Value function:** $$v(x) = \begin{cases} x^\alpha & x \geq 0 \\ -\lambda (-x)^\beta & x < 0 \end{cases}$$
 
-**Parameters:**
-- $\alpha \approx 0.88$ (concave for gains)
-- $\beta \approx 0.88$ (convex for losses)
-- $\lambda \approx 2.25$ (loss aversion)
+**Parameters:** - $\alpha \approx 0.88$ (concave for gains) - $\beta \approx 0.88$ (convex for losses) - $\lambda \approx 2.25$ (loss aversion)
 
-**Probability weighting function:**
-$$w(p) = \frac{p^\gamma}{(p^\gamma + (1-p)^\gamma)^{1/\gamma}}$$
+**Probability weighting function:** $$w(p) = \frac{p^\gamma}{(p^\gamma + (1-p)^\gamma)^{1/\gamma}}$$
 
-**With $\gamma \approx 0.61$ (overweight small probabilities)**
+**With** $\gamma \approx 0.61$ (overweight small probabilities)
 
-**Asset pricing implications:**
-- **Disposition effect:** Investors hold losers too long, sell winners too soon
-- **Narrow framing:** Evaluate investments in isolation
-- **Mental accounting:** Separate treatment of gains/losses
+**Asset pricing implications:** - **Disposition effect:** Investors hold losers too long, sell winners too soon - **Narrow framing:** Evaluate investments in isolation - **Mental accounting:** Separate treatment of gains/losses
 
 ### Limits to Arbitrage
 
 **Shleifer-Vishny (1997) model:**
 
-**Arbitrageur capital dynamics:**
-$$\frac{dC}{C} = \mu dt + \sigma dW - \delta dt$$
+**Arbitrageur capital dynamics:** $$\frac{dC}{C} = \mu dt + \sigma dW - \delta dt$$
 
-**Performance-based capital withdrawal:**
-- Good performance: Capital inflow (μ > 0)
-- Poor performance: Capital outflow (δ > 0)
+**Performance-based capital withdrawal:** - Good performance: Capital inflow (μ \> 0) - Poor performance: Capital outflow (δ \> 0)
 
-**Procyclical arbitrage:**
-$$\text{Arbitrage activity} \propto C_t$$
+**Procyclical arbitrage:** $$\text{Arbitrage activity} \propto C_t$$
 
 **Key insight:** Capital flows exacerbate mispricings exactly when arbitrage is most needed
 
 **De Long et al. (1990) noise trader model:**
 
-**Noise trader demand:**
-$$D_{NT,t} = \gamma P_{t-1} + \epsilon_t$$
+**Noise trader demand:** $$D_{NT,t} = \gamma P_{t-1} + \epsilon_t$$
 
-**Arbitrageur response:**
-$$D_{A,t} = -\phi (P_t - P^*)$$
+**Arbitrageur response:** $$D_{A,t} = -\phi (P_t - P^*)$$
 
-**Equilibrium price:**
-$$P_t = P^* + \frac{\gamma}{1 + \phi} P_{t-1} + \frac{1}{1 + \phi} \epsilon_t$$
+**Equilibrium price:** $$P_t = P^* + \frac{\gamma}{1 + \phi} P_{t-1} + \frac{1}{1 + \phi} \epsilon_t$$
 
 **Persistent mispricing when arbitrage limited**
 
@@ -450,72 +288,36 @@ $$P_t = P^* + \frac{\gamma}{1 + \phi} P_{t-1} + \frac{1}{1 + \phi} \epsilon_t$$
 
 ### Information Processing
 
-**Bayesian updating:**
-$$p(\theta | y) = \frac{p(y | \theta) p(\theta)}{p(y)}$$
+**Bayesian updating:** $$p(\theta | y) = \frac{p(y | \theta) p(\theta)}{p(y)}$$
 
-**Price as sufficient statistic:**
-- In rational expectations equilibrium
-- $p_t = E[V | \Phi_t]$
-- All relevant information impounded in price
+**Price as sufficient statistic:** - In rational expectations equilibrium - $p_t = E[V | \Phi_t]$ - All relevant information impounded in price
 
-**Aggregation theorem (Grossman-Stiglitz 1980):**
-$$\frac{1}{N} \sum_{i=1}^N p_i \to E[V | \Phi_{aggregate}] \text{ as } N \to \infty$$
+**Aggregation theorem (Grossman-Stiglitz 1980):** $$\frac{1}{N} \sum_{i=1}^N p_i \to E[V | \Phi_{aggregate}] \text{ as } N \to \infty$$
 
-**No-trade theorem (Milgrom-Stokey 1982):**
-- If information is common knowledge
-- And preferences are common knowledge
-- Then no trade occurs in equilibrium
+**No-trade theorem (Milgrom-Stokey 1982):** - If information is common knowledge - And preferences are common knowledge - Then no trade occurs in equilibrium
 
 ### Learning Models
 
-**Recursive least squares (RLS):**
-$$\hat{\theta}_{t+1} = \hat{\theta}_t + \frac{P_t x_t (y_t - x_t' \hat{\theta}_t)}{1 + x_t' P_t x_t}$$
+**Recursive least squares (RLS):** $$\hat{\theta}_{t+1} = \hat{\theta}_t + \frac{P_t x_t (y_t - x_t' \hat{\theta}_t)}{1 + x_t' P_t x_t}$$
 
-**Where:**
-- $P_t =$ precision matrix (inverse covariance)
-- $x_t =$ regressors
-- $y_t =$ dependent variable
+**Where:** - $P_t =$ precision matrix (inverse covariance) - $x_t =$ regressors - $y_t =$ dependent variable
 
 **Kalman filter for state estimation:**
 
-**State equation:**
-$$\theta_{t+1} = \theta_t + w_t, \quad w_t \sim N(0, Q)$$
+**State equation:** $$\theta_{t+1} = \theta_t + w_t, \quad w_t \sim N(0, Q)$$
 
-**Measurement equation:**
-$$y_t = x_t' \theta_t + v_t, \quad v_t \sim N(0, R)$$
+**Measurement equation:** $$y_t = x_t' \theta_t + v_t, \quad v_t \sim N(0, R)$$
 
-**Kalman update:**
-- **Prediction:** $\hat{\theta}_{t|t-1}, P_{t|t-1}$
-- **Innovation:** $\nu_t = y_t - x_t' \hat{\theta}_{t|t-1}$
-- **Kalman gain:** $K_t = P_{t|t-1} x_t (x_t' P_{t|t-1} x_t + R)^{-1}$
-- **Update:** $\hat{\theta}_{t|t} = \hat{\theta}_{t|t-1} + K_t \nu_t$
+**Kalman update:** - **Prediction:** $\hat{\theta}_{t|t-1}, P_{t|t-1}$ - **Innovation:** $\nu_t = y_t - x_t' \hat{\theta}_{t|t-1}$ - **Kalman gain:** $K_t = P_{t|t-1} x_t (x_t' P_{t|t-1} x_t + R)^{-1}$ - **Update:** $\hat{\theta}_{t|t} = \hat{\theta}_{t|t-1} + K_t \nu_t$
 
-**Applications to asset pricing:**
-- Learning about expected returns
-- Updating beliefs about firm fundamentals
-- Adaptive expectations formation
+**Applications to asset pricing:** - Learning about expected returns - Updating beliefs about firm fundamentals - Adaptive expectations formation
 
 ## Conclusion
 
-**EMH Contributions:**
-- **Prices aggregate information efficiently** under rational expectations
-- **Random walk as null hypothesis** for weak-form tests
-- **Event studies methodology** for semi-strong form tests
-- **Joint hypothesis problem** highlights testing challenges
+**EMH Contributions:** - **Prices aggregate information efficiently** under rational expectations - **Random walk as null hypothesis** for weak-form tests - **Event studies methodology** for semi-strong form tests - **Joint hypothesis problem** highlights testing challenges
 
-**Challenges and Extensions:**
-- **Anomalies require explanation:** Size, value, momentum effects
-- **Behavioral foundations:** Prospect theory, limits to rationality
-- **Limits to arbitrage:** Capital constraints, noise trader risk
-- **Market microstructure effects:** Bid-ask spreads, information asymmetry
+**Challenges and Extensions:** - **Anomalies require explanation:** Size, value, momentum effects - **Behavioral foundations:** Prospect theory, limits to rationality - **Limits to arbitrage:** Capital constraints, noise trader risk - **Market microstructure effects:** Bid-ask spreads, information asymmetry
 
-**Mathematical Rigor:**
-- **Statistical testing of efficiency:** Serial correlation, variance ratios, runs tests
-- **Information processing models:** Bayesian updating, Kalman filtering
-- **Equilibrium with frictions:** Adverse selection, transaction costs
-- **Learning frameworks:** Recursive estimation, adaptive expectations
+**Mathematical Rigor:** - **Statistical testing of efficiency:** Serial correlation, variance ratios, runs tests - **Information processing models:** Bayesian updating, Kalman filtering - **Equilibrium with frictions:** Adverse selection, transaction costs - **Learning frameworks:** Recursive estimation, adaptive expectations
 
-**Policy Implications:**
-- **Market design affects efficiency:** Trading mechanisms, disclosure rules
-- **Understanding frictions crucial:** For asset pricing theory and practice
-- **Behavioral insights inform:** Investment strategies and risk management
+**Policy Implications:** - **Market design affects efficiency:** Trading mechanisms, disclosure rules - **Understanding frictions crucial:** For asset pricing theory and practice - **Behavioral insights inform:** Investment strategies and risk management
