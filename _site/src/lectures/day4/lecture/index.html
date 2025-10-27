@@ -148,16 +148,9 @@ Juan F. Imbet
 </section>
 <section class="slide level0">
 
-<h2>Production-Based Asset Pricing</h2>
-<p><strong>Advanced Equilibrium Models</strong></p>
-<p>How firm investment and production decisions affect asset prices through the stochastic discount factor</p>
-</section>
-<section class="slide level0">
-
 <h2>Overview &amp; Agenda</h2>
 <p><strong>Focus</strong>: Production economies where firms make investment decisions</p>
 <p><strong>Key Insight</strong>: Asset prices reflect both consumption and investment opportunities</p>
-<p><strong>Main Contributors</strong>: Cochrane (1991, 1996), Jermann (1998), Zhang (2005), Belo (2010), etc.</p>
 <p><strong>Topics</strong>:</p>
 <ol type="1">
 <li>Production Economy Setup<br>
@@ -186,8 +179,7 @@ Juan F. Imbet
 <h3>Technology</h3>
 <p><span class="math display">\[
 Y_t = F(K_t, Z_t L_t),\qquad F_K&gt;0,\;F_L&gt;0,\;F_{KK}&lt;0,\;F_{LL}&lt;0,
-\]</span></p>
-<p><span class="math display">\[
+\]</span> <span class="math display">\[
 K_{t+1} = (1-\delta)K_t + \Phi(I_t,K_t),\qquad \Phi_I&gt;0,\;\Phi_{II}\le 0,
 \]</span></p>
 <p>where <span class="math inline">\(\Phi(I,K)\)</span> converts investment goods <span class="math inline">\(I_t\)</span> into installed capital; with no adjustment costs, <span class="math inline">\(\Phi(I,K)=I\)</span>.</p>
@@ -195,23 +187,34 @@ K_{t+1} = (1-\delta)K_t + \Phi(I_t,K_t),\qquad \Phi_I&gt;0,\;\Phi_{II}\le 0,
 <section class="slide level0">
 
 <h2>Household Problem</h2>
-<h3>Representative Household</h3>
 <p>Preferences: <span class="math display">\[
 \max_{\{C_t,L_t,\{x^i_t\}\}} E_0 \sum_{t=0}^{\infty} \beta^t u(C_t,1-L_t),\qquad 0&lt;\beta&lt;1,
 \]</span> with <span class="math inline">\(u_C&gt;0\)</span>, <span class="math inline">\(u_{CC}&lt;0\)</span>, <span class="math inline">\(u_{1-L}&gt;0\)</span>, <span class="math inline">\(u_{(1-L)(1-L)}&lt;0\)</span>.</p>
 <p>Budget constraint in units of consumption: <span class="math display">\[
-C_t + \sum_i p_t^i x_t^i \le w_t L_t + \sum_i x_{t-1}^i d_t^i + \Pi_t,
-\]</span> where <span class="math inline">\(x_t^i\)</span> is holdings of asset <span class="math inline">\(i\)</span>, <span class="math inline">\(p_t^i\)</span> its ex-dividend price, <span class="math inline">\(d_t^i\)</span> its dividend, <span class="math inline">\(w_t\)</span> the wage, and <span class="math inline">\(\Pi_t\)</span> firm profits rebated to households.</p>
+C_t + \sum_i p_t^i x_t^i \le w_t L_t + \sum_i x_{t-1}^i (d_t^i+p_t^i) + \Pi_t,
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>Mathematical Note</h2>
+<ul>
+<li>Law of iterated expectations: <span class="math display">\[
+E_0[X] = E_0[E_t[X]],\quad \text{for any } t\ge 0.
+\]</span></li>
+<li>Then, when computing Lagrangians which are computed using <span class="math inline">\(E_0\)</span> we can use this propery to add a <span class="math inline">\(E_t\)</span> operator inside the expectation. Then the first order conditions can be simplified by conditioning on the information set at time <span class="math inline">\(t\)</span>. Since the F.O.C. determine the optimal variables at time <span class="math inline">\(t\)</span> it is not correct to condition on the time zero information set.</li>
+</ul>
 </section>
 <section class="slide level0">
 
 <h2>Stochastic Discount Factor (SDF)</h2>
-<p>Household optimality implies for any traded payoff <span class="math inline">\(R_{t+1}^i \equiv \dfrac{p_{t+1}^i+d_{t+1}^i}{p_t^i}\)</span>: <span class="math display">\[
+<p><span class="math display">\[
 1 = E_t\big[M_{t+1} R_{t+1}^i\big],\qquad
 M_{t+1} \equiv \beta\,\frac{u_C(C_{t+1},1-L_{t+1})}{u_C(C_t,1-L_t)}.
-\]</span></p>
-<p><strong>Proof</strong>: The Lagrangian for the household problem includes: <span class="math display">\[
-\mathcal{L} = E_0 \sum_{t=0}^{\infty} \beta^t \left[u(C_t,1-L_t) + \mu_t\left(w_t L_t + \sum_i x_{t-1}^i(p_t^i+d_t^i) + \Pi_t - C_t - \sum_i p_t^i x_t^i\right)\right].
+\]</span> <strong>Proof</strong>: The Lagrangian for the household problem includes: (since utilities are increasing on consumption, the budget constraint is always binding) <span class="math display">\[
+\begin{aligned}
+\mathcal{L} &amp;= E_0 \sum_{t=0}^{\infty} \beta^t \left[u(C_t,1-L_t) + \mu_t\left(w_t L_t + \sum_i x_{t-1}^i(p_t^i+d_t^i) + \Pi_t - C_t - \sum_i p_t^i x_t^i\right)\right] \\
+&amp;= E_0 \sum_{t=0}^{\infty} \color{blue}E_t\color{black} \beta^t \left[u(C_t,1-L_t) + \mu_t\left(w_t L_t + \sum_i x_{t-1}^i(p_t^i+d_t^i) + \Pi_t - C_t - \sum_i p_t^i x_t^i\right)\right]
+\end{aligned}
 \]</span> First-order condition (FOC) w.r.t. <span class="math inline">\(x_t^i\)</span>: <span class="math display">\[
 -\beta^t u_C(C_t,\cdot)\,p_t^i + \beta^{t+1} E_t\!\left[u_C(C_{t+1},\cdot)(p_{t+1}^i+d_{t+1}^i)\right]=0.
 \]</span> Dividing by <span class="math inline">\(\beta^t u_C(C_t,\cdot)p_t^i\)</span>: <span class="math display">\[
@@ -224,9 +227,11 @@ M_{t+1} \equiv \beta\,\frac{u_C(C_{t+1},1-L_{t+1})}{u_C(C_t,1-L_t)}.
 <h3>Competitive Firm</h3>
 <p>The representative firm maximizes its value (priced by <span class="math inline">\(M_{t+1}\)</span>): <span class="math display">\[
 \max_{\{I_t,L_t\}} E_0 \sum_{t=0}^{\infty} \left[\prod_{s=0}^{t-1} M_{s+1}\right] D_t,
-\]</span> with <strong>dividends</strong> <span class="math display">\[
+\]</span> with <strong>dividends</strong></p>
+<p><span class="math display">\[
 D_t \equiv Y_t - I_t - \mathcal{G}(I_t,K_t) - w_t L_t,
-\]</span> where <span class="math inline">\(\mathcal{G}\)</span> captures (convex) <strong>adjustment costs</strong> in units of consumption, typically <span class="math inline">\(\mathcal{G}(I,K)=\frac{\kappa}{2}\left(\frac{I}{K}-\delta\right)^2 K\)</span>.</p>
+\]</span></p>
+<p>where <span class="math inline">\(\mathcal{G}\)</span> captures (convex) <strong>adjustment costs</strong> in units of consumption, typically <span class="math inline">\(\mathcal{G}(I,K)=\frac{\kappa}{2}\left(\frac{I}{K}-\delta\right)^2 K\)</span>.</p>
 <p>Capital accumulation: <span class="math display">\[
 K_{t+1}=(1-\delta)K_t+\Phi(I_t,K_t).
 \]</span></p>
@@ -235,16 +240,43 @@ K_{t+1}=(1-\delta)K_t+\Phi(I_t,K_t).
 <section class="slide level0">
 
 <h2>Firm Problem: First-Order Conditions</h2>
-<p>W.r.t. <span class="math inline">\(L_t\)</span>: <span class="math display">\[
+<p>Define the lagrangian: <span class="math display">\[
+\mathcal{L} = E_0 \sum_{t=0}^{\infty} \left[\prod_{s=0}^{t-1} M_{s+1}\right] \left[D_t - \lambda_t\,(K_{t+1}-(1-\delta)K_t-\Phi(I_t,K_t))\right].
+\]</span></p>
+<p>Define <span class="math inline">\(S_t \equiv \prod_{s=0}^{t-1} M_{s+1}\)</span> for notational convenience. The Lagrangian becomes</p>
+<p><span class="math display">\[
+\mathcal{L} = E_0 \sum_{t=0}^{\infty} S_t \left[D_t - \lambda_t\,(K_{t+1}-(1-\delta)K_t-\Phi(I_t,K_t))\right].
+\]</span></p>
+</section>
+<section class="slide level0">
+
+<h2>F.O.C. conditions</h2>
+<p><span class="math inline">\(I_t\)</span>-FOC: <span class="math display">\[
+-1 - \mathcal{G}_I(I_t,K_t) + \lambda_t \Phi_I(I_t,K_t)=0 \quad \Rightarrow \quad \lambda_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\Phi_I(I_t,K_t)} \equiv q_t.
+\]</span></p>
+<p><span class="math inline">\(L_t\)</span>-FOC: <span class="math display">\[
 F_L(K_t,Z_t L_t)\,Z_t = w_t.
 \]</span></p>
-<p>W.r.t. <span class="math inline">\(I_t\)</span>: <span class="math display">\[
--1 - \frac{\partial \mathcal{G}(I_t,K_t)}{\partial I_t} + \lambda_t\,\Phi_I(I_t,K_t)=0.
+</section>
+<section class="slide level0">
+
+<h2>F.O.C. w.r.t <span class="math inline">\(K_{t+1}\)</span></h2>
+<p>Envelope condition:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{\partial \mathcal{L}}{\partial K_{t+1}} &amp;= E_0\left[S_t \left( - \lambda_t\right) + S_{t+1}\left(\frac{\partial D_{t+1}}{\partial K_{t+1}} + \lambda_{t+1}(1-\delta) + \lambda_{t+1}\Phi_K(I_{t+1},K_{t+1})\right)\right] = 0.
+\end{aligned}
 \]</span></p>
-<p>Envelope (shadow value of capital): <span class="math display">\[
-\lambda_t = F_K(K_t,Z_t L_t) - \frac{\partial \mathcal{G}(I_t,K_t)}{\partial K_t} + E_t\left[M_{t+1}\,\lambda_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))\right].
+<p>Since <span class="math inline">\(K_{t+1}\)</span> is chosen at time <span class="math inline">\(t\)</span>, we can condition on <span class="math inline">\(\mathcal{F}_t\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+0 &amp;= E_t\left[-\lambda_t + M_{t+1}\left(\frac{\partial D_{t+1}}{\partial K_{t+1}} + \lambda_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))\right)\right].
+\end{aligned}
 \]</span></p>
-<p><strong>Definition (Marginal q).</strong> <span class="math inline">\(q_t \equiv \lambda_t\)</span> is the marginal value of installed capital in consumption units.</p>
+<p>Noting that <span class="math inline">\(\frac{\partial D_{t+1}}{\partial K_{t+1}} = F_K(K_{t+1},Z_{t+1}L_{t+1}) - \mathcal{G}_K(I_{t+1},K_{t+1})\)</span>:</p>
+<p><span class="math display">\[
+\lambda_t = E_t\left[M_{t+1}\left(F_K(K_{t+1},Z_{t+1}L_{t+1}) - \mathcal{G}_K(I_{t+1},K_{t+1}) + \lambda_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))\right)\right].
+\]</span></p>
 </section>
 <section class="slide level0">
 
@@ -263,25 +295,6 @@ R^K_{t+1} \equiv \frac{d^K_{t+1} + q_{t+1}\big(1-\delta+\Phi_K(I_{t+1},K_{t+1})\
 \]</span></p>
 <p>By the firm FOC and no-arbitrage: <span class="math display">\[
 1=E_t\big[M_{t+1} R^K_{t+1}\big].
-\]</span></p>
-</section>
-<section class="slide level0">
-
-<h2>Proof: Return on Capital Euler Equation</h2>
-<p>The firm’s Lagrangian is: <span class="math display">\[
-\mathcal{L} = E_0 \sum_{t=0}^{\infty} \left[\prod_{s=0}^{t-1} M_{s+1}\right] \left[D_t + \lambda_t(K_{t+1}-(1-\delta)K_t-\Phi(I_t,K_t))\right].
-\]</span></p>
-<p>FOC w.r.t. <span class="math inline">\(I_t\)</span>: <span class="math display">\[
--1 - \mathcal{G}_I(I_t,K_t) + \lambda_t\Phi_I(I_t,K_t)=0 \quad \Rightarrow \quad \lambda_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\Phi_I(I_t,K_t)} \equiv q_t.
-\]</span></p>
-<p>FOC w.r.t. <span class="math inline">\(K_{t+1}\)</span> (envelope condition): <span class="math display">\[
-\lambda_t = E_t\left[M_{t+1}\left(F_K(K_{t+1},Z_{t+1}L_{t+1}) - \mathcal{G}_K(I_{t+1},K_{t+1}) + \lambda_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))\right)\right].
-\]</span></p>
-<p>Recognize <span class="math inline">\(d^K_{t+1} = F_K(K_{t+1},Z_{t+1}L_{t+1}) - \mathcal{G}_K(I_{t+1},K_{t+1})\)</span> and <span class="math inline">\(\lambda_{t+1}=q_{t+1}\)</span>: <span class="math display">\[
-q_t = E_t\left[M_{t+1}\left(d^K_{t+1} + q_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))\right)\right].
-\]</span></p>
-<p>Dividing by <span class="math inline">\(q_t\)</span>: <span class="math display">\[
-1 = E_t\left[M_{t+1}\frac{d^K_{t+1} + q_{t+1}(1-\delta+\Phi_K(I_{t+1},K_{t+1}))}{q_t}\right] = E_t[M_{t+1}R^K_{t+1}].
 \]</span></p>
 </section>
 <section class="slide level0">
@@ -452,10 +465,10 @@ q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\mu_t\,\Phi_I(I_t,K_t)}\quad\text{(with IS
 
 <h2>Proof of Result (2)</h2>
 <p>The firm’s Lagrangian (with IST) includes: <span class="math display">\[
-\mathcal{L} = E_0 \sum_{t=0}^{\infty} \left[\prod_{s=0}^{t-1} M_{s+1}\right] \left[D_t + \lambda_t(K_{t+1}-(1-\delta)K_t-\mu_t\Phi(I_t,K_t))\right],
+\mathcal{L} = E_0 \sum_{t=0}^{\infty} \left[\prod_{s=0}^{t-1} M_{s+1}\right] \left[D_t - \lambda_t\,(K_{t+1}-(1-\delta)K_t-\mu_t\Phi(I_t,K_t))\right],
 \]</span> where <span class="math inline">\(D_t = Y_t - I_t - \mathcal{G}(I_t,K_t) - w_t L_t\)</span>.</p>
 <p>FOC w.r.t. <span class="math inline">\(I_t\)</span>: <span class="math display">\[
--1 - \mathcal{G}_I(I_t,K_t) - \lambda_t \mu_t\Phi_I(I_t,K_t)=0.
+-1 - \mathcal{G}_I(I_t,K_t) + \lambda_t \mu_t\Phi_I(I_t,K_t)=0.
 \]</span></p>
 <p>Solving for <span class="math inline">\(\lambda_t = q_t\)</span>: <span class="math display">\[
 q_t = \frac{1+\mathcal{G}_I(I_t,K_t)}{\mu_t\,\Phi_I(I_t,K_t)}.
